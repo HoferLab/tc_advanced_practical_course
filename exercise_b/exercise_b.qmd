@@ -1,0 +1,53 @@
+---
+title: "Background Info"
+format:
+  html:
+    code-fold: false
+engine: jupyter
+execute: 
+  echo: false
+---
+
+# Exercise - NNP MD Simulations of CO~2~@ZIF-8
+
+<div style="text-align: justify"> 
+<img align="right" src="../img/zif8_co2.png" width="313">
+Metal-organic framework (MOFs) are hybrid crystalline materials assembled from both inorganic and organic residues containing potential voids [1]. The key advantage of MOFs over naturally occurring porous compounds such as zeolites (*i.e.* aluminosilicates) or polymers lies in their crystalline nature, which allows for systematic modification through crystal engineering principles by altering their organic linkers or metal nodes. This capability leads to an almost limitless number of possible framework topologies and properties, making them particularly appealing for technologically relevant applications. 
+
+One of the most widely discussed applications is associated to the enormous gas storage capacity of MOF materials. Storage and separation of critical green house gasses such as CO~2~ and CH~4~ are widely discussed [2,3]. In addition, MOFs have also emerged as highly promising candidates for the storage of carbon dioxide (CO~2~)  for carbon capture [4] (due to their ultrahigh internal surface area, tunable pore dimensions, and rapid kinetics for gas adsorption and desorption).
+
+An increasing number of MOF compounds are discussed as potential carrier for green house gases such as CO~2~ [4]. In this exercise, carbon dioxide storage in the comparably simple ZIF-8 (zeolitic imidazolate framework) is investigated via molecular dynamics simulations (MD), to keep the computational effort and memory demand manageable.
+
+The ZIF-8 system Zn(methylimidazolate)~2~ crystallizes in the noncentrosymmetric cubic space group I43m (space group no. 217) with a lattice parameter of approx 1.7 nm. The cubic unit cell contains a total of 2 Zn^2+^ ions that are tetrahedrally coordinated by the 24 methylimidazolate linkers. The pore structure of ZIF-8 is similar compared to the topology of a prototypic sodalite zeolite (hence the name zeolitic imidazolate framework). Several studies have indeed investigated ZIF systems with respect to their CO~2~ storage capacity [5-8].
+
+In order to achieve fast and accurate MD simulations, the MACE-MP neural network potential (NNP) [9-11] is applied. If trained properly, NNPs provide an efficient and versatile description of a chemical system, that combines the advantages of quantum chemical and force field descriptions.
+
+In this exercise the properties of the pristine host material (lattice parameter, thermal expansion coefficient) and the associated host-guest interaction (interaction energies, diffusion coefficient, activation energy of diffusion) will be analyzed.
+</div>
+
+[1] Yusuf, V. F.; Malek, N. I.; Kailasa, S. K. “Review on Organic Framework Classification, Synthetic Approaches, and Influencing Factors: Applications in Energy, Drug Delivery, and Wastewater Treatment.” 
+ACS Omega 2022, 7, 44507 – 44531, DOI: 10.1021/acsomega.2c05310
+
+[2] Li,  B.; Wen,  H.-M.; Zhou,  W.; Chen,  B. “Porous Metal–Organic Frameworks for Gas Storage and Separation: What,  How,  and Why?” J. Phys. Chem. Lett. 2014, 5, 3468 – 3479 DOI: 10.1021/jz501586e
+
+[3] Li,  H.; Li,  L.; Lin,  R.-B.; Zhou, W.; Zhang, Z.; Xiang,  S.; Chen,  B. “Porous metal-organic frameworks for gas storage and separation: Status and challenges” EnergyChem  2019, 1, 100006/1 – 100006/39
+DOI: 10.1016/j.enchem.2019.100006
+ 
+[4] Mahajan, S.; Lahtinen Ma. ”Recent progress in metal-organic frameworks (MOFs) for CO~2~ capture at different pressures” J. Environ. Chem. Eng. 2022, 10, 108930/1 – 108930/35 DOI: 10.1016/j.jece.2022.108930
+
+[5] Abraha, Yuel W.; Tsai, C.-W.; Niemantsverdriet, J. W. H.; Langner E. H. G. ”Optimized CO~2~ Capture of the Zeolitic Imidazolate Framework ZIF-8 Modified by Solvent-Assisted Ligand Exchange” ACS Omega 2021, 6, 21850 – 21860 DOI: 10.1021/acsomega.1c01130
+
+[6] Jiang, S.; Liu, J.; Guan J.; Du, X.; Chen, S.; Song, Y.; Huan, Y. ”Enhancing CO~2~ adsorption capacity of ZIF‑8 by synergetic effect of high pressure and temperature” Sci. Rep. 2023, 17584/1 – 17584/8 DOI: 10.1038/s41598-023-44960-4
+
+
+[7] Kalauni, K.; Vedrtnam, A.; Wdowin, M.; Chaturvedi, S. “ZIF for CO~2~ Capture: Structure, Mechanism, Optimization, and Modeling” Processes 2022, 10, 2689/1 – 2689/32 DOI: 10.3390/pr10122689 
+
+[8] Heinz, K.; Rogge, S. M. J.; Kalytta-Mewes, A.; Volkmer, D.; Bunzen, H. “MOFs for long-term gas storage: exploiting kinetic trapping in ZIF-8 for on-demand and stimuli-controlled gas release” Inorg. Chem. Front. 2023, 10, 4763 – 4772 DOI: 10.1039/D3QI01007D
+
+[9] Batatia, I.; Kovacs, D. P.; Simm, G.; Ortner, C.; Csanyi G. “MACE: Higher Order Equivariant Message Passing Neural Networks for Fast and Accurate Force Fields” 
+arXiv, 2022, DOI: 10.48550/ARXIV.2206.07697
+
+[10] Batatia,  I. et al. “A foundation model for atomistic materials chemistry”
+arXiv, 2024, DOI:  10.48550/ARXIV.2401.00096
+
+[11] ACEsuit/mace-mp https://github.com/ACEsuit/mace-mp (accessed 16. 10. 2024)

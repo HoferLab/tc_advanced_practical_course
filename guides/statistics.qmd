@@ -1,0 +1,47 @@
+---
+title: "Statistical Excursion"
+format:
+  html:
+    code-fold: false
+jupyter: python3
+---
+
+# Linear Regression
+
+Regression analsis helps to understand the relationship between independent and dependent variables.
+
+The regression describes a model e.g. [linear regression](https://en.wikipedia.org/wiki/Simple_linear_regression) is using a linear function $f(x_i,\alpha)$
+
+$$
+f = \alpha_{0} + \alpha_{1} x_i
+$$
+which should describe your relationship between your dependent $y_i$ and the independent $x_i$ variables 
+
+$$
+y_i = f(x_i,\alpha) + \epsilon_i
+$$
+within small error terms $\epsilon_i$.
+
+To estimate the parameter of your model $\alpha_i$ so that the error terms $\epsilon_i$ are small as possible the most time an [ordinary least squares](https://en.wikipedia.org/wiki/Ordinary_least_squares) fit is performed:
+
+$$
+(\alpha_0,\alpha_1) = \mathrm{argmin}(g(\alpha_0, \alpha_1))
+$$
+
+where
+$$
+g(\alpha) = \sum_i \epsilon_i^2 = \sum_i (y_i - \alpha_0 + \alpha_1 x_i)^2
+$$
+
+so that $\alpha_0$ and $\alpha_1$ can computed as
+
+$$
+\alpha_0 = \bar{y} -\alpha_1 \bar{x}
+$$
+
+$$
+\alpha_1 = \frac{\sum_i (x_i - \bar{x})(y_i - \bar{y})}{\sum_i (x_i - \bar{x}^2)} = \frac{\sum_i \Delta x_i \Delta y_i}{\sum_i \Delta x_i^2}
+$$
+
+where $\bar{x}$ and $\bar{y}$ are the respective averages and $\Delta x_i$ $\Delta y_i$ are the respective deviations. 
+

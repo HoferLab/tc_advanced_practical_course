@@ -1,0 +1,855 @@
+---
+title: "Analysis B"
+subtitle: "Analysis Techniques for Computational Material Science"
+format: 
+  metropolis-beamer-revealjs: default
+    # theme: style.scss
+# header-logo: images/rstudio.png
+# header-logo-link: "https://posit.co/"
+slide-number: "c"
+# author:
+#   - name: Author X
+#     orcid: 0000-0000-0000-0000
+#     email: author.x@email.com
+#     affiliations: Institution X
+#   - name: Author Y
+#     orcid: 0000-0000-0000-0001
+#     email: author.y@email.com
+#     affiliations: Institution Y
+date: last-modified
+bibliography: references.bib
+embed-resources: true
+---
+# Computational Material Science
+
+:::{.nonincremental}
+-   modelling system under periodic boundary conditions
+
+-   describing structural properties
+
+-   comprehension thermal and mechanical properties
+
+-   virtual screening which encompasses the development of advanced functional materials:
+      -   anodes, cathods, 
+      -   solar cells, 
+      -   catalysts, 
+      -   bioactive glasses, 
+      -   sensors, 
+      -   alloys materials etc.
+:::
+
+## Analysis of Data
+
+:::{.nonincremental}
+It is important to be aware of the accuracy and limitations of the computational methods employed in order to ensure the reliability of the results obtained.
+
+
+<br>
+
+:::
+
+:::{.callout-tip}
+
+# Question
+What do you think are the limitations of a NNP?
+
+:::
+
+. . .
+
+:::{.callout-warning}
+# Answer
+- Modelling something out of the training set can be challenging.
+- Need of GPUS
+:::
+
+## Analysis of Data
+
+:::{.nonincremental}
+
+
+It is important to be aware of the accuracy and limitations of the computational methods employed in order to ensure the reliability of the results obtained.
+
+
+<br>
+
+:::
+
+:::{.callout-tip}
+
+# Question
+What is your assessment of the accuracy of NNP methods?
+:::
+
+. . .
+
+:::{.callout-warning}
+# Answer
+The degree of accuracy is depending on the quality and size of the training set.
+:::
+
+## Preanalysis
+
+:::{.nonincremental}
+-   Simulation finished without errors: no abort, no error messages appear
+
+
+
+![](../img/grep.png){width=100%}
+
+<br>
+
+-   Visual inspectation of the system: system behave properly
+
+<br>
+
+-   Equilibrium state of simulation
+:::
+
+
+## Visual inspection
+
+Check the system is working like expected.
+
+Open the `*.xyz` file with `VMD`.
+
+<br>
+
+It is a good sign if 
+
+
+ - [ ] no atom has been ejected from the box
+
+ - [ ] systems remains intact, no collapsing or blowing up
+
+ - [ ] no unanticipated movements were observed ect.
+
+
+
+
+
+## Troubleshooting
+
+In the event that the simulation does not produce the anticipated results:
+
+
+
+- [ ] Try to understanding any error messages that may have arisen
+
+
+- [ ] Check the `*.log` and `*.in` file  if the simulation was setup properly.
+
+
+- [ ] Check the starting structure
+
+
+- [ ] Check the moldescriptor ect.
+
+
+
+
+## Equilibrium state of simulation
+
+:::{.nonincremental}
+Firstly, in order to obtain meaningful physical properties from a simulation, it is essential to ensure that the system is in an equilibrium state. 
+:::
+
+:::{.callout-tip}
+# Question
+However, what constitutes an *equilibrium state*?
+:::
+
+
+. . .
+
+:::{.callout-warning}
+# Answer
+Equilibrium state can be defined as a state in which macroscopic properties $A$ (*e.g* temperture $T$, pressure $P$, energies $E$, volume $V$,...) do **NOT** undergo major changes over time.
+:::
+. . .
+
+Once these properties fluctuate around a constant pattern without any long-term trends, it can be assumed that the system has reached an equilibrium state.
+
+## Arithmetic Average, Standard Deviation and Standard Error {visibility="hidden"}
+
+
+The aforementioned constant relaxation of the properties can be verified by calculating the arithmetic mean of the properties $\left < A \right >$
+
+$$
+\left < A \right >  = \frac{1}{n}\sum_{i=0}^{n} a(t_{i})
+$$
+where $a(t_{i})$ is the property $a$ at time step $t_i$ and $n$ the total sampling time
+
+as well as the standard deviation $A_{\sigma }$
+
+$$
+A_{\sigma }= \sqrt{ \frac{1}{n}\sum_{i=0}^{n} (a(t_{i}) - \left < A \right > )^2}.
+$$
+and standard error $A_{\nu}$ of the arithmetic average
+$$
+A_{\nu} = \frac{A_{\sigma }}{\sqrt{n}}
+$$
+
+## Running Average {visibility="hidden"}
+Further the running average $\left < A \right >_{\tau}$ at time $\tau$ with a window size of $\omega$ and a gap size $g$ 
+
+$$
+\left < A \right >_{\tau} = \frac{1}{\omega}\sum_{i=\tau-(\omega-1)g}^{\tau} a(t_{i})
+$$
+*e.g.* $\tau=5$, $\omega=3$, $g=2$
+$$
+\left < A \right >_{5} = \frac{1}{3} (a(t_{1})+a(t_{3})+a(t_{5}))
+$$
+
+can help to estimate the fluctuation of the properties over time.
+
+## Cummulative Average {visibility="hidden"}
+
+And the cumulative average is a running average that is added at each step:
+$$
+\left < A \right >_n = \frac{(n-1)\left < A \right >_{n-1} + \left < A \right >_n}{n}.
+$$
+
+
+## Linear Regression Fit {visibility="hidden"}
+
+
+Further linear regression fit helps to estimate the trend of your simulation.
+
+For more further detail: [statistics](../guides/statistics.qmd)
+
+
+
+
+
+## Plot of temperature over simulation time {auto-animate="true"}
+
+
+::: {.panel-tabset}
+
+### Plot
+
+```{python}
+#| label: fig-temp
+#| fig-cap: "Temperature vs Time plot"
+#| echo: false
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy.stats import linregress
+import matplotlib as mpl
+
+mpl.rcParams["font.size"] = 15
+mpl.rcParams["axes.labelsize"] = 20
+
+
+physical_properties = ["SIMULATION-TIME", "TEMPERATURE", "PRESSURE", "E(TOT)", "E(QM)", "N(QM-ATOMS)", "E(KIN)", "E(INTRA)","VOLUME","DENSITY","MOMENTUM","LOOPTIME"]
+physical_units = ["fs", "K","bar", "kcal/mol", "kcal/mol", "-","kcal/mol","kcal/mol","A^3", "g/cm^3", "amuA/fs", "s"]
+data = pd.read_csv("../data/physical_properties.en",sep='\t+',names=physical_properties)
+# print(data.head())
+# print("Shape of data: ", data.shape)
+time = data["SIMULATION-TIME"]/1e6 # ns
+temperature_avg = np.mean(data["TEMPERATURE"])
+temperature_std = np.std(data["TEMPERATURE"])
+window = 50
+gap = 2
+running_average = data["TEMPERATURE"].rolling(window=window).mean() #window=window,min_periods=1,center=True,step=gap
+
+def linear_function(x,a,b):
+  return a*x+b
+
+
+
+plt.figure(figsize=(8,4))
+plt.plot(time,data["TEMPERATURE"],color="black", alpha=0.5,label=r"simulation")
+plt.plot(time,running_average,label=r"$T_{\mathrm{run.avg}}$")
+plt.hlines(temperature_avg,xmin=np.min(time),xmax=np.max(time),linestyles="solid",color="black",label=r"$T_{\mathrm{avg}}$")
+plt.hlines(temperature_avg+temperature_std,xmin=np.min(time),xmax=np.max(time),linestyles="dashed",color="black",label=r"$T_{\mathrm{std}}$")
+plt.hlines(temperature_avg-temperature_std,xmin=np.min(time),xmax=np.max(time),linestyles="dashed",color="black")
+
+plt.xlabel(r"$t$ / ns")
+plt.ylabel(r"$T$ / K")
+plt.legend(fontsize=12)
+plt.show()
+```
+
+
+### Code
+```{python}
+#| echo: true
+#| eval: false
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy.stats import linregress
+import matplotlib as mpl
+
+mpl.rcParams["font.size"] = 15
+mpl.rcParams["axes.labelsize"] = 20
+
+
+physical_properties = ["SIMULATION-TIME", "TEMPERATURE", "PRESSURE", "E(TOT)", "E(QM)", "N(QM-ATOMS)", "E(KIN)", "E(INTRA)","VOLUME","DENSITY","MOMENTUM","LOOPTIME"]
+physical_units = ["fs", "K","bar", "kcal/mol", "kcal/mol", "-","kcal/mol","kcal/mol","A^3", "g/cm^3", "amuA/fs", "s"]
+data = pd.read_csv("../data/physical_properties.en",sep='\t+',names=physical_properties)
+# print(data.head())
+# print("Shape of data: ", data.shape)
+time = data["SIMULATION-TIME"]/1e6 # ns
+temperature_avg = np.mean(data["TEMPERATURE"])
+temperature_std = np.std(data["TEMPERATURE"])
+window = 50
+gap = 2
+running_average = data["TEMPERATURE"].rolling(window=window).mean() #window=window,min_periods=1,center=True,step=gap
+
+def linear_function(x,a,b):
+  return a*x+b
+
+
+
+plt.figure(figsize=(8,4))
+plt.plot(time,data["TEMPERATURE"],color="black", alpha=0.5,label=r"simulation")
+plt.plot(time,running_average,label=r"$T_{\mathrm{run.avg}}$")
+plt.hlines(temperature_avg,xmin=np.min(time),xmax=np.max(time),linestyles="solid",color="black",label=r"$T_{\mathrm{avg}}$")
+plt.hlines(temperature_avg+temperature_std,xmin=np.min(time),xmax=np.max(time),linestyles="dashed",color="black",label=r"$T_{\mathrm{std}}$")
+plt.hlines(temperature_avg-temperature_std,xmin=np.min(time),xmax=np.max(time),linestyles="dashed",color="black")
+
+plt.xlabel(r"$t$ / ns")
+plt.ylabel(r"$T$ / K")
+plt.legend(fontsize=12)
+plt.show()
+```
+
+
+:::
+
+## Linear / Volumetric Thermal Expansion Coefficient 
+
+The thermal expansion coefficient is a quantity that describes the extent to which a solid substance undergoes a change in response to variations in temperature.
+
+<br>
+
+Therefore the system is computed in $NPT$ ensemble at different temperatures $T_i$ at $1\,\mathrm{bar}$.
+
+<br>
+
+For our case we consider a temperature range from $(248 - 348)\,\mathrm{K}$ in $25\,\mathrm{K}$ steps.
+
+## Linear thermal expansion coefficient
+
+Linear thermal expansion coefficient at $\mathrm{298}\,\mathrm{K}$ is calculated by the temperature gradient of the respective average lattice parameter $\left < a \right >$, $\left < b \right >$ or $\left < c\right >$ at constant pressure $P$ ($NPT$ ensemble)
+
+$$
+\alpha _{x}^{T_{\mathrm{298\,K}}} = \frac{1}{x} \left ( \frac{\partial x}{\partial T} \right ) _{P}, x={a,b,c}
+$$
+
+<br>
+
+The slope can be estimated numerically in different ways. A simple way is to employ a [finite difference method](https://en.wikipedia.org/wiki/Finite_difference_method).
+There are [three](https://en.wikipedia.org/wiki/Finite_difference) fundamental types of it the *forward, backward* and *central* finite difference. 
+
+
+## Linear thermal expansion coefficient
+
+
+In our case we use the central finite difference method with **[five-point stencil](https://en.wikipedia.org/wiki/Five-point_stencil)**.
+In general it is formulated in 1D as:
+
+$$
+\begin{align}
+f'(x) = \frac{-f(x+2h)+8f(x+h)-8f(x-h)+f(x-2h)}{12 h} + \\
+ +\frac{h^4}{30}f^{(5)(c)}, c \in [x-2h,x+2h]
+\end{align}
+$$
+where $h$ is the change of $x$.
+
+<br>
+
+If you use more than five points [higher](https://en.wikipedia.org/wiki/Finite_difference_coefficient) stencil order can be used.
+
+## Linear thermal expansion coefficient
+
+In our case the differentiation can be written as:
+
+<br>
+
+$$
+\frac{\partial x}{\partial T} \approx \frac{ \left < x^{T_{\mathrm{248\,K}}}\right >-8 \left < x^{T_{\mathrm{273\,K}}}\right > + 8 \left < x^{T_{\mathrm{323\,K}}}\right > - \left < x^{T_{\mathrm{348\,K}}} \right > }{12\Delta T}
+$$
+
+<br>
+
+$$
+x \in {a,b,c}
+$$
+
+## Volumetric thermal expansion coefficient
+
+
+It is the same formulation as for the linear thermal expansion coefficient, except that the volume $V$ is used instead of the individual lattice parameters:
+
+$$
+\alpha _{V}^{T_{\mathrm{298\,K}}} = \frac{1}{V} \left ( \frac{\partial V}{\partial T} \right ) _{P}
+$$
+
+The volume of a orthorhomibc system can be calculated as:
+$$
+V = a\cdot b \cdot c
+$$
+
+In general of a non-orthorhombic [crystal sytems](https://en.wikipedia.org/wiki/Crystal_system) the volume is calculatd by:
+$$
+V = a b c \sqrt{1-\mathrm{cos}^2(\alpha) -\mathrm{cos}^2(\beta) - \mathrm{cos}^2(\gamma)+ 2(\mathrm{cos}(\alpha) \mathrm{cos}(\beta) \mathrm{cos}(\gamma))}
+$$
+
+## Linear / Volumetric Thermal Expansion Coefficient 
+
+:::{.callout-tip}
+
+# Question
+How you can estimate linear/ volumetric thermal expansion coefficient in the lab?
+:::
+
+. . .
+
+:::{.callout-warning}
+# Answer
+X-ray diffraction (XRD)
+powder X-ray diffraction (PXRD)
+neutron powder diffraction (NPD)
+:::
+
+
+## Plot Lattice Parameter vs. Temperature
+
+```{python}
+#| label: fig-lattice
+#| fig-cap: "T vs a plot"
+#| echo: false
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+import matplotlib as mpl
+
+mpl.rcParams["font.size"] = 15
+mpl.rcParams["axes.labelsize"] = 20
+
+temperature = np.array([248.15,273.15,298.15,323.15,348.15])
+a = np.array([25.8, 25.77, 25.73, 25.70, 25.66])
+a_err = np.array([0.2,0.1,0.15,0.2,0.23])
+
+plt.figure(figsize=(8,4))
+plt.errorbar(temperature,a,a_err,fmt='ok',label=r"$\left < a \right >$")
+plt.xlabel(r"$T$ / K")
+plt.ylabel(r"$\left < a \right > $ / $\mathrm{\AA}$")
+plt.xlim(223,373)
+plt.xticks(temperature)
+# plt.legend(fontsize=12)
+plt.show()
+```
+
+
+
+
+
+
+## Interaction Energy 
+
+The interaction energy is a measurement to estimate the energy share of interaction between the guest and host system. 
+It can be calculated by substracting the single energy shares of the individual systems ($U_{\mathrm{guest}}$ and $U_{\mathrm{host}}$) from the energy of the total system ($U_{\mathrm{guest@host}}$):
+$$
+U_{\mathrm{int}} = \left< U_{\mathrm{guest@host}} \right > - \left< U_{\mathrm{host}} \right > -  \left< U_{\mathrm{guest}} \right >.
+$$
+
+In doing so you take the average total energy $U=E_{\mathrm{kin}}+U_{\mathrm{pot}}$ of the respective simulated systems (guest@host, host, guest) at a long enough equilibrated trajectories.
+
+<!-- ## Interaction Energy 
+::: {.callout-warning}
+### Ensemble
+*Pay attention:* 
+
+The $\left< U_{\mathrm{guest@host}} \right>$ and $\left< U_{\mathrm{host}}\right >$ energy are determined by a $NPT$ simulation in contrast $\left< U_{\mathrm{guest}} \right >$ energy has to be calculated in a $NVT$ ensemble.
+A single gas molecule in a periodic box has to be calculated $NVT$ because $NPT$ would cause into crash of the simulation.
+::: -->
+
+
+## Radial Distribution Functions (RDFs) 
+
+The radial distribution function (RDF) is a simple measurement to get structural information of the system.
+
+
+![](../img/rdf_sketch.png){width=25%}
+
+## Radial Distribution Functions (RDFs) 
+
+It describes the probability $P_{ab}(r)$ to find a target particle type $b$ at a distance $r$ away from a reference particle type $a$ *e.g.* the probability to find $\mathrm{H}_2$from $\mathrm{Zn}^{2+}$ clusters in a distance $r$:
+$$
+P_{ab}(r) = \int_{0}^{r'} 4\pi r'^2 g_{ab}(r') dr'
+$$ 
+where $g_{ab}(r)$ is the RDF. The RDF formulats the average local density $\left <\rho_{ab}(r)\right >$ normalized by $\rho=(N_a N_b)$
+$$
+g(r) = \frac{\left <\rho_{ab}(r)\right >}{\rho}.
+$$ 
+
+## Radial Distribution Functions (RDFs) 
+
+The two-particle density correlation function is defined as:
+
+$$
+\rho_{ab}(r) =\sum_{i=1}^{N_a} \sum_{j=1}^{N_b} \left < \delta(|\vec{r_{i}}-\vec{r_{j}}| -r)\right >.
+$$
+
+
+The average number of particles $b$ that can be found in the shell of distance $r$ can be determined by multiplying the density $\rho$ with the probability $G(r)$
+$$ 
+N_{ab}(r) = \rho G_{ab}(r)
+$$
+
+## Radial Distribution Functions (RDFs)
+
+:::{.callout-tip}
+
+### Dirc-Delta Function
+$$
+\delta(x-x_0) =  \begin{cases}
+      0        & x \neq x_0\\
+      \infty & x = x_0\\
+    \end{cases}   
+$$
+$$
+\int_L \delta(x-x_0) dx = 1, x_0 \in L
+$$
+:::
+
+
+
+## Self-Diffusion Coefficient 
+
+In order to describe the dynamic of guests in host systems, it is necessary to calculate transport properties. 
+A transport property would be for example the *diffusion*, *viscosity*, *electrical or thermal conductivity*.
+
+In general transport properties can be described as a property coefficient $\gamma$ which depends on microscopic variable $A$ (*e.g.* positions $\Delta \vec{r}$ or the velocities $\vec{v}$) that is written as an infinite time integration of a non-normalized time correlation function $\left < \dot{A}(t)\dot{A}(t_0) \right >$ :
+$$
+\gamma = \int_{0}^{\infty} dt \left < \dot{A}(t)\dot{A}(t_0) \right >.
+$$
+
+## Self-Diffusion Coefficient 
+
+This is also known as **Green-Kubo** relation which can also written as equivalent **Einstein** expression
+
+$$
+\gamma = \lim_{t\to\infty} \frac{\left < (A(t) - A(t_0))^2 \right >}{2t} = \frac{1}{2} \lim_{t\to\infty} \frac{d}{dt} \left < (A(t) - A(t_0))^2 \right >
+$$
+
+## Self-Diffusion Coefficient 
+
+In case of self-diffusion coefficient $D_{\mathrm{s}}$ the variable $A$ is the molecular position $\vec{r}_{\mathrm{cm}}$ which in general is the center of mass position of the particles:
+$$
+\vec{r}_{\mathrm{cm}} = \frac{\sum_{i=1}^{N} m_i \vec{r}_i}{\sum_{i=1}^{N} m_i}
+$$
+where $m_i$ is the atomic mass, $\vec{r}_i$ is the atomic positions and $N$ the number of atoms in the particle.
+
+As well as $\dot{A}$ is the molecular velocity which should be also considered as center of mass.
+
+
+## Einstein-Relation 
+
+The Einstein Relation can be therefore written as slope of the mean-squared-displacement ($MSD(\tau)$)  over time origins $\tau$
+
+$$
+D_{\mathrm{s}} = \frac{1}{2 \cdot d} \lim _{t\to \infty} \frac{d}{dt} MSD(\tau)
+$$
+where $d=1,2,3$ is the dimensionality.
+
+## Mean-Squared Displacement 
+
+The mean-squared displacement describes the the temporally displacement of the particle from a time origin $t_0$ averaged over the time interval $\tau$
+$$
+MSD(\tau) = \left < \frac{1}{N} \sum_{i=1}^{N} |\vec{r} _{i}(t) - \vec{r} _{i}(t_0)|^2  \right >_{\tau}
+$$
+where $N$ is the number of the particle, $\vec{r}_{i}$ is the center-of-mass position vector of the particle $i$.
+
+<!-- also can be written as running average with window size $\omega$ and gap size $g$
+$$
+MSD(t) =  \frac{1}{\omega} \sum_{j=1}^{\omega} \frac{1}{L - t \cdot g}  \frac{1}{N} \sum_{i=1}^{N} |\vec{r} _{i}(t+\tau) - \vec{r} _{i}(t)|^2
+$$
+
+ -->
+
+
+## Mean-Squared Displacement 
+
+
+Looking at the Figure @fig-msd (a), we see that the beginning of the MSD is not linear. Only at higher correleation times the normal diffusion (see Figure @fig-msd (b)) behaviour appear.
+
+
+:::{.callout-tip}
+
+# Question: 
+:::{.nonincremental}
+- How do you get the self-diffusion coefficient out of the MSD regarding the Einstein-relation?
+- How do you get the gradient/slope of the MSD?
+- What does the limes in that formular mean?
+:::
+
+:::
+
+. . . 
+
+:::{.callout-caution}
+
+# Answer:
+The self-diffusion coefficient is the slope of the MSD divided by 2 $\cdot d$.
+
+But this is only true if correlation time is long enough.
+We can say that in the linear regime we fulfill this limes due to unchanging slope which represents the difffusion coefficient.
+
+Therefore it is important to have really linear behaviour in order to apply the Einstein relation.
+
+You get the slope by fitting a [linear regression](../guides/statistics.qmd) at the last linear section.
+:::
+
+## Mean-Squared Displacement 
+```{python}
+#| label: fig-msd
+#| fig-cap: "(a) MSD(t) plot, (b) diffusion regimes"
+#| echo: false
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
+import matplotlib as mpl
+
+mpl.rcParams["font.size"] = 15
+mpl.rcParams["axes.labelsize"] = 20
+
+data = np.genfromtxt("../data/diff.out")
+steps = data[:,0]
+time = steps*0.002
+MSD_x = data[:,1]
+MSD_y = data[:,2]
+MSD_z = data[:,3]
+MSD_xyz = MSD_x + MSD_y + MSD_z
+
+def ballistic_regime(x,a):
+  return a*x**2
+
+def superdiffusion(x,a):
+  return a*x**1.5
+
+def subdiffusion(x,a):
+  return a*x**0.5
+
+def normaldiffusion(x,a):
+  return a*x
+
+def confined_diffusion(x,a,b):
+  return a*(1-np.exp(-b*x))
+
+def linear_regression(x,a,b):
+  return a*x + b
+
+popt, pcov = curve_fit(linear_regression,time[-500:],MSD_xyz[-500:])
+
+d_einstein = popt[0]/6
+time_regime= np.linspace(0,10,1000)
+
+fig, axs = plt.subplots(2,1,figsize=(2,5),gridspec_kw={'hspace': 0.4})
+axs[0].plot(time,MSD_x,label=r"$MSD_x$",color="C0")
+axs[0].plot(time,MSD_y,label=r"$MSD_y$",color="purple")
+axs[0].plot(time,MSD_z,label=r"$MSD_z$",color="grey")
+axs[0].plot(time,MSD_xyz,label=r"$MSD_{x+y+z}$",color="k")
+axs[0].vlines(time[-500],0,500,color="k",linestyle="dotted",label=r"fitting regime")
+axs[0].plot(time[-500:],linear_regression(time[-500:],*popt),color="red",linestyle="dashed",label=r"linear fit $y=a\cdot x + b$: $a= {:.2f}$, $b= {:.2f}$ ".format(popt[0],popt[1]))
+axs[0].text(-0.5, 1.05, '(a)', transform=axs[0].transAxes, fontsize=14, verticalalignment='top')
+axs[0].text(1.0,400, r"$D_s=%2.2f\,\mathrm{\AA^2 ps^{-1}}$" %(d_einstein),fontsize=14)
+axs[0].legend(fontsize=12,loc='upper left', bbox_to_anchor=(1.05, 1.05))
+
+
+axs[1].plot(time_regime,ballistic_regime(time_regime,100),label=r"ballistic regime $\propto \tau^2$", color="gold", linestyle="dashed")
+axs[1].plot(time_regime,superdiffusion(time_regime,100),label=r"superdiffusion regime $\propto \tau^{\alpha}, \alpha>1$", color="darkred", linestyle="dashed")
+axs[1].plot(time_regime,normaldiffusion(time_regime,100),label=r"normal diffusion regime $\propto \tau$", color="red", linestyle="dashed")
+axs[1].plot(time_regime,subdiffusion(time_regime,100),label=r"subdiffusion regime $\propto \tau^{\alpha}, \alpha<1$", color="salmon", linestyle="dashed")
+
+axs[1].plot(time_regime,confined_diffusion(time_regime,50,2),label=r"confined diffusion regime $\propto$ const.", color="hotpink", linestyle="dashed")
+
+
+axs[0].set_xlabel(r"correlation time $\tau$ / ps")
+axs[0].set_ylabel(r"$MSD(t)$ / $\mathrm{\AA^2}$")
+
+axs[0].set_ylim(0,500)
+
+
+axs[1].set_xlabel(r"correlation time $\tau$ / ps")
+axs[1].set_ylabel(r"$MSD(t)$ / $\mathrm{\AA^2}$")
+axs[1].set_xlim(0,5)
+axs[1].set_ylim(0,500)
+axs[1].text(-0.5, 1.05, '(b)', transform=axs[1].transAxes, fontsize=14, verticalalignment='top')
+
+axs[1].legend(fontsize=12,loc='upper left', bbox_to_anchor=(1.05, 1.05))
+plt.show()
+```
+
+
+## Green-Kubo Relation 
+
+The Green-Kubo formalism needs a numerical integration of the velocity-autocorrelation function $VACF(t)$ to get the self-diffusion coefficent $D_{\mathrm{s}}$
+$$
+D_{\mathrm{s}} = \frac{1}{d} \int _{0}^{\infty} VACF(t)  dt
+$$
+where $d=1,2,3$ is the dimension.
+
+## Veloctiy-Autocorrelation Function
+
+
+The  [Velocity-Autocorrelatin Function]() $VACF(\tau)$ is averaged over a time interval $\tau$ 
+$$
+VACF(\tau) = \left < \frac{1}{N} \sum_{i=1}^{N} |\vec{v} _{i}(t) \vec{v} _{i}(t_0)|^2 \right >_{\tau}
+$$
+where $\vec{v}_{i}$ is the velocity of the particle $i$ and $t_0$ labels the time origin.
+
+## Veloctiy-Autocorrelation Function
+
+```{python}
+#| label: fig-VACF
+#| fig-cap: "VACF(t) plot"
+#| echo: false
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import simpson
+from scipy.integrate import cumulative_trapezoid
+import matplotlib as mpl
+
+mpl.rcParams["font.size"] = 15
+mpl.rcParams["axes.labelsize"] = 20
+
+data = np.genfromtxt("../data/green_kubo.out")
+time = data[:,0]
+VACF_x = data[:,1]
+VACF_y = data[:,2]
+VACF_z = data[:,3]
+VACF_xyz = data[:,4]
+
+
+integral_VACF_xyz = simpson(VACF_xyz, x=time)
+cumulative_integral = cumulative_trapezoid(VACF_xyz, time, initial=0)
+d_green_kubo = integral_VACF_xyz / 3
+
+fig, axs = plt.subplots(1,figsize=(4,4))
+axs.plot(time,VACF_x,label=r"$VACF_x$",color="C0")
+axs.plot(time,VACF_y,label=r"$VACF_y$",color="purple")
+axs.plot(time,VACF_z,label=r"$VACF_z$",color="grey")
+axs.plot(time,VACF_xyz,label=r"$VACF_{x+y+z}$",color="k")
+axs.plot(time, cumulative_integral, label=r'Cumulative Integral of $VACF_{x+y+z}$',color="red")
+
+axs.text(0.05, 0.95, r"$D_s = %.2f \, \mathrm{\AA^2 ps^{-1}}$" %(d_green_kubo), transform=axs.transAxes, fontsize=14, verticalalignment='top')
+
+
+axs.set_xlabel(r"correlation time $\tau$ / ps")
+axs.set_ylabel(r"$VACF(t)$ / $\mathrm{(\AA ps^{-1})^{2}}$")
+# axs.legend(fontsize=12,loc='upper left', bbox_to_anchor=(1.05, 1.05))
+plt.show()
+```
+
+
+## Activation Energy  
+
+The diffusion coefficient is directly depending on the activation energy $E_{\mathrm{a}}$ by an exponential decacy
+$$
+D_{\mathrm{s}}=D_0 e^{-\frac{E_{\mathrm{a}}}{RT}}
+$$
+where $D_0$ is factor of the exponential function, $R=8.314\,\mathrm{JK^{-1}mol^{-1}}$ is the gas constant and $T$ is the temperature.
+
+With this formalism we can apply an [Arrhenius equation](https://en.wikipedia.org/wiki/Arrhenius_equation) to [fit a linear function](../guides/statistics.qmd) to get the activation energy $E_{\mathrm{a}}$
+$$
+\ln (D_{\mathrm{s}}) = -\frac{E_{\mathrm{a}}}{RT} + \ln{D_0}
+$$
+
+## Activation Energy  
+
+```{python}
+#| label: fig-Ea
+#| fig-cap: "(a) D(T), (b) D(n), (c) ln(D(1000/T) and (d) Ea(n))"
+#| echo: false
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
+import matplotlib as mpl
+
+mpl.rcParams["font.size"] = 15
+mpl.rcParams["axes.labelsize"] = 20
+
+diff_4 = np.array([2.5,2.7,2.8,2.9,3.2])
+diff_8 = np.array([4.2,4.8,4.7,5.0,5.3])
+diff_12 = np.array([5.2,5.8,6.0,6.4,6.8])
+diff_16 = np.array([5.2,5.9,6.1,6.6,7.2])
+temp = np.array([300,323,348,373,398])
+diff_300 = np.array([2.5,4.2,5.2,5.2]) 
+diff_323 = np.array([2.7,4.8,5.8,5.9]) 
+diff_348 = np.array([2.8,4.7,6.0,6.1]) 
+diff_373 = np.array([2.9,5.0,6.4,6.6]) 
+diff_398 = np.array([3.2,5.3,6.8,7.2]) 
+loading = np.array([4,8,12,16])
+
+
+
+def linear_regression(x,a,b):
+  return a*x + b
+
+popt_4, pcov_4 = curve_fit(linear_regression,np.log(diff_4),1000/temp)
+popt_8, pcov_8 = curve_fit(linear_regression,np.log(diff_8),1000/temp)
+popt_12, pcov_12 = curve_fit(linear_regression,np.log(diff_12),1000/temp)
+popt_16, pcov_16 = curve_fit(linear_regression,np.log(diff_16),1000/temp)
+
+
+R=8.313
+Ea_4 = -popt_4[0]*R
+Ea_8 = -popt_8[0]*R
+Ea_12 = -popt_12[0]*R
+Ea_16 = -popt_16[0]*R
+
+fig, axs = plt.subplots(2,2,figsize=(5,5),gridspec_kw={'hspace': 0.5,'wspace': 0.6})
+axs[0,0].scatter(temp,diff_4,label=r"$n=4$")
+axs[0,0].scatter(temp,diff_8,label=r"$n=8$")
+axs[0,0].scatter(temp,diff_12,label=r"$n=12$")
+axs[0,0].scatter(temp,diff_16,label=r"$n=16$")
+axs[0,0].set_xlabel(r"$T$ \ K")
+axs[0,0].set_ylabel(r"$D_{\mathrm{s}}$ \ $10^{-8}ms^{-1}$")
+axs[0,0].legend(fontsize=8,loc='upper right')
+axs[0,0].text(-0.5, 1.05, '(a)', transform=axs[0,0].transAxes, fontsize=14, verticalalignment='top')
+
+
+axs[0,1].scatter(loading,diff_300,label=r"$T=300\,{\mathrm{K}}$",marker="x")
+axs[0,1].scatter(loading,diff_323,label=r"$T=323\,{\mathrm{K}}$",marker="x")
+axs[0,1].scatter(loading,diff_348,label=r"$T=348\,{\mathrm{K}}$",marker="x")
+axs[0,1].scatter(loading,diff_373,label=r"$T=373\,{\mathrm{K}}$",marker="x")
+axs[0,1].scatter(loading,diff_398,label=r"$T=398\,{\mathrm{K}}$",marker="x")
+axs[0,1].set_xlabel(r"$n$")
+axs[0,1].set_ylabel(r"$D_{\mathrm{s}}$ \ $10^{-8}ms^{-1}$")
+axs[0,1].legend(fontsize=8,loc='lower right')
+axs[0,1].text(-0.5, 1.05, '(b)', transform=axs[0,1].transAxes, fontsize=14, verticalalignment='top')
+
+axs[1,0].scatter(1000/temp,np.log(diff_4),label=r"$n=4$")
+axs[1,0].scatter(1000/temp,np.log(diff_8),label=r"$n=8$")
+axs[1,0].scatter(1000/temp,np.log(diff_12),label=r"$n=12$")
+axs[1,0].scatter(1000/temp,np.log(diff_16),label=r"$n=16$")
+axs[1,0].set_xlabel(r"$1000/T$ in K$^{-1}$")
+axs[1,0].set_ylabel(r"$\mathrm{ln}(D_{\mathrm{s}})$")
+axs[1,0].text(-0.5, 1.05, '(c)', transform=axs[1,0].transAxes, fontsize=14, verticalalignment='top')
+# axs[1,0].legend(fontsize=8,loc='upper right')
+
+axs[1,1].scatter(4,Ea_4)
+axs[1,1].scatter(8,Ea_8)
+axs[1,1].scatter(12,Ea_12)
+axs[1,1].scatter(16,Ea_16)
+axs[1,1].set_ylabel(r"$E_{\mathrm{a}}$ \ kcal mol$^{-1}$")
+axs[1,1].set_xlabel(r"$n$")
+axs[1,1].text(-0.5, 1.05, '(d)', transform=axs[1,1].transAxes, fontsize=14, verticalalignment='top')
+# axs[1,1].legend(fontsize=8,loc='upper right')
+
+plt.show()
+```
+

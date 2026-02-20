@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Matplotlib – PR Computeraided Assessment of Material</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../templates/poster.html" rel="next">
+<link href="../exercise_b/checklist_b.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../custom.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../templates/matplotlib.html">Templates</a></li><li class="breadcrumb-item"><a href="../templates/matplotlib.html"><span class="chapter-title">Matplotlib</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">PR Computeraided Assessment of Material</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-substack"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="../presentation/analysis_b_presentation.html">
+            Analysis A Presentation
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="../presentation/howto_b_presentation.html">
+            HowTo A Presentation
+            </a>
+          </li>
+      </ul>
+    </div>
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-1" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-table"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-1">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://docs.google.com/spreadsheets/d/1wLiVdocFKj4iYNReIv2KdyEh5-HF7x3P1qJy946fHts/edit?usp=sharing">
+            Thermal Expansion
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://docs.google.com/spreadsheets/d/1k56gQvhw8spThA9WNhdUirlWV9gKY-G1va8DjMysdBU/edit?usp=sharing">
+            Gas Diffusion
+            </a>
+          </li>
+      </ul>
+    </div>
+    <a href="../PR-Computeraided-Assessment-of-Material.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Instructions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Exercise: NNP-MD</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercise_b/exercise_b.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Background Info</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercise_b/howto_b.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HowTo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercise_b/analysis_b.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercise_b/checklist_b.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Checklist</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Templates</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../templates/matplotlib.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Matplotlib</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../templates/poster.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Poster Templates</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Guides</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guides/statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistical Excursion</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guides/linux_quickstart_guide.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linux Quickstart Guide</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guides/scientific_plot_quickstart.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Visual. Quickstart Guide</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guides/latex_quickstart.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Latex Quickstart Guide</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guides/python_quickstart.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Quickstart Guide</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../guides/VisualizationPythonPackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Visualization</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#how-to-read-data-into-python" id="toc-how-to-read-data-into-python" class="nav-link active" data-scroll-target="#how-to-read-data-into-python">How to read data into python:</a></li>
+  <li><a href="#two-axis-plot" id="toc-two-axis-plot" class="nav-link" data-scroll-target="#two-axis-plot">Two axis plot</a></li>
+  <li><a href="#line-spectra-with-gaussian-broadening" id="toc-line-spectra-with-gaussian-broadening" class="nav-link" data-scroll-target="#line-spectra-with-gaussian-broadening">Line spectra with Gaussian broadening</a></li>
+  <li><a href="#band-plot" id="toc-band-plot" class="nav-link" data-scroll-target="#band-plot">Band Plot</a></li>
+  <li><a href="#plot-functions" id="toc-plot-functions" class="nav-link" data-scroll-target="#plot-functions">Plot functions</a></li>
+  <li><a href="#fit-a-function-to-data" id="toc-fit-a-function-to-data" class="nav-link" data-scroll-target="#fit-a-function-to-data">Fit a function to data</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../templates/matplotlib.html">Templates</a></li><li class="breadcrumb-item"><a href="../templates/matplotlib.html"><span class="chapter-title">Matplotlib</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">Matplotlib</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="how-to-read-data-into-python" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="how-to-read-data-into-python">How to read data into python:</h2>
+<div id="ee61b2b8" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.genfromtxt(<span class="st">"../data/data.dat"</span>,delimiter<span class="op">=</span><span class="st">"   "</span>, skip_header<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[ 100.            4.36417563   -1.19      ]
+ [ 200.            3.97386645   31.19      ]
+ [ 300.            3.81670518   43.19      ]
+ [ 400.            3.63958609   60.1       ]
+ [ 500.            3.36586221  108.77      ]
+ [ 600.            3.30685375  123.16      ]
+ [ 700.            2.95904139  192.74      ]
+ [ 800.            2.7512791   233.53      ]
+ [ 900.            2.73239376  235.13      ]
+ [1000.            2.37106786  284.71      ]
+ [1100.            2.22010809  301.51      ]]</code></pre>
+</div>
+</div>
+</section>
+<section id="two-axis-plot" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="two-axis-plot">Two axis plot</h2>
+<div id="9b873b16" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.ticker <span class="im">import</span> AutoMinorLocator,FixedLocator</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># global matplotlib settings</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>plt.rcParams.update({</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'legend.fontsize'</span>: <span class="dv">18</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'figure.figsize'</span>: (<span class="dv">4</span>, <span class="dv">4</span>),</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'axes.labelsize'</span>: <span class="dv">25</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'xtick.labelsize'</span>: <span class="dv">20</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ytick.labelsize'</span>: <span class="dv">20</span>}</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># create a figure with a subfigure to create 2 different y-axes</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>fig, ax1 <span class="op">=</span> plt.subplots()</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># create second subfigure with with sharing the x-axis of ax1 subfigure</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> ax1.twinx() </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the first data as line plot as ax1 subfigure</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># set color, linewidth, marker symbol and label</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>ax1.plot(data[:,<span class="dv">0</span>], data[:,<span class="dv">1</span>], color<span class="op">=</span><span class="st">"grey"</span>, linewidth<span class="op">=</span><span class="dv">3</span>, marker<span class="op">=</span><span class="st">"x"</span>,label<span class="op">=</span><span class="st">"data1"</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"># define the color of the y-axis</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span><span class="st">"grey"</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the second data as the ax2 subfigure by using scatter plot</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>ax2.scatter(data[:,<span class="dv">0</span>], data[:,<span class="dv">2</span>],color<span class="op">=</span><span class="st">"black"</span>, linewidths<span class="op">=</span><span class="dv">3</span>,label<span class="op">=</span><span class="st">"data2"</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>ax2.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co"># add all labels in one </span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>lines1, labels1 <span class="op">=</span> ax1.get_legend_handles_labels() <span class="co"># get labels of ax1 subfigure</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>lines2, labels2 <span class="op">=</span> ax2.get_legend_handles_labels() <span class="co"># get labels of ax2 subfigures</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>ax2.legend(lines1 <span class="op">+</span> lines2, labels1<span class="op">+</span> labels2, loc<span class="op">=</span><span class="dv">4</span>) <span class="co"># location of legend</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="co"># set x- and y-limits of the axes</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>ax1.set_xlim(<span class="dv">0</span>,<span class="dv">1500</span>)</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>ax1.set_ylim(<span class="op">-</span><span class="fl">0.1</span>,<span class="dv">5</span>)</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>ax2.set_ylim(<span class="op">-</span><span class="fl">0.1</span>,<span class="dv">400</span>)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="co"># set the x- and y-labels of the axes</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="vs">r"$x$ / a.u"</span>)</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="vs">r"$y_1$ / a.u."</span>,color<span class="op">=</span><span class="st">"grey"</span>) <span class="co"># define also the color of the labels</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="vs">r"$y_2$ / a.u."</span>,color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="co"># create a vertical line at 800 starting from 0 until 5</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>ax1.axvline(<span class="dv">800</span>,<span class="dv">0</span>,<span class="dv">5</span>,color<span class="op">=</span><span class="st">"red"</span>,linewidth<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="co"># define manjor and minor axes ticks</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>ax1.xaxis.set_major_locator(FixedLocator(np.arange(<span class="dv">0</span>, <span class="dv">2000</span>, <span class="dv">500</span>)))</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>ax1.xaxis.set_minor_locator(AutoMinorLocator(<span class="dv">2</span>))</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>ax1.yaxis.set_major_locator(FixedLocator(np.arange(<span class="op">-</span><span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">1</span>)))</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>ax1.yaxis.set_minor_locator(AutoMinorLocator(<span class="dv">2</span>))</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>ax2.yaxis.set_major_locator(FixedLocator(np.arange(<span class="op">-</span><span class="dv">100</span>, <span class="dv">500</span>, <span class="dv">100</span>)))</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>ax2.yaxis.set_minor_locator(AutoMinorLocator(<span class="dv">2</span>))</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="co"># save the figure as png</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.savefig("figure.png", dpi=300)</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="co"># show the picture</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="matplotlib_files/figure-html/cell-3-output-1.png" width="481" height="398" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="line-spectra-with-gaussian-broadening" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="line-spectra-with-gaussian-broadening">Line spectra with Gaussian broadening</h2>
+<div id="f37a8e25" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create random frequencies between 20 and 5000 cm-1 </span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>vib <span class="op">=</span> np.random.rand(<span class="dv">10</span>)<span class="op">*</span>(<span class="dv">5000</span><span class="op">-</span><span class="dv">20</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># with random intensity</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>intensity <span class="op">=</span> np.random.rand(<span class="dv">10</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># define gaussian broadening</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> spectrum(vib,intensity,sigma,v):</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    gvib<span class="op">=</span>[]</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> vibi <span class="kw">in</span> v:</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        tot<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> vibj,I <span class="kw">in</span> <span class="bu">zip</span>(vib,intensity):</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>            tot <span class="op">=</span> tot <span class="op">+</span> I<span class="op">*</span>np.exp(<span class="op">-</span>((((vibj<span class="op">-</span>vibi)<span class="op">/</span>sigma)<span class="op">**</span><span class="dv">2</span>)))</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        gvib.append(tot)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> gvib</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># create the broaded function with smooth frequency values</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>v<span class="op">=</span>np.linspace(<span class="dv">0</span>,<span class="dv">5000</span>, num<span class="op">=</span><span class="dv">10000</span>, endpoint<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co"># use different sigma</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>sigma1<span class="op">=</span><span class="dv">100</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>sigma2<span class="op">=</span><span class="dv">200</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>sigma3<span class="op">=</span><span class="dv">400</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>gvib1<span class="op">=</span>spectrum(vib,intensity,sigma1,v)</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>gvib2<span class="op">=</span>spectrum(vib,intensity,sigma2,v)</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>gvib3<span class="op">=</span>spectrum(vib,intensity,sigma3,v)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>fig,ax<span class="op">=</span>plt.subplots(figsize<span class="op">=</span>(<span class="dv">4</span>,<span class="dv">4</span>))</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the gaussian broadenings</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>ax.plot(v,gvib1,<span class="st">"--k"</span>, label<span class="op">=</span><span class="vs">r"$\sigma_1=100\,\mathrm{cm^{-1</span><span class="sc">}}</span><span class="vs">$"</span>)</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>ax.plot(v,gvib2,linestyle<span class="op">=</span><span class="st">"--"</span>, color<span class="op">=</span><span class="st">"grey"</span>, label<span class="op">=</span><span class="vs">r"$\sigma_2=200\,\mathrm{cm^{-1</span><span class="sc">}}</span><span class="vs">$"</span>)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>ax.plot(v,gvib3, linestyle<span class="op">=</span><span class="st">"dashed"</span>, color<span class="op">=</span><span class="st">"lightgrey"</span>, label<span class="op">=</span><span class="vs">r"$\sigma_3=500\,\mathrm{cm^{-1</span><span class="sc">}}</span><span class="vs">$"</span>)</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the line spectra</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> v,I <span class="kw">in</span> <span class="bu">zip</span>(vib,intensity):</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    ax.plot((v,v),(<span class="dv">0</span>,I),c<span class="op">=</span><span class="st">"red"</span>)</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="co"># or use vlines</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>ax.vlines(v,<span class="dv">0</span>,I,color<span class="op">=</span><span class="st">"red"</span>)</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="co"># set x- and y-axis limits</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>,<span class="dv">6000</span>)</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>,<span class="dv">3</span>)</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="co"># set minor ticks</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>ax.xaxis.set_minor_locator(AutoMinorLocator(<span class="dv">2</span>))</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>ax.yaxis.set_minor_locator(AutoMinorLocator(<span class="dv">2</span>))</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="co"># invert the x-axis</span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>plt.gca().invert_xaxis()</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="co"># set the axes labels</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'frequency / cm$^{-1}$'</span>)</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'intensity / a.u.'</span>)</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the legend</span></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>plt.legend(fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="co"># save the figure</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a><span class="co"># # plt.savefig('random_line_spectra.png')</span></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="matplotlib_files/figure-html/cell-4-output-1.png" width="389" height="405" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="band-plot" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="band-plot">Band Plot</h2>
+<div id="84652d6b" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># define the kpoints and the kpoint_labels</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>kpoints <span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">21</span>,<span class="dv">66</span>,<span class="dv">76</span>])</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>kpoint_labels <span class="op">=</span> [<span class="st">"Z"</span>,<span class="vs">r"$\Gamma$"</span>,<span class="st">"X"</span>,<span class="st">"P"</span>]</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># an example of random band data</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>bands <span class="op">=</span> np.genfromtxt(<span class="st">"../data/band_tot.dat"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="9580156f" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>EFermi <span class="op">=</span> <span class="op">-</span><span class="fl">0.5681</span> <span class="co">#eV taken from detailed.out</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># size of the band data</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>shape <span class="op">=</span> bands.shape</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># put all data in one array to calculate the band gap</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([])</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,shape[<span class="dv">1</span>]):</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> np.append(y,bands[:,i])</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([])</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,shape[<span class="dv">1</span>]):</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.append(x,bands[:,<span class="dv">0</span>])</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># use the convention of E-EFermi  </span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>yF <span class="op">=</span> y <span class="op">-</span> EFermi</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># the maximum energy of the valence band</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>max_valence <span class="op">=</span> np.<span class="bu">max</span>(yF[yF<span class="op">&lt;</span><span class="dv">0</span>])</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># the minimum energy of the conduction band</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>min_conduction <span class="op">=</span> np.<span class="bu">min</span>(yF[yF<span class="op">&gt;</span><span class="dv">0</span>])</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>k_max_valence <span class="op">=</span> x[np.argmin(yF[yF<span class="op">&gt;</span><span class="dv">0</span>])]</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>k_min_conduction <span class="op">=</span> x[np.argmax(yF[yF<span class="op">&lt;</span><span class="dv">0</span>])]</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co"># band gap</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>E_gap <span class="op">=</span> max_valence <span class="op">-</span> min_conduction</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="69be561b" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the bands</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">19</span>):</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    plt.plot(bands[:,<span class="dv">0</span>], bands[:,i]<span class="op">-</span>EFermi, color<span class="op">=</span><span class="st">"black"</span>, linewidth<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the vertical lines for the k-points of the Brillouin zone</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> kpoints:</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    plt.axvline(j, color<span class="op">=</span><span class="st">"grey"</span>, linestyle<span class="op">=</span><span class="st">"dashed"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># set some axes limits</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">1</span>,<span class="dv">76</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="op">-</span><span class="fl">6.5</span>,<span class="fl">3.5</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># plot Egap</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>plt.axhline(max_valence, color<span class="op">=</span><span class="st">"black"</span>, linestyle<span class="op">=</span><span class="st">"dashed"</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>plt.axhline(min_conduction, color<span class="op">=</span><span class="st">"black"</span>, linestyle<span class="op">=</span><span class="st">"dashed"</span>,label<span class="op">=</span><span class="vs">r"$E_{\mathrm</span><span class="sc">{gap}</span><span class="vs">}=</span><span class="sc">%2.3f</span><span class="vs">\,\mathrm</span><span class="sc">{eV}</span><span class="vs">$"</span> <span class="op">%</span>E_gap)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>plt.plot([k_min_conduction,k_max_valence],[max_valence,min_conduction], color<span class="op">=</span><span class="st">"red"</span>,label<span class="op">=</span><span class="vs">r"$E_{\mathrm{indirect,gap</span><span class="sc">}}</span><span class="vs">$"</span>)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>plt.xticks(kpoints,kpoint_labels)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$E-E_{\mathrm</span><span class="sc">{Fermi}</span><span class="vs">}$ / eV"</span>)</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>plt.legend(fontsize<span class="op">=</span><span class="dv">12</span>,loc<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="matplotlib_files/figure-html/cell-7-output-1.png" width="411" height="350" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="f942bf14" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># it is used for constants</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> constants</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># it is used for showing the latex equations</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, Latex</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># define constants</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>eV <span class="op">=</span> constants.eV</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>hbar <span class="op">=</span> constants.hbar</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>mol <span class="op">=</span> constants.Avogadro</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>cal <span class="op">=</span> constants.calorie</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>kB <span class="op">=</span> constants.k</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> constants.u</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> constants.angstrom</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"eV = "</span>,eV, <span class="st">"J"</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"hbar = "</span>,hbar, <span class="st">"J s"</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"mol = "</span>,mol, <span class="st">"mol"</span>)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"cal = "</span>,cal, <span class="st">"J"</span>)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"kB = "</span>,kB, <span class="st">"J K-1"</span>)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"u = "</span>,u, <span class="st">"kg"</span>)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"A = "</span>,A, <span class="st">"m"</span>)</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>display(Latex( <span class="vs">r"$\nu = \frac</span><span class="sc">{1}</span><span class="vs">{2\pi}\sqrt{\frac</span><span class="sc">{k}</span><span class="vs">{\mu</span><span class="sc">}}</span><span class="vs">$ in cm $^{-1}$"</span>))</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>display(Latex(<span class="vs">r"$\mu = \frac{m_1 \cdot m_2}{m_1 + m_2}$ in g $\cdot$ mol $^{-1}$"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>eV =  1.602176634e-19 J
+hbar =  1.0545718176461565e-34 J s
+mol =  6.02214076e+23 mol
+cal =  4.184 J
+kB =  1.380649e-23 J K-1
+u =  1.6605390666e-27 kg
+A =  1e-10 m</code></pre>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><span class="math inline">\(\nu = \frac{1}{2\pi}\sqrt{\frac{k}{\mu}}\)</span> in cm <span class="math inline">\(^{-1}\)</span></p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><span class="math inline">\(\mu = \frac{m_1 \cdot m_2}{m_1 + m_2}\)</span> in g <span class="math inline">\(\cdot\)</span> mol <span class="math inline">\(^{-1}\)</span></p>
+</div>
+</div>
+</section>
+<section id="plot-functions" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="plot-functions">Plot functions</h2>
+<div id="2ba62893" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.switch_backend("TkAgg") </span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># it is used for plotting the figures in the jupyter notebook as interactive figures</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># %matplotlib widget</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>plt.rcParams.update({</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'legend.fontsize'</span>: <span class="dv">9</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'figure.figsize'</span>: (<span class="dv">2</span>,<span class="dv">2</span>),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'axes.labelsize'</span>: <span class="dv">10</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'xtick.labelsize'</span>: <span class="dv">9</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ytick.labelsize'</span>: <span class="dv">9</span>}</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># array of r values from 0 to 10 with 100 points</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">1000</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co"># force constant is extracted</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> <span class="dv">3</span> <span class="co"># check the units of k it should be in kcal mol-1 A-2</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co"># translation of the units</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co"># harmonic potential</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> harmonic_potential(r, k, r0):</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">0.5</span> <span class="op">*</span> k <span class="op">*</span> (r<span class="op">-</span>r0)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> morse_potential(r, D, a, r0):</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> D <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> np.exp(<span class="op">-</span>a<span class="op">*</span>(r<span class="op">-</span>r0)))<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>fig  <span class="op">=</span> plt.figure(dpi<span class="op">=</span><span class="dv">300</span>)</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>plt.plot(r, harmonic_potential(r, k, <span class="dv">5</span>), label<span class="op">=</span><span class="vs">r"harm. pot."</span>)</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>plt.plot(r, morse_potential(r, <span class="dv">15</span>,<span class="fl">0.3</span>, <span class="dv">5</span>), label<span class="op">=</span><span class="vs">r"Morse pot."</span>)</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$r$ / $\AA$"</span>)</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$V(r)$ / kcal mol$^{-1}$"</span>)</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="dv">15</span>)</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, <span class="dv">20</span>)</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>plt.legend(fontsize<span class="op">=</span><span class="dv">6</span>)</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="matplotlib_files/figure-html/cell-9-output-1.png" width="569" height="570" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="fit-a-function-to-data" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="fit-a-function-to-data">Fit a function to data</h2>
+<div id="86a2447d" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> curve_fit</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># global matplotlib settings</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>plt.rcParams.update({</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'legend.fontsize'</span>: <span class="dv">9</span>,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'figure.figsize'</span>: (<span class="dv">2</span>,<span class="dv">2</span>),</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'axes.labelsize'</span>: <span class="dv">10</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'xtick.labelsize'</span>: <span class="dv">9</span>,</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ytick.labelsize'</span>: <span class="dv">9</span>}</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># define the function to fit</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> harmonic_potential(r, k, r0):</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">0.5</span> <span class="op">*</span> k <span class="op">*</span> (r<span class="op">-</span>r0)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co"># generate some data</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">1000</span>)</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>r0 <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> harmonic_potential(r, k, r0) <span class="op">+</span> np.random.normal(<span class="dv">0</span>, <span class="fl">0.5</span>, r.size)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="co"># fit the data</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>popt, pcov <span class="op">=</span> curve_fit(harmonic_potential, r, data)</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the R2 score</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> r2_score(data, harmonic_potential(r, <span class="op">*</span>popt))</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="co"># print the fit parameters</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"k = "</span>, popt[<span class="dv">0</span>], <span class="st">" +/- "</span>, np.sqrt(pcov[<span class="dv">0</span>,<span class="dv">0</span>]))</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"r0 = "</span>, popt[<span class="dv">1</span>], <span class="st">" +/- "</span>, np.sqrt(pcov[<span class="dv">1</span>,<span class="dv">1</span>]))</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"R2 = "</span>, r2)</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>plt.figure(dpi<span class="op">=</span><span class="dv">300</span>)</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the data and the fit</span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>plt.plot(r, data, label<span class="op">=</span><span class="st">"random data"</span>)</span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>plt.plot(r, harmonic_potential(r, <span class="op">*</span>popt), label<span class="op">=</span><span class="vs">r"$V(r) = \frac</span><span class="sc">{1}{2}</span><span class="vs"> k (r-r_0)^2$"</span> <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="vs">r"$k = </span><span class="sc">%2.4f</span><span class="vs"> \pm </span><span class="sc">%2.4f</span><span class="vs">$"</span> <span class="op">%</span>(popt[<span class="dv">0</span>], np.sqrt(pcov[<span class="dv">0</span>,<span class="dv">0</span>])) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="vs">r"$r_0 = </span><span class="sc">%2.4f</span><span class="vs"> \pm </span><span class="sc">%2.4f</span><span class="vs">$"</span> <span class="op">%</span>(popt[<span class="dv">1</span>], np.sqrt(pcov[<span class="dv">1</span>,<span class="dv">1</span>])) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="vs">r"$R^2 = </span><span class="sc">%2.4f</span><span class="vs">$"</span> <span class="op">%</span>r2)</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$r$ / $\AA$"</span>)</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$V(r)$ / kcal mol$^{-1}$"</span>)</span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>plt.legend(fontsize<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="dv">15</span>)</span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, <span class="dv">20</span>)</span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>k =  3.0002358065923596  +/-  0.001529098137942877
+r0 =  4.999150938462694  +/-  0.0018913601765475603
+R2 =  0.9998621335925691</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="matplotlib_files/figure-html/cell-10-output-2.png" width="566" height="584" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../exercise_b/checklist_b.html" class="pagination-link" aria-label="Checklist">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Checklist</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../templates/poster.html" class="pagination-link" aria-label="Poster Templates">
+        <span class="nav-page-text"><span class="chapter-title">Poster Templates</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,68 @@
+project:
+  type: book
+  output-dir: _site
+book:
+  title: "PR Computeraided Assessment of Material"
+  reader-mode: true
+  downloads: pdf
+  sidebar:
+    style: "docked"
+    search: true
+    tools: 
+      - icon: "substack"
+        menu:
+          - text: Analysis A Presentation
+            href: presentation/analysis_b_presentation.html
+          - text: HowTo A Presentation
+            href: presentation/howto_b_presentation.html
+      - icon: "table"
+        menu:
+          - text: Thermal Expansion
+            href: https://docs.google.com/spreadsheets/d/1wLiVdocFKj4iYNReIv2KdyEh5-HF7x3P1qJy946fHts/edit?usp=sharing
+          - text: Gas Diffusion
+            href: https://docs.google.com/spreadsheets/d/1k56gQvhw8spThA9WNhdUirlWV9gKY-G1va8DjMysdBU/edit?usp=sharing
+  chapters:
+    - index.qmd     
+
+    - part: "Exercise: NNP-MD"  
+      chapters:
+        - exercise_b/exercise_b.qmd
+        - exercise_b/howto_b.qmd
+        - exercise_b/analysis_b.qmd
+        - exercise_b/checklist_b.qmd
+
+    - part: "Templates"
+      chapters:
+        - templates/matplotlib.qmd
+        - templates/poster.qmd
+    - part: "Guides"
+      chapters:
+        - guides/statistics.qmd
+        - guides/linux_quickstart_guide.qmd
+        - guides/scientific_plot_quickstart.qmd
+        - guides/latex_quickstart.qmd
+        - guides/python_quickstart.qmd
+        - guides/VisualizationPythonPackages.qmd
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    toc: true
+    number-parts: false
+    number-chapters: false        
+    number-sections: false
+    number-depth: 0    
+    code-copy: true
+    linkcolor: "#4C9FB5"
+    code:
+      highlight: true
+      highlight-style: pygments
+      code-block-bg: true
+      code-block-border-left: true
+    css: custom.css
+  PrettyPDF-pdf:
+    latex-tinytex: true
+    latex-auto-install: true
+    keep-tex: true
+    pdf-engine: xelatex

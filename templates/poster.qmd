@@ -1,0 +1,14 @@
+---
+title: "Poster Templates"
+format:
+  html:
+    code-fold: false
+jupyter: python3
+---
+
+Here are some poster templates:
+
+- [UIBK Poster template](https://www.uibk.ac.at/de/public-relations/services/dokumentvorlagen/)
+- [Overleaf Templates](https://www.overleaf.com/gallery/tagged/poster)
+
+Think about how to create the poster. Figures and tables should be informative and readable. Choose a suitable font size and style. Divide the poster in reasonable sections.

@@ -1,0 +1,127 @@
+---
+title: "Visual. Quickstart Guide"
+format:
+  html:
+    code-fold: show
+execute:
+    echo: true
+    eval: false
+---
+
+How to: scientific plots
+========================
+
+xmgrace
+-------
+
+A tutorial can be found here:\
+<https://universe.bits-pilani.ac.in/uploads/Pilani/navin/ReadPDFDOC/xmgrace.pdf>
+
+
+gnuplot
+-------
+
+A lot of example plots can be seen here (an example plot is also shown in the appendix):\
+<http://gnuplot.sourceforge.net/demo/>
+
+
+
+Gnuplot template for pdf plots (resulting example plot shown below):
+```{python}
+    #!/usr/bin/gnuplot
+    reset
+    # plot a pdf
+    set terminal pdfcairo enhanced font "Times New Roman,12.0" rounded
+    set output 'confinement_plot.pdf'
+    set border linewidth 1.0
+    set size ratio 0.55
+    # set plot line styles
+    set style line 1 linecolor rgb 'black'   linetype 1 linewidth 1
+    set style line 2 linecolor rgb '#FFB85F' linetype 1 linewidth 1   #yellow
+    # set legend position
+    set key left top
+    # set axis properties
+    set ylabel 'V(r)'
+    set xlabel 'r / Bohr'
+    set xtics nomirror
+    set ytics nomirror
+    set xr[0:10]
+    set yr[0:9]
+    #variables
+    w = 8.5
+    r0 = 4.0
+    a = 2.0
+    r1=2.5
+    #functions
+    f (x) = w / ( 1 + exp (a * (r0 - x)))
+    g (x) = (x/r1)**2
+    # plot funcitons
+    plot  f(x)  title 'Wood-Saxon Confinement' w lines linestyle 1, \
+              g(x)  title 'Power Confinement'      w lines linestyle 2
+
+    ### for plotting data files:
+    # plot "name_of_datafile.dat" w lines 
+```
+
+
+
+::: {.column width="75%"}
+![gnuplot example plot](../img/ws_plot.png){width=75%}
+:::
+
+
+
+matplotlib
+----------
+
+Quickstart guide:\
+<https://matplotlib.org/stable/users/getting_started/index.html>
+
+julia
+-----
+
+Found on the net (not testet yet, but seems useful):\
+<https://nextjournal.com/leandromartinez98/tips-to-create-beautiful-publication-quality-plots-in-julia>
+
+How to: vmd eye candy
+=====================
+
+-   Set background color to white (a good .vmdrc file is shown in the
+    appendix)
+
+-   Adjust camera to a nice perspective of the molecule and set the
+    resolution of atoms and bonds in graphical representations to 25
+
+-   File -\> Render \...
+
+-   Select \"Tachyon\"
+
+-   add to the the command before the -o flag \"-res 3000 3000\" so that
+    i looks like \"\... TARGA -res 3000 3000 -o \...\"
+
+-   autocrop and scale the image to a smaller size it with gimp, done!
+
+Good default `VMD` settings (stolen from Bernhard, copy content end save it in `.vmdrc` in your home directory):
+
+```{python}
+    color Display Background white
+    color Axes Labels black
+    color Labels Bonds black
+    color Labels Angles black
+    display depthcue off
+    ## position and turn on menus
+    menu main move 5 225
+    menu display move 395 30
+    menu graphics move 395 500
+    menu main on
+    menu graphics on
+    mol delrep 0 top
+    mol representation Licorice 0.100000 12.000000 1.000000
+    mol addrep top
+    mol representation DynamicBonds 1.600000 0.100000 12.000000
+    mol addrep top
+```
+
+
+
+

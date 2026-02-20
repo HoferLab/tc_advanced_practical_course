@@ -1,0 +1,14 @@
+name: quarto_env
+channels:
+  - conda
+dependencies:
+  - python=3.12
+  - pandas
+  - numpy
+  - matplotlib
+  - jupyter
+  - jupyterlab
+  - scikit-learn
+  - scipy
+  - seaborn
+  - statsmodels

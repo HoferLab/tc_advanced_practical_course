@@ -1,0 +1,26 @@
+---
+title: "Checklist"
+format:
+  html:
+    code-fold: false
+---
+All data generated along with a discussion of results fit easily on a single page. The images and graphs to be plotted are grouped into three subsections, which should also be grouped together in the protocol.
+
+Subsection 1 - System Setup and Equilibration:
+
+- [ ] A screenshot of the CO<sub>2</sub>@ZIF-8 hybrid system including the simulatin box
+- [ ] A graph showing the lattice parameter of the pristine (= empty) ZIF-8 against the simulation time $a$(t) 
+
+
+Subsection 2 - Gas Diffusion:
+
+- [ ] A graph showing the mean-square-displacement (MSD) of the CO<sub>2</sub> molecules vs time including a fit
+- [ ] A graph showing the Green-Kubo correlation function vs time and the associated integral
+
+
+Subsection 3 - Group Work:
+
+- [ ] A graph showing the lattice parameter of the pristine (= empty) ZIF-8 at the five different temperatures
+(248.15&nbsp;K - 348.15&nbsp;K) and the resulting linear thermal expansion coefficient
+- [ ] A graph showing the Arrhenius plot of the Einstein diffusion coefficient at the five different temperatures (298.15&nbsp;K - 398.15&nbsp;K) including a fit
+- [ ] A graph showing the Arrhenius plot of the Green-Kubo diffusion coefficient at the five different temperatures (298.15&nbsp;K - 398.15&nbsp;K) including a fit

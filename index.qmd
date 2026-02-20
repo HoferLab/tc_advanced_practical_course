@@ -1,0 +1,44 @@
+---
+title: "Instructions"
+format:
+  html:
+    code-fold: true
+jupyter: python3
+---
+
+Welcome to the instruction page of the 724700 PR Computeraided Assessment of Materials!
+
+The sidebar contains links to the respective exercise. For the exercise a scientific introduction is provided along with a detailed HowTo and a checklist which results should be included in the protocol.
+
+
+<img src="img/water1.png" width="250"/>  <img src="img/numerov.png" width="250"/> <img src="img/zif8-h2.png" width="250"/> 
+
+```{python}
+#| fig-cap: Example Code with corresponding Plot. Any similarity to the Greek Letter Ψ is by coincidence
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
+
+# 100 linearly spaced numbers
+x = np.linspace(-4.9,4.9,100)
+
+# the function, which is y = x^2 here
+y = x**2+10
+
+# setting the axes at the centre
+fig = plt.figure()
+ax = fig.add_subplot(1, 1, 1)
+ax.set_ylim([-5, 35])
+ax.xaxis.set_minor_locator(MultipleLocator(0.5))
+ax.yaxis.set_minor_locator(MultipleLocator(2.5))
+
+# plot the function
+plt.plot(x,y, 'r', linewidth = 2.5)
+plt.axvline(x = 0, ymin = 0.1, ymax = 0.9, color = 'r', linewidth = 2.5)
+#plt.axis('off')
+plt.grid(True)
+
+# show the plot
+plt.show()
+
+```

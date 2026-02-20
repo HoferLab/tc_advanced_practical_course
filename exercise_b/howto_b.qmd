@@ -1,0 +1,366 @@
+---
+title: "HowTo"
+format:
+  html:
+    code-fold: true
+engine: jupyter
+---
+
+:::{.callout-warning}
+
+Links to the **Google Sheets** with the assigned temperatures and carbon dioxide loadings:
+
+- [Thermal Expansion](https://docs.google.com/spreadsheets/d/1wLiVdocFKj4iYNReIv2KdyEh5-HF7x3P1qJy946fHts/edit?usp=sharing)
+- [Gas Diffusion](https://docs.google.com/spreadsheets/d/1k56gQvhw8spThA9WNhdUirlWV9gKY-G1va8DjMysdBU/edit?usp=sharing)
+
+:::
+
+Each student will be assigned two specific temperature values and two different carbon dioxide loadings for the simulations.
+One temperature will be used for Part [B.1](#part-b.1-gas-simulation-in-zif-8) and the other for Part [B.2](#part-b.2-thermal-expansion-of-zif-8).
+The carbon dioxide loadings will be used for the simulations in Part [B.1](#part-b.1-gas-simulation-in-zif-8)
+
+:::{.callout-important}
+
+Before you run any simulations, please make sure you know your assigned **TEMPERATURE** values.
+
+:::
+
+# Tools and Programs {.unnumbered}
+
+All tools and programs are provided by the Hofer Lab. The simulaton engine is [PQ](https://github.com/MolarVerse/PQ). The analysis tools are written in Python and C, and are partially based on the [PQAnalysis](https://github.com/MolarVerse/PQAnalysis) library.
+
+The required tools and programs for this exercise are provided by executing the following command:
+
+```bash
+module load pq
+```
+
+:::{.callout-important}
+
+This command needs to be executed only once per terminal session. If you close the terminal, you will need to execute the command again when you open a new terminal.
+
+:::
+
+The simulation engine [PQ](https://github.com/MolarVerse/PQ) can be executed by running the following command:
+
+```bash
+PQ <input_file>
+```
+
+The analysis tools are written in an intuitive way and have a help function that can be accessed by running the script with the `--help` flag. For example:
+
+```bash
+<analysis_tool> --help
+```
+
+## Analysis Tools {.unnumbered}
+
+The following analysis tools are provided for this exercise:
+
+| Tool          | Description                                                                                                      |
+|---------------|------------------------------------------------------------------------------------------------------------------|
+| `average_a`   | Averages the lattice parameter a of the provided box files.                                                      |
+| `average_V`   | Averages the volume of the provided box files.                                                                   |
+| `extract_co2`  | Extracts the carbon dioxide molecules of trajectory/velocity-files and calculates the center of mass coordinates/velocities. |
+| `msd`         | Calculates the mean squared displacement of the carbon dioxide molecules from a trajectory. (Note: The carbon dioxide molecules have to be extracted first using `extract_co2`). |
+| `rdf_zif8`         | Calculates the radial distribution function of the carbon dioxide molecule from a trajectory.                          |
+| `vacf`        | Calculates the velocity autocorrelation function of the carbon dioxide molecule from a velocity file. (Note: The carbon dioxide molecules have to be extracted first using `extract_co2`). |
+| `linearfit`   | Fits a linear function to the mean squared displacement data to calculate the diffusion coefficient according to the Einstein relation. |
+| `integration` | Integrates the velocity autocorrelation function to calculate the diffusion coefficient according to the Green-Kubo relation. |
+
+
+## Files {.unnumbered}
+
+The folders encoded in the varible `ZIF_DIR` contains all necessary files for the simulations. The files are organized in the following way:
+
+:::{.callout-note title="File Structure" collapse="true"}
+
+```bash
+├── general_input
+│   ├── moldescriptor.dat
+│   ├── run-01.in
+│   ├── run-02.in
+│   ├── run-03.in
+│   └── run-04.in
+├── co2
+│   ├── co2.rst
+└── preeq
+    ├── 248
+    │   ├── shake_zif8_248.top
+    │   └── zif8_preeq_248.rst
+    ├── 273
+    │   ├── shake_zif8_273.top
+    │   └── zif8_preeq_273.rst
+    ├── 298
+    │   ├── shake_zif8_298.top
+    │   └── zif8_preeq_298.rst
+    ├── 323
+    │   ├── shake_zif8_323.top
+    │   └── zif8_preeq_323.rst
+    ├── 348
+    │   ├── shake_zif8_348.top
+    │   └── zif8_preeq_348.rst
+    ├── 373
+    │   ├── shake_zif8_373.top
+    │   └── zif8_preeq_373.rst
+    └── 398
+        ├── shake_zif8_398.top
+        └── zif8_preeq_398.rst
+```
+
+:::
+
+| Folder/File          | Description                                                                                                        |
+|----------------------|--------------------------------------------------------------------------------------------------------------------|
+| `general_input`      | Contains the input files for the simulations (`moldescriptor.dat` and `run-0*.in`).                                |
+| `co2`                | Contains the carbon dioxide restart-file (`co2.rst`)                                                               |
+| `preeq`              | Contains the equilibration restart-files (`zif8_preeq_*.rst`) and the topology files (`shake_zif8_*.top`).         |
+
+
+# Part B.1) Gas simulation in ZIF-8  
+
+The first part of the exercise is to simulate the diffusion of carbon dioxide molecules in the ZIF-8 framework at the assigned temperature values. The carbon dioxide loading is set to the two assigned loadings per student.
+
+:::{.callout-note}
+
+This part of the exercise is performed twice with the two assigned carbon dioxide loadings. The simulations can be run in parallel.
+
+:::
+
+## System Setup {.unnumbered}
+
+The system setup is done by running the following command:
+
+**1.** Copy the necessary files to the working directory
+
+```bash
+cp $ZIF_DIR/zif8_files/co2/* .
+cp $ZIF_DIR/zif8_files/preeq/<TEMPERATURE>/* .
+cp $ZIF_DIR/zif8_files/general_input/* .
+```
+
+**2.** Add the CO2 loading to the topology and restart files (e.g. 32 carbon dioxide molecules and 298 K)
+
+```bash
+add_molecules zif8_preeq_298.rst co2.rst   \
+  --rst-mol-desc-file moldescriptor.dat   \
+  -n 32                                   \
+  > 32xco2-zif8-00.rst
+```
+
+## Simulation {.unnumbered}
+
+**1.** Edit the input file `run-01.in` to include your assigned temperature, generated restart file, and topology file.
+
+```
+...
+# Temperature algorithm (velocity rescaling), Target T in K and Relaxation time in ps
+      thermostat = velocity_rescaling; temp = XXX.XX; t_relaxation = 0.1;
+...
+# Files
+      start_file    = XXX-00.rst;
+      topology_file = XXX.top;
+
+      file_prefix   = XXX-01;
+```
+
+:::{.callout-note}
+
+Replace `XXX` with the assigned temperature value and the corresponding restart and topology files. The `file_prefix` can be any name you choose.
+Please make sure to use `-00.rst` as the start file and `-01` as the file prefix. This will help to keep track of the different simulation steps.
+
+:::
+
+**2.** Run NVT equlibration 
+
+```bash
+PQ run-01.in
+```
+Start multiple input files one after the other
+
+```bash
+PQ run-01.in && PQ run-02.in && PQ run-03.in
+```
+
+:::{.callout-important}
+
+The overall equilibration is split into two stages. The first stage is a 10 ps NVT equilibration (`run-01.in`). 
+The second stage is a 10 ps NPT equilibration (`run-02.in`).
+After the equilibration, the production run is performed for 1 ns, which is split into 2 runs of 500 ps each (`run-03.in` and `run-04.in`).
+
+:::
+
+## Extract Carbon Dioxide Molecule {.unnumbered}
+
+Extract the carbon dioxide molecule from the trajectory and velocity files using the `extract_co2` tool:
+
+```bash
+extract_co2 <trajectory_files>.xyz
+```
+and
+```bash
+extract_co2 <velocity_files>.vel
+```
+
+## Einstein Relation {.unnumbered}
+
+**1.** Calculate the [mean squared displacement (MSD)](analysis_b.qmd#einstein-relation) of the carbon dioxide molecule using the `msd` tool:
+```bash
+msd
+```
+
+**2.** Fit a linear function to the MSD data using the `linearfit` tool:
+
+```bash
+linearfit --window 5
+```
+
+:::{.callout-important}
+
+For both assigned carbon dioxide loadings, insert the corresponding self-diffusion coefficient values into the **Google Sheets**.
+
+:::
+
+## Green-Kubo Relation {.unnumbered}
+
+**1.** Calculate the [velocity autocorrelation function (VACF)](analysis_b.qmd#green-kubo-relation) of the carbon dioxide molecule using the `vacf` tool:
+```bash
+vacf
+```
+**2.** Integrate the VACF data using the `integration` tool:
+```bash
+integration
+```
+
+:::{.callout-important}
+
+For both assigned carbon dioxide loadings, insert the corresponding self-diffusion coefficient values into the **Google Sheets**.
+
+:::
+
+## Radial Distribution Function {.unnumbered}
+
+**1.** Calculate the [radial distribution function (RDF)](analysis_b.qmd#radial-distribution-functions-(rdfs)) of the carbon dioxide molecule using the `rdf_zif8` tool:
+
+```bash
+rdf_zif8 <trajectory_file-03>.xyz <trajectory_file-04>.xyz
+```
+
+**2.** Calculate the RDF for `Zn` and `C` or `O` atoms (gas) using the `rdf_zif8` tool:
+
+```bash
+rdf_zif8 <trajectory_file-03>.xyz <trajectory_file-04>.xyz --center Zn --ligand1 X
+```
+
+:::{.callout-note}
+The RDF calculation will generate a `output` file named `rdf-C-C.out` and `rdf-Zn-C.out`, accordingly. Plot the 1st column (distance) against the 2nd column (RDF) using your preferred plotting tool.
+:::
+
+## Visualization {.unnumbered}
+
+**1.** Visualize the trajectory files using the `vmd` tool:
+
+```bash
+vmd <trajectory_file>.xyz
+```
+
+**2.** Box files can be made with the `traj2box` tool:
+
+```bash
+traj2box <trajectory_file>.xyz --vmd > <box_file>.xyz
+```
+
+:::{.callout-note}
+
+The `traj2box` tool generates a box file that can be visualized in VMD. The box file contains the unit cell information with `X` atoms at the corners of the unit cell. The box file can be used to visualize the unit cell of the simulation.
+
+:::
+
+**3.** Visualize the box file using the `vmd` tool:
+
+```
+File > New Molecule > Filename (Browse to the box file) > Load (All at once)
+```
+
+**4.** Representations can be changed in the `Graphics > Representations...` window. Good representations are:
+
+- `Licorice` for the framework atoms (and Box atoms)
+- `DynamicBonds` for the framework atoms (and Box atoms)
+- `VDW` for the carbon dioxide atoms (Selected Atoms `index > 275`)
+- `VDW` for the Zn atoms (Selected Atoms `name Zn`)
+
+**5.** General color and setting recommendations:
+
+- Color box atoms: Change the color of the box atoms to `Coloring Method > ColorID 8` (white) for both `Licorice` and `DynamicBonds` representations.
+- Change the background color to white: `Graphics > Colors > Categories (Display) > Names (Background) > Colors (White)`
+- Disable depth cueing: `Display > Depth Cueing > Off`
+- Render the image: `File > Render > Tachyon (internal, in-memory rendering)`
+
+# Part B.2) Thermal Expansion of ZIF-8
+
+The second part of the exercise is to calculate the thermal expansion of the ZIF-8 framework at the assigned temperature values.
+
+## System Setup {.unnumbered}
+
+The system setup is done by running the following command:
+
+**1.** Copy the necessary files to the working directory
+
+```bash
+cp $ZIF_DIR/zif8_files/preeq/<TEMPERATURE>/* .
+cp $ZIF_DIR/zif8_files/general_input/* .
+```
+
+## Simulation {.unnumbered}
+
+**1.** Edit the input file `run-01.in` to include your assigned temperature, generated restart file, and topology file.
+
+```
+...
+# Temperature algorithm (velocity rescaling), Target T in K and Relaxation time in ps
+      thermostat = velocity_rescaling; temp = XXX.XX; t_relaxation = 0.1;
+...
+# Files
+      start_file    = zif8_preeq_XXX.rst;
+      topology_file = shake_zif8_XXX.top;
+
+      file_prefix   = zif8-01;
+```
+
+:::{.callout-note}
+
+Replace `XXX` with the assigned temperature value. The `file_prefix` can be any name you choose.
+Please make sure to use `-01` as the file prefix. This will help to keep track of the different simulation steps.
+
+:::
+
+**2.** Run NVT equlibration
+
+```bash
+PQ run-01.in
+```
+
+:::{.callout-note}
+
+The overall equilibration is split into two stages. The first stage is a 10 ps NVT equilibration (`run-01.in`).
+The second stage is a 10 ps NPT equilibration (`run-02.in`).
+After the equilibration, the production run is performed for 500 ps (`run-03.in`).
+Only run `run-03.in` for the thermal expansion calculation.
+
+:::
+
+## Analysis {.unnumbered}
+
+**1.** Average the lattice parameter `a` of the ZIF-8 framework using the `average_a` tool:
+
+```bash
+average_a zif8-03.box
+```
+
+**2.** Average the volume of the ZIF-8 framework using the `average_V` tool:
+
+```bash
+average_V zif8-03.box
+```
+
+**3.** Calculate the thermal expansion coefficient using the following formula, see [thermal expansion](analysis_b.qmd#linear--volumetric-thermal-expansion-coefficient)

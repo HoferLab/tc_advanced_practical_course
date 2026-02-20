@@ -1,0 +1,681 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "PR Theoretical Chemistry and Computer-Chemistry (Advanced)",
+    "section": "",
+    "text": "Timeschedule for the next two weeks",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Instructions</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#timeschedule-for-the-next-two-weeks",
+    "href": "index.html#timeschedule-for-the-next-two-weeks",
+    "title": "PR Theoretical Chemistry and Computer-Chemistry (Advanced)",
+    "section": "",
+    "text": "Week 1\nMorning : 09:00 - 13:30\nAfternoon : 13:30-18:00\n\n\n\n\n Monday \n MM-MD 1 Introduction\n MM-MD 1 Setup\n\n\nTuesday\nExercise A: Numerov Introduction\nExercise A: Numerov Setup\n\n\nWednesday\nExercise B: NPP-MD Introduction\nExercise B: NPP-MD Setup\n\n\nThursday\nExercise A: Numerov Analyse\nExercise A: Numerov Analyse\n\n\n Friday \n MM-MD 2 Introduction \n MM-MD 2 Setup \n\n\n\n\n\n\nWeek 2\nMorning : 09:00 - 13:30\nAfternoon : 13:30-18:00\n\n\n\n\nMonday\nExercise B: Analyse Introduction\nExercise B: Analyse\n\n\nTuesday\nExercise B: Analyse\nExercise B: Analyse\n\n\n Wednesday \n MM-MD Analyse \n MM-MD Analyse \n\n\n Thursday \n MM-MD Analyse \n MM-MD Analyse \n\n\n Friday \n MM-MD Analyse \n MM-MD Analyse",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Instructions</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#posters-submission-date",
+    "href": "index.html#posters-submission-date",
+    "title": "PR Theoretical Chemistry and Computer-Chemistry (Advanced)",
+    "section": "Posters Submission Date",
+    "text": "Posters Submission Date\n\n\n\n\n\n\nImportant\n\n\n\nSubmission until: XX.XX.XX",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Instructions</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_a/background_info_a.html",
+    "href": "exercise_a/background_info_a.html",
+    "title": "Background Info A",
+    "section": "",
+    "text": "Exercise A – Vibrational spectroscopy using nuclear wave functions\nwith \\(\\mu\\) being the associated reduced mass. However, a short-coming of this approach is the neglect of anharmonicity, mode coupling and nuclear quantum effects. In some cases these contributions cancel, while for other systems the error in the harmonic frequencies can be up to \\(300\\,\\mathrm{cm^{-1}}\\).\nAn elegant alternative is the calculation of vibrational wave functions by numerically solving the nuclear Schrödinger equation. One method to achieve this is a method according to Boris V. Numerov requiring the potential curve as input in form of a discretised grid. The latter can be obtained from a potential energy scan executed for instance using the QM program gaussian. The difference between the eigenvalue of the ground state (\\(n=0\\)) and the first (\\(n=1\\)) and second (\\(n=2\\)) excited states correspond to the expected vibrational frequency of the fundamental and first overtone, when divided by Planck’s constant:\n\\[\n\\nu_{n0} = \\frac{E_n - E_0}{h}\n\\]\nFrom the frequencies \\(\\nu_{n0}\\) (in \\(\\mathrm{s}^{-1}\\)) the respective wave numbers \\(\\bar{\\nu}_{n0}\\) (in \\(\\mathrm{cm}^{-1}\\)) have to be calculated and reported. Knowledge of the wave function also enables the calculation of the oscillator strengths \\(f_{n0}\\), providing an accurate estimate of the expected IR absorption intensities.\n\\[\nf_{n0} = \\frac{4\\pi m_{\\mathrm{e}}}{3\\mathrm{e}^2\\hbar c}|\\mu_{n0}|^2 \\bar{\\nu}_{n0}= 4.702 \\cdot 10^{-7}\\,\\mathrm{\\frac{cm}{D^2}}|\\mu_{n0}|^2 \\bar{\\nu}_{n0}\n\\]\nTo calculate the oscillator strength, the wave numbers \\(\\bar{\\nu}_{n0}\\) and the respective transition dipole moment \\(\\mu_{n0}\\) is required. The latter is given as:\n\\[\n|\\mu_{n0}|^2 = |\\mu_{n0}^x|^2 +  |\\mu_{n0}^y|^2 + |\\mu_{n0}^z|^2\n\\]\nwith\n\\[\n|\\mu_{n0}^x| = \\left &lt; \\psi_0 | \\mu^x | \\psi_n \\right &gt; = \\int_{-\\infty}^{\\infty} \\psi_0 \\mu^x \\psi_n dx\n\\]\nWhile this integral appears intimidating, it can be easily evaluated in an approximate way using the trapezoidal rule:\n\\[\n\\int_a^b f(x) dx \\approx \\frac{\\Delta x}{2} (y_1 + 2y_2 +2 y_3+ ... + 2y_{n-1}+y_n)\n\\] \\[\n\\approx \\frac{\\Delta x}{2} \\sum_{i=1}^{n-1} (y_i + y_{i+1})\n\\]\nThe calculation of the trapezoidal integration is actually very simple and can be easily implemented in a spreadsheet editor such as libreoffice or excel (or computed using data science software such as matlab, octave,python, R, etc.)",
+    "crumbs": [
+      "Excercise A - Vibration Spectroscopy",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Background Info A</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_a/background_info_a.html#a.1-diatomic-molecule",
+    "href": "exercise_a/background_info_a.html#a.1-diatomic-molecule",
+    "title": "Background Info A",
+    "section": "A.1) Diatomic molecule",
+    "text": "A.1) Diatomic molecule\nIn this part the vibration of a diatomic molecule is investigated. After drawing the molecule using gaussview, an energy minimisation (= geometry optimisation) and a harmonic frequency calculation has to be carried out. In the next step a potential energy scan has to be performed in the range of approx. -0.5\\(\\,\\)Å to +1.5\\(\\,\\)Å using a step length \\(\\Delta r = 0.01\\,\\)Å. This yields about \\(150\\) individual potential points.\nThe energy and dipole moment information can be extracted in the terminal using the provided tool:\n./extract_data.sh  scan-logfile   &gt;  data-file\nThe data file contains the distance information in Å, the QM energy in Hartree, and the components of the dipole moment in \\(x\\), \\(y\\) and \\(z\\) direction in Debye. Next, the force constant \\(k\\) according to the harmonic approximation has to be determined via finite differences from the energy column of the data-file (second column).\n\\[\nk \\approx \\frac{E_1 -2 E_{\\mathrm{min}} + E_{+1}}{\\Delta r^2}\n\\]\nwith \\(E_{\\mathrm{min}}\\) being the minum energy and \\(E_{\\pm 1}\\) corresponding to the energy values of the two neighbouring points. Please report the force constant in \\(\\mathrm{kcal\\cdot mol^{-1}Å^{-2}}\\):\nBecause the program gaussian provides a wrong reduced mass \\(\\mu\\) in case of diatomic systems, this property has to be calculated manually in this part of the exercise.\n\\[\n\\mu = \\frac{m_1 m_2}{m_1+m_2}\n\\]\nUsing the reduced mass \\(μ\\) and the force constant \\(k\\) the frequency (in \\(\\mathrm{s^{-1}}\\)) and corresponding wave number (in \\(\\mathrm{cm^{-1}}\\)) should be calculated and compared to the result obtained from gaussian.\n\n\n\n\n\n\nNote\n\n\n\nExtra care is required to apply all factors to obtain the correct unit of the frequency and wavenumber (i.e. just dividing the force constant \\(k\\) in \\(\\mathrm{kcal\\cdot mol^{-1}Å^{-2}}\\) by the reduced mass \\(\\mu\\) given in \\(\\mathrm{g \\cdot mol^{-1}}\\) will obviously yield a wrong result …)\n\n\nIn the final step the Numerov calculation is carried out, requiring the data file and the reduced mass as input:\n./numerov    data-file   mass   &gt;  numerov-outfile\nThe output of the Numerov procedure contains the coordinate and potential information (in units Å and \\(\\mathrm{kcal\\cdot mol^{-1}}\\)) as well as the wave-functions for the five lowest states. The energy eigenvalues are given as comment line (also in \\(\\mathrm{kcal\\cdot mol^{-1}}\\)) on top of the Nuermov output file. The respective energy differences have to be transformed into \\(\\mathrm{cm^{-1}}\\).\n\n\n\n\n\n\nThe report for this part should include:\n\n\n\n\nA screenshot of the equilibrium geometry (white background!).\nThe calculation of the force constant \\(k\\) and the reduced mass \\(\\mu\\).\nCalculation of the frequency and wave number showing ALL(!) required conversion factors.\nA figure showing the QM energy as a function of distance and the Numerov wave functions plus the energy graph showing the harmonic approximation (all in the same figure).\nA table comparing the wavenumbers obtained via the Numerov procedure with the results obtained from the harmonic approximation for \\(n\\) = 1 - 4.\nFor all points a short description/interpretation should be included as text.\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nIn this part, the transition dipole moments and oscillator strengths are NOT(!) required.",
+    "crumbs": [
+      "Excercise A - Vibration Spectroscopy",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Background Info A</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_a/background_info_a.html#a.2-stretch-vibration-in-a-polyatomic-molecule",
+    "href": "exercise_a/background_info_a.html#a.2-stretch-vibration-in-a-polyatomic-molecule",
+    "title": "Background Info A",
+    "section": "A.2) Stretch vibration in a polyatomic molecule",
+    "text": "A.2) Stretch vibration in a polyatomic molecule\nIn this example, the X-H stretch motion of a polyatomic molecule (X=O,N) provides a suitable approximation to the actual normal mode. In order to assess the influence of quantum effects, both hydrated and deuterated species (i.e. X-H and X-D) have to be investigated. After the geometry optimisation and frequency computation, the potential energy scan of the X-H distance in the range of approx. \\(0.5\\,\\mathrm{Å}\\) to \\(2.0\\,\\mathrm{Å}\\) has to be carried out, using again a step length of \\(0.01\\,\\mathrm{Å}\\).\n\n\n\n\n\n\nCareful:\n\n\n\nBe sure to select the correct bond for the potential energy scan! (This is a very frequent error in this excercise.)\n\n\nAs before the energy and dipole moment information can be extracted in the terminal using the provided tool:\n./extract_data.sh    scan-logfile     &gt;    data-file\nThe resulting data file contains the coordinate, energy and dipole moment information (in units of Å, Hartree and Debye) and can be directly used as input for the Numerov programm:\n./numerov    data-file   mass   &gt; numerov-outfile\nIn addition to the data file, the reduced mass of the vibrational mode has to be provided as a second input. For polyatomic molecules the reduced mass provided in the gaussian output file is correct! To identify the correct mode, a visual inspection in gaussview is required.\n\n\n\n\n\n\nCareful:\n\n\n\nBe sure to make a separate check in the deuterated case – the order of vibrations is sometimes different (again a very common error in this excercise).\n\n\nAs before the output of the Numerov procedure contains the coordinate and potential information (in units Å and \\(\\mathrm{kcal\\cdot mol^{-1}}\\)) as well as the wave-functions for the five lowest states. The energy eigenvalues are given as comment line (also in \\(\\mathrm{kcal\\cdot mol^{-1}}\\)) on top of the file. The respective energy differences have to be transformed into \\(\\mathrm{cm^{-1}}\\). Prior to computing the transition dipole moments it should be verified that the wave functions are orthonormal for the states \\(i, j\\) = 0 – 2.\n\\[\n\\left &lt; \\psi_i | \\psi_j \\right &gt; - \\delta_{ij} = 0\n\\]\nNext, the oscillator strength \\(f_{n0}\\) (for \\(n=1,2\\)) should be computed from the transition dipole moments and reported relative to \\(f_{10}\\). (i.e. the oscillator strengths are divided by \\(f_{10}\\), thus always giving a number of \\(1.0\\) for the ground state transition).\n\n\n\n\n\n\nThe report for this part should include:\n\n\n\n\nA screenshot of the equilibrium geometries (white background!).\nTwo figures comparing the potential energy and the first five wave functions including also the potential energy of the harmonic approximation for both the hydrated and deuterated species.\nA graph showing the components of the dipole moment as a function of the distance.\nResults of the orthonormality check between the states \\(i\\), \\(j = {0,1,2}\\) in form of a table.\nA table comparing the frequencies and oscillator strengths of the fundamental and first overtone modes obtained via the Numerov procedure and the harmonic approximation.\nFor all points a short description/interpretation should be included as text.",
+    "crumbs": [
+      "Excercise A - Vibration Spectroscopy",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Background Info A</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_a/background_info_a.html#a.3-protocol",
+    "href": "exercise_a/background_info_a.html#a.3-protocol",
+    "title": "Background Info A",
+    "section": "A.3 ) Protocol:",
+    "text": "A.3 ) Protocol:\nThe protocol in this section should be designed as an A0-Poster (similar to those Ph.D. students typically prepare for their presentations in the Atrium of the CCB building), see poster templeates. All data generated along with a discussion of results fit easily on a single page. Please include your name and matriculation number, and provide the protocol as pdf-file including your surname in the name of the file.",
+    "crumbs": [
+      "Excercise A - Vibration Spectroscopy",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Background Info A</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_a/exercise_a.html",
+    "href": "exercise_a/exercise_a.html",
+    "title": "HowTo A",
+    "section": "",
+    "text": "Exercise A – Vibrational spectroscopy using nuclear wave functions\nThe required scripts and programs for this exercise are provided in the folder:\nIf you are unsure please look at this Linux quickstart guide.",
+    "crumbs": [
+      "Excercise A - Vibration Spectroscopy",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>HowTo A</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_a/exercise_a.html#part-a.1-vibrational-spectroscopy-of-a-diatomic-molecule-at-the-example-of-h2",
+    "href": "exercise_a/exercise_a.html#part-a.1-vibrational-spectroscopy-of-a-diatomic-molecule-at-the-example-of-h2",
+    "title": "HowTo A",
+    "section": "Part A.1) Vibrational spectroscopy of a diatomic molecule at the example of H2",
+    "text": "Part A.1) Vibrational spectroscopy of a diatomic molecule at the example of H2\n\nTasks\n\nExecute an energy minimisation, a frequency calculation and a potential energy scan using gaussian\nExtract the potential energy data from the output file\nExecute a Numerov calculation\n\n\n\nResults\n\nNumeric evaluation of the force constant from the potential plot\nCalculation of the harmonic vibrational wave numbers from the force constant (compare this value to the gaussian result for verification – deviation typically about 1-2 \\(\\mathrm{cm^{-1}}\\))\nCalculation of the anharmonic vibrational wave numbers from the Numerov eigenvalues\n1 plot \\(V_{\\mathrm{QM}}\\) vs bond length including the vibrational wave function from the Numerov output and the harmonic approximation to the potential energy\nTable comparing the harmonic and anharmonic wave numbers for the states 01 to 04\nA screenshot of the equilibrium geometry (use a white background color!)\n\n\n\nHowTo Part A.1)\n1) Draw the structure using gaussview (command gv) and save the file, e.g. as h2_opt.com.\ngv\n\n\n\n\n\n\nGaussView\n\n\n\ndraw stuff\nFile &gt; Save\nBe sure to NOT save cartesian coordinates, so “Write Cartesian” must be unticked!\n\n\n2) Open the File in your favourite editor (code, nedit, gedit, vi, …) and change the command line (#) to\n\n\n\n\n\n\nh2_opt.com\n\n\n\n# B3LYP/6-311++G(3df,3pd) OPT=TIGHT SCF=VERYTIGHT INT=ULTRAFINE\n\n\n\n\n\n\n\n\nImportant\n\n\n\nIt is important to include one (and only one) blank line after the command line (#-line), the title-line as well as the atom list and at least one blank-line after the last input for all gaussian input file!\n\n\n3) Execute the geometry optimisation:\ng16 h2_opt.com\n4) Open the log-file (code,nedit, gedit, vi, …) and get the equilibrium bond distance,e.g.:\nnedit h2_opt.log\n\n\n\n\n\n\nh2_opt.log\n\n\n\n[…]\n[…]\nFinal structure in terms of initial Z-matrix:\nH\nH,1,B1\nVariables:\nB1= 0.74273528\n[…]\n[…]\n\n\n\n5) Copy the in-file and change the command line to that of a frequency calculation, e.g.:\ncp h2_opt.com h2_freq.com\n\n\n\n\n\n\nh2_freq.com\n\n\n\n# B3LYP/6-311++G(3df,3pd) FREQ SCF=VERYTIGHT INT=ULTRAFINE\n\n\nAlso set the bond length to the minimum distance, e.g.\n\n\n\n\n\n\nh2_freq.com\n\n\n\n[…]\n0  1\nH\nH     1     B1\n\nB1    0.74273528 \n[…]\n\n\n6) Execute the frequency calculation and get the harmonic frequency from the input-file\ng16 h2_freq.com\nnedit h2_freq.log\n\n\n\n\n\n\nh2_freq.log\n\n\n\n[…]\n[…]\nHarmonic frequencies (cm**-1), IR intensities (KM/Mole), Raman scattering\nactivities (A**4/AMU), depolarization ratios for plane and unpolarized\nincident light, reduced masses (AMU), force constants (mDyne/A),\nand normal coordinates:\n         1\n         SGG\nFrequencies --          4410.4726 \nRed. masses --               1.0078 \nFrc consts --                     11.550 \nIR Inten --                         0.0000 \n[…]\n[…]\n\n\n\n\n\n\n\n\n\nBe careful\n\n\n\nFor diatomics the force constant and the reduced mass are not given correctly! (according to the developers that’s a feature, not an error …) This is the reason why in this exercise, the force constant has to be determined from the potential energy scan! Do NOT use the force constant from the output file.\n\n\n7) Copy the in-file and change the command line for the potential energy scan, e.g.:\ncp h2_freq.com h2_scan.com\n\n\n\n\n\n\nh2_scan.com\n\n\n\n# B3LYP/6-311++G(3df,3pd) SCAN SCF=VERYTIGHT INT=ULTRAFINE \n# GEOM=NOCROWD NOSYMM POP=ALWAYS\n\n\n8) Change the starting value of the bond length by subtracting \\(\\mathrm{0.5\\,Å}\\), and set up the scan points e.g.:\n\n\n\n\n\n\nNote\n\n\n\n0.7427352 – 0.5 = 0.2427352\n\n\n\n\n\n\n\n\nh2_scan.com\n\n\n\n[…]\n0  1\nH\nH     1     B1\n\nB1    0.24273528  150  0.01\n[…]\n\n\nThis will perform a potential energy scan from \\(\\mathrm{0.2427352\\,Å}\\), increasing the H-H distance \\(150\\) times by \\(\\mathrm{0.01\\,Å}\\), thus the scan will end at a H-H distance of \\(\\mathrm{1.7427352\\,Å}\\). Don`t forget to include a final blank line in the gaussian input.\n9) Execute the potential energy scan and grab a coffee:\ng16 h2_scan.com\n10) Copy the extraction-script and the Numerov analysis code to your working directory:\ncp /media/TC_Lehre/03_PR_Fortgeschrittene_Uebungen_zu_TC_und_Comp_Chemie/vibration/extract_data.sh .\ncp /media/TC_Lehre/03_PR_Fortgeschrittene_Uebungen_zu_TC_und_Comp_Chemie/vibration/numerov .\n11) Extract the potential energy and dipole moment information from the log-file and use &gt; to redirect the output:\n./extract_data.sh h2_scan.log &gt; scan_data.dat\n\n\n\n\n\n\nWarning\n\n\n\nCareful – if told, the redirect &gt; will overwrite existing files and there is no undo if this happens!\n\n\nThe file scan_data.dat contains five data columns:\n\n\n\n\n\n\nscan_data.dat\n\n\n\n\ncolumn \\(1\\) : Distance in Å\n\ncolumn \\(2\\) : Energy in Hartree\ncolumns \\(3\\) to \\(4\\) : \\(x\\), \\(y\\) and \\(z\\)-component of the dipole moment\n\n\n\nThis file can be directly imported into graphic-programs, e.g. office,xmgrace, gnuplot, …\nThe dipole moment data is only required in part A.2 of this practical course.\n12) Calculate the reduced mass of the vibration and execute the Numerov analysis:\n\nIn this course always the reduced mass formula for two particles should be used.\n\n\n\n\n\n\n\nWarning\n\n\n\nBe sure to use the mass of the correct isotopes, e.g. \\(\\mathrm{^1H_2}\\), \\(\\mathrm{^2D_2}\\), \\(\\mathrm{^{12}C}\\), \\(\\mathrm{^{18}O}\\) and do NOT use the averaged mass given in the periodic table.\n\n\n\nThe Numerov-program requires two inputs, being the data-file from step 11 above and the reduced mass, e.g. in case of \\(\\mathrm{^1H_2}\\):\n\n./numerov scan_data.dat 0.50391251605 &gt; numerov.dat\nAgain, be careful while redirecting &gt; to not overwrite any files.\nThe file numerov.dat contains a headline (#) and twelve data columns. Columns \\(1\\) to \\(7\\) are to generate the required figure, columns \\(8\\) to \\(12\\) are for data analysis:\n\n\n\n\n\n\nnumerov.dat\n\n\n\n\n# headline – energy eigenvalues E of the five lowest wave functions \\(\\Psi_0\\) to \\(\\Psi_4\\) in \\(\\mathrm{kcal/mol}\\)\ncolumn \\(1\\) : Distance in Å\n\ncolumn \\(2\\) : Energy in \\(\\mathrm{kcal/mol}\\) and shifted to zero at the minimum\ncolumns \\(3\\) to \\(7\\) : wave functions \\(\\Psi_0\\) to \\(\\Psi_4\\) shifted by the respective eigenvalue\ncolumns \\(8\\) to \\(12\\): wave functions \\(\\Psi_0\\) to \\(\\Psi_4\\) without shift\n\n\n\nThis file can be directly imported into graphic programs (e.g. office, xmgrace, gnuplot, …) as well as data software (office, matlab, octave, R, bash, origin, …) to perform the analyses required in A.2.2.\n\n\n\n\n\n\nNote\n\n\n\nWhich software you choose for the analysis part (or if you want to write your own code) is entirely up to you. There are different ways to obtain the requested data, e.g. the numerical integration can be carried out i) in an excel-sheet, ii) using phyton/R datascience routines,  iii) on the command line using a (very simple) awk-script or  iv) even graphically in the program xmgrace.  You can choose whichever method works best for you.",
+    "crumbs": [
+      "Excercise A - Vibration Spectroscopy",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>HowTo A</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_a/exercise_a.html#part-a.2-stretch-vibration-in-a-polyatomic-molecule",
+    "href": "exercise_a/exercise_a.html#part-a.2-stretch-vibration-in-a-polyatomic-molecule",
+    "title": "HowTo A",
+    "section": "Part A.2) Stretch vibration in a polyatomic molecule",
+    "text": "Part A.2) Stretch vibration in a polyatomic molecule\n\nTasks\n\nExecute an energy minimisation, a frequency calculation and a potential energy scan using gaussian\nExtract the potential energy data from the output file\nExecute a Numerov calculation\nAnalyse both a hydrated (\\(\\mathrm{^1H}\\)) and deuterated system (\\(\\mathrm{^1D}\\))\n\n\n\nResults\n\nNumeric evaluation of the force constant from the potential plot\nCalculation of the harmonic vibrational wave numbers from the force constant for \\(\\mathrm{^1H}\\) and \\(\\mathrm{^2D}\\) (compare these values to the gaussian results for verification – deviation typically about \\(1-2\\) \\(\\mathrm{cm^{-1}}\\))\nCalculation of the anharmonic vibrational wave numbers from the Numerov eigenvalues\n2 plots \\(V_{\\mathrm{QM}}\\) vs bond length including the vibrational wave function from the Numerov output and the harmonic approximation to the potential energy\n1 plot showing the components of the dipole moment and the total dipole moment as a function of the distance.\nResults of the orthonormality check between the states \\(i,j = 0,1,2\\) should be provided in a table.\nA table comparing the frequencies and oscillator strengths of the fundamental and \\(1^{\\mathrm{st}}\\) overtone modes obtained via the Numerov procedure and the harmonic approximation should be included.\nA screenshot of the equilibrium geometry (use a white background color!)\n\nFollow steps 1) to 12) of part 2.1 for the polyatomic system. Redo the calculations for the deuterated system, but be smart - not all calculations of the steps i) to iii) above have to be repeated for the deuterated system. Just consider which calculation steps are mass-independent and which one is not.\nIn order to change the isotope from \\(\\mathrm{^1H}\\) and \\(\\mathrm{^2D}\\) in the gaussian calculation, the iso-keyword should be applied, e.g. in case of a frequency calculation for \\(\\mathrm{D_2}\\):\n\n\n\n\n\n\nd2_scan.dat\n\n\n\n# B3LYP/6-311++G(3df,3pd) FREQ SCF=VERYTIGHT INT=ULTRAFINE\n\nD2 Frequency calculation (at minimum geometry)\n\n0 1\nH  (iso=2)\nH  (iso=2)    1    B1\n\nB1    0.74273528\n\n\n\n\n\n\n\n\n\nCommon errors/pitfalls in this exercise\n\n\n\n\nBe VERY careful which bond to scan – in many cases the correct bond is NOT B1 (a very common error!). Which bond to scan depends on the way the molecule is drawn and the resulting order of atoms.\nIf you start to draw the molecule starting with the functional group of interest (e.g. start with the OH- group in case of methanol), the y-component of the dipole moment will be zero. This means less work in the analysis of the transition dipole moment and the oscillator strengths.\nBe aware of the units of the different properties and take your time to perform a dimensional analysis. For instance, typical units of the force constants k and the reduced mass \\(\\mu\\) are \\(\\mathrm{kcal \\cdot mol^{-1}\\cdot Å^{-2}}\\) and \\(\\mathrm{g/mol}\\), respectively. It is not possible to simple use the associated values to calculate the frequency without first making the units compatible: \\[\n\\nu = \\frac{1}{2\\pi}\\sqrt{\\frac{k}{\\mu}}\n\\]\n\nHere, the units \\(\\mathrm{kcal}\\), \\(\\mathrm{Å^{-2}}\\) and \\(\\mathrm{g}\\) need to be converted to obtain the unit of \\(\\mathrm{s^{-1}}\\) for the frequency.",
+    "crumbs": [
+      "Excercise A - Vibration Spectroscopy",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>HowTo A</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_a/checklist_a.html",
+    "href": "exercise_a/checklist_a.html",
+    "title": "Checklist A",
+    "section": "",
+    "text": "The protocol in this section should be designed as an A0-Poster (similar to those Ph.D. students typically prepare for their presentations in the Atrium of the CCB building). All data generated along with a discussion of results fit easily on a single page. Please include your name and matriculation number, and provide the protocol as pdf-file including your surname in the name of the file.\nThe report for exercise A.1 should include:\n\nA screenshot of the equilibrium geometry (white background!).\nThe calculation of the force constant \\(k\\) and the reduced mass \\(\\mu\\).\nCalculation of the frequency and wave number showing ALL(!) required conversion factors.\nA figure showing the QM energy as a function of distance and the Numerov wave functions plus the energy graph showing the harmonic approximation (all in the same figure).\nA table comparing the wavenumbers obtained via the Numerov procedure with the results obtained from the harmonic approximation for \\(n\\) = 01 - 04.\n\n\n\n\n\n\n\nNote\n\n\n\nIn this part, the transition dipole moments and oscillator strengths are NOT(!) required.\n\n\nThe report for exercise A.2 should include:\n\nA screenshot of the equilibrium geometries (white background!).\nTwo figures comparing the potential energy and the first five wave functions including also the potential energy of the harmonic approximation for both the hydrated and deuterated species.\nA graph showing the components of the dipole moment as a function of the distance.\nResults of the orthonormality check between the states \\(i, j = {0,1,2}\\) in form of a table.\nA table comparing the frequencies and oscillator strengths of the fundamental and first overtone modes obtained via the Numerov procedure and the harmonic approximation.\nFor all points a short description/interpretation should be included as text.\n\n\n\n\n\n\n\nNote\n\n\n\nIn this part, the transition dipole moments and oscillator strengths ARE(!) required for the analysis.",
+    "crumbs": [
+      "Excercise A - Vibration Spectroscopy",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Checklist A</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/exercise_b.html",
+    "href": "exercise_b/exercise_b.html",
+    "title": "Background Info B",
+    "section": "",
+    "text": "Exercise B - NNP MD Simulations of H2@ZIF-8\n\n Metal-organic framework (MOFs) are hybrid crystalline materials assembled from both inorganic and organic residues containing potential voids [1]. The key advantage of MOFs over naturally occurring porous compounds such as zeolites (i.e. alumino- silicates) or polymers lies in their crystalline nature, which allows for systematic modification through crystal engineering principles by altering their organic linkers or metal nodes. This capability leads to an almost limitless number of possible framework topologies, making them particularly appealing for technologically relevant applications.\nOne of the most widely discussed applications is associated to the enormous gas storage capacity of MOF materials. Storage and separation of critical green house gasses such as CO2 and CH4 are widely discussed [2,3]. In addition, MOFs have also emerged as highly promising candidates for the storage of molecular hydrogen as a green energy carrier [4] (due to their ultrahigh surface area, tunable pore dimensions, and rapid kinetics for hydrogen adsorption and desorption).\nAn increasing number of MOF compounds are discussed as potential hydrogen carrier [4]. In this exercise, H2 storage in the comparably simple ZIF-8 (zeolitic imidazolate framework) is investigated via molecular dynamics simulations (MD), to keep the computational effort and memory demand manageable.\nThe ZIF-8 system Zn(methylimidazolate)2 crystalizes in a cubic unit cell (space group no. 217, I43m ) with a lattice parameter of approx 1.7 nm. The cubic unit cell contains a total of 12 Zn2+ ions that are tetrahedrally coordinated by the 24 methylimidazolate linkers. The pore structure of ZIF-8 is similar compared to the topology of a prototypic sodalite zeolite (hence the name zeolitic imidazolate framework). Several studies have indeed investigated ZIF systems with respect to their hydrogen storage capacity [5-8].\nIn order to achieve fast and accurate MD simulations, the MACE-MP neural network potential (NNP) is applied. If trained properly, NNPs provide an efficient and versatile description of a chemical system, that combines the advantages of quantum chemical and force field descriptions.\nIn this exercise the properties of the pristine host material (lattice parameter, thermal expansion coefficient) and the associated host-guest interaction (interaction energies, diffusion coefficent, activation energy of diffusion) will be analyzed.\n\n[1] Yusuf, V. F.; Malek, N. I.; Kailasa, S. K. “Review on Organic Framework Classification, Synthetic Approaches, and Influencing Factors: Applications in Energy, Drug Delivery, and Wastewater Treatment.” ACS Omega 2022, 7, 44507 – 44531, DOI: 10.1021/acsomega.2c05310\n[2] Li, B.; Wen, H.-M.; Zhou, W.; Chen, B. “Porous Metal–Organic Frameworks for Gas Storage and Separation: What, How, and Why?” J. Phys. Chem. Lett. 2014, 5, 3468 – 3479 DOI: 10.1021/jz501586e\n[3] Li, H.; Li, L.; Lin, R.-B.; Zhou, W.; Zhang, Z.; Xiang, S.; Chen, B. “Porous metal-organic frameworks for gas storage and separation: Status and challenges” EnergyChem 2019, 1, 100006 DOI: 10.1016/j.enchem.2019.100006\n[4] Li, Y.; Guo, Q.; Ding, Z.; Jiang, H.; Yang, H.; Du, W.; Zheng, Y.; Huo, K; Shaw, L. L. “MOFs-Based Materials for Solid-State Hydrogen Storage: Strategies and Perspectives” Chem. Eng. J. 2024, 485, 149665 DOI: 10.1016/j.cej.2024.149665\n[5] Wu, H.; Zhou, W.; Yildirim, T. “Hydrogen Storage in a Prototypical Zeolitic Imidazolate Framework-8” J. Am. Chem. Soc. 2007, 129, 5314 – 5315 DOI: 10.1021/ja0691932\n[6] Pinjari, S.; Bera, T.; Kjeang, Erik “Room temperature hydrogen storage enhancement in copper-doped zeolitic imidazolate frameworks with trioctylamine” Sustain. Energy & Fuels 2023, 7, 3142 – 3151 DOI: 10.1039/D3SE00277B\n[7] Balderas-Xicohtencatl, R.; Villajos, J. A.; Casabán, J.; Wong, D.; Maiwald, M. Hirscher, M. “ZIF-8 Pellets as a Robust Material for Hydrogen Cryo-Adsorption Tanks” ACS Appl. Energy Mater. 2023, 6, 9145 – 9152 DOI: 10.1021/acsaem.2c03719\n[8] Villajos, J. A.; Balderas‐Xicohténcatl, R.; Al Shakhs, A. N.; Berenguer‐Murcia, Á.; Buckley, C. E.; Cazorla‐Amorós, D.; Charalambopoulou, Georgia; Couturas, F.; Cuevas, F.; Fairen‐Jimenez, D.; Heinselman, K. N.; Humphries, T. D.; Kaskel, S.; Kim, Hyunlim; Marco‐Lozar, J. P.; Oh, H.; Parilla, P. A.; Paskevicius, M.; Senkovska, I.; Shulda, S.; Silvestre‐Albero, J.; Steriotis, T.; Tampaxis, C.; Hirscher, M.; Maiwald, M. ”Establishing ZIF‐8 as a reference material for hydrogen cryoadsorption: An interlaboratory study” ChemPhysChem 2024,25, e202300794 DOI: 10.1002/cphc.202300794\n[9] Batatia, I.; Kovacs, D. P.; Simm, G.; Ortner, C.; Csanyi G. “MACE: Higher Order Equivariant Message Passing Neural Networks for Fast and Accurate Force Fields” arXiv, 2022, DOI: 10.48550/ARXIV.2206.07697\n[10] Batatia, I. et al. “A foundation model for atomistic materials chemistry” arXiv, 2024, DOI: 10.48550/ARXIV.2401.00096\n[11] ACEsuit/mace-mp https://github.com/ACEsuit/mace-mp (accessed 16. 10. 2024)",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Background Info B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/analysis_b.html",
+    "href": "exercise_b/analysis_b.html",
+    "title": "Analysis B",
+    "section": "",
+    "text": "Preanalysis",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Analysis B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/analysis_b.html#log-file-check",
+    "href": "exercise_b/analysis_b.html#log-file-check",
+    "title": "Analysis B",
+    "section": "Log-file check",
+    "text": "Log-file check\nOpen the *.log file with any editor.\nCheck if the log file end with this:\n\n“PQ ended normally”\n\nYou can also grep for this statement to verify the normal termination of the simulation for all files:\ngrep \"PQ ended\" *.log",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Analysis B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/analysis_b.html#visual-inspection",
+    "href": "exercise_b/analysis_b.html#visual-inspection",
+    "title": "Analysis B",
+    "section": "Visual inspection",
+    "text": "Visual inspection\nCheck if the system is behaving like expected.\nOpen the *.xyz file with VMD.\nIt is a good sign if\n\nno atom has been shoot out of the box\nbox was not collapsing or blowing up\nno unexpected movements was happening\n\nect.",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Analysis B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/analysis_b.html#troubleshooting",
+    "href": "exercise_b/analysis_b.html#troubleshooting",
+    "title": "Analysis B",
+    "section": "Troubleshooting",
+    "text": "Troubleshooting\nIf the simulation is not computed as expected some first-aid steps can be done:\n\nTry to understanding any error messages that may have arisen\nCheck in the *.log file and *.in if the simulation was setup correctly.\nCheck the starting structure\nCheck the moldescriptor\n\nect.",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Analysis B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/analysis_b.html#arithmetic-average-standard-deviation-and-standard-error",
+    "href": "exercise_b/analysis_b.html#arithmetic-average-standard-deviation-and-standard-error",
+    "title": "Analysis B",
+    "section": "Arithmetic Average, Standard Deviation and Standard Error",
+    "text": "Arithmetic Average, Standard Deviation and Standard Error\nThe aforementioned constant relaxation of the properties can be verified by calculating the arithmetic mean of the properties \\(\\left &lt; A \\right &gt;\\)\n\\[\n\\left &lt; A \\right &gt;  = \\frac{1}{n}\\sum_{i=0}^{n} a(t_{i})\n\\] where \\(a(t_{i})\\) is the property \\(a\\) at time step \\(t_i\\) and \\(n\\) the total sampling time\nas well as the standard deviation \\(A_{\\sigma }\\)\n\\[\nA_{\\sigma }= \\sqrt{ \\frac{1}{n}\\sum_{i=0}^{n} (a(t_{i}) - \\left &lt; A \\right &gt; )^2}.\n\\] and standard error \\(A_{\\nu}\\) of the arithmetic average \\[\nA_{\\nu} = \\frac{A_{\\sigma }}{\\sqrt{n}}\n\\]",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Analysis B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/analysis_b.html#running-average",
+    "href": "exercise_b/analysis_b.html#running-average",
+    "title": "Analysis B",
+    "section": "Running Average",
+    "text": "Running Average\nFurther the running average \\(\\left &lt; A \\right &gt;_{\\tau}\\) at time \\(\\tau\\) with a window size of \\(\\omega\\) and a gap size \\(g\\)\n\\[\n\\left &lt; A \\right &gt;_{\\tau} = \\frac{1}{\\omega}\\sum_{i=\\tau-(\\omega-1)g}^{\\tau} a(t_{i})\n\\] e.g. \\(\\tau=5\\), \\(\\omega=3\\), \\(g=2\\) \\[\n\\left &lt; A \\right &gt;_{5} = \\frac{1}{3} (a(t_{1})+a(t_{3})+a(t_{5}))\n\\]\ncan help to estimate the fluctuation of the properties over time.",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Analysis B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/analysis_b.html#cummulative-average",
+    "href": "exercise_b/analysis_b.html#cummulative-average",
+    "title": "Analysis B",
+    "section": "Cummulative Average",
+    "text": "Cummulative Average\nAnd the cumulative average is a running average that is added at each step. \\[\n\\left &lt; A \\right &gt;_n = \\frac{(n-1)\\left &lt; A \\right &gt;_{n-1} + \\left &lt; A \\right &gt;_n}{n}\n\\]",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Analysis B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/analysis_b.html#linear-regression-fit",
+    "href": "exercise_b/analysis_b.html#linear-regression-fit",
+    "title": "Analysis B",
+    "section": "Linear Regression Fit",
+    "text": "Linear Regression Fit\nFurther linear regression fit helps to estimate the trend of your simulation.\nFor more further detail: statistics",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Analysis B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/analysis_b.html#plot-of-temperature-over-simulation-time",
+    "href": "exercise_b/analysis_b.html#plot-of-temperature-over-simulation-time",
+    "title": "Analysis B",
+    "section": "Plot of temperature over simulation time",
+    "text": "Plot of temperature over simulation time\n\n\nCode\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nfrom scipy.stats import linregress\nimport matplotlib as mpl\n\nmpl.rcParams[\"font.size\"] = 15\nmpl.rcParams[\"axes.labelsize\"] = 20\n\n\nphysical_properties = [\"SIMULATION-TIME\", \"TEMPERATURE\", \"PRESSURE\", \"E(TOT)\", \"E(QM)\", \"N(QM-ATOMS)\", \"E(KIN)\", \"E(INTRA)\",\"VOLUME\",\"DENSITY\",\"MOMENTUM\",\"LOOPTIME\"]\nphysical_units = [\"fs\", \"K\",\"bar\", \"kcal/mol\", \"kcal/mol\", \"-\",\"kcal/mol\",\"kcal/mol\",\"A^3\", \"g/cm^3\", \"amuA/fs\", \"s\"]\ndata = pd.read_csv(\"../data/physical_properties.en\",sep='\\t+',names=physical_properties)\nprint(data.head())\nprint(\"Shape of data: \", data.shape)\ntime = data[\"SIMULATION-TIME\"]/1e6 # ns\ntemperature_avg = np.mean(data[\"TEMPERATURE\"])\ntemperature_std = np.std(data[\"TEMPERATURE\"])\nwindow = 50\ngap = 2\nrunning_average = data[\"TEMPERATURE\"].rolling(window=window).mean() #window=window,min_periods=1,center=True,step=gap\n\ndef linear_function(x,a,b):\n  return a*x+b\n\n\n\nplt.figure(figsize=(8,4))\nplt.plot(time,data[\"TEMPERATURE\"],color=\"black\", alpha=0.5,label=r\"simulation\")\nplt.plot(time,running_average,label=r\"$T_{\\mathrm{run.avg}}$\")\nplt.hlines(temperature_avg,xmin=np.min(time),xmax=np.max(time),linestyles=\"solid\",color=\"black\",label=r\"$T_{\\mathrm{avg}}$\")\nplt.hlines(temperature_avg+temperature_std,xmin=np.min(time),xmax=np.max(time),linestyles=\"dashed\",color=\"black\",label=r\"$T_{\\mathrm{std}}$\")\nplt.hlines(temperature_avg-temperature_std,xmin=np.min(time),xmax=np.max(time),linestyles=\"dashed\",color=\"black\")\n\nplt.xlabel(r\"$t$ / ns\")\nplt.ylabel(r\"$T$ / K\")\nplt.legend(fontsize=12)\nplt.show()\n\n\n   SIMULATION-TIME  TEMPERATURE      PRESSURE        E(TOT)         E(QM)  \\\n0          1656002   265.867307  -9219.140442 -39593.157062 -39779.394319   \n1          1656004   232.575082 -10168.957588 -39594.249861 -39757.166264   \n2          1656006   326.845099  -6236.688599 -39600.546646 -39829.498207   \n3          1656008   398.202185   2882.459019 -39597.914972 -39876.851422   \n4          1656010   382.115074   9870.653269 -39596.205739 -39863.873337   \n\n   N(QM-ATOMS)      E(KIN)  E(INTRA)       VOLUME   DENSITY  MOMENTUM  \\\n0        276.0  186.237257       0.0  4946.281581  0.916867  0.000011   \n1        276.0  162.916403       0.0  4944.425576  0.917211  0.000011   \n2        276.0  228.951560       0.0  4943.049144  0.917466  0.000011   \n3        276.0  278.936450       0.0  4943.121195  0.917453  0.000011   \n4        276.0  267.667598       0.0  4944.683355  0.917163  0.000011   \n\n   LOOPTIME  \n0   5.08360  \n1   1.58753  \n2   3.05997  \n3   0.18536  \n4   0.17990  \nShape of data:  (50000, 12)\n\n\n\n\n\n\n\n\nFigure 6.1: Temperature vs Time plot",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Analysis B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/analysis_b.html#plot-lattice-parameter-vs.-temperature",
+    "href": "exercise_b/analysis_b.html#plot-lattice-parameter-vs.-temperature",
+    "title": "Analysis B",
+    "section": "Plot Lattice Parameter vs. Temperature",
+    "text": "Plot Lattice Parameter vs. Temperature\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nimport matplotlib as mpl\n\nmpl.rcParams[\"font.size\"] = 15\nmpl.rcParams[\"axes.labelsize\"] = 20\n\ntemperature = np.array([248.15,273.15,298.15,323.15,348.15])\na = np.array([25.8, 25.77, 25.73, 25.70, 25.66])\na_err = np.array([0.2,0.1,0.15,0.2,0.23])\n\nplt.figure(figsize=(8,4))\nplt.errorbar(temperature,a,a_err,fmt='ok',label=r\"$\\left &lt; a \\right &gt;$\")\nplt.xlabel(r\"$T$ in K\")\nplt.ylabel(r\"$\\left &lt; a \\right &gt; $ in $\\mathrm{\\AA}$\")\nplt.xlim(223,373)\nplt.xticks(temperature)\n# plt.legend(fontsize=12)\nplt.show()\n\n\n\n\n\n\n\n\nFigure 6.2: T vs a plot\n\n\n\n\n\n\n\n\n\n\n\nExperimental Measurement\n\n\n\nX-ray diffraction (XRD) powder X-ray diffraction (PXRD) neutron powder diffraction (NPD)",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Analysis B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/analysis_b.html#einstein-relation",
+    "href": "exercise_b/analysis_b.html#einstein-relation",
+    "title": "Analysis B",
+    "section": "Einstein-Relation",
+    "text": "Einstein-Relation\nThe Einstein Relation can be therefore written as slope of the mean-squared-displacement (\\(MSD(\\tau)\\)) over time origins \\(\\tau\\)\n\\[\nD_{\\mathrm{s}} = \\frac{1}{2 \\cdot d} \\lim _{t\\to \\infty} \\frac{d}{dt} MSD(\\tau)\n\\] where \\(d=1,2,3\\) is the dimensionality.\n\nMean-Squared Displacement\nThe mean-squared displacement describes the the temporally displacement of the particle from a time origin \\(t_0\\) averaged over time interval \\(\\tau\\) \\[\nMSD(\\tau) = \\left &lt; \\frac{1}{N} \\sum_{i=1}^{N} |\\vec{r} _{i}(t) - \\vec{r} _{i}(t_0)|^2  \\right &gt;_{\\tau}\n\\] where \\(N\\) is the number of the particle, \\(\\vec{r}_{i}\\) is the center-of-mass position vector of the particle \\(i\\).\n\nIf we look at the Figure Figure 6.3 (a) we realize the beginning of the MSD is not linear. Only with higher correleation time, normal diffusional (see Figure Figure 6.3 (b)) behaviour appear in the linear region.\n\n\n\n\n\n\nQuestion:\n\n\n\n\nHow do you get the self-diffusion coefficient out of the MSD regarding the Einstein-relation?\nHow do you get the gradient/slope of the MSD?\nWhat does the limes in that formular mean?\n\n\n\n\n\n\n\n\n\nAnswer:\n\n\n\n\n\nThe self-diffusion coefficient is the slope of the MSD divided by 2 \\(\\cdot d\\).\nBut this is only true if correlation time is long enough. We can say that in the linear regime we fulfill this limes due to unchanging slope which represents the difffusion coefficient.\nTherefore it is important to have really linear behaviour in order to apply the Einstein relation.\nYou get the slope by fitting a linear regression at the last linear section.\n\n\n\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.optimize import curve_fit\nimport matplotlib as mpl\n\nmpl.rcParams[\"font.size\"] = 15\nmpl.rcParams[\"axes.labelsize\"] = 20\n\ndata = np.genfromtxt(\"../data/diff.out\")\nsteps = data[:,0]\ntime = steps*0.002\nMSD_x = data[:,1]\nMSD_y = data[:,2]\nMSD_z = data[:,3]\nMSD_xyz = MSD_x + MSD_y + MSD_z\n\ndef ballistic_regime(x,a):\n  return a*x**2\n\ndef superdiffusion(x,a):\n  return a*x**1.5\n\ndef subdiffusion(x,a):\n  return a*x**0.5\n\ndef normaldiffusion(x,a):\n  return a*x\n\ndef confined_diffusion(x,a,b):\n  return a*(1-np.exp(-b*x))\n\ndef linear_regression(x,a,b):\n  return a*x + b\n\npopt, pcov = curve_fit(linear_regression,time[-500:],MSD_xyz[-500:])\n\nd_einstein = popt[0]/6\ntime_regime= np.linspace(0,10,1000)\n\nfig, axs = plt.subplots(2,1,figsize=(4,8),gridspec_kw={'hspace': 0.4})\naxs[0].plot(time,MSD_x,label=r\"$MSD_x$\",color=\"C0\")\naxs[0].plot(time,MSD_y,label=r\"$MSD_y$\",color=\"purple\")\naxs[0].plot(time,MSD_z,label=r\"$MSD_z$\",color=\"grey\")\naxs[0].plot(time,MSD_xyz,label=r\"$MSD_{x+y+z}$\",color=\"k\")\naxs[0].vlines(time[-500],0,500,color=\"k\",linestyle=\"dotted\",label=r\"fitting regime\")\naxs[0].plot(time[-500:],linear_regression(time[-500:],*popt),color=\"red\",linestyle=\"dashed\",label=r\"linear fit $y=a\\cdot x + b$: $a= {:.2f}$, $b= {:.2f}$ \".format(popt[0],popt[1]))\naxs[0].text(-0.5, 1.05, '(a)', transform=axs[0].transAxes, fontsize=14, verticalalignment='top')\naxs[0].text(1.0,400, r\"$D_s=%2.2f\\,\\mathrm{\\AA^2 ps^{-1}}$\" %(d_einstein),fontsize=14)\naxs[0].legend(fontsize=12,loc='upper left', bbox_to_anchor=(1.05, 1.05))\n\n\naxs[1].plot(time_regime,ballistic_regime(time_regime,100),label=r\"ballistic regime $\\propto \\tau^2$\", color=\"gold\", linestyle=\"dashed\")\naxs[1].plot(time_regime,superdiffusion(time_regime,100),label=r\"superdiffusion regime $\\propto \\tau^{\\alpha}, \\alpha&gt;1$\", color=\"darkred\", linestyle=\"dashed\")\naxs[1].plot(time_regime,normaldiffusion(time_regime,100),label=r\"normal diffusion regime $\\propto \\tau$\", color=\"red\", linestyle=\"dashed\")\naxs[1].plot(time_regime,subdiffusion(time_regime,100),label=r\"subdiffusion regime $\\propto \\tau^{\\alpha}, \\alpha&lt;1$\", color=\"salmon\", linestyle=\"dashed\")\n\naxs[1].plot(time_regime,confined_diffusion(time_regime,50,2),label=r\"confined diffusion regime $\\propto$ const.\", color=\"hotpink\", linestyle=\"dashed\")\n\n\naxs[0].set_xlabel(r\"correlation time $\\tau$ in ps\")\naxs[0].set_ylabel(r\"$MSD(t)$ in $\\mathrm{\\AA^2}$\")\n\naxs[0].set_ylim(0,500)\n\n\naxs[1].set_xlabel(r\"correlation time $\\tau$ in ps\")\naxs[1].set_ylabel(r\"$MSD(t)$ in $\\mathrm{\\AA^2}$\")\naxs[1].set_xlim(0,5)\naxs[1].set_ylim(0,500)\naxs[1].text(-0.5, 1.05, '(b)', transform=axs[1].transAxes, fontsize=14, verticalalignment='top')\n\naxs[1].legend(fontsize=12,loc='upper left', bbox_to_anchor=(1.05, 1.05))\nplt.show()\n\n\n\n\n\n\n\n\nFigure 6.3: (a) MSD(t) plot, (b) diffusion regimes",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Analysis B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/analysis_b.html#green-kubo-relation",
+    "href": "exercise_b/analysis_b.html#green-kubo-relation",
+    "title": "Analysis B",
+    "section": "Green-Kubo Relation",
+    "text": "Green-Kubo Relation\nThe Green-Kubo formalism needs a numerical integration of the velocity-autocorrelation function \\(VACF(t)\\) to get the self-diffusion coefficent \\(D_{\\mathrm{s}}\\) \\[\nD_{\\mathrm{s}} = \\frac{1}{d} \\int _{0}^{\\infty} VACF(t)  dt\n\\] where \\(d=1,2,3\\) is the dimension.\n\nVeloctiy-Autocorrelation Function\nThe Velocity-Autocorrelatin Function \\(VACF(\\tau)\\) is averaged over a time interval \\(\\tau\\) \\[\nVACF(\\tau) = \\left &lt; \\frac{1}{N} \\sum_{i=1}^{N} |\\vec{v} _{i}(t) \\vec{v} _{i}(t_0)|^2 \\right &gt;_{\\tau}\n\\] where \\(\\vec{v}_{i}\\) is the velocity of the particle \\(i\\) and \\(t_0\\) labels the time origin.\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.integrate import simpson\nfrom scipy.integrate import cumulative_trapezoid\nimport matplotlib as mpl\n\nmpl.rcParams[\"font.size\"] = 15\nmpl.rcParams[\"axes.labelsize\"] = 20\n\ndata = np.genfromtxt(\"../data/green_kubo.out\")\ntime = data[:,0]\nVACF_x = data[:,1]\nVACF_y = data[:,2]\nVACF_z = data[:,3]\nVACF_xyz = data[:,4]\n\n\nintegral_VACF_xyz = simpson(VACF_xyz, x=time)\ncumulative_integral = cumulative_trapezoid(VACF_xyz, time, initial=0)\nd_green_kubo = integral_VACF_xyz / 3\n\nfig, axs = plt.subplots(1,figsize=(4,4))\naxs.plot(time,VACF_x,label=r\"$VACF_x$\",color=\"C0\")\naxs.plot(time,VACF_y,label=r\"$VACF_y$\",color=\"purple\")\naxs.plot(time,VACF_z,label=r\"$VACF_z$\",color=\"grey\")\naxs.plot(time,VACF_xyz,label=r\"$VACF_{x+y+z}$\",color=\"k\")\naxs.plot(time, cumulative_integral, label=r'Cumulative Integral of $VACF_{x+y+z}$',color=\"red\")\n\naxs.text(0.05, 0.95, r\"$D_s = %.2f \\, \\mathrm{\\AA^2 ps^{-1}}$\" %(d_green_kubo), transform=axs.transAxes, fontsize=14, verticalalignment='top')\n\n\naxs.set_xlabel(r\"correlation time $\\tau$ in ps\")\naxs.set_ylabel(r\"$VACF(t)$ in $\\mathrm{(\\AA ps^{-1})^{2}}$\")\naxs.legend(fontsize=12,loc='upper left', bbox_to_anchor=(1.05, 1.05))\nplt.show()\n\n\n\n\n\n\n\n\nFigure 6.4: VACF(t) plot",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Analysis B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/howto_b.html",
+    "href": "exercise_b/howto_b.html",
+    "title": "HowTo B",
+    "section": "",
+    "text": "Tools and Programs\nAll tools and programs are provided by the Hofer Lab. The simulaton engine is PQ. The analysis tools are written in Python and C, and are partially based on the PQAnalysis library.\nThe required tools and programs for this exercise are provided by executing the following command:\nThe simulation engine PQ can be executed by running the following command:\nThe analysis tools are written in an intuitive way and have a help function that can be accessed by running the script with the --help flag. For example:",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>HowTo B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/howto_b.html#analysis-tools",
+    "href": "exercise_b/howto_b.html#analysis-tools",
+    "title": "HowTo B",
+    "section": "Analysis Tools",
+    "text": "Analysis Tools\nThe following analysis tools are provided for this exercise:\n\n\n\n\n\n\n\nTool\nDescription\n\n\n\n\naverage_a\nAverages the lattice parameter a of the provided box files.\n\n\naverage_V\nAverages the volume of the provided box files.\n\n\nextract_h2\nExtracts the hydrogen molecules of trajectory/velocity-files and calculates the center of mass coordinates/velocities.\n\n\nmsd\nCalculates the mean squared displacement of the hydrogen molecules from a trajectory. (Note: The hydrogen molecules have to be extracted first using extract_h2).\n\n\nrdf\nCalculates the radial distribution function of the hydrogen molecule from a trajectory.\n\n\nvacf\nCalculates the velocity autocorrelation function of the hydrogen molecule from a velocity file. (Note: The hydrogen molecules have to be extracted first using extract_h2).\n\n\nlinearfit\nFits a linear function to the mean squared displacement data to calculate the diffusion coefficient according to the Einstein relation.\n\n\nintegration\nIntegrates the velocity autocorrelation function to calculate the diffusion coefficient according to the Green-Kubo relation.",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>HowTo B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/howto_b.html#files",
+    "href": "exercise_b/howto_b.html#files",
+    "title": "HowTo B",
+    "section": "Files",
+    "text": "Files\nThe folders /media/TC_Lehre/03_PR_Fortgeschrittene_Uebungen_zu_TC_und_Comp_Chemie/zif8-h2/zif8_files contains all necessary files for the simulations. The files are organized in the following way:\n\n\n\n\n\n\nFile Structure\n\n\n\n\n\n├── general_input\n│   ├── moldescriptor.dat\n│   ├── run-01.in\n│   ├── run-02.in\n│   ├── run-03.in\n│   └── run-04.in\n├── h2\n│   ├── h2.rst\n│   └── shake_h2.top\n└── preeq\n    ├── 248\n    │   ├── shake_zif8_248.top\n    │   └── zif8_preeq_248.rst\n    ├── 273\n    │   ├── shake_zif8_273.top\n    │   └── zif8_preeq_273.rst\n    ├── 298\n    │   ├── shake_zif8_298.top\n    │   └── zif8_preeq_298.rst\n    ├── 323\n    │   ├── shake_zif8_323.top\n    │   └── zif8_preeq_323.rst\n    ├── 348\n    │   ├── shake_zif8_348.top\n    │   └── zif8_preeq_348.rst\n    ├── 373\n    │   ├── shake_zif8_373.top\n    │   └── zif8_preeq_373.rst\n    └── 398\n        ├── shake_zif8_398.top\n        └── zif8_preeq_398.rst\n\n\n\n\n\n\n\n\n\n\nFolder/File\nDescription\n\n\n\n\ngeneral_input\nContains the input files for the simulations (moldescriptor.dat and run-0*.in).\n\n\nh2\nContains the hydrogen restart-file (h2.rst) and the topology file (shake_h2.top).\n\n\npreeq\nContains the equilibration restart-files (zif8_preeq_*.rst) and the topology files (shake_zif8_*.top).",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>HowTo B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/howto_b.html#system-setup",
+    "href": "exercise_b/howto_b.html#system-setup",
+    "title": "HowTo B",
+    "section": "System Setup",
+    "text": "System Setup\nThe system setup is done by running the following command:\n1. Copy the necessary files to the working directory\ncp /media/TC_Lehre/03_PR_Fortgeschrittene_Uebungen_zu_TC_und_Comp_Chemie/zif8-h2/zif8_files/h2/* .\ncp /media/TC_Lehre/03_PR_Fortgeschrittene_Uebungen_zu_TC_und_Comp_Chemie/zif8-h2/zif8_files/preeq/&lt;TEMPERATURE&gt;/* .\ncp /media/TC_Lehre/03_PR_Fortgeschrittene_Uebungen_zu_TC_und_Comp_Chemie/zif8-h2/zif8_files/general_input/* .\n2. Add the hydrogen loading to the topology and restart files (e.g. 32 hydrogen molecules and 298 K)\nadd_molecules zif8_preeq_298.rst h2.rst   \\\n  --rst-mol-desc-file moldescriptor.dat   \\\n  --top-file shake_zif8_298.top           \\\n  --added-top-file shake_h2.top           \\\n  --output-top-file shake.top             \\\n  -n 32                                   \\\n  &gt; 32xh2-zif8-00.rst",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>HowTo B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/howto_b.html#simulation",
+    "href": "exercise_b/howto_b.html#simulation",
+    "title": "HowTo B",
+    "section": "Simulation",
+    "text": "Simulation\n1. Edit the input file run-01.in to include your assigned temperature, generated restart file, and topology file.\n...\n# Temperature algorithm (velocity rescaling), Target T in K and Relaxation time in ps\n      thermostat = velocity_rescaling; temp = XXX.XX; t_relaxation = 0.1;\n...\n# Files\n      start_file    = XXX-00.rst;\n      topology_file = XXX.top;\n\n      file_prefix   = XXX-01;\n\n\n\n\n\n\nNote\n\n\n\nReplace XXX with the assigned temperature value and the corresponding restart and topology files. The file_prefix can be any name you choose. Please make sure to use -00.rst as the start file and -01 as the file prefix. This will help to keep track of the different simulation steps.\n\n\n2. Run NVT equlibration\nPQ run-01.in\n\n\n\n\n\n\nImportant\n\n\n\nThe overall equilibration is split into two stages. The first stage is a 10 ps NVT equilibration (run-01.in). The second stage is a 10 ps NPT equilibration (run-02.in). After the equilibration, the production run is performed for 1 ns, which is split into 2 runs of 500 ps each (run-03.in and run-04.in).",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>HowTo B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/howto_b.html#extract-hydrogen-molecule",
+    "href": "exercise_b/howto_b.html#extract-hydrogen-molecule",
+    "title": "HowTo B",
+    "section": "Extract Hydrogen Molecule",
+    "text": "Extract Hydrogen Molecule\nExtract the hydrogen molecule from the trajectory and velocity files using the extract_h2 tool:\nextract_h2 &lt;trajectory_file&gt;.xyz -n 276\nand\nextract_h2 &lt;velocity_file&gt;.vel -n 276\n\n\n\n\n\n\nNote\n\n\n\nThe -n flag specifies the number of atoms of the empty ZIF-8 framework.",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>HowTo B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/howto_b.html#einstein-relation",
+    "href": "exercise_b/howto_b.html#einstein-relation",
+    "title": "HowTo B",
+    "section": "Einstein Relation",
+    "text": "Einstein Relation\n1. Calculate the mean squared displacement (MSD) of the hydrogen molecule using the msd tool:\nmsd\n2. Fit a linear function to the MSD data using the linearfit tool:\nlinearfit --window 5\n\n\n\n\n\n\nImportant\n\n\n\nFor both assigned hydrogen loadings, insert the corresponding self-diffusion coefficient values into the Google Sheets.",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>HowTo B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/howto_b.html#green-kubo-relation",
+    "href": "exercise_b/howto_b.html#green-kubo-relation",
+    "title": "HowTo B",
+    "section": "Green-Kubo Relation",
+    "text": "Green-Kubo Relation\n1. Calculate the velocity autocorrelation function (VACF) of the hydrogen molecule using the vacf tool:\nvacf\n2. Integrate the VACF data using the integration tool:\nintegration\n\n\n\n\n\n\nImportant\n\n\n\nFor both assigned hydrogen loadings, insert the corresponding self-diffusion coefficient values into the Google Sheets.",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>HowTo B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/howto_b.html#system-setup-1",
+    "href": "exercise_b/howto_b.html#system-setup-1",
+    "title": "HowTo B",
+    "section": "System Setup",
+    "text": "System Setup\nThe system setup is done by running the following command:\n1. Copy the necessary files to the working directory\ncp /media/TC_Lehre/03_PR_Fortgeschrittene_Uebungen_zu_TC_und_Comp_Chemie/zif8-h2/zif8_files/preeq/&lt;TEMPERATURE&gt;/* .\ncp /media/TC_Lehre/03_PR_Fortgeschrittene_Uebungen_zu_TC_und_Comp_Chemie/zif8-h2/zif8_files/general_input/* .",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>HowTo B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/howto_b.html#simulation-1",
+    "href": "exercise_b/howto_b.html#simulation-1",
+    "title": "HowTo B",
+    "section": "Simulation",
+    "text": "Simulation\n1. Edit the input file run-01.in to include your assigned temperature, generated restart file, and topology file.\n...\n# Temperature algorithm (velocity rescaling), Target T in K and Relaxation time in ps\n      thermostat = velocity_rescaling; temp = XXX.XX; t_relaxation = 0.1;\n...\n# Files\n      start_file    = zif8_preeq_XXX.rst;\n      topology_file = shake_zif8_XXX.top;\n\n      file_prefix   = zif8-01;\n\n\n\n\n\n\nNote\n\n\n\nReplace XXX with the assigned temperature value. The file_prefix can be any name you choose. Please make sure to use -01 as the file prefix. This will help to keep track of the different simulation steps.\n\n\n2. Run NVT equlibration\nPQ run-01.in\n\n\n\n\n\n\nNote\n\n\n\nThe overall equilibration is split into two stages. The first stage is a 10 ps NVT equilibration (run-01.in). The second stage is a 10 ps NPT equilibration (run-02.in). After the equilibration, the production run is performed for 500 ps (run-03.in). Only run run-03.in for the thermal expansion calculation.",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>HowTo B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/howto_b.html#analysis",
+    "href": "exercise_b/howto_b.html#analysis",
+    "title": "HowTo B",
+    "section": "Analysis",
+    "text": "Analysis\n1. Average the lattice parameter a of the ZIF-8 framework using the average_a tool:\naverage_a zif8-03.box\n2. Average the volume of the ZIF-8 framework using the average_V tool:\naverage_V zif8-03.box\n3. Calculate the thermal expansion coefficient using the following formula, see thermal expansion",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>HowTo B</span>"
+    ]
+  },
+  {
+    "objectID": "exercise_b/checklist_b.html",
+    "href": "exercise_b/checklist_b.html",
+    "title": "Checklist B",
+    "section": "",
+    "text": "The protocol in this section should be designed as an A0-Poster (similar to those Ph.D. students typically prepare for their presentations in the Atrium of the CCB building). All data generated along with a discussion of results fit easily on a single page. Please include your name and matriculation number, and provide the protocol as pdf-file including your surname in the name of the file. The images and graphs to be plotted are grouped into three subsections, which should also be grouped together on the poster.\nSubsection 1 - System Setup and Equilibration:\n\nA screenshot of the H2@ZIF-8 hybrid system including the simulatin box\nA graph showing the lattice parameter of the pristine (= empty) ZIF-8 against the simulation time \\(a\\)(t)\n\nSubsection 2 - Gas Diffusion:\n\nA graph showing the mean-square-displacement (MSD) of the H2 molecules vs time including a fit\nA graph showing the Green-Kubo correlation function vs time and the associated integral\n\nSubsection 3 - Group Work:\n\nA graph showing the lattice parameter of the pristine (= empty) ZIF-8 at the five different temperatures (248.15 K - 348.15 K) and the resulting linear thermal expansion coefficient\nA graph showing the Arrhenius plot of the Einstein diffusion coefficient at the five different temperatures (298.15 K - 398.15 K) including a fit\nA graph showing the Arrhenius plot of the Green-Kubo diffusion coefficient at the five different temperatures (298.15 K - 398.15 K) including a fit",
+    "crumbs": [
+      "Excercise B - NNP Molecular Dynamics",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Checklist B</span>"
+    ]
+  },
+  {
+    "objectID": "templates/matplotlib.html",
+    "href": "templates/matplotlib.html",
+    "title": "Matplotlib",
+    "section": "",
+    "text": "How to read data into python:\nimport numpy as np\n\ndata = np.genfromtxt(\"../data/data.dat\",delimiter=\"   \", skip_header=2)\nprint(data)\n\n[[ 100.            4.36417563   -1.19      ]\n [ 200.            3.97386645   31.19      ]\n [ 300.            3.81670518   43.19      ]\n [ 400.            3.63958609   60.1       ]\n [ 500.            3.36586221  108.77      ]\n [ 600.            3.30685375  123.16      ]\n [ 700.            2.95904139  192.74      ]\n [ 800.            2.7512791   233.53      ]\n [ 900.            2.73239376  235.13      ]\n [1000.            2.37106786  284.71      ]\n [1100.            2.22010809  301.51      ]]",
+    "crumbs": [
+      "Templates",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Matplotlib</span>"
+    ]
+  },
+  {
+    "objectID": "templates/matplotlib.html#two-axis-plot",
+    "href": "templates/matplotlib.html#two-axis-plot",
+    "title": "Matplotlib",
+    "section": "Two axis plot",
+    "text": "Two axis plot\n\nimport matplotlib.pyplot as plt\nfrom matplotlib.ticker import AutoMinorLocator,FixedLocator\n\n\n# global matplotlib settings\nplt.rcParams.update({\n    'legend.fontsize': 18,\n    'figure.figsize': (4, 4),\n    'axes.labelsize': 25,\n    'xtick.labelsize': 20,\n    'ytick.labelsize': 20}\n)\n\n# create a figure with a subfigure to create 2 different y-axes\nfig, ax1 = plt.subplots()\n# create second subfigure with with sharing the x-axis of ax1 subfigure\nax2 = ax1.twinx() \n# plot the first data as line plot as ax1 subfigure\n# set color, linewidth, marker symbol and label\nax1.plot(data[:,0], data[:,1], color=\"grey\", linewidth=3, marker=\"x\",label=\"data1\")\n# define the color of the y-axis\nax1.tick_params(axis='y', labelcolor=\"grey\")\n\n# plot the second data as the ax2 subfigure by using scatter plot\nax2.scatter(data[:,0], data[:,2],color=\"black\", linewidths=3,label=\"data2\")\nax2.tick_params(axis='y', labelcolor=\"black\")\n\n# add all labels in one \nlines1, labels1 = ax1.get_legend_handles_labels() # get labels of ax1 subfigure\nlines2, labels2 = ax2.get_legend_handles_labels() # get labels of ax2 subfigures\nax2.legend(lines1 + lines2, labels1+ labels2, loc=4) # location of legend\n\n# set x- and y-limits of the axes\nax1.set_xlim(0,1500)\nax1.set_ylim(-0.1,5)\nax2.set_ylim(-0.1,400)\n\n# set the x- and y-labels of the axes\nax1.set_xlabel(r\"$x$ / a.u\")\nax1.set_ylabel(r\"$y_1$ / a.u.\",color=\"grey\") # define also the color of the labels\nax2.set_ylabel(r\"$y_2$ / a.u.\",color=\"black\")\n\n# create a vertical line at 800 starting from 0 until 5\nax1.axvline(800,0,5,color=\"red\",linewidth=3)\n\n# define manjor and minor axes ticks\nax1.xaxis.set_major_locator(FixedLocator(np.arange(0, 2000, 500)))\nax1.xaxis.set_minor_locator(AutoMinorLocator(2))\nax1.yaxis.set_major_locator(FixedLocator(np.arange(-1, 6, 1)))\nax1.yaxis.set_minor_locator(AutoMinorLocator(2))\nax2.yaxis.set_major_locator(FixedLocator(np.arange(-100, 500, 100)))\nax2.yaxis.set_minor_locator(AutoMinorLocator(2))\n\n# save the figure as png\n# plt.savefig(\"figure.png\", dpi=300)\n# show the picture\nplt.show()",
+    "crumbs": [
+      "Templates",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Matplotlib</span>"
+    ]
+  },
+  {
+    "objectID": "templates/matplotlib.html#line-spectra-with-gaussian-broadening",
+    "href": "templates/matplotlib.html#line-spectra-with-gaussian-broadening",
+    "title": "Matplotlib",
+    "section": "Line spectra with Gaussian broadening",
+    "text": "Line spectra with Gaussian broadening\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# create random frequencies between 20 and 5000 cm-1 \nvib = np.random.rand(10)*(5000-20)\n# with random intensity\nintensity = np.random.rand(10)\n\n# define gaussian broadening\ndef spectrum(vib,intensity,sigma,v):\n    gvib=[]\n    for vibi in v:\n        tot=0\n        for vibj,I in zip(vib,intensity):\n            tot = tot + I*np.exp(-((((vibj-vibi)/sigma)**2)))\n        gvib.append(tot)\n    return gvib\n\n# create the broaded function with smooth frequency values\nv=np.linspace(0,5000, num=10000, endpoint=True)\n# use different sigma\nsigma1=100\nsigma2=200\nsigma3=400\n\ngvib1=spectrum(vib,intensity,sigma1,v)\ngvib2=spectrum(vib,intensity,sigma2,v)\ngvib3=spectrum(vib,intensity,sigma3,v)\n\nfig,ax=plt.subplots(figsize=(4,4))\n\n# plot the gaussian broadenings\nax.plot(v,gvib1,\"--k\", label=r\"$\\sigma_1=100\\,\\mathrm{cm^{-1}}$\")\nax.plot(v,gvib2,linestyle=\"--\", color=\"grey\", label=r\"$\\sigma_2=200\\,\\mathrm{cm^{-1}}$\")\nax.plot(v,gvib3, linestyle=\"dashed\", color=\"lightgrey\", label=r\"$\\sigma_3=500\\,\\mathrm{cm^{-1}}$\")\n\n# plot the line spectra\nfor v,I in zip(vib,intensity):\n    ax.plot((v,v),(0,I),c=\"red\")\n\n# or use vlines\nax.vlines(v,0,I,color=\"red\")\n\n# set x- and y-axis limits\nax.set_xlim(0,6000)\nax.set_ylim(0,3)\n\n# set minor ticks\nax.xaxis.set_minor_locator(AutoMinorLocator(2))\nax.yaxis.set_minor_locator(AutoMinorLocator(2))\n\n# invert the x-axis\nplt.gca().invert_xaxis()\n\n# set the axes labels\nplt.xlabel('frequency / cm$^{-1}$')\nplt.ylabel('intensity / a.u.')\n\n# plot the legend\nplt.legend(fontsize=15)\n# save the figure\n# # plt.savefig('random_line_spectra.png')\n\nplt.show()",
+    "crumbs": [
+      "Templates",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Matplotlib</span>"
+    ]
+  },
+  {
+    "objectID": "templates/matplotlib.html#band-plot",
+    "href": "templates/matplotlib.html#band-plot",
+    "title": "Matplotlib",
+    "section": "Band Plot",
+    "text": "Band Plot\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# define the kpoints and the kpoint_labels\nkpoints = np.array([1,21,66,76])\nkpoint_labels = [\"Z\",r\"$\\Gamma$\",\"X\",\"P\"]\n\n# an example of random band data\nbands = np.genfromtxt(\"../data/band_tot.dat\")\n\n\nEFermi = -0.5681 #eV taken from detailed.out\n# size of the band data\nshape = bands.shape\n\n# put all data in one array to calculate the band gap\ny = np.array([])\nfor i in range(1,shape[1]):\n    y = np.append(y,bands[:,i])\n\nx = np.array([])\nfor i in range(1,shape[1]):\n    x = np.append(x,bands[:,0])\n# use the convention of E-EFermi  \nyF = y - EFermi\n\n# the maximum energy of the valence band\nmax_valence = np.max(yF[yF&lt;0])\n# the minimum energy of the conduction band\nmin_conduction = np.min(yF[yF&gt;0])\n\nk_max_valence = x[np.argmin(yF[yF&gt;0])]\nk_min_conduction = x[np.argmax(yF[yF&lt;0])]\n\n# band gap\nE_gap = max_valence - min_conduction\n\n\nplt.figure()\n# plot the bands\nfor i in range(1,19):\n    plt.plot(bands[:,0], bands[:,i]-EFermi, color=\"black\", linewidth=3)\n# plot the vertical lines for the k-points of the Brillouin zone\nfor j in kpoints:\n    plt.axvline(j, color=\"grey\", linestyle=\"dashed\")\n\n# set some axes limits\nplt.xlim(1,76)\nplt.ylim(-6.5,3.5)\n\n# plot Egap\nplt.axhline(max_valence, color=\"black\", linestyle=\"dashed\")\nplt.axhline(min_conduction, color=\"black\", linestyle=\"dashed\",label=r\"$E_{\\mathrm{gap}}=%2.3f\\,\\mathrm{eV}$\" %E_gap)\n\nplt.plot([k_min_conduction,k_max_valence],[max_valence,min_conduction], color=\"red\",label=r\"$E_{\\mathrm{indirect,gap}}$\")\n\nplt.xticks(kpoints,kpoint_labels)\nplt.ylabel(r\"$E-E_{\\mathrm{Fermi}}$ / eV\")\nplt.legend(fontsize=12,loc=4)\nplt.show()\n\n\n\n\n\n\n\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n# it is used for constants\nfrom scipy import constants\n# it is used for showing the latex equations\nfrom IPython.display import display, Latex\n\n# define constants\neV = constants.eV\nhbar = constants.hbar\nmol = constants.Avogadro\ncal = constants.calorie\nkB = constants.k\nu = constants.u\nA = constants.angstrom\n\nprint(\"eV = \",eV, \"J\")\nprint(\"hbar = \",hbar, \"J s\")\nprint(\"mol = \",mol, \"mol\")\nprint(\"cal = \",cal, \"J\")\nprint(\"kB = \",kB, \"J K-1\")\nprint(\"u = \",u, \"kg\")\nprint(\"A = \",A, \"m\")\n\ndisplay(Latex( r\"$\\nu = \\frac{1}{2\\pi}\\sqrt{\\frac{k}{\\mu}}$ in cm $^{-1}$\"))\n\ndisplay(Latex(r\"$\\mu = \\frac{m_1 \\cdot m_2}{m_1 + m_2}$ in g $\\cdot$ mol $^{-1}$\"))\n\neV =  1.602176634e-19 J\nhbar =  1.0545718176461565e-34 J s\nmol =  6.02214076e+23 mol\ncal =  4.184 J\nkB =  1.380649e-23 J K-1\nu =  1.6605390666e-27 kg\nA =  1e-10 m\n\n\n\\(\\nu = \\frac{1}{2\\pi}\\sqrt{\\frac{k}{\\mu}}\\) in cm \\(^{-1}\\)\n\n\n\\(\\mu = \\frac{m_1 \\cdot m_2}{m_1 + m_2}\\) in g \\(\\cdot\\) mol \\(^{-1}\\)",
+    "crumbs": [
+      "Templates",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Matplotlib</span>"
+    ]
+  },
+  {
+    "objectID": "templates/matplotlib.html#plot-functions",
+    "href": "templates/matplotlib.html#plot-functions",
+    "title": "Matplotlib",
+    "section": "Plot functions",
+    "text": "Plot functions\n\n# plt.switch_backend(\"TkAgg\") \n# it is used for plotting the figures in the jupyter notebook as interactive figures\n# %matplotlib widget\nplt.rcParams.update({\n    'legend.fontsize': 9,\n    'figure.figsize': (2,2),\n    'axes.labelsize': 10,\n    'xtick.labelsize': 9,\n    'ytick.labelsize': 9}\n)\n\n# array of r values from 0 to 10 with 100 points\nr = np.linspace(0, 15, 1000)\n# force constant is extracted\nk = 3 # check the units of k it should be in kcal mol-1 A-2\n\n# translation of the units\n\n\n\n# harmonic potential\ndef harmonic_potential(r, k, r0):\n    return 0.5 * k * (r-r0)**2\n\ndef morse_potential(r, D, a, r0):\n    return D * (1 - np.exp(-a*(r-r0)))**2\n\n\n\n\n\nfig  = plt.figure(dpi=300)\nplt.plot(r, harmonic_potential(r, k, 5), label=r\"harm. pot.\")\nplt.plot(r, morse_potential(r, 15,0.3, 5), label=r\"Morse pot.\")\n\nplt.xlabel(r\"$r$ / $\\AA$\")\nplt.ylabel(r\"$V(r)$ / kcal mol$^{-1}$\")\nplt.xlim(0, 15)\nplt.ylim(0, 20)\nplt.legend(fontsize=6)\nplt.tight_layout()\nplt.show()",
+    "crumbs": [
+      "Templates",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Matplotlib</span>"
+    ]
+  },
+  {
+    "objectID": "templates/matplotlib.html#fit-a-function-to-data",
+    "href": "templates/matplotlib.html#fit-a-function-to-data",
+    "title": "Matplotlib",
+    "section": "Fit a function to data",
+    "text": "Fit a function to data\n\nfrom scipy.optimize import curve_fit\nfrom sklearn.metrics import r2_score\nimport numpy as np\nimport matplotlib.pyplot as plt\n# global matplotlib settings\nplt.rcParams.update({\n    'legend.fontsize': 9,\n    'figure.figsize': (2,2),\n    'axes.labelsize': 10,\n    'xtick.labelsize': 9,\n    'ytick.labelsize': 9}\n)\n# define the function to fit\ndef harmonic_potential(r, k, r0):\n    return 0.5 * k * (r-r0)**2\n\n# generate some data\nr = np.linspace(0, 15, 1000)\nk = 3\nr0 = 5\ndata = harmonic_potential(r, k, r0) + np.random.normal(0, 0.5, r.size)\n\n# fit the data\npopt, pcov = curve_fit(harmonic_potential, r, data)\n# calculate the R2 score\nr2 = r2_score(data, harmonic_potential(r, *popt))\n\n# print the fit parameters\nprint(\"k = \", popt[0], \" +/- \", np.sqrt(pcov[0,0]))\nprint(\"r0 = \", popt[1], \" +/- \", np.sqrt(pcov[1,1]))\nprint(\"R2 = \", r2)\n\n\n\nplt.figure(dpi=300)\n# plot the data and the fit\nplt.plot(r, data, label=\"random data\")\nplt.plot(r, harmonic_potential(r, *popt), label=r\"$V(r) = \\frac{1}{2} k (r-r_0)^2$\" + \"\\n\" + r\"$k = %2.4f \\pm %2.4f$\" %(popt[0], np.sqrt(pcov[0,0])) + \"\\n\" + r\"$r_0 = %2.4f \\pm %2.4f$\" %(popt[1], np.sqrt(pcov[1,1])) + \"\\n\" + r\"$R^2 = %2.4f$\" %r2)\nplt.xlabel(r\"$r$ / $\\AA$\")\nplt.ylabel(r\"$V(r)$ / kcal mol$^{-1}$\")\nplt.tight_layout()\nplt.legend(fontsize=3)\nplt.xlim(0, 15)\nplt.ylim(0, 20)\nplt.show()\n\nk =  2.9980679791001745  +/-  0.0016109028167218052\nr0 =  4.996065334015015  +/-  0.001994768588909238\nR2 =  0.9998470059652318",
+    "crumbs": [
+      "Templates",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Matplotlib</span>"
+    ]
+  },
+  {
+    "objectID": "templates/poster.html",
+    "href": "templates/poster.html",
+    "title": "Poster Templates",
+    "section": "",
+    "text": "Here are some poster templates:\n\nUIBK Poster template\nOverleaf Templates\n\nThink about how to create the poster. Figures and tables should be informative and readable. Choose a suitable font size and style. Divide the poster in reasonable sections.",
+    "crumbs": [
+      "Templates",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Poster Templates</span>"
+    ]
+  },
+  {
+    "objectID": "guides/statistics.html",
+    "href": "guides/statistics.html",
+    "title": "Statistical Excursion",
+    "section": "",
+    "text": "Regression\nLinear Regression:\n\\[\ny = ax +b\n\\]\n\\[\na = \\frac{n \\sum_{i=1}^{n} x_i y_i - \\sum_{i=1}^{n} x_i \\sum_{i=1}^{n} y_i}{n \\sum_{i=1}^{n} x_i^2 - \\left( \\sum_{i=1}^{n} x_i \\right)^2}\n\\]\n\\[\nb = \\frac{\\sum_{i=1}^{n} y_i - a \\sum_{i=1}^{n} x_i}{n}\n\\]",
+    "crumbs": [
+      "Guides",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Statistical Excursion</span>"
+    ]
+  },
+  {
+    "objectID": "guides/linux_quickstart_guide.html",
+    "href": "guides/linux_quickstart_guide.html",
+    "title": "Linux Quickstart Guide",
+    "section": "",
+    "text": "Introduction\nThis guide is for people new to Linux. The aim of this documents is to help with everyday challenges when working with Linux systems. Generally, manual pages (e.g. man sed gives the terminal manual of sed) are almost everytime helpful and also -h (or --help) flags after commands quickly display helpful information. Obviously, the internet often helps as well and most of the time new things are learned doing. A good overview of the command line interface on linux is on the following github repository (there is also a german version, but reading the english one is recommended):\nhttps://github.com/jlevy/the-art-of-command-line\n\n\nProbably most used linux commands:\n\n\n\n\n\n\n\n\ncommand [options]\ndescription\n\n\n\n\ncd /path/to/directory | Change to directory\n\n\nmkdir [options] directory\nCreate a new directory\n\n\ntouch filename\nCreate an empty file with the specified name\n\n\ncp [options] source destination\nCopy files and directories\n\n\nmv [options] source destination\nRename or move file(s) or directories\n\n\nls [options]\nList directory contents\n\n\npwd\nDisplay the pathname for the current directory\n\n\nrm [options] directory\nRemove (delete) file(s) and/or directories\n\n\nrm -r [options] directory\nDelete directories\n\n\ncat [filename]\nDisplay file’s contents to the standard output device\n\n\nless [options] [filename]\nView the contents of a file one page at a time\n\n\ntail [options] [filename]\nDisplay the last n lines of a file (the default is 10)\n\n\nhead [options] [filename]\nDisplay the first n lines of a file (the default is 10)\n\n\ngrep [options] pattern [filesname]\nSearch files or output for a particular pattern\n\n\nchmod [options] mode filename\nChange a file’s permissions (u+x to make executable)\n\n\nfind [pathname] [expression]\nSearch for files matching a provided pattern.\n\n\nsort [options] file\nsort the file via [option]\n\n\nps [options]\nDisplay a snapshot of the currently running processes\n\n\ntop\nDisplays the resources being used on your system. Press q to exit\n\n\nkill [options] pid\nStop a process. If the process refuses to stop, use kill -9 pid\n\n\n\n\n\n\nMore commands are:\n\n\nBasic Linux Commands (modified version of source: here)\n\n\ncommand [options]\ndescription\n\n\n\n\nman [command]\nDisplay the help information for the specified command\n\n\necho [options]\nPrint string, variable, etc.\n\n\ntar [options] filename\nStore and extract files from a tarfile (.tar) or tarball (.tar.gz or .tgz)\n\n\nbc\nbasic calculator (e.g. echo “3+2”| bc \\(\\;\\) gives 5 for floats use flag -l)\n\n\nchown [options] filename\nChange who owns a file\n\n\nclear\nClear a command line screen/window for a fresh start\n\n\ndate [options]\nDisplay or set the system date and time\n\n\ndf [options]\nDisplay used and available disk space\n\n\ndu [options]\nShow how much space each file takes up\n\n\nln [options] source [destination]\nCreate a shortcut.\n\n\nlocate filename\nSearch a copy of your filesystem for the specified filename.\n\n\npasswd [name [password]]\nChange the password\n\n\nssh [options] user@machine\nRemotely log in to another Linux machine, over the network\n\n\nwho [options]\nDisplay who is logged on\n\n\n&gt; [oufile]\nWrite stdout (text written to terminal) to outfile (e.g. dftb+ &gt; dftb.out)\n\n\n\n\nYou can use Tab for autocompletion of commands.\nCommands can usually be combined with the pipe: |. To write a pipe press Alt Gr + &lt;|&gt;-key (usually located on the left of Y on German keyboards) in between. For example:\n    grep \"Done\" dftb.out | cat -n     \nTo send your job to the background, stop it with CTRL+Z and then enter bg. Afterwards, you can logout with CTRL+D and the process will still be running (can be observed with top when relogging in) after you closed the terminal.\nOn the desktop computers in the office you can search the history with PageUp and PageDown keys. The prefix you entered will then be autocompleted by searching in the history for matching commands you entered before.\n\n\n\n\n\n\nNote\n\n\n\nIf you want quick access to files or directories in your home folder, the ~-symbol is an alias for your home directory /home/user (= \\$HOME).\n\n\n\n\n\nHow to: edit files\nFor editing files you can use any editor that you like e.g.:\n\nVSCode (code)\nnedit\ngedit\nEmacs (emacs)\n\nFor quick changes in files vim is a good option as it runs in the terminal (no -X in ssh required). To learn the basic commands the vimtutor (just type \"vimtutor\" in your terminal) is highly recommended. To exit vim, just type :q and Enter.\n\nVim cheat sheet\n\n\n\nHow to: gawk\nBasic usage of gawk:\ngawk '{ [commands] }' file\nExample: print the first and third column of the file example.dat. Be sure to add some spaces in between the columns using \"   \":\ngawk '{print $1\"   \"$3}' example.dat\nExample: print the first column and \\(500*x^2\\) of the first column column of the file x.dat to calculate a harmonic potential and output then data to the file potential.dat:\ngawk '{print $1\"   \" 500*$1*$1}' x.dat &gt; potential.dat\nFor more advanced usage, also printf and if/else statements can be used similar in the language C. And sed (see below) can be used to substitute characters with white spaces which then generate new columns that can be printed with gawk.\n\n\nHow to: sed\nBasic usage of sed:\nsed -flags '[commands]' file\nExample: every occurrence (g for global at the end) of \"apple\" in fruit.dat will be substituted (s at the beginning) by \"banana\":\nsed 's/apple/banana/g' fruit.dat\nTo extract lines between two strings (print every line between \"pear\" and \"kiwi\"), use:\nsed '/pear/,/kiwi/p' fruit.dat\n\n\n\n\n\n\nNote\n\n\n\nNote that symbols, numbers, words, strings can be replaced with a white space (\" \") to separate columns which can be printed with gawk. The combination of sed and gawk is very powerful!\n\n\n\n\nHow to: for-loops in bash\nA simple for loop looks like:\nfor i in [list]\n    do \n    [commands]\n    done \nFor every item in [list] the commands between the lines do and done will be executed. For example to print all the items in the fruit list:\nfor i in pear banana apple\n    do \n    echo $i\n    done \nor print a sequence of numbers (here 1-10):\nfor i in $(seq 1 1 10)\n    do \n    echo $i\n    done \nor iterate over output files (here grep for the Total Energy of a QM calculation):\nfor i in $(ls *.out)\n    do \n    grep \"Total Energy\" $i\n    done \n\n\nHow to: ssh & scp\nNote the ~ symbol is an alias for /home/\\$USER where \\$USER is your username. To connect with a remote pc via ssh (no colon!)\n\nssh username@remote_host  \nTo enable streaming of windows (e.g. nedit) to your computer add -X (when accessing from home, -CY might be faster and more stable):\nssh -X username@remote_host  \nCopy file from a remote host to local host (your computer):\nscp   username@from_host:one_file.txt   some/folder/\nCopy file from local host (your computer) to a remote host:\nscp   one_file.txt   username@to_host:/some/folder/\nCopy directory from a remote host to local host:\nscp -r   username@from_host:/some/folder/    other/folder/\nCopy directory from local host to a remote host:\nscp -r   some/folder/   username@to_host:/other/folder/\nThe use of rsync is recommended. See:\nhttps://www.tecmint.com/rsync-local-remote-file-synchronization-commands/\nTo login into remote computers without password authentication run ssh-keygen (just press Enter a few times) and ssh-copyid $USER@$HOST and enter the password. This is especially convenient for accessing the clusters.\n\n\nAppendix: Vim Cheat Sheet\n\n\n\n\nVim Cheat Sheet",
+    "crumbs": [
+      "Guides",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Linux Quickstart Guide</span>"
+    ]
+  },
+  {
+    "objectID": "guides/scientific_plot_quickstart.html",
+    "href": "guides/scientific_plot_quickstart.html",
+    "title": "Visualization Quickstart Guide",
+    "section": "",
+    "text": "How to: scientific plots",
+    "crumbs": [
+      "Guides",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Visualization Quickstart Guide</span>"
+    ]
+  },
+  {
+    "objectID": "guides/scientific_plot_quickstart.html#xmgrace",
+    "href": "guides/scientific_plot_quickstart.html#xmgrace",
+    "title": "Visualization Quickstart Guide",
+    "section": "xmgrace",
+    "text": "xmgrace\nA tutorial can be found here:\nhttps://universe.bits-pilani.ac.in/uploads/Pilani/navin/ReadPDFDOC/xmgrace.pdf",
+    "crumbs": [
+      "Guides",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Visualization Quickstart Guide</span>"
+    ]
+  },
+  {
+    "objectID": "guides/scientific_plot_quickstart.html#gnuplot",
+    "href": "guides/scientific_plot_quickstart.html#gnuplot",
+    "title": "Visualization Quickstart Guide",
+    "section": "gnuplot",
+    "text": "gnuplot\nA lot of example plots can be seen here (an example plot is also shown in the appendix):\nhttp://gnuplot.sourceforge.net/demo/\nGnuplot template for pdf plots (resulting example plot shown below):\n\n\nCode\n    #!/usr/bin/gnuplot\n    reset\n    # plot a pdf\n    set terminal pdfcairo enhanced font \"Times New Roman,12.0\" rounded\n    set output 'confinement_plot.pdf'\n    set border linewidth 1.0\n    set size ratio 0.55\n    # set plot line styles\n    set style line 1 linecolor rgb 'black'   linetype 1 linewidth 1\n    set style line 2 linecolor rgb '#FFB85F' linetype 1 linewidth 1   #yellow\n    # set legend position\n    set key left top\n    # set axis properties\n    set ylabel 'V(r)'\n    set xlabel 'r / Bohr'\n    set xtics nomirror\n    set ytics nomirror\n    set xr[0:10]\n    set yr[0:9]\n    #variables\n    w = 8.5\n    r0 = 4.0\n    a = 2.0\n    r1=2.5\n    #functions\n    f (x) = w / ( 1 + exp (a * (r0 - x)))\n    g (x) = (x/r1)**2\n    # plot funcitons\n    plot  f(x)  title 'Wood-Saxon Confinement' w lines linestyle 1, \\\n              g(x)  title 'Power Confinement'      w lines linestyle 2\n\n    ### for plotting data files:\n    # plot \"name_of_datafile.dat\" w lines \n\n\n\n\n\n\ngnuplot example plot",
+    "crumbs": [
+      "Guides",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Visualization Quickstart Guide</span>"
+    ]
+  },
+  {
+    "objectID": "guides/scientific_plot_quickstart.html#matplotlib",
+    "href": "guides/scientific_plot_quickstart.html#matplotlib",
+    "title": "Visualization Quickstart Guide",
+    "section": "matplotlib",
+    "text": "matplotlib\nQuickstart guide:\nhttps://matplotlib.org/stable/users/getting_started/index.html",
+    "crumbs": [
+      "Guides",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Visualization Quickstart Guide</span>"
+    ]
+  },
+  {
+    "objectID": "guides/scientific_plot_quickstart.html#julia",
+    "href": "guides/scientific_plot_quickstart.html#julia",
+    "title": "Visualization Quickstart Guide",
+    "section": "julia",
+    "text": "julia\nFound on the net (not testet yet, but seems useful):\nhttps://nextjournal.com/leandromartinez98/tips-to-create-beautiful-publication-quality-plots-in-julia",
+    "crumbs": [
+      "Guides",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Visualization Quickstart Guide</span>"
+    ]
+  },
+  {
+    "objectID": "guides/latex_quickstart.html",
+    "href": "guides/latex_quickstart.html",
+    "title": "Latex Quickstart Guide",
+    "section": "",
+    "text": "How to: LaTeX\n\nA Short Introduction to LATEX\nThe Not So Short Introduction to LATEX 2\\(_\\epsilon\\)\nOverleaf Documentation A list of LaTeX editors:\n\nTeXStudio\nKile\nAny texteditor with a LaTeX plugin (e.g. VScode, (neo)vim, Kile, …)\nOverleaf (online tool) - it is not recommended if you want to compile a very large project like a thesis because it is getting very slow.",
+    "crumbs": [
+      "Guides",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Latex Quickstart Guide</span>"
+    ]
+  },
+  {
+    "objectID": "guides/python_quickstart.html",
+    "href": "guides/python_quickstart.html",
+    "title": "Python Quickstart Guide",
+    "section": "",
+    "text": "How to learn programming",
+    "crumbs": [
+      "Guides",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Python Quickstart Guide</span>"
+    ]
+  },
+  {
+    "objectID": "guides/python_quickstart.html#variables",
+    "href": "guides/python_quickstart.html#variables",
+    "title": "Python Quickstart Guide",
+    "section": "Variables",
+    "text": "Variables\nIn python, a variable is a container that holds a value. To create a variable, you simply assign a value to it using the assignment operator (=). For example:\nx = 5\nThis creates a variable called x and assigns it the value 5. You can then use the variable x in your code to refer to the value 5.",
+    "crumbs": [
+      "Guides",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Python Quickstart Guide</span>"
+    ]
+  },
+  {
+    "objectID": "guides/python_quickstart.html#data-types",
+    "href": "guides/python_quickstart.html#data-types",
+    "title": "Python Quickstart Guide",
+    "section": "Data Types",
+    "text": "Data Types\npython has several built-in data types, including:\n\nIntegers: whole numbers, like 5\nFloats: decimal numbers, like 3.14\nStrings: sequences of characters, like \"hello\"\nBooleans: values that can be either True or False\n\nYou can use the type() function to check the data type of a variable. For example:\nx = 5\nprint(type(x)) # Output: &lt;class 'int'&gt;",
+    "crumbs": [
+      "Guides",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Python Quickstart Guide</span>"
+    ]
+  },
+  {
+    "objectID": "guides/python_quickstart.html#loops",
+    "href": "guides/python_quickstart.html#loops",
+    "title": "Python Quickstart Guide",
+    "section": "Loops",
+    "text": "Loops\nLoops are used to repeat a block of code multiple times. In python, there are two types of loops: for loops and while loops.\nFor loops are used to iterate over a sequence of values, such as a list or a string. For example:\nfruits = [\"apple\", \"banana\", \"cherry\"]\nfor fruit in fruits:\n  print(fruit)\nThis will output each fruit in the list, one at a time.\nWhile loops are used to repeat a block of code while a certain condition is true. For example:\nx = 0\nwhile x &lt; 5:\n  print(x)\n  x += 1\nThis will output the numbers 0 through 4, one at a time.",
+    "crumbs": [
+      "Guides",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Python Quickstart Guide</span>"
+    ]
+  },
+  {
+    "objectID": "guides/python_quickstart.html#functions",
+    "href": "guides/python_quickstart.html#functions",
+    "title": "Python Quickstart Guide",
+    "section": "Functions",
+    "text": "Functions\nFunctions are reusable blocks of code that perform a specific task. To define a function in python, you use the def keyword followed by the name of the function and a colon. For example:\ndef greet(name):\n  print(\"Hello, \" + name + \"!\")\nThis defines a function called greet that takes a single argument called name. You can then call the function using the name of the function followed by parentheses containing any arguments. For example:\ngreet(\"Alice\") # Output: Hello, Alice!\nThis will call the greet function with the argument \"Alice\", which will print the message “Hello, Alice!”.",
+    "crumbs": [
+      "Guides",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Python Quickstart Guide</span>"
+    ]
+  },
+  {
+    "objectID": "guides/python_quickstart.html#conclusion",
+    "href": "guides/python_quickstart.html#conclusion",
+    "title": "Python Quickstart Guide",
+    "section": "Conclusion",
+    "text": "Conclusion\nThat’s it for the python tutorial! We’ve covered the basics of variables, data t",
+    "crumbs": [
+      "Guides",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Python Quickstart Guide</span>"
+    ]
+  },
+  {
+    "objectID": "guides/VisualizationPythonPackages.html",
+    "href": "guides/VisualizationPythonPackages.html",
+    "title": "Python Modules for Data Visualization",
+    "section": "",
+    "text": "Matplotlib\nMatplotlib is the main plotting library in Python. It is a very powerful tool for creating high-quality plots and figures.\nMore informations can be found under https://matplotlib.org/\nfrom matplotlib import pyplot as plt\n# change style to default \nplt.style.use('default')\nComponents of Matplotlib Figure:",
+    "crumbs": [
+      "Guides",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Python Modules for Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "guides/VisualizationPythonPackages.html#matplotlib",
+    "href": "guides/VisualizationPythonPackages.html#matplotlib",
+    "title": "Python Modules for Data Visualization",
+    "section": "",
+    "text": "Global settings\n\nimport matplotlib as mpl\nmpl.rcParams['font.size'] = 20\nmpl.rcParams['lines.linewidth'] = 2\nmpl.rcParams['lines.linestyle'] = '-'\nmpl.rcParams['figure.figsize'] = (3,3)\n\n\n\nFigure\n\nfig = plt.figure()\nplt.xlabel('x') # x label\nplt.ylabel('y') # y label\nplt.title('Title') # title \n# plot line with x and y data , label for legend\nplt.plot([1, 2, 3], [4, 5, 6], label='line1')\nplt.xlim(0, 4) # x axis limits\nplt.ylim(4, 6) # y axis limits\nplt.xticks([1, 2, 3, 4]) # x axis ticks\nplt.yticks([ 4, 5, 6]) # y axis ticks\nplt.grid(True) # show grid\nplt.legend() # show legend\nplt.show() \n\n\n\n\n\n\n\n\n\n\nAxes\n\nfig, ax = plt.subplots()\nax.set_xlabel('x')\nax.set_ylabel('y')\nax.set_title('Title')\nax.plot([1, 2, 3], [4, 5, 6], label='line1')\nax.set_xlim(0, 4)\nax.set_ylim(4, 6)\nax.set_xticks([1, 2, 3, 4])\nax.set_yticks([ 4, 5, 6])\nax.legend()\nplt.show()\n\n\n\n\n\n\n\n\n\n\nUse different styles\nYou can use different styles for your plots. The following code shows how to use the ggplot style.\n\nplt.style.use('ggplot')\n\n\nfig = plt.figure()\nplt.xlabel('x')\nplt.ylabel('y')\nplt.title('Title')\nplt.plot([1, 2, 3], [4, 5, 6], label='line1')\nplt.xlim(0, 4)\nplt.ylim(4, 6)\nplt.xticks([1, 2, 3, 4])\nplt.yticks([ 4, 5, 6])\nplt.grid(True)\nplt.legend()\nplt.show()\n\n\n\n\n\n\n\n\nOther style can be found under https://matplotlib.org/stable/gallery/style_sheets/style_sheets_reference.html\n\n\nSubplots\nYou can create subplots in a figure. The following code shows how to create a figure with 2x2 subplots.\nplt.style.use('default')\n\nfig, axes = plt.subplots(2, 2, sharex=False, sharey=False, figsize=(5, 5),gridspec_kw={'hspace': 0.3, 'wspace': 0.2})\naxes[0, 0].set_title('Title 1')\naxes[0, 0].plot([1, 2, 3], [4, 5, 6], label='line1')\naxes[0, 0].set_xlim(0, 4)\naxes[0, 0].set_ylim(4, 6)\naxes[0, 0].set_xticks([1, 2, 3, 4])\naxes[0, 0].set_yticks([ 4, 5, 6])\naxes[0, 0].legend()\naxes[0, 1].set_title('Title 2')\naxes[0, 1].plot([1, 2, 3], [-4, -5, -6], label='line1')\naxes[0, 1].set_xlim(0, 4)\naxes[0, 1].set_ylim(-6,-4)\naxes[0, 1].set_xticks([1, 2, 3, 4])\naxes[0, 1].set_yticks([ -4, -5, -6])\naxes[0, 1].legend()\naxes[1, 0].set_title('Title 3')\naxes[1, 0].plot([-1, -2, -3], [4, 5, 6], label='line1')\naxes[1, 0].set_xlim(-4,0)\naxes[1, 0].set_ylim(4, 6)\naxes[1, 0].set_xticks([-1, -2, -3, -4])\naxes[1, 0].set_yticks([ 4, 5, 6])\naxes[1, 0].legend()\naxes[1, 1].set_title('Title 4')\naxes[1, 1].plot([-1, -2, -3], [-4, -5, -6], label='line1')\naxes[1, 1].set_xlim(-4,0)\naxes[1, 1].set_ylim( -6,-4)\naxes[1, 1].set_xticks([-1, -2, -3, -4])\naxes[1, 1].set_yticks([ -4,- 5, -6])\naxes[1, 1].legend()\nplt.show()\n\n\n\n\n\n\n\n\nYou can also use gridspec to create subplots.\n\nfrom matplotlib.gridspec import GridSpec\nfig = plt.figure()\ngs =  GridSpec(2,2 ,width_ratios=[1, 2], height_ratios=[4, 1])\nax1 = fig.add_subplot(gs[0, 0])\nax2 = fig.add_subplot(gs[0, 1])\nax3 = fig.add_subplot(gs[1, 0])\nax4 = fig.add_subplot(gs[1, 1])\nfig.suptitle('Title') # title for the entire figure\nfor i,ax in enumerate(fig.get_axes()):\n    ax.set(xlabel='x', ylabel='y')\n    ax.plot([1, 2, 3], [4, 5, 6],label = \"ax%d\" %i)\n\nplt.show()\n\n\n\n\n\n\n\n\n\n\nColors and Color maps\nMatplotlib provides a large number of color maps. Here your can find a list of all available color maps: https://matplotlib.org/stable/tutorials/colors/colormaps.html and colors: https://matplotlib.org/stable/tutorials/colors/colors.html and https://matplotlib.org/stable/gallery/color/named_colors.html.\n\n\nTexts and Annotations\n\nimport numpy as np\nx = [0.2,0.4,0.6,0.8,1.0]\ny = [0.2,0.4,0.6,0.8,1.0]\nplt.text(0.5, 0.5, 'This is a text!', fontsize=12, ha='center')\nplt.annotate('Data!', xy=(0.2, 0.2), xytext=(0.5, 0.4),arrowprops=dict(facecolor='black', shrink=0.05))\nplt.scatter(x,y, color='red',marker='x',s=100)\nplt.xlabel(r'$x$ / mm') # using LaTeX syntax\nplt.ylabel(r'$\\frac{y}{z}$ / mm$^{-1}$') # using LaTeX syntax\nplt.show()\n\n\n\n\n\n\n\n\n\n\nLogarithmic scale\n\ny = np.random.normal(loc=0.5,scale=0.4,size=10000)\ny = y[(y &gt; 0) & (y &lt; 1)]\ny.sort()\nx = np.arange(len(y))\nplt.figure()\n\n# linear\nplt.subplot(221)\nplt.plot(x, y)\nplt.yscale('linear')\nplt.title('linear')\nplt.grid(True)\n\n# log\nplt.subplot(222)\nplt.plot(x, y)\nplt.yscale('log')\nplt.title('log')\nplt.grid(True)\n\n# symmetric log\nplt.subplot(223)\nplt.plot(x, y - y.mean())\nplt.yscale('symlog', linthresh=0.01)\nplt.title('symlog')\nplt.grid(True)\n\n# logit\nplt.subplot(224)\nplt.plot(x, y)\nplt.yscale('logit')\nplt.title('logit')\nplt.grid(True)\n# Adjust the subplot layout, because the logit one may take more space\n# than usual, due to y-tick labels like \"1 - 10^{-3}\"\nplt.subplots_adjust(top=0.92, bottom=0.08, left=0.10, right=0.95, hspace=0.25,\n                    wspace=0.35)\n\nplt.show()\n\n\n\n\n\n\n\n\n\n\nScatter / Line plot\n\nimport numpy as np\nx = np.array([1, 2, 3, 4, 5])\ny = np.array([1, 4, 9, 16, 25])\ny2 = y + 10\n\n\nplt.scatter(x, y, s=100, c='green', edgecolor='black', linewidth=1, alpha=0.75, marker='o', label='scatter')\nplt.plot(x, y2, color='red', marker='o', markersize=10, markerfacecolor='blue', linestyle='--', linewidth=2,label='line')\nplt.legend()\nplt.show()\n\n\n\n\n\n\n\n\n\n\nError bars\n\nplt.style.use('default')\nplt.errorbar(x, y, yerr=5, fmt='o', color='black', ecolor='lightgray', elinewidth=3, capsize=10) \n# fmt is the format of the marker, ecolor is the color of the error bar, elinewidth is the width of the error bar line, capsize is the size of the error bar cap\nplt.show()\n\n\n\n\n\n\n\n\n\n\nSave figure\n\nx = np.linspace(0, 2 * np.pi, 100)\ny = np.sin(x)\nfig, ax = plt.subplots()\nax.plot(x, y, label='line1')\n# bbox_inches is the bounding box in inches. \n# If 'tight', it will fit the figure to the plot area.\nplt.savefig('../data/test.png', dpi=300, bbox_inches='tight') \nplt.show()\n\n\n\n\n\n\n\n\n\n\nHistogram\n\nx = np.linspace(0, 200,1000)\ny = np.random.normal(0,1,1000)\nfig, ax = plt.subplots()\nax.hist(y, bins=30, color='lightblue', edgecolor='black')\nplt.show()\n\n\n\n\n\n\n\n\n\n# 2D histogram\nx = np.random.normal(0,1,1000)\ny = np.random.normal(0,1,1000)\n\nplt.hist2d(x, y, bins=30, cmap='Blues')\ncolorbar = plt.colorbar()\ncolorbar.set_label('counts in bin')\nplt.show()\n\n\n\n\n\n\n\n\n\n\nDensity plot\n\nx = np.linspace(0, 100, 1000)\ny = np.linspace(0, 100, 1000)*2\n# Create a 2D array of shape (1000,1000)\nX, Y = np.meshgrid(x, y)\n# Z is a 2D array of shape (1000,1000)\nZ = np.sin(X) + np.cos(Y)\nprint(\"Shape of X:\", X.shape)\nprint(\"Shape of Y:\", Y.shape)\nprint(\"Shape of Z:\", Z.shape)\n\nShape of X: (1000, 1000)\nShape of Y: (1000, 1000)\nShape of Z: (1000, 1000)\n\n\n\nfig, ax = plt.subplots()\n# Create a contour plot\nplt.contour(X, Y, Z, 20, cmap='RdGy')\nplt.colorbar()\nplt.show()\n\n\n\n\n\n\n\n\n\n# 2D grid is interpreted as an image with imshow\nplt.imshow(Z, extent=[0, 100, 0, 100], origin='lower', cmap='RdGy')\nplt.colorbar()\nplt.show()\n\n\n\n\n\n\n\n\n\n# contour plot with labels\nX = np.linspace(-5, 5, 100)\nY = np.linspace(-5, 5, 100)\nX, Y = np.meshgrid(X, Y)\nZ = np.sin(np.sqrt(X**2 + Y**2))\n\ncontours = plt.contour(X,Y,Z,3, colors='black') # plt.contour([X,Y],Z,[levels])\nplt.clabel(contours, inline=True, fontsize=6)",
+    "crumbs": [
+      "Guides",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Python Modules for Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "guides/VisualizationPythonPackages.html#seaborn",
+    "href": "guides/VisualizationPythonPackages.html#seaborn",
+    "title": "Python Modules for Data Visualization",
+    "section": "Seaborn",
+    "text": "Seaborn\nSearborn is based on Matplotliband is made for statistical graphics. It is comparable with R’s ggplot2 library.\nIt works best with Pandas DataFrames. You can easly create complex plots with only a few lines of code by grouping and aggregating data.\nMore informations can be found under https://seaborn.pydata.org/\n\nimport seaborn as sns\n\n\nExample\n\n# Use the default data set from seaborn\ntips = sns.load_dataset('tips')\n# Create a boxplot\nsns.boxplot(x='day', y='total_bill', data=tips)\n\n\n\n\n\n\n\n\n\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\n\nsns.set_theme(style=\"darkgrid\")\niris = sns.load_dataset(\"iris\")\n\n# Set up the figure\nf, ax = plt.subplots(figsize=(8, 8))\nax.set_aspect(\"equal\")\n\n# Draw a contour plot to represent each bivariate density\nsns.kdeplot(\n    data=iris.query(\"species != 'versicolor'\"),\n    x=\"sepal_width\",\n    y=\"sepal_length\",\n    hue=\"species\",\n    thresh=.1,\n)",
+    "crumbs": [
+      "Guides",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Python Modules for Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "guides/VisualizationPythonPackages.html#d-plots",
+    "href": "guides/VisualizationPythonPackages.html#d-plots",
+    "title": "Python Modules for Data Visualization",
+    "section": "3D plots",
+    "text": "3D plots\nMatplotlib can also be used to create 3D plots but it is not the best tool for this.\n\nfrom mpl_toolkits.mplot3d import Axes3D\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nfig = plt.figure(figsize=(5, 5))\nax = fig.add_subplot(111, projection='3d')\nx = np.random.standard_normal(100)\ny = np.random.standard_normal(100)\nz = np.random.standard_normal(100)\nax.scatter(x, y, z, c='r', marker='o')\nax.set_xlabel('X Label')\nax.set_ylabel('Y Label')\nax.set_zlabel('Z Label')\nplt.tight_layout() # adjust the plot to the figure\nplt.show()\n\n\n\n\n\n\n\n\nBetter tools for 3D plots are Mayavi and Plotly.",
+    "crumbs": [
+      "Guides",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Python Modules for Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "guides/VisualizationPythonPackages.html#other-plotting-libraries",
+    "href": "guides/VisualizationPythonPackages.html#other-plotting-libraries",
+    "title": "Python Modules for Data Visualization",
+    "section": "Other plotting libraries",
+    "text": "Other plotting libraries\n\nPlotly\nMayavi\nBokeh\nAltair\nggplot\npygal\npandas",
+    "crumbs": [
+      "Guides",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Python Modules for Data Visualization</span>"
+    ]
+  }
+]

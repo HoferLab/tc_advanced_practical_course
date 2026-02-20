@@ -1,0 +1,34 @@
+---
+title: "Checklist A"
+format:
+  html:
+    code-fold: false
+---
+The protocol in this section should be designed as an A0-Poster (similar to those Ph.D. students typically prepare for their presentations in the Atrium of the CCB building). All data generated along with a discussion of results fit easily on a single page. Please include your name and matriculation number, and provide the protocol as pdf-file including your surname in the name of the file.
+
+The report for exercise A.1 should include:
+
+- [ ] A screenshot of the equilibrium geometry (white background!).
+- [ ] The calculation of the force constant $k$ and the reduced mass $\mu$.
+- [ ] Calculation of the frequency and wave number showing **ALL(!)** required conversion factors.
+- [ ] A figure showing the QM energy as a function of distance and the Numerov wave functions plus the energy graph showing the harmonic approximation (all in the same figure).
+- [ ] A table comparing the wavenumbers obtained via the Numerov procedure with the results obtained from the harmonic approximation for $n$ = 01 - 04.
+
+
+:::{.callout-note }
+In this part, the transition dipole moments and oscillator strengths are **NOT(!)** required.
+:::
+
+
+The report for exercise A.2 should include:
+
+- [ ] A screenshot of the equilibrium geometries (white background!).
+- [ ] Two figures comparing the potential energy and the first five wave functions including also the potential energy of the harmonic approximation for both the hydrated and deuterated species.
+- [ ] A graph showing the components of the dipole moment as a function of the distance.
+- [ ] Results of the orthonormality check between the states $i, j = {0,1,2}$ in form of a table.
+- [ ] A table comparing the frequencies and oscillator strengths of the fundamental and first overtone modes obtained via the Numerov procedure and the harmonic approximation.
+- [ ] For all points a short description/interpretation should be included as text.
+
+:::{.callout-note }
+In this part, the transition dipole moments and oscillator strengths **ARE(!)** required for the analysis.
+:::

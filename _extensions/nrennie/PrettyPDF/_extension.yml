@@ -1,0 +1,25 @@
+title: PrettyPDF
+author: Nicola Rennie
+version: 0.0.5
+contributes:
+  project:
+    project:
+      type: book
+  formats: 
+    pdf:
+      documentclass: article
+      top-level-division: section
+      number-sections: false
+      include-in-header: 
+       - "PrettyPDF.tex"
+      include-before-body:
+       - "pagestyle.tex"
+      toc: true
+      toc-depth: 3
+      link-citations: true
+      code-block-bg: light
+      linkcolor: highlight
+      urlcolor: highlight
+      pdf-engine: xelatex
+      fig-width: 10
+      fig-height: 10

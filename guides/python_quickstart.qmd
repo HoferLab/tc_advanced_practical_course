@@ -1,0 +1,101 @@
+---
+title: "Python Quickstart Guide"
+format:
+  html:
+    code-fold: false
+jupyter: python3
+---
+
+
+
+How to learn programming
+========================
+
+- A good free option to learn python is [`python` for Everybody](https://www.py4e.com/)
+- [Excersim](https://exercism.org/) offers programming challenges (various languages) 
+Udemy courses have a good reputation as well.
+
+
+
+
+Python Tutorial
+================
+
+Welcome to the `python` tutorial! In this tutorial, we will cover the basics of the `python` programming language, including variables, data types, loops, and functions.
+
+Variables
+---------
+
+In `python`, a variable is a container that holds a value. To create a variable, you simply assign a value to it using the assignment operator (=). For example:
+
+```python
+x = 5
+```
+
+This creates a variable called `x` and assigns it the value `5`. You can then use the variable `x` in your code to refer to the value `5`.
+
+Data Types
+----------
+
+`python` has several built-in data types, including:
+
+* Integers: whole numbers, like `5`
+* Floats: decimal numbers, like `3.14`
+* Strings: sequences of characters, like `"hello"`
+* Booleans: values that can be either `True` or `False`
+
+You can use the `type()` function to check the data type of a variable. For example:
+
+```python
+x = 5
+print(type(x)) # Output: <class 'int'>
+```
+
+Loops
+-----
+
+Loops are used to repeat a block of code multiple times. In `python`, there are two types of loops: `for` loops and `while` loops.
+
+`For` loops are used to iterate over a sequence of values, such as a list or a string. For example:
+
+```python
+fruits = ["apple", "banana", "cherry"]
+for fruit in fruits:
+  print(fruit)
+```
+
+This will output each fruit in the list, one at a time.
+
+`While` loops are used to repeat a block of code while a certain condition is true. For example:
+
+```python
+x = 0
+while x < 5:
+  print(x)
+  x += 1
+```
+
+This will output the numbers `0` through `4`, one at a time.
+
+Functions
+---------
+
+Functions are reusable blocks of code that perform a specific task. To define a function in `python`, you use the `def` keyword followed by the name of the function and a colon. For example:
+
+```python
+def greet(name):
+  print("Hello, " + name + "!")
+```
+
+This defines a function called `greet` that takes a single argument called `name`. You can then call the function using the name of the function followed by parentheses containing any arguments. For example:
+
+```python
+greet("Alice") # Output: Hello, Alice!
+```
+
+This will call the `greet` function with the argument `"Alice"`, which will print the message "Hello, Alice!".
+
+Conclusion
+----------
+
+That's it for the `python` tutorial! We've covered the basics of variables, data t

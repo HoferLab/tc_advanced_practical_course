@@ -1,0 +1,25 @@
+---
+title: "Latex Quickstart Guide"
+format:
+  html:
+    code-fold: show
+execute:
+    echo: true
+    eval: false
+---
+
+How to: LaTeX
+=============
+
+- [A Short Introduction to LATEX](http://www.math.uco.edu/pages/rwilliams/math3183-fall2018/Short_LaTeX_Intro.pdf)
+- [The Not So Short Introduction to LATEX 2$_\epsilon$](https://tobi.oetiker.ch/lshort/lshort.pdf)
+- [Overleaf Documentation](https://de.overleaf.com/learn)
+ A list of LaTeX editors:\
+
+-   TeXStudio
+
+-   Kile
+
+-   Any texteditor with a LaTeX plugin (*e.g.* VScode, (neo)vim, Kile, ...)
+
+-   [Overleaf](https://de.overleaf.com/) (online tool) - it is not recommended if you want to compile a very large project like a thesis because it is getting very slow.

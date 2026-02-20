@@ -1,0 +1,311 @@
+---
+title: "HowTo A"
+format:
+  html:
+    code-fold: false
+engine: jupyter
+execute: 
+  echo: false
+---
+# Exercise A – Vibrational spectroscopy using nuclear wave functions {.unnumbered}
+
+The required scripts and programs for this exercise are provided in the folder:
+
+```bash
+cd /media/TC_Lehre/03_PR_Fortgeschrittene_Uebungen_zu_TC_und_Comp_Chemie/vibration/
+```
+
+:::{.callout-note}
+
+This HowTo assumes you remember how to
+
+i) create new directories and
+
+ii) copy/move/rename files.
+
+:::
+
+
+If you are unsure please look at this [Linux quickstart guide](../guides/linux_quickstart_guide.qmd).
+
+## Part A.1) Vibrational spectroscopy of a diatomic molecule at the example of H2 {.unnumbered}
+
+### Tasks {.unnumbered}
+
+- Execute an energy minimisation, a frequency calculation and a potential energy scan using `gaussian`
+- Extract the potential energy data from the output file
+- Execute a Numerov calculation
+ 
+### Results {.unnumbered}
+
+- Numeric evaluation of the force constant from the potential plot
+- Calculation of the harmonic vibrational wave numbers from the force constant (compare this value to the gaussian result for verification – deviation typically about 1-2 $\mathrm{cm^{-1}}$)
+- Calculation of the anharmonic vibrational wave numbers from the Numerov eigenvalues 
+- 1 plot $V_{\mathrm{QM}}$ vs bond length including the vibrational wave function from the Numerov output and the harmonic approximation to the potential energy
+- Table comparing the harmonic and anharmonic wave numbers for the states 01 to 04
+- A screenshot of the equilibrium geometry (use a white background color!)
+
+### HowTo Part A.1) {.unnumbered}
+
+**1)** Draw the structure using `gaussview` (command `gv`) and save the file, *e.g.* as `h2_opt.com`. 
+
+
+```bash
+gv
+```
+
+:::{.callout-note icon=false title="GaussView"}
+draw stuff \
+File > Save \
+Be sure to **NOT** save cartesian coordinates, so “Write Cartesian” must be unticked!
+:::
+
+**2)** Open the File in your favourite editor (`code`, `nedit`, `gedit`, `vi`, …) and change the command line (`#`) to
+
+:::{.callout-note icon=false title="h2_opt.com"}
+```bash
+# B3LYP/6-311++G(3df,3pd) OPT=TIGHT SCF=VERYTIGHT INT=ULTRAFINE
+```
+
+:::
+
+:::{.callout-important}
+It is important to include **one (and only one) blank line** after the command line (`#`-line), the title-line as well as the atom list and at least one blank-line after the last input for all `gaussian` input file!
+:::
+
+
+**3)** Execute the geometry optimisation:
+				 
+```bash
+g16 h2_opt.com
+```
+
+**4)** Open the log-file (`code`,`nedit`, `gedit`, `vi`, …) and get the equilibrium bond distance,*e.g.*:
+
+```bash
+nedit h2_opt.log
+```
+
+:::{.callout-note icon=false title="h2_opt.log"}
+[...]  \
+[...]  \
+Final structure in terms of initial Z-matrix: \
+H  \
+H,1,B1  \
+Variables:  \
+B1=<span style="color:red"> 0.74273528</span> \
+[...]   \
+[...]  \
+:::
+
+**5)** Copy the in-file and change the command line to that of a frequency calculation, *e.g.*:
+
+```bash
+cp h2_opt.com h2_freq.com
+```
+:::{.callout-note icon=false title=h2_freq.com}
+```bash
+# B3LYP/6-311++G(3df,3pd) FREQ SCF=VERYTIGHT INT=ULTRAFINE
+```
+:::
+
+Also set the bond length to the minimum distance, *e.g.*
+
+:::{.callout-note icon=false title="h2_freq.com"}
+[...] \
+0  1   \
+H   \
+H     1     B1   \
+ \
+B1   <span style="color:red"> 0.74273528 </span>  \
+[...]
+:::
+
+**6)** Execute the frequency calculation and get the harmonic frequency from the input-file
+
+```bash
+g16 h2_freq.com
+```
+
+```bash
+nedit h2_freq.log
+```
+
+:::{.callout-note icon=false title="h2_freq.log"}
+[...]\
+[...]\
+Harmonic frequencies (cm\*\*\-1), IR intensities (KM/Mole), Raman scattering\
+activities (A**4/AMU), depolarization ratios for plane and unpolarized\
+incident light, reduced masses (AMU), force constants (mDyne/A),\
+and normal coordinates:\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SGG\
+Frequencies \-\- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:red">   __4410.4726__  </span>\
+Red. masses \-\- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:red">   ~~1.0078~~  </span>\
+Frc consts \-\- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; <span style="color:red"> ~~11.550~~  </span>\
+IR Inten \-\- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <span style="color:red"> 0.0000 </span> \
+[...]\
+[...]\
+:::
+
+:::{.callout-important title='Be careful'}
+For diatomics the force constant and the reduced mass are not given correctly!
+(according to the developers that’s a feature, not an error ...)
+This is the reason why in this exercise, the force constant has to be
+determined from the potential energy scan!
+Do __NOT__ use the force constant from the output file.
+:::
+
+**7)** Copy the in-file and change the command line for the potential energy scan, *e.g.*:
+
+```bash
+cp h2_freq.com h2_scan.com
+```
+
+:::{.callout-note icon=false title="h2_scan.com"}
+```bash
+# B3LYP/6-311++G(3df,3pd) SCAN SCF=VERYTIGHT INT=ULTRAFINE 
+# GEOM=NOCROWD NOSYMM POP=ALWAYS
+```
+:::
+
+**8)** Change the starting value of the bond length by subtracting $\mathrm{0.5\,Å}$, and set up the scan points *e.g.*:
+
+:::{.callout-note icon=false}
+0.7427352 – 0.5 = 0.2427352
+:::
+
+:::{.callout-note icon=false title="h2_scan.com"}
+[...] \
+0  1 \
+H \
+H     1     B1  \
+\
+B1   <span style="color:red"> 0.24273528</span> <span style="color:red"> 150</span> <span style="color:red"> 0.01</span> \
+[...]
+:::
+
+This will perform a potential energy scan from $\mathrm{0.2427352\,Å}$, increasing the H-H distance $150$ times by  $\mathrm{0.01\,Å}$, thus the scan will end at a H-H distance of  $\mathrm{1.7427352\,Å}$. Don`t forget to include a final blank line in the gaussian input.
+
+**9)** Execute the potential energy scan and grab a coffee:
+
+```bash
+g16 h2_scan.com
+```
+
+**10)** Copy the extraction-script and the Numerov analysis code to your working directory:
+
+```bash
+cp /media/TC_Lehre/03_PR_Fortgeschrittene_Uebungen_zu_TC_und_Comp_Chemie/vibration/extract_data.sh .
+cp /media/TC_Lehre/03_PR_Fortgeschrittene_Uebungen_zu_TC_und_Comp_Chemie/vibration/numerov .
+```
+
+**11)** Extract the potential energy and dipole moment information from the log-file and use `>` to redirect the output:
+
+```bash
+./extract_data.sh h2_scan.log > scan_data.dat
+```
+:::{.callout-warning}
+Careful – if told, the redirect `>` will overwrite existing files and there is no undo if this happens!
+::::
+
+The file `scan_data.dat` contains five data columns: 	
+
+:::{.callout-note icon=false title="scan_data.dat"}
+- column $1$	:  Distance in Å	
+- column $2$	:  Energy in Hartree
+- columns $3$ to $4$	:  $x$, $y$ and $z$-component of the dipole moment
+::::
+
+This file can be directly imported into graphic-programs, *e.g.* `office`,`xmgrace`, `gnuplot`, ...
+
+The dipole moment data is only required in part [A.2](exercise_a.qmd) of this practical course.
+
+
+**12)** Calculate the reduced mass of the vibration and execute the Numerov analysis:
+
+- In this course always the reduced mass formula for two particles should be used. 
+
+:::{.callout-warning}
+Be sure to use the mass of the correct isotopes, *e.g.* $\mathrm{^1H_2}$, $\mathrm{^2D_2}$, $\mathrm{^{12}C}$, $\mathrm{^{18}O}$ and do **NOT** use the averaged mass given in the periodic table.
+:::
+
+- The Numerov-program requires two inputs, being the data-file from step 11 above and the reduced mass, e.g. in case of $\mathrm{^1H_2}$:
+
+```bash
+./numerov scan_data.dat 0.50391251605 > numerov.dat
+```
+
+Again, be careful while redirecting `>` to not overwrite any files.
+
+The file `numerov.dat` contains a headline (`#`) and twelve data columns. Columns $1$ to $7$ are to generate the required figure, columns $8$ to $12$ are for data analysis:
+
+:::{.callout-note icon=false title="numerov.dat"}
+- \# headline – energy eigenvalues E of the five lowest wave functions $\Psi_0$ to $\Psi_4$ in  $\mathrm{kcal/mol}$ 
+- column $1$	  :  Distance in Å	
+- column $2$	  :  Energy in $\mathrm{kcal/mol}$ and shifted to zero at the minimum
+- columns $3$ to $7$  :  wave functions $\Psi_0$ to $\Psi_4$ shifted by the respective eigenvalue
+- columns $8$ to $12$:  wave functions $\Psi_0$ to $\Psi_4$ without shift
+:::
+
+This file can be directly imported into graphic programs (e.g. office, xmgrace, gnuplot, ...) as well as data software (`office`, `matlab`, `octave`, `R`, `bash`, `origin`, …) to perform the analyses required in [A.2.2](exercise_a.qmd).
+
+:::{.callout-note}
+Which software you choose for the analysis part (or if you want to write your own code) is entirely up to you. There are different ways to obtain the requested data, *e.g.* the numerical integration can be carried out<br>
+i) in an `excel`-sheet,<br>
+ii) using `phyton`/`R` datascience routines,  <br>
+iii) on the command line using a (very simple) `awk`-script or <br>
+iv) even graphically in the program `xmgrace`. <br>
+You can choose whichever method works best for you.
+:::
+
+## Part A.2) Stretch vibration in a polyatomic molecule {.unnumbered}
+
+### Tasks {.unnumbered}
+
+i) Execute an energy minimisation, a frequency calculation and a potential energy scan using gaussian
+ii) Extract the potential energy data from the output file
+iii) Execute a Numerov calculation
+iv) Analyse both a hydrated ($\mathrm{^1H}$) and deuterated system ($\mathrm{^1D}$) 
+ 
+### Results {.unnumbered}
+
+- Numeric evaluation of the force constant from the potential plot
+- Calculation of the harmonic vibrational wave numbers from the force constant for $\mathrm{^1H}$ and $\mathrm{^2D}$ (compare these values to the gaussian results for verification – deviation typically about $1-2$ $\mathrm{cm^{-1}}$)
+- Calculation of the anharmonic vibrational wave numbers from the Numerov eigenvalues
+- 2 plots $V_{\mathrm{QM}}$ vs bond length including the vibrational wave function from the Numerov output and the harmonic approximation to the potential energy
+- 1 plot showing the components of the dipole moment and the total dipole moment as a function of the distance.
+- Results of the orthonormality check between the states $i,j = 0,1,2$ should be provided in a table.
+- A table comparing the frequencies and oscillator strengths of the fundamental and $1^{\mathrm{st}}$ overtone modes obtained via the Numerov procedure and the harmonic approximation should be included.
+- A screenshot of the equilibrium geometry (use a white background color!)
+
+Follow steps 1) to 12) of part 2.1 for the polyatomic system. Redo the calculations for the deuterated system, but be smart - not all calculations of the steps i) to iii) above have to be repeated for the deuterated system. Just consider which calculation steps are mass-independent and which one is not.
+
+In order to change the isotope from $\mathrm{^1H}$ and $\mathrm{^2D}$ in the gaussian calculation, the iso-keyword should be applied, *e.g.* in case of a frequency calculation for $\mathrm{D_2}$:
+
+
+
+:::{.callout-note icon=false title="d2_scan.dat"}
+\# B3LYP/6-311++G(3df,3pd) FREQ SCF=VERYTIGHT INT=ULTRAFINE \
+\
+D2 Frequency calculation (at minimum geometry) \
+\
+0  1  \
+H <span style="color:red"> (iso=2)</span>  \
+H <span style="color:red"> (iso=2)</span> &nbsp;&nbsp;  1  &nbsp;&nbsp;   B1  \
+ \
+ B1 &nbsp;&nbsp;      0.74273528  \
+:::
+
+:::{.callout-important}
+# Common errors/pitfalls in this exercise
+
+- Be **VERY** careful which bond to scan – in many cases the correct bond is NOT `B1` (a very common error!). Which bond to scan depends on the way the molecule is drawn and the resulting order of atoms.
+- If you start to draw the molecule starting with the functional group of interest (*e.g.* start with the OH- group in case of methanol), the y-component of the dipole moment will be zero. This means less work in the analysis of the transition dipole moment and the oscillator strengths.
+- Be aware of the units of the different properties and take your time to perform a dimensional analysis. For instance, typical units of the force constants k and the reduced mass $\mu$ are $\mathrm{kcal \cdot mol^{-1}\cdot Å^{-2}}$ and $\mathrm{g/mol}$, respectively. It is not possible to simple use the associated values to calculate the frequency without first making the units compatible:
+$$
+\nu = \frac{1}{2\pi}\sqrt{\frac{k}{\mu}}
+$$
+
+Here, the units $\mathrm{kcal}$, $\mathrm{Å^{-2}}$ and $\mathrm{g}$ need to be converted to obtain the unit of $\mathrm{s^{-1}}$ for the frequency.
+:::

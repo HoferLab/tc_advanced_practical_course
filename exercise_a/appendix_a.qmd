@@ -1,0 +1,58 @@
+---
+title: "Appendix A"
+format:
+  html:
+    code-fold: false
+---
+
+## Gaussian geometry optimization {.unnumbered}
+Example input for a geometry optimisation. It is important to include **one (and only one) blank line**  after the command line (#-line), the title-line as well as the atom list and at least one blank-line after the last input.
+
+![](../img/gv_geoopt.png){width=80%}
+
+
+## Gaussian frequency calculation {.unnumbered}
+Example input for a frequency calculation. It is important to include **one (and only one) blank line**  after the command line (#-line), the title-line as well as the atom list and at least one blank-line after the last input.
+
+:::{.callout-note}
+# Reminder:
+Frequency computations work **only(!)** at minimum geometries! \
+Method and basis set have to be same for optimisation and frequency calculation!
+:::
+
+![](../img/gv_freq.png){width=80%}
+
+
+## Gaussian potential energy scan {.unnumbered}
+
+Example input for a potential energy scan. It is important to include **one (and only one) blank line**  after the command line (#-line), the title-line as well as the atom list and at least one blank-line after the last input.
+
+A suitable starting value for the scan has to be provided, based on the bond distance obtained from the minimum geometry. For example in the case of HCl:
+
+:::{.callout-note icon=false  }
+1.29056384Å – 0.5Å = 0.79056384Å
+:::
+
+
+
+:::{.callout-note}
+# Reminder:
+In this exercise the scan has to be at the minimum geometry!
+Method and basis set have to be same for optimisation and frequency calculation!
+**Be sure to scan the correct bond (not always B1!).**
+:::
+
+![](../img/gv_potential_energy_scan.png){width=80%}
+
+
+## Gaussian frequency calculation for DCl {.unnumbered}
+
+Example input for a frequency calculation for DCl. It is important to include **one (and only one) blank line**  after the command line (#-line), the title-line as well as the atom list and at least one blank-line after the last input.
+
+:::{.callout-note}
+# Reminder:
+ Frequency computations work **only(!)** at minimum geometries!
+Method and basis set have to be same for optimisation and frequency calculation!
+:::
+
+![](../img/gv_dcl.png){width=80%}
