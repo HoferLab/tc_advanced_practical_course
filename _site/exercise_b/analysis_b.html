@@ -379,7 +379,7 @@ div.csl-indent {
 <section id="log-file-check" class="level2">
 <h2 class="anchored" data-anchor-id="log-file-check">Log-file check</h2>
 <p>Open the <code>*.log</code> file with any editor.</p>
-<p>Check if the log file end with this:</p>
+<p>Check if the log file ends with this:</p>
 <ul class="task-list">
 <li><input type="checkbox" disabled="">“PQ ended normally”</li>
 </ul>
@@ -422,7 +422,7 @@ An equilibrium state:
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>can be defined as a state in which macroscopic properties <span class="math inline">\(A\)</span> (<em>e.g</em> temperture <span class="math inline">\(T\)</span>, pressure <span class="math inline">\(P\)</span>, energies <span class="math inline">\(E\)</span>, volume <span class="math inline">\(V\)</span>,…) do <strong>NOT</strong> undergo major changes over time.</p>
+<p>can be defined as a state in which macroscopic properties <span class="math inline">\(A\)</span> (<em>e.g</em> temperture <span class="math inline">\(T\)</span>, pressure <span class="math inline">\(P\)</span>, energies <span class="math inline">\(E\)</span>, volume <span class="math inline">\(V\)</span>, …) do <strong>NOT</strong> undergo major changes over time.</p>
 </div>
 </div>
 <p>Once these properties fluctuate around a constant pattern without any long-term trends, it can be assumed that the system reached an equilibrium state.</p>
@@ -441,7 +441,7 @@ A_{\nu} = \frac{A_{\sigma }}{\sqrt{n}}
 </section>
 <section id="running-average" class="level2">
 <h2 class="anchored" data-anchor-id="running-average">Running Average</h2>
-<p>Further the running average <span class="math inline">\(\left &lt; A \right &gt;_{\tau}\)</span> at time <span class="math inline">\(\tau\)</span> with a window size of <span class="math inline">\(\omega\)</span> and a gap size <span class="math inline">\(g\)</span></p>
+<p>Further, the running average <span class="math inline">\(\left &lt; A \right &gt;_{\tau}\)</span> at time <span class="math inline">\(\tau\)</span> with a window size of <span class="math inline">\(\omega\)</span> and a gap size <span class="math inline">\(g\)</span></p>
 <p><span class="math display">\[
 \left &lt; A \right &gt;_{\tau} = \frac{1}{\omega}\sum_{i=\tau-(\omega-1)g}^{\tau} a(t_{i})
 \]</span> <em>e.g.</em> <span class="math inline">\(\tau=5\)</span>, <span class="math inline">\(\omega=3\)</span>, <span class="math inline">\(g=2\)</span> <span class="math display">\[
@@ -457,11 +457,12 @@ A_{\nu} = \frac{A_{\sigma }}{\sqrt{n}}
 </section>
 <section id="linear-regression-fit" class="level2">
 <h2 class="anchored" data-anchor-id="linear-regression-fit">Linear Regression Fit</h2>
-<p>Further linear regression fit helps to estimate the trend of your simulation.</p>
+<p>A linear regression fit can help to estimate the trend of your simulation.</p>
 <p>For more further detail: <a href="../guides/statistics.html">statistics</a></p>
 </section>
 <section id="plot-of-temperature-over-simulation-time" class="level2">
 <h2 class="anchored" data-anchor-id="plot-of-temperature-over-simulation-time">Plot of temperature over simulation time</h2>
+<p>The temperature during the simulation can be found in the associated energy file <code>*.en</code>, which can be readily used for plotting. The <code>*.info</code> file contains information about the individual columns in the <code>*.en</code> file. An example code to plot the temperature vs simulation time is shown below.</p>
 <div class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
@@ -540,19 +541,19 @@ Shape of data:  (50000, 12)</code></pre>
 </section>
 <section id="linear-volumetric-thermal-expansion-coefficient" class="level1 unnumbered">
 <h1 class="unnumbered">Linear / Volumetric Thermal Expansion Coefficient</h1>
-<p>The thermal expansion coefficient is a quantity that describes the extent to which a solid substance undergoes a change in response to variations in temperature.</p>
-<p>Therefore the system is computed in <span class="math inline">\(NPT\)</span> ensemble at different temperatures <span class="math inline">\(T_i\)</span> at <span class="math inline">\(1\,\mathrm{bar}\)</span>.</p>
-<p>For our case we consider a temperature range from <span class="math inline">\((248 - 348)\,\mathrm{K}\)</span> in <span class="math inline">\(25\,\mathrm{K}\)</span> steps.</p>
+<p>The thermal expansion coefficient is a quantity that describes the extent to which a solid substance undergoes a change in size in response to variations in temperature.</p>
+<p>Therefore the system is computed in the <span class="math inline">\(NPT\)</span> ensemble at different temperatures <span class="math inline">\(T_i\)</span> at <span class="math inline">\(1\,\mathrm{bar}\)</span>.</p>
+<p>In our case we consider a temperature range from <span class="math inline">\(248\,\text{to}\,348\,\mathrm{K}\)</span> in <span class="math inline">\(25\,\mathrm{K}\)</span> steps.</p>
 <ul>
 <li><strong>Linear thermal expansion coefficient</strong></li>
 </ul>
-<p>Linear thermal expansion coefficient at <span class="math inline">\(\mathrm{298}\,\mathrm{K}\)</span> is calculated by the temperature gradient of the respective average lattice parameter <span class="math inline">\(\left &lt; a \right &gt;\)</span>, <span class="math inline">\(\left &lt; b \right &gt;\)</span> or <span class="math inline">\(\left &lt; c\right &gt;\)</span> at constant pressure <span class="math inline">\(P\)</span> (<span class="math inline">\(NPT\)</span> ensemble). <span class="math display">\[
+<p>The linear thermal expansion coefficient at <span class="math inline">\(\mathrm{298}\,\mathrm{K}\)</span> is calculated from the temperature gradient of the respective average lattice parameter <span class="math inline">\(\left &lt; a \right &gt;\)</span>, <span class="math inline">\(\left &lt; b \right &gt;\)</span> or <span class="math inline">\(\left &lt; c\right &gt;\)</span> at constant pressure <span class="math inline">\(P\)</span> (<span class="math inline">\(NPT\)</span> ensemble). <span class="math display">\[
 \alpha _{x}^{T_{\mathrm{298\,K}}} = \frac{1}{x} \left ( \frac{\partial x}{\partial T} \right ) _{P}, x={a,b,c}
-\]</span> The slope can be estimated numerically in different ways. A simple way is to employ a <a href="https://en.wikipedia.org/wiki/Finite_difference_method">finite difference method</a>. There are <a href="https://en.wikipedia.org/wiki/Finite_difference">three</a> fundamental types of it the <em>forward, backward</em> and <em>central</em> finite difference.</p>
-<p>In our case we use the central finite difference method with <strong><a href="https://en.wikipedia.org/wiki/Five-point_stencil">five-point stencil</a></strong>. In general it is formulated in 1D as: <span class="math display">\[
+\]</span> The slope can be estimated numerically in different ways. A simple way is to employ a <a href="https://en.wikipedia.org/wiki/Finite_difference_method">finite difference method</a>. There are <a href="https://en.wikipedia.org/wiki/Finite_difference">three</a> fundamental types of finite differentiation: <em>forward</em>, <em>backward</em> and <em>central</em> finite differentiation.</p>
+<p>We will use the central finite difference method with a <strong><a href="https://en.wikipedia.org/wiki/Five-point_stencil">five-point stencil</a></strong>. In general it is formulated in 1D as: <span class="math display">\[
 f'(x) = \frac{-f(x+2h)+8f(x+h)-8f(x-h)+f(x-2h)}{12 h} + \frac{h^4}{30}f^{(5)(c)}, c \in [x-2h,x+2h]
 \]</span> where <span class="math inline">\(h\)</span> is the change of <span class="math inline">\(x\)</span>.</p>
-<p>If you use more than five points <a href="https://en.wikipedia.org/wiki/Finite_difference_coefficient">higher</a> stencil order can be used.</p>
+<p>If you use more than five points, a <a href="https://en.wikipedia.org/wiki/Finite_difference_coefficient">higher</a> order stencil can be used.</p>
 <p>In our case the differentiation can be written as: <span class="math display">\[
 \frac{\partial x}{\partial T} \approx \frac{ \left &lt; x^{T_{\mathrm{248\,K}}}\right &gt;-8 \left &lt; x^{T_{\mathrm{273\,K}}}\right &gt; + 8 \left &lt; x^{T_{\mathrm{323\,K}}}\right &gt; - \left &lt; x^{T_{\mathrm{348\,K}}} \right &gt; }{12\Delta T}
 \]</span></p>
@@ -564,7 +565,7 @@ f'(x) = \frac{-f(x+2h)+8f(x+h)-8f(x-h)+f(x-2h)}{12 h} + \frac{h^4}{30}f^{(5)(c)}
 \]</span></p>
 <p>The volume of a orthorhombic system can be calculated as: <span class="math display">\[
 V = a\cdot b \cdot c
-\]</span> In general of a non-orthorhombic <a href="https://en.wikipedia.org/wiki/Crystal_system">crystal sytems</a> the volume is calculatd by: <span class="math display">\[
+\]</span> In general, the volume of a non-orthorhombic <a href="https://en.wikipedia.org/wiki/Crystal_system">crystal sytems</a> is calculated as: <span class="math display">\[
 V = a b c \sqrt{1-\mathrm{cos}^2(\alpha) -\mathrm{cos}^2(\beta) - \mathrm{cos}^2(\gamma)+ 2(\mathrm{cos}(\alpha) \mathrm{cos}(\beta) \mathrm{cos}(\gamma))}
 \]</span></p>
 <section id="plot-lattice-parameter-vs.-temperature" class="level2">
@@ -608,11 +609,13 @@ V = a b c \sqrt{1-\mathrm{cos}^2(\alpha) -\mathrm{cos}^2(\beta) - \mathrm{cos}^2
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Experimental Measurement
+Experimental Measurement Data is available from:
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>X-ray diffraction (XRD) powder X-ray diffraction (PXRD) neutron powder diffraction (NPD)</p>
+<p>X-ray Diffraction (XRD)</p>
+<p>Powder X-ray Diffraction (PXRD)</p>
+<p>Neutron Powder Diffraction (NPD)</p>
 </div>
 </div>
 </section>
@@ -622,7 +625,7 @@ Experimental Measurement
 <p>The interaction energy is a measurement to estimate the energy share of interaction between the guest and host system. It can be calculated by substracting the single energy shares of the individual systems (<span class="math inline">\(U_{\mathrm{guest}}\)</span> and <span class="math inline">\(U_{\mathrm{host}}\)</span>) from the energy of the total system (<span class="math inline">\(U_{\mathrm{guest@host}}\)</span>): <span class="math display">\[
 U_{\mathrm{int}} = \left&lt; U_{\mathrm{guest@host}} \right &gt; - \left&lt; U_{\mathrm{host}} \right &gt; -  \left&lt; U_{\mathrm{guest}} \right &gt;.
 \]</span></p>
-<p>In doing so you take the average total energy <span class="math inline">\(U=E_{\mathrm{kin}}+U_{\mathrm{pot}}\)</span> of the respective simulated systems (guest@host, host, guest) at a long enough equilibrated trajectories.</p>
+<p>For this, you take the average total energy <span class="math inline">\(U=E_{\mathrm{kin}}+U_{\mathrm{pot}}\)</span> of the respective simulated system (guest@host, host, guest) from a long enough equilibrated trajectory.</p>
 <!-- ::: {.callout-warning}
 ## Ensemble
 *Pay attention:* 
@@ -636,9 +639,9 @@ A single gas molecule in a periodic box has to be calculated $NVT$ because $NPT$
 <p>The radial distribution function (RDF) is a simple measurement to get structural information of the system.</p>
 <p><img align="right" src="../img/rdf_sketch.png" width="313"></p>
 <!-- !RDF-plot -->
-<p>It describes the probability <span class="math inline">\(P_{ab}(r)\)</span> to find a target particle type <span class="math inline">\(b\)</span> at a distance <span class="math inline">\(r\)</span> away from a reference particle type <span class="math inline">\(a\)</span> <em>e.g.</em> the probability to find <span class="math inline">\(\mathrm{H}_2\)</span>from <span class="math inline">\(\mathrm{Zn}^{2+}\)</span> clusters in a distance <span class="math inline">\(r\)</span>: <span class="math display">\[
+<p>It describes the probability <span class="math inline">\(P_{ab}(r)\)</span> to find a target particle type <span class="math inline">\(b\)</span> at distance <span class="math inline">\(r\)</span> away from a reference particle type <span class="math inline">\(a\)</span>; <em>e.g.</em> the probability to find <span class="math inline">\(\mathrm{C}\mathrm{O}_2\)</span> from <span class="math inline">\(\mathrm{Zn}^{2+}\)</span> clusters at distance <span class="math inline">\(r\)</span>: <span class="math display">\[
 P_{ab}(r) = \int_{0}^{r'} 4\pi r'^2 g_{ab}(r') dr'
-\]</span> where <span class="math inline">\(g_{ab}(r)\)</span> is the RDF. The RDF formulats the average local density <span class="math inline">\(\left &lt;\rho_{ab}(r)\right &gt;\)</span> normalized by <span class="math inline">\(\rho=(N_a N_b)\)</span> <span class="math display">\[
+\]</span> where <span class="math inline">\(g_{ab}(r)\)</span> is the RDF. The RDF formulates the average local density <span class="math inline">\(\left &lt;\rho_{ab}(r)\right &gt;\)</span> normalized by <span class="math inline">\(\rho=(N_a N_b)\)</span> <span class="math display">\[
 g(r) = \frac{\left &lt;\rho_{ab}(r)\right &gt;}{\rho}.
 \]</span></p>
 <p>The two-particle density correlation function is defined as:</p>
@@ -654,7 +657,7 @@ N_{ab}(r) = \rho G_{ab}(r)
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Dirc-Delta Function
+Dirac-Delta Function
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -672,9 +675,9 @@ Dirc-Delta Function
 <section id="self-diffusion-coefficient" class="level1 unnumbered">
 <h1 class="unnumbered">Self-Diffusion Coefficient</h1>
 <p>In order to describe the dynamic of guests in host systems, it is necessary to calculate transport properties. A transport property would be for example the <em>diffusion</em>, <em>viscosity</em>, <em>electrical or thermal conductivity</em>.</p>
-<p>In general transport properties can be described as a property coefficient <span class="math inline">\(\gamma\)</span> which depends on microscopic variable <span class="math inline">\(A\)</span> (<em>e.g.</em> positions <span class="math inline">\(\Delta \vec{r}\)</span> or the velocities <span class="math inline">\(\vec{v}\)</span>) that is written as an infinite time integration of a non-normalized time correlation function <span class="math inline">\(\left &lt; \dot{A}(t)\dot{A}(t_0) \right &gt;\)</span> : <span class="math display">\[
+<p>In general, transport properties can be described as a property coefficient <span class="math inline">\(\gamma\)</span> which depends on microscopic variable <span class="math inline">\(A\)</span> (<em>e.g.</em> positions <span class="math inline">\(\Delta \vec{r}\)</span> or the velocities <span class="math inline">\(\vec{v}\)</span>) that is written as an infinite time integration of a non-normalized time correlation function <span class="math inline">\(\left &lt; \dot{A}(t)\dot{A}(t_0) \right &gt;\)</span> : <span class="math display">\[
 \gamma = \int_{0}^{\infty} dt \left &lt; \dot{A}(t)\dot{A}(t_0) \right &gt;.
-\]</span> This is also known as <strong>Green-Kubo</strong> relation<span class="citation" data-cites="Kubo1957"><sup><a href="#ref-Kubo1957" role="doc-biblioref">1</a></sup></span> which can also written as equivalent <strong>Einstein</strong> expression</p>
+\]</span> This is also known as <strong>Green-Kubo</strong> relation<span class="citation" data-cites="Kubo1957"><sup><a href="#ref-Kubo1957" role="doc-biblioref">1</a></sup></span> which can also written as the equivalent <strong>Einstein</strong> expression</p>
 <p><span class="math display">\[
 \gamma = \lim_{t\to\infty} \frac{\left &lt; (A(t) - A(t_0))^2 \right &gt;}{2t} = \frac{1}{2} \lim_{t\to\infty} \frac{d}{dt} \left &lt; (A(t) - A(t_0))^2 \right &gt;
 \]</span></p>
@@ -690,7 +693,7 @@ D_{\mathrm{s}} = \frac{1}{2 \cdot d} \lim _{t\to \infty} \frac{d}{dt} MSD(\tau)
 \]</span> where <span class="math inline">\(d=1,2,3\)</span> is the dimensionality.</p>
 <section id="mean-squared-displacement" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="mean-squared-displacement">Mean-Squared Displacement</h3>
-<p>The mean-squared displacement describes the the temporally displacement of the particle from a time origin <span class="math inline">\(t_0\)</span> averaged over the time interval <span class="math inline">\(\tau\)</span> <span class="math display">\[
+<p>The mean-squared displacement describes the temporal displacement of the particle from a time origin <span class="math inline">\(t_0\)</span> averaged over the time interval <span class="math inline">\(\tau\)</span> <span class="math display">\[
 MSD(\tau) = \left &lt; \frac{1}{N} \sum_{i=1}^{N} |\vec{r} _{i}(t) - \vec{r} _{i}(t_0)|^2  \right &gt;_{\tau}
 \]</span> where <span class="math inline">\(N\)</span> is the number of the particle, <span class="math inline">\(\vec{r}_{i}\)</span> is the center-of-mass position vector of the particle <span class="math inline">\(i\)</span>.</p>
 <!-- also can be written as running average with window size $\omega$ and gap size $g$
@@ -699,7 +702,7 @@ MSD(t) =  \frac{1}{\omega} \sum_{j=1}^{\omega} \frac{1}{L - t \cdot g}  \frac{1}
 $$
 
  -->
-<p>Looking at the Figure <a href="#fig-msd">Figure&nbsp;<span>4.3</span></a> (a), we see that the beginning of the MSD is not linear. Only at higher correleation times the normal diffusion (see Figure <a href="#fig-msd">Figure&nbsp;<span>4.3</span></a> (b)) behaviour appear.</p>
+<p>Looking at Figure <a href="#fig-msd">Figure&nbsp;<span>4.3</span></a> (a), we see that the beginning of the MSD is not linear. Only at higher correleation times the expected diffusion (see Figure <a href="#fig-msd">Figure&nbsp;<span>4.3</span></a> (b)) behaviour can be observed.</p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -729,10 +732,10 @@ Answer:
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The self-diffusion coefficient is the slope of the MSD divided by 2 <span class="math inline">\(\cdot d\)</span>.</p>
-<p>But this is only true if correlation time is long enough. We can say that in the linear regime we fulfill this limes due to unchanging slope which represents the difffusion coefficient.</p>
-<p>Therefore it is important to have really linear behaviour in order to apply the Einstein relation.</p>
-<p>You get the slope by fitting a <a href="../guides/statistics.html">linear regression</a> at the last linear section.</p>
+<p>The self-diffusion coefficient is the slope of the MSD divided by 2 <span class="math inline">\(\cdot\;d\)</span>.</p>
+<p>But this is only true if the correlation time is long enough. We can say that in the linear regime we fulfill this limes due to the constant slope, which represents the difffusion coefficient.</p>
+<p>Therefore, in order to apply the Einstein relation, it is important to be in the linar regime of the MSD plot.</p>
+<p>You get the slope by fitting a <a href="../guides/statistics.html">linear regression</a> to the linear part of the dataset.</p>
 </div>
 </div>
 </div>
@@ -831,7 +834,7 @@ D_{\mathrm{s}} = \frac{1}{d} \int _{0}^{\infty} VACF(t)  dt
 \]</span> where <span class="math inline">\(d=1,2,3\)</span> is the dimension.</p>
 <section id="veloctiy-autocorrelation-function" class="level3">
 <h3 class="anchored" data-anchor-id="veloctiy-autocorrelation-function">Veloctiy-Autocorrelation Function</h3>
-<p>The <a href="">Velocity-Autocorrelatin Function</a> <span class="math inline">\(VACF(\tau)\)</span> is averaged over a time interval <span class="math inline">\(\tau\)</span> <span class="math display">\[
+<p>The <a href="">velocity-autocorrelatin function</a> <span class="math inline">\(VACF(\tau)\)</span> is averaged over a time interval <span class="math inline">\(\tau\)</span> <span class="math display">\[
 VACF(\tau) = \left &lt; \frac{1}{N} \sum_{i=1}^{N} |\vec{v} _{i}(t) \vec{v} _{i}(t_0)|^2 \right &gt;_{\tau}
 \]</span> where <span class="math inline">\(\vec{v}_{i}\)</span> is the velocity of the particle <span class="math inline">\(i\)</span> and <span class="math inline">\(t_0\)</span> labels the time origin.</p>
 <div class="cell" data-execution_count="4">
@@ -889,8 +892,8 @@ VACF(\tau) = \left &lt; \frac{1}{N} \sum_{i=1}^{N} |\vec{v} _{i}(t) \vec{v} _{i}
 <h1 class="unnumbered">Activation Energy</h1>
 <p>The diffusion coefficient is directly depending on the activation energy <span class="math inline">\(E_{\mathrm{a}}\)</span> by an exponential decacy <span class="math display">\[
 D_{\mathrm{s}}=D_0 e^{-\frac{E_{\mathrm{a}}}{RT}}
-\]</span> where <span class="math inline">\(D_0\)</span> is factor of the exponential function, <span class="math inline">\(R=8.314\,\mathrm{JK^{-1}mol^{-1}}\)</span> is the gas constant and <span class="math inline">\(T\)</span> is the temperature.</p>
-<p>With this formalism we can apply an <a href="https://en.wikipedia.org/wiki/Arrhenius_equation">Arrhenius equation</a> to <a href="../guides/statistics.html">fit a linear function</a> to get the activation energy <span class="math inline">\(E_{\mathrm{a}}\)</span> <span class="math display">\[
+\]</span> where <span class="math inline">\(D_0\)</span> is factor of the exponential function, <span class="math inline">\(R=8.3145\,\mathrm{JK^{-1}mol^{-1}}\)</span> is the ideal gas constant and <span class="math inline">\(T\)</span> is the temperature.</p>
+<p>With this formalism we can apply an <a href="https://en.wikipedia.org/wiki/Arrhenius_equation">Arrhenius equation</a> to <a href="../guides/statistics.html">fit a linear function</a> to get the activation energy <span class="math inline">\(E_{\mathrm{a}}\)</span>. <span class="math display">\[
 \ln (D_{\mathrm{s}}) = -\frac{E_{\mathrm{a}}}{RT} + \ln{D_0}
 \]</span></p>
 <div class="cell" data-execution_count="5">

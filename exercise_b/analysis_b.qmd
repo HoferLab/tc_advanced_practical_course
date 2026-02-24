@@ -22,7 +22,7 @@ execute:
 ## Log-file check
 Open the `*.log` file with any editor.
 
-Check if the log file end with this:
+Check if the log file ends with this:
 
   - [ ] "PQ ended normally "
 
@@ -70,7 +70,7 @@ Firstly, in order to obtain meaningful physical properties from a simulation, it
 :::{.callout-important}
 ## An equilibrium state:
 
-can be defined as a state in which macroscopic properties $A$ (*e.g* temperture $T$, pressure $P$, energies $E$, volume $V$,...) do **NOT** undergo major changes over time.
+can be defined as a state in which macroscopic properties $A$ (*e.g* temperture $T$, pressure $P$, energies $E$, volume $V$, ...) do **NOT** undergo major changes over time.
 :::
 Once these properties fluctuate around a constant pattern without any long-term trends, it can be assumed that the system reached an equilibrium state.
 
@@ -93,7 +93,7 @@ A_{\nu} = \frac{A_{\sigma }}{\sqrt{n}}
 $$
 
 ## Running Average
-Further the running average $\left < A \right >_{\tau}$ at time $\tau$ with a window size of $\omega$ and a gap size $g$ 
+Further, the running average $\left < A \right >_{\tau}$ at time $\tau$ with a window size of $\omega$ and a gap size $g$ 
 
 $$
 \left < A \right >_{\tau} = \frac{1}{\omega}\sum_{i=\tau-(\omega-1)g}^{\tau} a(t_{i})
@@ -114,13 +114,17 @@ $$
 
 
 ## Linear Regression Fit
-Further linear regression fit helps to estimate the trend of your simulation.
+A linear regression fit can help to estimate the trend of your simulation.
 
 For more further detail: [statistics](../guides/statistics.qmd)
 
 
 
 ## Plot of temperature over simulation time
+
+The temperature during the simulation can be found in the associated energy file `*.en`, which can be readily used for plotting.
+The `*.info` file contains information about the individual columns in the `*.en` file.
+An example code to plot the temperature vs simulation time is shown below.
 
 ```{python}
 #| label: fig-temp
@@ -169,31 +173,31 @@ plt.show()
 
 
 # Linear / Volumetric Thermal Expansion Coefficient {.unnumbered}
-The thermal expansion coefficient is a quantity that describes the extent to which a solid substance undergoes a change in response to variations in temperature.
+The thermal expansion coefficient is a quantity that describes the extent to which a solid substance undergoes a change in size in response to variations in temperature.
 
 
-Therefore the system is computed in $NPT$ ensemble at different temperatures $T_i$ at $1\,\mathrm{bar}$.
+Therefore the system is computed in the $NPT$ ensemble at different temperatures $T_i$ at $1\,\mathrm{bar}$.
 
-For our case we consider a temperature range from $(248 - 348)\,\mathrm{K}$ in $25\,\mathrm{K}$ steps.
+In our case we consider a temperature range from $248\,\text{to}\,348\,\mathrm{K}$ in $25\,\mathrm{K}$ steps.
 
 
 - **Linear thermal expansion coefficient**
 
-Linear thermal expansion coefficient at $\mathrm{298}\,\mathrm{K}$ is calculated by the temperature gradient of the respective average lattice parameter $\left < a \right >$, $\left < b \right >$ or $\left < c\right >$ at constant pressure $P$ ($NPT$ ensemble).
+The linear thermal expansion coefficient at $\mathrm{298}\,\mathrm{K}$ is calculated from the temperature gradient of the respective average lattice parameter $\left < a \right >$, $\left < b \right >$ or $\left < c\right >$ at constant pressure $P$ ($NPT$ ensemble).
 $$
 \alpha _{x}^{T_{\mathrm{298\,K}}} = \frac{1}{x} \left ( \frac{\partial x}{\partial T} \right ) _{P}, x={a,b,c}
 $$
 The slope can be estimated numerically in different ways. A simple way is to employ a [finite difference method](https://en.wikipedia.org/wiki/Finite_difference_method).
-There are [three](https://en.wikipedia.org/wiki/Finite_difference) fundamental types of it the *forward, backward* and *central* finite difference. 
+There are [three](https://en.wikipedia.org/wiki/Finite_difference) fundamental types of finite differentiation: *forward*, *backward* and *central* finite differentiation. 
 
-In our case we use the central finite difference method with **[five-point stencil](https://en.wikipedia.org/wiki/Five-point_stencil)**.
+We will use the central finite difference method with a **[five-point stencil](https://en.wikipedia.org/wiki/Five-point_stencil)**.
 In general it is formulated in 1D as:
 $$
 f'(x) = \frac{-f(x+2h)+8f(x+h)-8f(x-h)+f(x-2h)}{12 h} + \frac{h^4}{30}f^{(5)(c)}, c \in [x-2h,x+2h]
 $$
 where $h$ is the change of $x$.
 
-If you use more than five points [higher](https://en.wikipedia.org/wiki/Finite_difference_coefficient) stencil order can be used.
+If you use more than five points, a [higher](https://en.wikipedia.org/wiki/Finite_difference_coefficient) order stencil can be used.
 
 
 In our case the differentiation can be written as:
@@ -212,7 +216,7 @@ The volume of a orthorhombic system can be calculated as:
 $$
 V = a\cdot b \cdot c
 $$
-In general of a non-orthorhombic [crystal sytems](https://en.wikipedia.org/wiki/Crystal_system) the volume is calculatd by:
+In general, the volume of a non-orthorhombic [crystal sytems](https://en.wikipedia.org/wiki/Crystal_system) is calculated as:
 $$
 V = a b c \sqrt{1-\mathrm{cos}^2(\alpha) -\mathrm{cos}^2(\beta) - \mathrm{cos}^2(\gamma)+ 2(\mathrm{cos}(\alpha) \mathrm{cos}(\beta) \mathrm{cos}(\gamma))}
 $$
@@ -247,10 +251,12 @@ plt.show()
 
 
 :::{.callout-note}
-## Experimental Measurement
-X-ray diffraction (XRD)
-powder X-ray diffraction (PXRD)
-neutron powder diffraction (NPD)
+## Experimental Measurement Data is available from:
+X-ray Diffraction (XRD)
+
+Powder X-ray Diffraction (PXRD)
+
+Neutron Powder Diffraction (NPD)
 :::
 
 
@@ -262,7 +268,7 @@ $$
 U_{\mathrm{int}} = \left< U_{\mathrm{guest@host}} \right > - \left< U_{\mathrm{host}} \right > -  \left< U_{\mathrm{guest}} \right >.
 $$
 
-In doing so you take the average total energy $U=E_{\mathrm{kin}}+U_{\mathrm{pot}}$ of the respective simulated systems (guest@host, host, guest) at a long enough equilibrated trajectories.
+For this, you take the average total energy $U=E_{\mathrm{kin}}+U_{\mathrm{pot}}$ of the respective simulated system (guest@host, host, guest) from a long enough equilibrated trajectory.
 
 
 <!-- ::: {.callout-warning}
@@ -283,11 +289,11 @@ The radial distribution function (RDF) is a simple measurement to get structural
 
 <!-- !RDF-plot -->
 
-It describes the probability $P_{ab}(r)$ to find a target particle type $b$ at a distance $r$ away from a reference particle type $a$ *e.g.* the probability to find $\mathrm{H}_2$from $\mathrm{Zn}^{2+}$ clusters in a distance $r$:
+It describes the probability $P_{ab}(r)$ to find a target particle type $b$ at distance $r$ away from a reference particle type $a$; *e.g.* the probability to find $\mathrm{C}\mathrm{O}_2$ from $\mathrm{Zn}^{2+}$ clusters at distance $r$:
 $$
 P_{ab}(r) = \int_{0}^{r'} 4\pi r'^2 g_{ab}(r') dr'
 $$ 
-where $g_{ab}(r)$ is the RDF. The RDF formulats the average local density $\left <\rho_{ab}(r)\right >$ normalized by $\rho=(N_a N_b)$
+where $g_{ab}(r)$ is the RDF. The RDF formulates the average local density $\left <\rho_{ab}(r)\right >$ normalized by $\rho=(N_a N_b)$
 $$
 g(r) = \frac{\left <\rho_{ab}(r)\right >}{\rho}.
 $$ 
@@ -305,7 +311,7 @@ N_{ab}(r) = \rho G_{ab}(r)
 $$
 
 :::{.callout-tip}
-## Dirc-Delta Function
+## Dirac-Delta Function
 $$
 \delta(x-x_0) =  \begin{cases}
       0        & x \neq x_0\\
@@ -324,11 +330,11 @@ $$
 In order to describe the dynamic of guests in host systems, it is necessary to calculate transport properties. 
 A transport property would be for example the *diffusion*, *viscosity*, *electrical or thermal conductivity*.
 
-In general transport properties can be described as a property coefficient $\gamma$ which depends on microscopic variable $A$ (*e.g.* positions $\Delta \vec{r}$ or the velocities $\vec{v}$) that is written as an infinite time integration of a non-normalized time correlation function $\left < \dot{A}(t)\dot{A}(t_0) \right >$ :
+In general, transport properties can be described as a property coefficient $\gamma$ which depends on microscopic variable $A$ (*e.g.* positions $\Delta \vec{r}$ or the velocities $\vec{v}$) that is written as an infinite time integration of a non-normalized time correlation function $\left < \dot{A}(t)\dot{A}(t_0) \right >$ :
 $$
 \gamma = \int_{0}^{\infty} dt \left < \dot{A}(t)\dot{A}(t_0) \right >.
 $$
-This is also known as **Green-Kubo** relation [@Kubo1957] which can also written as equivalent **Einstein** expression
+This is also known as **Green-Kubo** relation [@Kubo1957] which can also written as the equivalent **Einstein** expression
 
 $$
 \gamma = \lim_{t\to\infty} \frac{\left < (A(t) - A(t_0))^2 \right >}{2t} = \frac{1}{2} \lim_{t\to\infty} \frac{d}{dt} \left < (A(t) - A(t_0))^2 \right >
@@ -354,7 +360,7 @@ where $d=1,2,3$ is the dimensionality.
 
 ### Mean-Squared Displacement {.unnumbered}
 
-The mean-squared displacement describes the the temporally displacement of the particle from a time origin $t_0$ averaged over the time interval $\tau$
+The mean-squared displacement describes the temporal displacement of the particle from a time origin $t_0$ averaged over the time interval $\tau$
 $$
 MSD(\tau) = \left < \frac{1}{N} \sum_{i=1}^{N} |\vec{r} _{i}(t) - \vec{r} _{i}(t_0)|^2  \right >_{\tau}
 $$
@@ -369,7 +375,7 @@ $$
 
 
 
-Looking at the Figure @fig-msd (a), we see that the beginning of the MSD is not linear. Only at higher correleation times the normal diffusion (see Figure @fig-msd (b)) behaviour appear.
+Looking at Figure @fig-msd (a), we see that the beginning of the MSD is not linear. Only at higher correleation times the expected diffusion (see Figure @fig-msd (b)) behaviour can be observed.
 
 :::{.callout-tip}
 ## Question: 
@@ -381,14 +387,14 @@ Looking at the Figure @fig-msd (a), we see that the beginning of the MSD is not 
 
 :::{.callout-caution collapse="true"}
 ## Answer:
-The self-diffusion coefficient is the slope of the MSD divided by 2 $\cdot d$.
+The self-diffusion coefficient is the slope of the MSD divided by 2 $\cdot\;d$.
 
-But this is only true if correlation time is long enough.
-We can say that in the linear regime we fulfill this limes due to unchanging slope which represents the difffusion coefficient.
+But this is only true if the correlation time is long enough.
+We can say that in the linear regime we fulfill this limes due to the constant slope, which represents the difffusion coefficient.
 
-Therefore it is important to have really linear behaviour in order to apply the Einstein relation.
+Therefore, in order to apply the Einstein relation, it is important to be in the linar regime of the MSD plot.
 
-You get the slope by fitting a [linear regression](../guides/statistics.qmd) at the last linear section.
+You get the slope by fitting a [linear regression](../guides/statistics.qmd) to the linear part of the dataset.
 :::
 
 
@@ -483,7 +489,7 @@ where $d=1,2,3$ is the dimension.
 ### Veloctiy-Autocorrelation Function
 
 
-The  [Velocity-Autocorrelatin Function]() $VACF(\tau)$ is averaged over a time interval $\tau$ 
+The [velocity-autocorrelatin function]() $VACF(\tau)$ is averaged over a time interval $\tau$ 
 $$
 VACF(\tau) = \left < \frac{1}{N} \sum_{i=1}^{N} |\vec{v} _{i}(t) \vec{v} _{i}(t_0)|^2 \right >_{\tau}
 $$
@@ -538,9 +544,9 @@ The diffusion coefficient is directly depending on the activation energy $E_{\ma
 $$
 D_{\mathrm{s}}=D_0 e^{-\frac{E_{\mathrm{a}}}{RT}}
 $$
-where $D_0$ is factor of the exponential function, $R=8.314\,\mathrm{JK^{-1}mol^{-1}}$ is the gas constant and $T$ is the temperature.
+where $D_0$ is factor of the exponential function, $R=8.3145\,\mathrm{JK^{-1}mol^{-1}}$ is the ideal gas constant and $T$ is the temperature.
 
-With this formalism we can apply an [Arrhenius equation](https://en.wikipedia.org/wiki/Arrhenius_equation) to [fit a linear function](../guides/statistics.qmd) to get the activation energy $E_{\mathrm{a}}$
+With this formalism we can apply an [Arrhenius equation](https://en.wikipedia.org/wiki/Arrhenius_equation) to [fit a linear function](../guides/statistics.qmd) to get the activation energy $E_{\mathrm{a}}$.
 $$
 \ln (D_{\mathrm{s}}) = -\frac{E_{\mathrm{a}}}{RT} + \ln{D_0}
 $$
