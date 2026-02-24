@@ -98,4 +98,4 @@ This will call the `greet` function with the argument `"Alice"`, which will prin
 Conclusion
 ----------
 
-That's it for the `python` tutorial! We've covered the basics of variables, data t
+That's it for the `python` tutorial!

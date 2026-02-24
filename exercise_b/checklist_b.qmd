@@ -4,7 +4,7 @@ format:
   html:
     code-fold: false
 ---
-All data generated along with a discussion of results fit easily on a single page. The images and graphs to be plotted are grouped into three subsections, which should also be grouped together in the protocol.
+All data generated along with a discussion of results fit easily on a single page. The images and graphs to be plotted are grouped into three subsections, which should also be grouped together on the poster.
 
 Subsection 1 - System Setup and Equilibration:
 

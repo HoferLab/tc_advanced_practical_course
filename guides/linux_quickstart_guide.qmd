@@ -24,7 +24,7 @@ This guide is for people new to Linux. The aim of this documents is to help with
 +----------------------------------+----------------------------------+
 | command \[options\]              | description                      |
 +:=================================+:=================================+
-| **cd** /path/to/directory           | Change to directory           |
+| **cd** /path/to/directory        | Change to directory              |
 +----------------------------------+----------------------------------+
 | **mkdir** \[options\] directory  | Create a new directory           |
 +----------------------------------+----------------------------------+
