@@ -6,15 +6,15 @@ format:
 jupyter: python3
 ---
 
-Welcome to the instruction page of the 724700 PR Computeraided Assessment of Materials!
+Welcome to the instruction page of the 724651 PR Advanced Exercises for Theoretical Chemistry and Computational Chemistry!
 
-The sidebar contains links to the respective exercise. For the exercise a scientific introduction is provided along with a detailed HowTo and a checklist which results should be included in the protocol.
+The sidebar contains links to the respective exercise. For the exercise a scientific introduction is provided along with a detailed HowTo and a checklist which results should be included on the poster.
 
 
-<img src="img/water1.png" width="250"/>  <img src="img/numerov.png" width="250"/> <img src="img/zif8-h2.png" width="250"/> 
+<img src="img/water1.png" width="250"/>  <img src="img/numerov.png" width="250"/> <img src="img/zif8_co2.png" width="250"/> 
 
 ```{python}
-#| fig-cap: Example Code with corresponding Plot. Any similarity to the Greek Letter Ψ is by coincidence
+#| fig-cap: Example code with corresponding plot. Any similarity to the greek letter Ψ is pure coincidence ;)
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)

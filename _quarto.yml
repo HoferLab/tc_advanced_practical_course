@@ -2,7 +2,7 @@ project:
   type: book
   output-dir: _site
 book:
-  title: "PR Computeraided Assessment of Material"
+  title: "PR Advanced Exercises for Theoretical Chemistry and Computational Chemistry"
   reader-mode: true
   downloads: pdf
   sidebar:
