@@ -23,12 +23,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up Conda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          environment-file: environment.yml
+          activate-environment: quarto_env
+          auto-activate-base: false
+
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:
           version: 'release'
 
       - name: Render Quarto project
+        shell: bash -el {0}
         run: quarto render
 
       - name: Upload artifact
