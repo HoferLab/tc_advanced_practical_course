@@ -34,6 +34,7 @@ jobs:
         uses: quarto-dev/quarto-actions/setup@v2
         with:
           version: 'release'
+          tinytex: true
 
       - name: Render Quarto project
         shell: bash -el {0}
