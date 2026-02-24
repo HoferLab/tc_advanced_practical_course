@@ -21,13 +21,13 @@ The carbon dioxide loadings will be used for the simulations in Part [B.1](#part
 
 :::{.callout-important}
 
-Before you run any simulations, please make sure you know your assigned **TEMPERATURE** values.
+Before you run any simulations, please make sure you know your assigned **TEMPERATURES** values and **CARBON DIOXIDE LOADINGS**!
 
 :::
 
 # Tools and Programs {.unnumbered}
 
-All tools and programs are provided by the Hofer Lab. The simulaton engine is [PQ](https://github.com/MolarVerse/PQ). The analysis tools are written in Python and C, and are partially based on the [PQAnalysis](https://github.com/MolarVerse/PQAnalysis) library.
+All tools and programs are provided by the HoferLab™. The simulation engine that will be used is [PQ](https://github.com/MolarVerse/PQ). The analysis tools are written in Python and C, and are partially based on the [PQAnalysis](https://github.com/MolarVerse/PQAnalysis) library.
 
 The required tools and programs for this exercise are provided by executing the following command:
 
@@ -71,7 +71,7 @@ The following analysis tools are provided for this exercise:
 
 ## Files {.unnumbered}
 
-The folders encoded in the varible `ZIF_DIR` contains all necessary files for the simulations. The files are organized in the following way:
+The directories encoded in the varible `ZIF_DIR` contain all necessary files for the simulations. The files are organized in the following way:
 
 :::{.callout-note title="File Structure" collapse="true"}
 
@@ -114,7 +114,7 @@ The folders encoded in the varible `ZIF_DIR` contains all necessary files for th
 |----------------------|--------------------------------------------------------------------------------------------------------------------|
 | `general_input`      | Contains the input files for the simulations (`moldescriptor.dat` and `run-0*.in`).                                |
 | `co2`                | Contains the carbon dioxide restart-file (`co2.rst`)                                                               |
-| `preeq`              | Contains the equilibration restart-files (`zif8_preeq_*.rst`) and the topology files (`shake_zif8_*.top`).         |
+| `preeq`              | Contains the pre-equilibrated restart-files (`zif8_preeq_*.rst`) and associated topology files (`shake_zif8_*.top`).         |
 
 
 # Part B.1) Gas simulation in ZIF-8  
@@ -142,7 +142,7 @@ cp $ZIF_DIR/zif8_files/general_input/* .
 **2.** Add the CO2 loading to the topology and restart files (e.g. 32 carbon dioxide molecules and 298 K)
 
 ```bash
-add_molecules zif8_preeq_298.rst co2.rst   \
+add_molecules zif8_preeq_298.rst co2.rst  \
   --rst-mol-desc-file moldescriptor.dat   \
   -n 32                                   \
   > 32xco2-zif8-00.rst
@@ -190,9 +190,9 @@ After the equilibration, the production run is performed for 1 ns, which is spli
 
 :::
 
-## Extract Carbon Dioxide Molecule {.unnumbered}
+## Extract Carbon Dioxide Molecules {.unnumbered}
 
-Extract the carbon dioxide molecule from the trajectory and velocity files using the `extract_co2` tool:
+Extract the carbon dioxide molecules from the trajectory and velocity files using the `extract_co2` tool:
 
 ```bash
 extract_co2 <trajectory_files>.xyz
@@ -294,11 +294,11 @@ File > New Molecule > Filename (Browse to the box file) > Load (All at once)
 - Color box atoms: Change the color of the box atoms to `Coloring Method > ColorID 8` (white) for both `Licorice` and `DynamicBonds` representations.
 - Change the background color to white: `Graphics > Colors > Categories (Display) > Names (Background) > Colors (White)`
 - Disable depth cueing: `Display > Depth Cueing > Off`
-- Render the image: `File > Render > Tachyon (internal, in-memory rendering)`
+- Render the image: `File > Render > Tachyon`
 
 # Part B.2) Thermal Expansion of ZIF-8
 
-The second part of the exercise is to calculate the thermal expansion of the ZIF-8 framework at the assigned temperature values.
+The second part of the exercise is to calculate the thermal expansion of the pristine ZIF-8 framework at the assigned temperature values.
 
 ## System Setup {.unnumbered}
 
@@ -345,7 +345,7 @@ PQ run-01.in
 The overall equilibration is split into two stages. The first stage is a 10 ps NVT equilibration (`run-01.in`).
 The second stage is a 10 ps NPT equilibration (`run-02.in`).
 After the equilibration, the production run is performed for 500 ps (`run-03.in`).
-Only run `run-03.in` for the thermal expansion calculation.
+Only the trajectory from the last run `run-03.in` is used for the thermal expansion coefficient calculation.
 
 :::
 

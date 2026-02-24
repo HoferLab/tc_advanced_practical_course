@@ -308,7 +308,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul class="collapse">
   <li><a href="#system-setup" id="toc-system-setup" class="nav-link" data-scroll-target="#system-setup">System Setup</a></li>
   <li><a href="#simulation" id="toc-simulation" class="nav-link" data-scroll-target="#simulation">Simulation</a></li>
-  <li><a href="#extract-carbon-dioxide-molecule" id="toc-extract-carbon-dioxide-molecule" class="nav-link" data-scroll-target="#extract-carbon-dioxide-molecule">Extract Carbon Dioxide Molecule</a></li>
+  <li><a href="#extract-carbon-dioxide-molecules" id="toc-extract-carbon-dioxide-molecules" class="nav-link" data-scroll-target="#extract-carbon-dioxide-molecules">Extract Carbon Dioxide Molecules</a></li>
   <li><a href="#einstein-relation" id="toc-einstein-relation" class="nav-link" data-scroll-target="#einstein-relation">Einstein Relation</a></li>
   <li><a href="#green-kubo-relation" id="toc-green-kubo-relation" class="nav-link" data-scroll-target="#green-kubo-relation">Green-Kubo Relation</a></li>
   <li><a href="#radial-distribution-function" id="toc-radial-distribution-function" class="nav-link" data-scroll-target="#radial-distribution-function">Radial Distribution Function</a></li>
@@ -371,12 +371,12 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Before you run any simulations, please make sure you know your assigned <strong>TEMPERATURE</strong> values.</p>
+<p>Before you run any simulations, please make sure you know your assigned <strong>TEMPERATURES</strong> values and <strong>CARBON DIOXIDE LOADINGS</strong>!</p>
 </div>
 </div>
 <section id="tools-and-programs" class="level1 unnumbered">
 <h1 class="unnumbered">Tools and Programs</h1>
-<p>All tools and programs are provided by the Hofer Lab. The simulaton engine is <a href="https://github.com/MolarVerse/PQ">PQ</a>. The analysis tools are written in Python and C, and are partially based on the <a href="https://github.com/MolarVerse/PQAnalysis">PQAnalysis</a> library.</p>
+<p>All tools and programs are provided by the HoferLab™. The simulation engine that will be used is <a href="https://github.com/MolarVerse/PQ">PQ</a>. The analysis tools are written in Python and C, and are partially based on the <a href="https://github.com/MolarVerse/PQAnalysis">PQAnalysis</a> library.</p>
 <p>The required tools and programs for this exercise are provided by executing the following command:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load pq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout-important callout callout-style-default callout-captioned">
@@ -448,7 +448,7 @@ Important
 </section>
 <section id="files" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="files">Files</h2>
-<p>The folders encoded in the varible <code>ZIF_DIR</code> contains all necessary files for the simulations. The files are organized in the following way:</p>
+<p>The directories encoded in the varible <code>ZIF_DIR</code> contain all necessary files for the simulations. The files are organized in the following way:</p>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -516,7 +516,7 @@ Note
 </tr>
 <tr class="odd">
 <td><code>preeq</code></td>
-<td>Contains the equilibration restart-files (<code>zif8_preeq_*.rst</code>) and the topology files (<code>shake_zif8_*.top</code>).</td>
+<td>Contains the pre-equilibrated restart-files (<code>zif8_preeq_*.rst</code>) and associated topology files (<code>shake_zif8_*.top</code>).</td>
 </tr>
 </tbody>
 </table>
@@ -546,7 +546,7 @@ Note
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="va">$ZIF_DIR</span>/zif8_files/preeq/<span class="op">&lt;</span>TEMPERATURE<span class="op">&gt;</span>/<span class="pp">*</span> .</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="va">$ZIF_DIR</span>/zif8_files/general_input/<span class="pp">*</span> .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>2.</strong> Add the CO2 loading to the topology and restart files (e.g.&nbsp;32 carbon dioxide molecules and 298 K)</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">add_molecules</span> zif8_preeq_298.rst co2.rst   <span class="dt">\</span></span>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">add_molecules</span> zif8_preeq_298.rst co2.rst  <span class="dt">\</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--rst-mol-desc-file</span> moldescriptor.dat   <span class="dt">\</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-n</span> 32                                   <span class="dt">\</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">&gt;</span> 32xco2-zif8-00.rst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -594,9 +594,9 @@ Important
 </div>
 </div>
 </section>
-<section id="extract-carbon-dioxide-molecule" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="extract-carbon-dioxide-molecule">Extract Carbon Dioxide Molecule</h2>
-<p>Extract the carbon dioxide molecule from the trajectory and velocity files using the <code>extract_co2</code> tool:</p>
+<section id="extract-carbon-dioxide-molecules" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="extract-carbon-dioxide-molecules">Extract Carbon Dioxide Molecules</h2>
+<p>Extract the carbon dioxide molecules from the trajectory and velocity files using the <code>extract_co2</code> tool:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">extract_co2</span> <span class="op">&lt;</span>trajectory_files<span class="op">&gt;</span>.xyz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">extract_co2</span> <span class="op">&lt;</span>velocity_files<span class="op">&gt;</span>.vel</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -694,13 +694,13 @@ Note
 <li>Color box atoms: Change the color of the box atoms to <code>Coloring Method &gt; ColorID 8</code> (white) for both <code>Licorice</code> and <code>DynamicBonds</code> representations.</li>
 <li>Change the background color to white: <code>Graphics &gt; Colors &gt; Categories (Display) &gt; Names (Background) &gt; Colors (White)</code></li>
 <li>Disable depth cueing: <code>Display &gt; Depth Cueing &gt; Off</code></li>
-<li>Render the image: <code>File &gt; Render &gt; Tachyon (internal, in-memory rendering)</code></li>
+<li>Render the image: <code>File &gt; Render &gt; Tachyon</code></li>
 </ul>
 </section>
 </section>
 <section id="part-b.2-thermal-expansion-of-zif-8" class="level1">
 <h1>Part B.2) Thermal Expansion of ZIF-8</h1>
-<p>The second part of the exercise is to calculate the thermal expansion of the ZIF-8 framework at the assigned temperature values.</p>
+<p>The second part of the exercise is to calculate the thermal expansion of the pristine ZIF-8 framework at the assigned temperature values.</p>
 <section id="system-setup-1" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="system-setup-1">System Setup</h2>
 <p>The system setup is done by running the following command:</p>
@@ -745,7 +745,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The overall equilibration is split into two stages. The first stage is a 10 ps NVT equilibration (<code>run-01.in</code>). The second stage is a 10 ps NPT equilibration (<code>run-02.in</code>). After the equilibration, the production run is performed for 500 ps (<code>run-03.in</code>). Only run <code>run-03.in</code> for the thermal expansion calculation.</p>
+<p>The overall equilibration is split into two stages. The first stage is a 10 ps NVT equilibration (<code>run-01.in</code>). The second stage is a 10 ps NPT equilibration (<code>run-02.in</code>). After the equilibration, the production run is performed for 500 ps (<code>run-03.in</code>). Only the trajectory from the last run <code>run-03.in</code> is used for the thermal expansion coefficient calculation.</p>
 </div>
 </div>
 </section>
