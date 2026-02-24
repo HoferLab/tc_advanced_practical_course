@@ -293,7 +293,7 @@ Chemistry}
 \maketitle
 \pagestyle{mystyle}
 
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, colback={shadecolor}, boxrule=0pt, enhanced, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, enhanced, colback={shadecolor}, boxrule=0pt, breakable]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -358,7 +358,7 @@ greek letter Ψ is pure coincidence ;)}
 \hypertarget{background-info}{%
 \section{Background Info}\label{background-info}}
 
-Metal-organic framework (MOFs) are hybrid crystalline materials
+Metal-organic frameworks (MOFs) are hybrid crystalline materials
 assembled from both inorganic and organic residues containing potential
 voids {[}1{]}. The key advantage of MOFs over naturally occurring porous
 compounds such as zeolites (\emph{i.e.} aluminosilicates) or polymers
@@ -366,44 +366,47 @@ lies in their crystalline nature, which allows for systematic
 modification through crystal engineering principles by altering their
 organic linkers or metal nodes. This capability leads to an almost
 limitless number of possible framework topologies and properties, making
-them particularly appealing for technologically relevant applications.
+them particularly appealing for technological applications.
 
 One of the most widely discussed applications is associated to the
 enormous gas storage capacity of MOF materials. Storage and separation
-of critical green house gasses such as CO\textsubscript{2} and
-CH\textsubscript{4} are widely discussed {[}2,3{]}. In addition, MOFs
-have also emerged as highly promising candidates for the storage of
-carbon dioxide (CO\textsubscript{2}) for carbon capture {[}4{]} (due to
+of critical green house gases such as CO\textsubscript{2} and
+CH\textsubscript{4} are widely discussed {[}2,3{]}. In addition, due to
 their ultrahigh internal surface area, tunable pore dimensions, and
-rapid kinetics for gas adsorption and desorption).
+rapid kinetics for gas adsorption and desorption, MOFs have emerged as
+highly promising candidates for capturing and storing carbon dioxide,
+called direct air capture (DAC) {[}4{]}.
 
-An increasing number of MOF compounds are discussed as potential carrier
-for green house gases such as CO\textsubscript{2} {[}4{]}. In this
-exercise, carbon dioxide storage in the comparably simple ZIF-8
-(zeolitic imidazolate framework) is investigated via molecular dynamics
-simulations (MD), to keep the computational effort and memory demand
-manageable.
+An increasing number of MOF compounds are discussed as potential host
+matrices for green house gases {[}4{]}. In this exercise, carbon dioxide
+storage in the comparably simple ZIF-8 (zeolitic imidazolate framework)
+is investigated via molecular dynamics simulations (MD), to keep the
+computational effort and memory demand manageable.
 
-The ZIF-8 system Zn(methylimidazolate)\textsubscript{2} crystallizes in
-the noncentrosymmetric cubic space group I43m (space group no. 217) with
-a lattice parameter of approx 1.7~nm. The cubic unit cell contains a
-total of 2 Zn\textsuperscript{2+} ions that are tetrahedrally
-coordinated by the 24 methylimidazolate linkers. The pore structure of
-ZIF-8 is similar compared to the topology of a prototypic sodalite
-zeolite (hence the name zeolitic imidazolate framework). Several studies
-have indeed investigated ZIF systems with respect to their
-CO\textsubscript{2} storage capacity {[}5-8{]}.
+The ZIF-8 system Zn(2-methylimidazolate)\textsubscript{2} crystallizes
+in the non-centrosymmetric cubic space group I43m (space group no. 217)
+with a lattice parameter of approx 1.7~nm. The cubic unit cell contains
+a total of 2 Zn\textsuperscript{2+} cations that are tetrahedrally
+coordinated by the 24 2-methylimidazolate linkers. The pore structure of
+ZIF-8 is similar to the topology of a prototypic sodalite zeolite (hence
+the name zeolitic imidazolate framework). Several studies have
+investigated ZIF systems with respect to their CO\textsubscript{2}
+storage capacity {[}5-8{]}.
 
 In order to achieve fast and accurate MD simulations, the MACE-MP neural
-network potential (NNP) {[}9-11{]} is applied. If trained properly, NNPs
-provide an efficient and versatile description of a chemical system,
-that combines the advantages of quantum chemical and force field
-descriptions.
+network potential (NNP) {[}9-11{]} is applied, in particular the
+MACE-DAC-1 model {[}12{]}, which is trained not only on solid-state
+systems but also on interactions with gases for direct air capture (DAC)
+applications. If trained properly, NNPs provide an efficient and
+versatile description of chemical systems, combining the accuracy of
+high level quantum chemical methods with the speed of classical force
+field approaches.
 
 In this exercise the properties of the pristine host material (lattice
-parameter, thermal expansion coefficient) and the associated host-guest
-interaction (interaction energies, diffusion coefficient, activation
-energy of diffusion) will be analyzed.
+parameter and thermal expansion coefficient) and the interaction between
+the inserted CO\textsubscript{2} molecules and the ZIF-8 host
+(interaction energies, diffusion coefficient, activation energy of
+diffusion) will be studied.
 
 {[}1{]} Yusuf, V. F.; Malek, N. I.; Kailasa, S. K. ``Review on Organic
 Framework Classification, Synthetic Approaches, and Influencing Factors:
@@ -455,10 +458,15 @@ chemistry'' arXiv, 2024, DOI: 10.48550/ARXIV.2401.00096
 {[}11{]} ACEsuit/mace-mp https://github.com/ACEsuit/mace-mp (accessed
 16. 10. 2024)
 
+{[}12{]} Yunsung L., Hyunsoo P., Aron W., Jihan K. ``Accelerating CO2
+direct air capture screening for metal-organic frameworks with a
+transferable machine learning force field'' Matter 2025, 8, 102203 DOI:
+10.1016/j.matt.2025.102203
+
 \hypertarget{howto}{%
 \section{HowTo}\label{howto}}
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-warning-color-frame, arc=.35mm, breakable, leftrule=.75mm, opacitybacktitle=0.6, toptitle=1mm, left=2mm, colback=white, titlerule=0mm, coltitle=black, bottomrule=.15mm, colbacktitle=quarto-callout-warning-color!10!white, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, colback=white, arc=.35mm, colframe=quarto-callout-warning-color-frame, titlerule=0mm, colbacktitle=quarto-callout-warning-color!10!white, bottomrule=.15mm, breakable, leftrule=.75mm, left=2mm, bottomtitle=1mm, opacityback=0, opacitybacktitle=0.6, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, toptitle=1mm]
 
 Links to the \textbf{Google Sheets} with the assigned temperatures and
 carbon dioxide loadings:
@@ -483,7 +491,7 @@ for Part \protect\hyperlink{part-b.2-thermal-expansion-of-zif-8}{B.2}.
 The carbon dioxide loadings will be used for the simulations in Part
 \protect\hyperlink{part-b.1-gas-simulation-in-zif-8}{B.1}
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-important-color-frame, arc=.35mm, breakable, leftrule=.75mm, opacitybacktitle=0.6, toptitle=1mm, left=2mm, colback=white, titlerule=0mm, coltitle=black, bottomrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, colback=white, arc=.35mm, colframe=quarto-callout-important-color-frame, titlerule=0mm, colbacktitle=quarto-callout-important-color!10!white, bottomrule=.15mm, breakable, leftrule=.75mm, left=2mm, bottomtitle=1mm, opacityback=0, opacitybacktitle=0.6, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, toptitle=1mm]
 
 Before you run any simulations, please make sure you know your assigned
 \textbf{TEMPERATURE} values.
@@ -504,7 +512,7 @@ executing the following command:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-important-color-frame, arc=.35mm, breakable, leftrule=.75mm, opacitybacktitle=0.6, toptitle=1mm, left=2mm, colback=white, titlerule=0mm, coltitle=black, bottomrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, colback=white, arc=.35mm, colframe=quarto-callout-important-color-frame, titlerule=0mm, colbacktitle=quarto-callout-important-color!10!white, bottomrule=.15mm, breakable, leftrule=.75mm, left=2mm, bottomtitle=1mm, opacityback=0, opacitybacktitle=0.6, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, toptitle=1mm]
 
 This command needs to be executed only once per terminal session. If you
 close the terminal, you will need to execute the command again when you
@@ -583,7 +591,7 @@ The folders encoded in the varible \texttt{ZIF\_DIR} contains all
 necessary files for the simulations. The files are organized in the
 following way:
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, arc=.35mm, breakable, leftrule=.75mm, opacitybacktitle=0.6, toptitle=1mm, left=2mm, colback=white, titlerule=0mm, coltitle=black, bottomrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, colback=white, arc=.35mm, colframe=quarto-callout-note-color-frame, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white, bottomrule=.15mm, breakable, leftrule=.75mm, left=2mm, bottomtitle=1mm, opacityback=0, opacitybacktitle=0.6, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, toptitle=1mm]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -652,7 +660,7 @@ dioxide molecules in the ZIF-8 framework at the assigned temperature
 values. The carbon dioxide loading is set to the two assigned loadings
 per student.
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, arc=.35mm, breakable, leftrule=.75mm, opacitybacktitle=0.6, toptitle=1mm, left=2mm, colback=white, titlerule=0mm, coltitle=black, bottomrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, colback=white, arc=.35mm, colframe=quarto-callout-note-color-frame, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white, bottomrule=.15mm, breakable, leftrule=.75mm, left=2mm, bottomtitle=1mm, opacityback=0, opacitybacktitle=0.6, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, toptitle=1mm]
 
 This part of the exercise is performed twice with the two assigned
 carbon dioxide loadings. The simulations can be run in parallel.
@@ -710,7 +718,7 @@ assigned temperature, generated restart file, and topology file.
       file_prefix   = XXX-01;
 \end{verbatim}
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, arc=.35mm, breakable, leftrule=.75mm, opacitybacktitle=0.6, toptitle=1mm, left=2mm, colback=white, titlerule=0mm, coltitle=black, bottomrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, colback=white, arc=.35mm, colframe=quarto-callout-note-color-frame, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white, bottomrule=.15mm, breakable, leftrule=.75mm, left=2mm, bottomtitle=1mm, opacityback=0, opacitybacktitle=0.6, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, toptitle=1mm]
 
 Replace \texttt{XXX} with the assigned temperature value and the
 corresponding restart and topology files. The \texttt{file\_prefix} can
@@ -736,7 +744,7 @@ Start multiple input files one after the other
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-important-color-frame, arc=.35mm, breakable, leftrule=.75mm, opacitybacktitle=0.6, toptitle=1mm, left=2mm, colback=white, titlerule=0mm, coltitle=black, bottomrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, colback=white, arc=.35mm, colframe=quarto-callout-important-color-frame, titlerule=0mm, colbacktitle=quarto-callout-important-color!10!white, bottomrule=.15mm, breakable, leftrule=.75mm, left=2mm, bottomtitle=1mm, opacityback=0, opacitybacktitle=0.6, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, toptitle=1mm]
 
 The overall equilibration is split into two stages. The first stage is a
 10 ps NVT equilibration (\texttt{run-01.in}). The second stage is a 10
@@ -795,7 +803,7 @@ squared displacement (MSD)} of the carbon dioxide molecule using the
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-important-color-frame, arc=.35mm, breakable, leftrule=.75mm, opacitybacktitle=0.6, toptitle=1mm, left=2mm, colback=white, titlerule=0mm, coltitle=black, bottomrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, colback=white, arc=.35mm, colframe=quarto-callout-important-color-frame, titlerule=0mm, colbacktitle=quarto-callout-important-color!10!white, bottomrule=.15mm, breakable, leftrule=.75mm, left=2mm, bottomtitle=1mm, opacityback=0, opacitybacktitle=0.6, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, toptitle=1mm]
 
 For both assigned carbon dioxide loadings, insert the corresponding
 self-diffusion coefficient values into the \textbf{Google Sheets}.
@@ -827,7 +835,7 @@ tool:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-important-color-frame, arc=.35mm, breakable, leftrule=.75mm, opacitybacktitle=0.6, toptitle=1mm, left=2mm, colback=white, titlerule=0mm, coltitle=black, bottomrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, colback=white, arc=.35mm, colframe=quarto-callout-important-color-frame, titlerule=0mm, colbacktitle=quarto-callout-important-color!10!white, bottomrule=.15mm, breakable, leftrule=.75mm, left=2mm, bottomtitle=1mm, opacityback=0, opacitybacktitle=0.6, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, toptitle=1mm]
 
 For both assigned carbon dioxide loadings, insert the corresponding
 self-diffusion coefficient values into the \textbf{Google Sheets}.
@@ -861,7 +869,7 @@ distribution function (RDF)} of the carbon dioxide molecule using the
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, arc=.35mm, breakable, leftrule=.75mm, opacitybacktitle=0.6, toptitle=1mm, left=2mm, colback=white, titlerule=0mm, coltitle=black, bottomrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, colback=white, arc=.35mm, colframe=quarto-callout-note-color-frame, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white, bottomrule=.15mm, breakable, leftrule=.75mm, left=2mm, bottomtitle=1mm, opacityback=0, opacitybacktitle=0.6, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, toptitle=1mm]
 
 The RDF calculation will generate a \texttt{output} file named
 \texttt{rdf-C-C.out} and \texttt{rdf-Zn-C.out}, accordingly. Plot the
@@ -892,7 +900,7 @@ plotting tool.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, arc=.35mm, breakable, leftrule=.75mm, opacitybacktitle=0.6, toptitle=1mm, left=2mm, colback=white, titlerule=0mm, coltitle=black, bottomrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, colback=white, arc=.35mm, colframe=quarto-callout-note-color-frame, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white, bottomrule=.15mm, breakable, leftrule=.75mm, left=2mm, bottomtitle=1mm, opacityback=0, opacitybacktitle=0.6, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, toptitle=1mm]
 
 The \texttt{traj2box} tool generates a box file that can be visualized
 in VMD. The box file contains the unit cell information with \texttt{X}
@@ -988,7 +996,7 @@ assigned temperature, generated restart file, and topology file.
       file_prefix   = zif8-01;
 \end{verbatim}
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, arc=.35mm, breakable, leftrule=.75mm, opacitybacktitle=0.6, toptitle=1mm, left=2mm, colback=white, titlerule=0mm, coltitle=black, bottomrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, colback=white, arc=.35mm, colframe=quarto-callout-note-color-frame, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white, bottomrule=.15mm, breakable, leftrule=.75mm, left=2mm, bottomtitle=1mm, opacityback=0, opacitybacktitle=0.6, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, toptitle=1mm]
 
 Replace \texttt{XXX} with the assigned temperature value. The
 \texttt{file\_prefix} can be any name you choose. Please make sure to
@@ -1005,7 +1013,7 @@ different simulation steps.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, arc=.35mm, breakable, leftrule=.75mm, opacitybacktitle=0.6, toptitle=1mm, left=2mm, colback=white, titlerule=0mm, coltitle=black, bottomrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, colback=white, arc=.35mm, colframe=quarto-callout-note-color-frame, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white, bottomrule=.15mm, breakable, leftrule=.75mm, left=2mm, bottomtitle=1mm, opacityback=0, opacitybacktitle=0.6, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, toptitle=1mm]
 
 The overall equilibration is split into two stages. The first stage is a
 10 ps NVT equilibration (\texttt{run-01.in}). The second stage is a 10
@@ -1123,7 +1131,7 @@ simulation, it is essential to ensure that the system is in an
 equilibrium state. However, what constitutes an \emph{equilibrium
 state}?
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{An equilibrium state:}, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-important-color-frame, arc=.35mm, breakable, leftrule=.75mm, opacitybacktitle=0.6, toptitle=1mm, left=2mm, colback=white, titlerule=0mm, coltitle=black, bottomrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, colback=white, arc=.35mm, colframe=quarto-callout-important-color-frame, titlerule=0mm, colbacktitle=quarto-callout-important-color!10!white, bottomrule=.15mm, breakable, leftrule=.75mm, left=2mm, bottomtitle=1mm, opacityback=0, opacitybacktitle=0.6, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{An equilibrium state:}, toptitle=1mm]
 
 can be defined as a state in which macroscopic properties \(A\)
 (\emph{e.g} temperture \(T\), pressure \(P\), energies \(E\), volume
@@ -1380,7 +1388,7 @@ vs.~Temperature}\label{plot-lattice-parameter-vs.-temperature}}
 
 \end{figure}
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Experimental Measurement}, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, arc=.35mm, breakable, leftrule=.75mm, opacitybacktitle=0.6, toptitle=1mm, left=2mm, colback=white, titlerule=0mm, coltitle=black, bottomrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, colback=white, arc=.35mm, colframe=quarto-callout-note-color-frame, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white, bottomrule=.15mm, breakable, leftrule=.75mm, left=2mm, bottomtitle=1mm, opacityback=0, opacitybacktitle=0.6, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Experimental Measurement}, toptitle=1mm]
 
 X-ray diffraction (XRD) powder X-ray diffraction (PXRD) neutron powder
 diffraction (NPD)
@@ -1440,7 +1448,7 @@ with the probability \(G(r)\) \[
 N_{ab}(r) = \rho G_{ab}(r)
 \]
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Dirc-Delta Function}, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-tip-color-frame, arc=.35mm, breakable, leftrule=.75mm, opacitybacktitle=0.6, toptitle=1mm, left=2mm, colback=white, titlerule=0mm, coltitle=black, bottomrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, colback=white, arc=.35mm, colframe=quarto-callout-tip-color-frame, titlerule=0mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, breakable, leftrule=.75mm, left=2mm, bottomtitle=1mm, opacityback=0, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Dirc-Delta Function}, toptitle=1mm]
 
 \[
 \delta(x-x_0) =  \begin{cases}
@@ -1517,7 +1525,7 @@ beginning of the MSD is not linear. Only at higher correleation times
 the normal diffusion (see Figure Figure~\ref{fig-msd} (b)) behaviour
 appear.
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Question:}, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-tip-color-frame, arc=.35mm, breakable, leftrule=.75mm, opacitybacktitle=0.6, toptitle=1mm, left=2mm, colback=white, titlerule=0mm, coltitle=black, bottomrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, colback=white, arc=.35mm, colframe=quarto-callout-tip-color-frame, titlerule=0mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, breakable, leftrule=.75mm, left=2mm, bottomtitle=1mm, opacityback=0, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Question:}, toptitle=1mm]
 
 \begin{itemize}
 \tightlist
@@ -1532,7 +1540,7 @@ appear.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Answer:}, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-caution-color-frame, arc=.35mm, breakable, leftrule=.75mm, opacitybacktitle=0.6, toptitle=1mm, left=2mm, colback=white, titlerule=0mm, coltitle=black, bottomrule=.15mm, colbacktitle=quarto-callout-caution-color!10!white, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, colback=white, arc=.35mm, colframe=quarto-callout-caution-color-frame, titlerule=0mm, colbacktitle=quarto-callout-caution-color!10!white, bottomrule=.15mm, breakable, leftrule=.75mm, left=2mm, bottomtitle=1mm, opacityback=0, opacitybacktitle=0.6, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Answer:}, toptitle=1mm]
 
 The self-diffusion coefficient is the slope of the MSD divided by 2
 \(\cdot d\).
@@ -2227,9 +2235,9 @@ $\mu = \frac{m_1 \cdot m_2}{m_1 + m_2}$ in g $\cdot$ mol $^{-1}$
 \end{Shaded}
 
 \begin{verbatim}
-k =  2.9989117627005464  +/-  0.0015757877672506768
-r0 =  4.997076809945524  +/-  0.0019504860436055083
-R2 =  0.9998536209452863
+k =  3.000439538827802  +/-  0.0015855966471502655
+r0 =  5.00042048272994  +/-  0.001960794102381075
+R2 =  0.999851777121007
 \end{verbatim}
 
 \begin{figure}[H]
@@ -2455,7 +2463,7 @@ On the desktop computers in the office you can search the history with
 then be autocompleted by searching in the history for matching commands
 you entered before.
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, arc=.35mm, breakable, leftrule=.75mm, opacitybacktitle=0.6, toptitle=1mm, left=2mm, colback=white, titlerule=0mm, coltitle=black, bottomrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, colback=white, arc=.35mm, colframe=quarto-callout-note-color-frame, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white, bottomrule=.15mm, breakable, leftrule=.75mm, left=2mm, bottomtitle=1mm, opacityback=0, opacitybacktitle=0.6, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, toptitle=1mm]
 
 If you want quick access to files or directories in your home folder,
 the \texttt{\textasciitilde{}}-symbol is an alias for your home
@@ -2565,7 +2573,7 @@ and "kiwi"), use:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, arc=.35mm, breakable, leftrule=.75mm, opacitybacktitle=0.6, toptitle=1mm, left=2mm, colback=white, titlerule=0mm, coltitle=black, bottomrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, coltitle=black, rightrule=.15mm, colback=white, arc=.35mm, colframe=quarto-callout-note-color-frame, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white, bottomrule=.15mm, breakable, leftrule=.75mm, left=2mm, bottomtitle=1mm, opacityback=0, opacitybacktitle=0.6, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, toptitle=1mm]
 
 Note that symbols, numbers, words, strings can be replaced with a white
 space (" ") to separate columns which can be printed with \texttt{gawk}.
