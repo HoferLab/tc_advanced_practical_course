@@ -1,0 +1,28 @@
+# Quarto build outputs
+/_site/
+/Website_QMPart/
+
+# LaTeX temporary files
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+
+# R
+.Rhistory
+.Rdata
+.RData
+.httr-oauth
+
+# OS files
+.DS_Store
+Thumbs.db
