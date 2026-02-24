@@ -1,3 +1,5 @@
+#!/bin/bash
+
 module purge 
 module load miniconda/tci-collection-v1   
 

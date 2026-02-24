@@ -8,6 +8,7 @@
 ]{article}
 
 \usepackage{amsmath,amssymb}
+\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -17,10 +18,6 @@
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
-\fi
-\usepackage{lmodern}
-\ifPDFTeX\else  
-    % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -42,28 +39,14 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 % Make \paragraph and \subparagraph free-standing
-\makeatletter
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
-  \renewcommand{\paragraph}{
-    \@ifstar
-      \xxxParagraphStar
-      \xxxParagraphNoStar
-  }
-  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
-  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
 \fi
 \ifx\subparagraph\undefined\else
   \let\oldsubparagraph\subparagraph
-  \renewcommand{\subparagraph}{
-    \@ifstar
-      \xxxSubParagraphStar
-      \xxxSubParagraphNoStar
-  }
-  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
-  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
-\makeatother
 
 \usepackage{color}
 \usepackage{fancyvrb}
@@ -83,7 +66,7 @@
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
 \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
@@ -93,7 +76,7 @@
 \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
 \newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
 \newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
 \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
@@ -219,7 +202,7 @@
 %     ItalicFont=*-Italic,
 %     ]
 \makeatletter
-\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
 \@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
 \definecolor{quarto-callout-color}{HTML}{909090}
 \definecolor{quarto-callout-note-color}{HTML}{0758E5}
@@ -233,6 +216,8 @@
 \definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
 \definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
 \definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
 \makeatother
 \makeatletter
 \@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
@@ -273,29 +258,21 @@
 \newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
 \makeatother
 \makeatletter
-\makeatother
-\makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
 \makeatletter
-\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
 \makeatother
 \makeatletter
-\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}{}
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{named}{light}}
 \makeatother
 \makeatletter
-\@ifundefined{codebgcolor}{\definecolor{codebgcolor}{named}{light}}{}
 \makeatother
-\makeatletter
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, boxrule=0pt, colback={codebgcolor}, enhanced, frame hidden, breakable]}{\end{tcolorbox}}\fi
-\makeatother
-
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\usepackage{bookmark}
-
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
@@ -307,15 +284,15 @@
   urlcolor={highlight},
   pdfcreator={LaTeX via pandoc}}
 
-
 \title{PR Computeraided Assessment of Material}
 \author{}
 \date{}
 
 \begin{document}
 \maketitle
-
 \pagestyle{mystyle}
+
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[colback={shadecolor}, frame hidden, boxrule=0pt, enhanced, breakable]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -323,10 +300,10 @@
 \setcounter{tocdepth}{3}
 \tableofcontents
 }
-
 \bookmarksetup{startatroot}
 
-\section{Instructions}\label{instructions}
+\hypertarget{instructions}{%
+\section{Instructions}\label{instructions}}
 
 Welcome to the instruction page of the 724700 PR Computeraided
 Assessment of Materials!
@@ -341,7 +318,6 @@ checklist which results should be included in the protocol.
 \ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
 \ImportTok{from}\NormalTok{ matplotlib.ticker }\ImportTok{import}\NormalTok{ (MultipleLocator, AutoMinorLocator)}
 
-\CommentTok{\# 100 linearly spaced numbers}
 \NormalTok{x }\OperatorTok{=}\NormalTok{ np.linspace(}\OperatorTok{{-}}\FloatTok{4.9}\NormalTok{,}\FloatTok{4.9}\NormalTok{,}\DecValTok{100}\NormalTok{)}
 
 \CommentTok{\# the function, which is y = x\^{}2 here}
@@ -367,21 +343,19 @@ checklist which results should be included in the protocol.
 
 \begin{figure}[H]
 
-{\centering \includegraphics{index_files/figure-pdf/cell-2-output-1.pdf}
+{\centering \includegraphics{./index_files/figure-pdf/cell-2-output-1.png}
 
 }
 
 \caption{Example Code with corresponding Plot. Any similarity to the
 Greek Letter Ψ is by coincidence}
 
-\end{figure}%
+\end{figure}
 
 \part{Exercise: NNP-MD}
 
-\section{Background Info}\label{background-info}
-
-\section{\texorpdfstring{Exercise - NNP MD Simulations of
-CO\textsubscript{2}@ZIF-8}{Exercise - NNP MD Simulations of CO2@ZIF-8}}\label{exercise---nnp-md-simulations-of-co2zif-8}
+\hypertarget{background-info}{%
+\section{Background Info}\label{background-info}}
 
 Metal-organic framework (MOFs) are hybrid crystalline materials
 assembled from both inorganic and organic residues containing potential
@@ -480,9 +454,10 @@ chemistry'' arXiv, 2024, DOI: 10.48550/ARXIV.2401.00096
 {[}11{]} ACEsuit/mace-mp https://github.com/ACEsuit/mace-mp (accessed
 16. 10. 2024)
 
-\section{HowTo}\label{howto}
+\hypertarget{howto}{%
+\section{HowTo}\label{howto}}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colbacktitle=quarto-callout-warning-color!10!white, bottomtitle=1mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, coltitle=black, leftrule=.75mm, rightrule=.15mm, bottomrule=.15mm, titlerule=0mm, breakable, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, colback=white, toptitle=1mm, colframe=quarto-callout-warning-color-frame, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colback=white, rightrule=.15mm, bottomrule=.15mm, coltitle=black, toprule=.15mm, bottomtitle=1mm, arc=.35mm, colframe=quarto-callout-warning-color-frame, opacityback=0, toptitle=1mm, breakable, titlerule=0mm, left=2mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, leftrule=.75mm, colbacktitle=quarto-callout-warning-color!10!white]
 
 Links to the \textbf{Google Sheets} with the assigned temperatures and
 carbon dioxide loadings:
@@ -501,23 +476,18 @@ carbon dioxide loadings:
 
 Each student will be assigned two specific temperature values and two
 different carbon dioxide loadings for the simulations. One temperature
-will be used for Part \hyperref[part-b.1-gas-simulation-in-zif-8]{B.1}
-and the other for Part
-\hyperref[part-b.2-thermal-expansion-of-zif-8]{B.2}. The carbon dioxide
-loadings will be used for the simulations in Part
-\hyperref[part-b.1-gas-simulation-in-zif-8]{B.1}
+will be used for Part
+\protect\hyperlink{part-b.1-gas-simulation-in-zif-8}{B.1} and the other
+for Part \protect\hyperlink{part-b.2-thermal-expansion-of-zif-8}{B.2}.
+The carbon dioxide loadings will be used for the simulations in Part
+\protect\hyperlink{part-b.1-gas-simulation-in-zif-8}{B.1}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, coltitle=black, leftrule=.75mm, rightrule=.15mm, bottomrule=.15mm, titlerule=0mm, breakable, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, colback=white, toptitle=1mm, colframe=quarto-callout-important-color-frame, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colback=white, rightrule=.15mm, bottomrule=.15mm, coltitle=black, toprule=.15mm, bottomtitle=1mm, arc=.35mm, colframe=quarto-callout-important-color-frame, opacityback=0, toptitle=1mm, breakable, titlerule=0mm, left=2mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white]
 
 Before you run any simulations, please make sure you know your assigned
 \textbf{TEMPERATURE} values.
 
 \end{tcolorbox}
-
-\section*{Tools and Programs}\label{tools-and-programs}
-\addcontentsline{toc}{section}{Tools and Programs}
-
-\markboth{Tools and Programs}{Tools and Programs}
 
 All tools and programs are provided by the Hofer Lab. The simulaton
 engine is \href{https://github.com/MolarVerse/PQ}{PQ}. The analysis
@@ -533,7 +503,7 @@ executing the following command:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, coltitle=black, leftrule=.75mm, rightrule=.15mm, bottomrule=.15mm, titlerule=0mm, breakable, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, colback=white, toptitle=1mm, colframe=quarto-callout-important-color-frame, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colback=white, rightrule=.15mm, bottomrule=.15mm, coltitle=black, toprule=.15mm, bottomtitle=1mm, arc=.35mm, colframe=quarto-callout-important-color-frame, opacityback=0, toptitle=1mm, breakable, titlerule=0mm, left=2mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white]
 
 This command needs to be executed only once per terminal session. If you
 close the terminal, you will need to execute the command again when you
@@ -560,7 +530,8 @@ function that can be accessed by running the script with the
 \end{Highlighting}
 \end{Shaded}
 
-\subsection*{Analysis Tools}\label{analysis-tools}
+\hypertarget{analysis-tools}{%
+\subsection*{Analysis Tools}\label{analysis-tools}}
 \addcontentsline{toc}{subsection}{Analysis Tools}
 
 \markright{Analysis Tools}
@@ -570,16 +541,14 @@ The following analysis tools are provided for this exercise:
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.1163}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.8837}}@{}}
-\toprule\noalign{}
+\toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
 Tool
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Description
 \end{minipage} \\
-\midrule\noalign{}
+\midrule()
 \endhead
-\bottomrule\noalign{}
-\endlastfoot
 \texttt{average\_a} & Averages the lattice parameter a of the provided
 box files. \\
 \texttt{average\_V} & Averages the volume of the provided box files. \\
@@ -600,9 +569,11 @@ the Einstein relation. \\
 \texttt{integration} & Integrates the velocity autocorrelation function
 to calculate the diffusion coefficient according to the Green-Kubo
 relation. \\
+\bottomrule()
 \end{longtable}
 
-\subsection*{Files}\label{files}
+\hypertarget{files}{%
+\subsection*{Files}\label{files}}
 \addcontentsline{toc}{subsection}{Files}
 
 \markright{Files}
@@ -611,7 +582,7 @@ The folders encoded in the varible \texttt{ZIF\_DIR} contains all
 necessary files for the simulations. The files are organized in the
 following way:
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{File Structure}, coltitle=black, leftrule=.75mm, rightrule=.15mm, bottomrule=.15mm, titlerule=0mm, breakable, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, colback=white, toptitle=1mm, colframe=quarto-callout-note-color-frame, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colback=white, rightrule=.15mm, bottomrule=.15mm, coltitle=black, toprule=.15mm, bottomtitle=1mm, arc=.35mm, colframe=quarto-callout-note-color-frame, opacityback=0, toptitle=1mm, breakable, titlerule=0mm, left=2mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -653,16 +624,14 @@ following way:
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.1594}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.8406}}@{}}
-\toprule\noalign{}
+\toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
 Folder/File
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Description
 \end{minipage} \\
-\midrule\noalign{}
+\midrule()
 \endhead
-\bottomrule\noalign{}
-\endlastfoot
 \texttt{general\_input} & Contains the input files for the simulations
 (\texttt{moldescriptor.dat} and \texttt{run-0*.in}). \\
 \texttt{co2} & Contains the carbon dioxide restart-file
@@ -670,24 +639,27 @@ Description
 \texttt{preeq} & Contains the equilibration restart-files
 (\texttt{zif8\_preeq\_*.rst}) and the topology files
 (\texttt{shake\_zif8\_*.top}). \\
+\bottomrule()
 \end{longtable}
 
+\hypertarget{part-b.1-gas-simulation-in-zif-8}{%
 \section{Part B.1) Gas simulation in
-ZIF-8}\label{part-b.1-gas-simulation-in-zif-8}
+ZIF-8}\label{part-b.1-gas-simulation-in-zif-8}}
 
 The first part of the exercise is to simulate the diffusion of carbon
 dioxide molecules in the ZIF-8 framework at the assigned temperature
 values. The carbon dioxide loading is set to the two assigned loadings
 per student.
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, coltitle=black, leftrule=.75mm, rightrule=.15mm, bottomrule=.15mm, titlerule=0mm, breakable, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, colback=white, toptitle=1mm, colframe=quarto-callout-note-color-frame, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colback=white, rightrule=.15mm, bottomrule=.15mm, coltitle=black, toprule=.15mm, bottomtitle=1mm, arc=.35mm, colframe=quarto-callout-note-color-frame, opacityback=0, toptitle=1mm, breakable, titlerule=0mm, left=2mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white]
 
 This part of the exercise is performed twice with the two assigned
 carbon dioxide loadings. The simulations can be run in parallel.
 
 \end{tcolorbox}
 
-\subsection*{System Setup}\label{system-setup}
+\hypertarget{system-setup}{%
+\subsection*{System Setup}\label{system-setup}}
 \addcontentsline{toc}{subsection}{System Setup}
 
 \markright{System Setup}
@@ -716,7 +688,8 @@ The system setup is done by running the following command:
 \end{Highlighting}
 \end{Shaded}
 
-\subsection*{Simulation}\label{simulation}
+\hypertarget{simulation}{%
+\subsection*{Simulation}\label{simulation}}
 \addcontentsline{toc}{subsection}{Simulation}
 
 \markright{Simulation}
@@ -736,7 +709,7 @@ assigned temperature, generated restart file, and topology file.
       file_prefix   = XXX-01;
 \end{verbatim}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, coltitle=black, leftrule=.75mm, rightrule=.15mm, bottomrule=.15mm, titlerule=0mm, breakable, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, colback=white, toptitle=1mm, colframe=quarto-callout-note-color-frame, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colback=white, rightrule=.15mm, bottomrule=.15mm, coltitle=black, toprule=.15mm, bottomtitle=1mm, arc=.35mm, colframe=quarto-callout-note-color-frame, opacityback=0, toptitle=1mm, breakable, titlerule=0mm, left=2mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white]
 
 Replace \texttt{XXX} with the assigned temperature value and the
 corresponding restart and topology files. The \texttt{file\_prefix} can
@@ -762,7 +735,7 @@ Start multiple input files one after the other
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, coltitle=black, leftrule=.75mm, rightrule=.15mm, bottomrule=.15mm, titlerule=0mm, breakable, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, colback=white, toptitle=1mm, colframe=quarto-callout-important-color-frame, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colback=white, rightrule=.15mm, bottomrule=.15mm, coltitle=black, toprule=.15mm, bottomtitle=1mm, arc=.35mm, colframe=quarto-callout-important-color-frame, opacityback=0, toptitle=1mm, breakable, titlerule=0mm, left=2mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white]
 
 The overall equilibration is split into two stages. The first stage is a
 10 ps NVT equilibration (\texttt{run-01.in}). The second stage is a 10
@@ -772,8 +745,9 @@ ps each (\texttt{run-03.in} and \texttt{run-04.in}).
 
 \end{tcolorbox}
 
+\hypertarget{extract-carbon-dioxide-molecule}{%
 \subsection*{Extract Carbon Dioxide
-Molecule}\label{extract-carbon-dioxide-molecule}
+Molecule}\label{extract-carbon-dioxide-molecule}}
 \addcontentsline{toc}{subsection}{Extract Carbon Dioxide Molecule}
 
 \markright{Extract Carbon Dioxide Molecule}
@@ -795,13 +769,14 @@ and
 \end{Highlighting}
 \end{Shaded}
 
-\subsection*{Einstein Relation}\label{einstein-relation}
+\hypertarget{einstein-relation}{%
+\subsection*{Einstein Relation}\label{einstein-relation}}
 \addcontentsline{toc}{subsection}{Einstein Relation}
 
 \markright{Einstein Relation}
 
-\textbf{1.} Calculate the \hyperref[einstein-relation]{mean squared
-displacement (MSD)} of the carbon dioxide molecule using the
+\textbf{1.} Calculate the \protect\hyperlink{einstein-relation}{mean
+squared displacement (MSD)} of the carbon dioxide molecule using the
 \texttt{msd} tool:
 
 \begin{Shaded}
@@ -819,21 +794,23 @@ displacement (MSD)} of the carbon dioxide molecule using the
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, coltitle=black, leftrule=.75mm, rightrule=.15mm, bottomrule=.15mm, titlerule=0mm, breakable, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, colback=white, toptitle=1mm, colframe=quarto-callout-important-color-frame, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colback=white, rightrule=.15mm, bottomrule=.15mm, coltitle=black, toprule=.15mm, bottomtitle=1mm, arc=.35mm, colframe=quarto-callout-important-color-frame, opacityback=0, toptitle=1mm, breakable, titlerule=0mm, left=2mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white]
 
 For both assigned carbon dioxide loadings, insert the corresponding
 self-diffusion coefficient values into the \textbf{Google Sheets}.
 
 \end{tcolorbox}
 
-\subsection*{Green-Kubo Relation}\label{green-kubo-relation}
+\hypertarget{green-kubo-relation}{%
+\subsection*{Green-Kubo Relation}\label{green-kubo-relation}}
 \addcontentsline{toc}{subsection}{Green-Kubo Relation}
 
 \markright{Green-Kubo Relation}
 
-\textbf{1.} Calculate the \hyperref[green-kubo-relation]{velocity
-autocorrelation function (VACF)} of the carbon dioxide molecule using
-the \texttt{vacf} tool:
+\textbf{1.} Calculate the
+\protect\hyperlink{green-kubo-relation}{velocity autocorrelation
+function (VACF)} of the carbon dioxide molecule using the \texttt{vacf}
+tool:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -849,21 +826,22 @@ the \texttt{vacf} tool:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, coltitle=black, leftrule=.75mm, rightrule=.15mm, bottomrule=.15mm, titlerule=0mm, breakable, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, colback=white, toptitle=1mm, colframe=quarto-callout-important-color-frame, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colback=white, rightrule=.15mm, bottomrule=.15mm, coltitle=black, toprule=.15mm, bottomtitle=1mm, arc=.35mm, colframe=quarto-callout-important-color-frame, opacityback=0, toptitle=1mm, breakable, titlerule=0mm, left=2mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white]
 
 For both assigned carbon dioxide loadings, insert the corresponding
 self-diffusion coefficient values into the \textbf{Google Sheets}.
 
 \end{tcolorbox}
 
+\hypertarget{radial-distribution-function}{%
 \subsection*{Radial Distribution
-Function}\label{radial-distribution-function}
+Function}\label{radial-distribution-function}}
 \addcontentsline{toc}{subsection}{Radial Distribution Function}
 
 \markright{Radial Distribution Function}
 
 \textbf{1.} Calculate the
-\hyperref[radial-distribution-functions-ux28rdfsux29]{radial
+\protect\hyperlink{radial-distribution-functions-ux28rdfsux29}{radial
 distribution function (RDF)} of the carbon dioxide molecule using the
 \texttt{rdf\_zif8} tool:
 
@@ -882,7 +860,7 @@ distribution function (RDF)} of the carbon dioxide molecule using the
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, coltitle=black, leftrule=.75mm, rightrule=.15mm, bottomrule=.15mm, titlerule=0mm, breakable, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, colback=white, toptitle=1mm, colframe=quarto-callout-note-color-frame, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colback=white, rightrule=.15mm, bottomrule=.15mm, coltitle=black, toprule=.15mm, bottomtitle=1mm, arc=.35mm, colframe=quarto-callout-note-color-frame, opacityback=0, toptitle=1mm, breakable, titlerule=0mm, left=2mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white]
 
 The RDF calculation will generate a \texttt{output} file named
 \texttt{rdf-C-C.out} and \texttt{rdf-Zn-C.out}, accordingly. Plot the
@@ -891,7 +869,8 @@ plotting tool.
 
 \end{tcolorbox}
 
-\subsection*{Visualization}\label{visualization}
+\hypertarget{visualization}{%
+\subsection*{Visualization}\label{visualization}}
 \addcontentsline{toc}{subsection}{Visualization}
 
 \markright{Visualization}
@@ -912,7 +891,7 @@ plotting tool.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, coltitle=black, leftrule=.75mm, rightrule=.15mm, bottomrule=.15mm, titlerule=0mm, breakable, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, colback=white, toptitle=1mm, colframe=quarto-callout-note-color-frame, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colback=white, rightrule=.15mm, bottomrule=.15mm, coltitle=black, toprule=.15mm, bottomtitle=1mm, arc=.35mm, colframe=quarto-callout-note-color-frame, opacityback=0, toptitle=1mm, breakable, titlerule=0mm, left=2mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white]
 
 The \texttt{traj2box} tool generates a box file that can be visualized
 in VMD. The box file contains the unit cell information with \texttt{X}
@@ -963,13 +942,15 @@ representations are:
   \texttt{File\ \textgreater{}\ Render\ \textgreater{}\ Tachyon\ (internal,\ in-memory\ rendering)}
 \end{itemize}
 
+\hypertarget{part-b.2-thermal-expansion-of-zif-8}{%
 \section{Part B.2) Thermal Expansion of
-ZIF-8}\label{part-b.2-thermal-expansion-of-zif-8}
+ZIF-8}\label{part-b.2-thermal-expansion-of-zif-8}}
 
 The second part of the exercise is to calculate the thermal expansion of
 the ZIF-8 framework at the assigned temperature values.
 
-\subsection*{System Setup}\label{system-setup-1}
+\hypertarget{system-setup-1}{%
+\subsection*{System Setup}\label{system-setup-1}}
 \addcontentsline{toc}{subsection}{System Setup}
 
 \markright{System Setup}
@@ -985,7 +966,8 @@ The system setup is done by running the following command:
 \end{Highlighting}
 \end{Shaded}
 
-\subsection*{Simulation}\label{simulation-1}
+\hypertarget{simulation-1}{%
+\subsection*{Simulation}\label{simulation-1}}
 \addcontentsline{toc}{subsection}{Simulation}
 
 \markright{Simulation}
@@ -1005,7 +987,7 @@ assigned temperature, generated restart file, and topology file.
       file_prefix   = zif8-01;
 \end{verbatim}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, coltitle=black, leftrule=.75mm, rightrule=.15mm, bottomrule=.15mm, titlerule=0mm, breakable, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, colback=white, toptitle=1mm, colframe=quarto-callout-note-color-frame, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colback=white, rightrule=.15mm, bottomrule=.15mm, coltitle=black, toprule=.15mm, bottomtitle=1mm, arc=.35mm, colframe=quarto-callout-note-color-frame, opacityback=0, toptitle=1mm, breakable, titlerule=0mm, left=2mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white]
 
 Replace \texttt{XXX} with the assigned temperature value. The
 \texttt{file\_prefix} can be any name you choose. Please make sure to
@@ -1022,7 +1004,7 @@ different simulation steps.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, coltitle=black, leftrule=.75mm, rightrule=.15mm, bottomrule=.15mm, titlerule=0mm, breakable, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, colback=white, toptitle=1mm, colframe=quarto-callout-note-color-frame, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colback=white, rightrule=.15mm, bottomrule=.15mm, coltitle=black, toprule=.15mm, bottomtitle=1mm, arc=.35mm, colframe=quarto-callout-note-color-frame, opacityback=0, toptitle=1mm, breakable, titlerule=0mm, left=2mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white]
 
 The overall equilibration is split into two stages. The first stage is a
 10 ps NVT equilibration (\texttt{run-01.in}). The second stage is a 10
@@ -1032,7 +1014,8 @@ production run is performed for 500 ps (\texttt{run-03.in}). Only run
 
 \end{tcolorbox}
 
-\subsection*{Analysis}\label{analysis}
+\hypertarget{analysis}{%
+\subsection*{Analysis}\label{analysis}}
 \addcontentsline{toc}{subsection}{Analysis}
 
 \markright{Analysis}
@@ -1057,17 +1040,14 @@ framework using the \texttt{average\_a} tool:
 
 \textbf{3.} Calculate the thermal expansion coefficient using the
 following formula, see
-\hyperref[linear--volumetric-thermal-expansion-coefficient]{thermal
+\protect\hyperlink{linear--volumetric-thermal-expansion-coefficient}{thermal
 expansion}
 
-\section{Analysis}\label{analysis-1}
+\hypertarget{analysis-1}{%
+\section{Analysis}\label{analysis-1}}
 
-\section*{Preanalysis}\label{preanalysis}
-\addcontentsline{toc}{section}{Preanalysis}
-
-\markboth{Preanalysis}{Preanalysis}
-
-\subsection{Log-file check}\label{log-file-check}
+\hypertarget{log-file-check}{%
+\subsection{Log-file check}\label{log-file-check}}
 
 Open the \texttt{*.log} file with any editor.
 
@@ -1088,7 +1068,8 @@ the simulation for all files:
 \end{Highlighting}
 \end{Shaded}
 
-\subsection{Visual inspection}\label{visual-inspection}
+\hypertarget{visual-inspection}{%
+\subsection{Visual inspection}\label{visual-inspection}}
 
 Check if the system is behaving as expected.
 
@@ -1105,7 +1086,8 @@ It is a good sign if
   no unanticipated movements can be observed etc.
 \end{itemize}
 
-\subsection*{Troubleshooting}\label{troubleshooting}
+\hypertarget{troubleshooting}{%
+\subsection*{Troubleshooting}\label{troubleshooting}}
 \addcontentsline{toc}{subsection}{Troubleshooting}
 
 \markright{Troubleshooting}
@@ -1127,8 +1109,9 @@ results:
 
 etc.
 
+\hypertarget{equilibrium-state-of-simulation}{%
 \section*{Equilibrium state of
-simulation}\label{equilibrium-state-of-simulation}
+simulation}\label{equilibrium-state-of-simulation}}
 \addcontentsline{toc}{section}{Equilibrium state of simulation}
 
 \markboth{Equilibrium state of simulation}{Equilibrium state of
@@ -1139,7 +1122,7 @@ simulation, it is essential to ensure that the system is in an
 equilibrium state. However, what constitutes an \emph{equilibrium
 state}?
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{An equilibrium state:}, coltitle=black, leftrule=.75mm, rightrule=.15mm, bottomrule=.15mm, titlerule=0mm, breakable, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, colback=white, toptitle=1mm, colframe=quarto-callout-important-color-frame, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colback=white, rightrule=.15mm, bottomrule=.15mm, coltitle=black, toprule=.15mm, bottomtitle=1mm, arc=.35mm, colframe=quarto-callout-important-color-frame, opacityback=0, toptitle=1mm, breakable, titlerule=0mm, left=2mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{An equilibrium state:}, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white]
 
 can be defined as a state in which macroscopic properties \(A\)
 (\emph{e.g} temperture \(T\), pressure \(P\), energies \(E\), volume
@@ -1151,8 +1134,9 @@ Once these properties fluctuate around a constant pattern without any
 long-term trends, it can be assumed that the system reached an
 equilibrium state.
 
+\hypertarget{arithmetic-average-standard-deviation-and-standard-error}{%
 \subsection{Arithmetic Average, Standard Deviation and Standard
-Error}\label{arithmetic-average-standard-deviation-and-standard-error}
+Error}\label{arithmetic-average-standard-deviation-and-standard-error}}
 
 The aforementioned constant relaxation of the properties can be verified
 by calculating the arithmetic mean of the properties
@@ -1171,7 +1155,8 @@ A_{\sigma }= \sqrt{ \frac{1}{n}\sum_{i=0}^{n} (a(t_{i}) - \left < A \right > )^2
 A_{\nu} = \frac{A_{\sigma }}{\sqrt{n}}
 \]
 
-\subsection{Running Average}\label{running-average}
+\hypertarget{running-average}{%
+\subsection{Running Average}\label{running-average}}
 
 Further the running average \(\left < A \right >_{\tau}\) at time
 \(\tau\) with a window size of \(\omega\) and a gap size \(g\)
@@ -1184,22 +1169,26 @@ Further the running average \(\left < A \right >_{\tau}\) at time
 
 can help to estimate the fluctuation of the properties over time.
 
-\subsection{Cummulative Average}\label{cummulative-average}
+\hypertarget{cummulative-average}{%
+\subsection{Cummulative Average}\label{cummulative-average}}
 
 And the cumulative average is a running average that is added at each
 step. \[
 \left < A \right >_n = \frac{(n-1)\left < A \right >_{n-1} + \left < A \right >_n}{n}
 \]
 
-\subsection{Linear Regression Fit}\label{linear-regression-fit}
+\hypertarget{linear-regression-fit}{%
+\subsection{Linear Regression Fit}\label{linear-regression-fit}}
 
 Further linear regression fit helps to estimate the trend of your
 simulation.
 
-For more further detail: \href{../guides/statistics.qmd}{statistics}
+For more further detail:
+\protect\hyperlink{statistical-excursion}{statistics}
 
+\hypertarget{plot-of-temperature-over-simulation-time}{%
 \subsection{Plot of temperature over simulation
-time}\label{plot-of-temperature-over-simulation-time}
+time}\label{plot-of-temperature-over-simulation-time}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1270,18 +1259,17 @@ Shape of data:  (50000, 12)
 
 \begin{figure}[H]
 
-\centering{
-
-\includegraphics{exercise_b/analysis_b_files/figure-pdf/fig-temp-output-2.pdf}
+{\centering \includegraphics{exercise_b/analysis_b_files/figure-pdf/fig-temp-output-2.png}
 
 }
 
 \caption{\label{fig-temp}Temperature vs Time plot}
 
-\end{figure}%
+\end{figure}
 
+\hypertarget{linear-volumetric-thermal-expansion-coefficient}{%
 \section*{Linear / Volumetric Thermal Expansion
-Coefficient}\label{linear-volumetric-thermal-expansion-coefficient}
+Coefficient}\label{linear-volumetric-thermal-expansion-coefficient}}
 \addcontentsline{toc}{section}{Linear / Volumetric Thermal Expansion
 Coefficient}
 
@@ -1352,8 +1340,9 @@ volume is calculatd by: \[
 V = a b c \sqrt{1-\mathrm{cos}^2(\alpha) -\mathrm{cos}^2(\beta) - \mathrm{cos}^2(\gamma)+ 2(\mathrm{cos}(\alpha) \mathrm{cos}(\beta) \mathrm{cos}(\gamma))}
 \]
 
+\hypertarget{plot-lattice-parameter-vs.-temperature}{%
 \subsection{Plot Lattice Parameter
-vs.~Temperature}\label{plot-lattice-parameter-vs.-temperature}
+vs.~Temperature}\label{plot-lattice-parameter-vs.-temperature}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1382,24 +1371,23 @@ vs.~Temperature}\label{plot-lattice-parameter-vs.-temperature}
 
 \begin{figure}[H]
 
-\centering{
-
-\includegraphics{exercise_b/analysis_b_files/figure-pdf/fig-lattice-output-1.pdf}
+{\centering \includegraphics{exercise_b/analysis_b_files/figure-pdf/fig-lattice-output-1.png}
 
 }
 
 \caption{\label{fig-lattice}T vs a plot}
 
-\end{figure}%
+\end{figure}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Experimental Measurement}, coltitle=black, leftrule=.75mm, rightrule=.15mm, bottomrule=.15mm, titlerule=0mm, breakable, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, colback=white, toptitle=1mm, colframe=quarto-callout-note-color-frame, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colback=white, rightrule=.15mm, bottomrule=.15mm, coltitle=black, toprule=.15mm, bottomtitle=1mm, arc=.35mm, colframe=quarto-callout-note-color-frame, opacityback=0, toptitle=1mm, breakable, titlerule=0mm, left=2mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Experimental Measurement}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white]
 
 X-ray diffraction (XRD) powder X-ray diffraction (PXRD) neutron powder
 diffraction (NPD)
 
 \end{tcolorbox}
 
-\section*{Interaction Energy}\label{interaction-energy}
+\hypertarget{interaction-energy}{%
+\section*{Interaction Energy}\label{interaction-energy}}
 \addcontentsline{toc}{section}{Interaction Energy}
 
 \markboth{Interaction Energy}{Interaction Energy}
@@ -1417,8 +1405,9 @@ In doing so you take the average total energy
 systems (guest@host, host, guest) at a long enough equilibrated
 trajectories.
 
+\hypertarget{radial-distribution-functions-rdfs}{%
 \section*{Radial Distribution Functions
-(RDFs)}\label{radial-distribution-functions-rdfs}
+(RDFs)}\label{radial-distribution-functions-rdfs}}
 \addcontentsline{toc}{section}{Radial Distribution Functions (RDFs)}
 
 \markboth{Radial Distribution Functions (RDFs)}{Radial Distribution
@@ -1450,7 +1439,7 @@ with the probability \(G(r)\) \[
 N_{ab}(r) = \rho G_{ab}(r)
 \]
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Dirc-Delta Function}, coltitle=black, leftrule=.75mm, rightrule=.15mm, bottomrule=.15mm, titlerule=0mm, breakable, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, colback=white, toptitle=1mm, colframe=quarto-callout-tip-color-frame, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colback=white, rightrule=.15mm, bottomrule=.15mm, coltitle=black, toprule=.15mm, bottomtitle=1mm, arc=.35mm, colframe=quarto-callout-tip-color-frame, opacityback=0, toptitle=1mm, breakable, titlerule=0mm, left=2mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Dirc-Delta Function}, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white]
 
 \[
 \delta(x-x_0) =  \begin{cases}
@@ -1463,7 +1452,8 @@ N_{ab}(r) = \rho G_{ab}(r)
 
 \end{tcolorbox}
 
-\section*{Self-Diffusion Coefficient}\label{self-diffusion-coefficient}
+\hypertarget{self-diffusion-coefficient}{%
+\section*{Self-Diffusion Coefficient}\label{self-diffusion-coefficient}}
 \addcontentsline{toc}{section}{Self-Diffusion Coefficient}
 
 \markboth{Self-Diffusion Coefficient}{Self-Diffusion Coefficient}
@@ -1496,7 +1486,8 @@ positions and \(N\) the number of atoms in the particle.
 As well as \(\dot{A}\) is the molecular velocity which should be also
 considered as center of mass.
 
-\subsection*{Einstein-Relation}\label{einstein-relation-1}
+\hypertarget{einstein-relation-1}{%
+\subsection*{Einstein-Relation}\label{einstein-relation-1}}
 \addcontentsline{toc}{subsection}{Einstein-Relation}
 
 \markright{Einstein-Relation}
@@ -1508,8 +1499,9 @@ mean-squared-displacement (\(MSD(\tau)\)) over time origins \(\tau\)
 D_{\mathrm{s}} = \frac{1}{2 \cdot d} \lim _{t\to \infty} \frac{d}{dt} MSD(\tau)
 \] where \(d=1,2,3\) is the dimensionality.
 
+\hypertarget{mean-squared-displacement}{%
 \subsubsection*{Mean-Squared
-Displacement}\label{mean-squared-displacement}
+Displacement}\label{mean-squared-displacement}}
 \addcontentsline{toc}{subsubsection}{Mean-Squared Displacement}
 
 The mean-squared displacement describes the the temporally displacement
@@ -1524,7 +1516,7 @@ beginning of the MSD is not linear. Only at higher correleation times
 the normal diffusion (see Figure Figure~\ref{fig-msd} (b)) behaviour
 appear.
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Question:}, coltitle=black, leftrule=.75mm, rightrule=.15mm, bottomrule=.15mm, titlerule=0mm, breakable, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, colback=white, toptitle=1mm, colframe=quarto-callout-tip-color-frame, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colback=white, rightrule=.15mm, bottomrule=.15mm, coltitle=black, toprule=.15mm, bottomtitle=1mm, arc=.35mm, colframe=quarto-callout-tip-color-frame, opacityback=0, toptitle=1mm, breakable, titlerule=0mm, left=2mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Question:}, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white]
 
 \begin{itemize}
 \tightlist
@@ -1539,7 +1531,7 @@ appear.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colbacktitle=quarto-callout-caution-color!10!white, bottomtitle=1mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Answer:}, coltitle=black, leftrule=.75mm, rightrule=.15mm, bottomrule=.15mm, titlerule=0mm, breakable, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, colback=white, toptitle=1mm, colframe=quarto-callout-caution-color-frame, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colback=white, rightrule=.15mm, bottomrule=.15mm, coltitle=black, toprule=.15mm, bottomtitle=1mm, arc=.35mm, colframe=quarto-callout-caution-color-frame, opacityback=0, toptitle=1mm, breakable, titlerule=0mm, left=2mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Answer:}, leftrule=.75mm, colbacktitle=quarto-callout-caution-color!10!white]
 
 The self-diffusion coefficient is the slope of the MSD divided by 2
 \(\cdot d\).
@@ -1551,8 +1543,9 @@ which represents the difffusion coefficient.
 Therefore it is important to have really linear behaviour in order to
 apply the Einstein relation.
 
-You get the slope by fitting a \href{../guides/statistics.qmd}{linear
-regression} at the last linear section.
+You get the slope by fitting a
+\protect\hyperlink{statistical-excursion}{linear regression} at the last
+linear section.
 
 \end{tcolorbox}
 
@@ -1636,17 +1629,16 @@ regression} at the last linear section.
 
 \begin{figure}[H]
 
-\centering{
-
-\includegraphics{exercise_b/analysis_b_files/figure-pdf/fig-msd-output-1.pdf}
+{\centering \includegraphics{exercise_b/analysis_b_files/figure-pdf/fig-msd-output-1.png}
 
 }
 
 \caption{\label{fig-msd}(a) MSD(t) plot, (b) diffusion regimes}
 
-\end{figure}%
+\end{figure}
 
-\subsection*{Green-Kubo Relation}\label{green-kubo-relation-1}
+\hypertarget{green-kubo-relation-1}{%
+\subsection*{Green-Kubo Relation}\label{green-kubo-relation-1}}
 \addcontentsline{toc}{subsection}{Green-Kubo Relation}
 
 \markright{Green-Kubo Relation}
@@ -1657,8 +1649,9 @@ coefficent \(D_{\mathrm{s}}\) \[
 D_{\mathrm{s}} = \frac{1}{d} \int _{0}^{\infty} VACF(t)  dt
 \] where \(d=1,2,3\) is the dimension.
 
+\hypertarget{veloctiy-autocorrelation-function}{%
 \subsubsection{Veloctiy-Autocorrelation
-Function}\label{veloctiy-autocorrelation-function}
+Function}\label{veloctiy-autocorrelation-function}}
 
 The \href{}{Velocity-Autocorrelatin Function} \(VACF(\tau)\) is averaged
 over a time interval \(\tau\) \[
@@ -1708,17 +1701,16 @@ VACF(\tau) = \left < \frac{1}{N} \sum_{i=1}^{N} |\vec{v} _{i}(t) \vec{v} _{i}(t_
 
 \begin{figure}[H]
 
-\centering{
-
-\includegraphics{exercise_b/analysis_b_files/figure-pdf/fig-vacf-output-1.pdf}
+{\centering \includegraphics{exercise_b/analysis_b_files/figure-pdf/fig-vacf-output-1.png}
 
 }
 
 \caption{\label{fig-vacf}VACF(t) plot}
 
-\end{figure}%
+\end{figure}
 
-\section*{Activation Energy}\label{activation-energy}
+\hypertarget{activation-energy}{%
+\section*{Activation Energy}\label{activation-energy}}
 \addcontentsline{toc}{section}{Activation Energy}
 
 \markboth{Activation Energy}{Activation Energy}
@@ -1732,25 +1724,24 @@ the temperature.
 
 With this formalism we can apply an
 \href{https://en.wikipedia.org/wiki/Arrhenius_equation}{Arrhenius
-equation} to \href{../guides/statistics.qmd}{fit a linear function} to
-get the activation energy \(E_{\mathrm{a}}\) \[
+equation} to \protect\hyperlink{statistical-excursion}{fit a linear
+function} to get the activation energy \(E_{\mathrm{a}}\) \[
 \ln (D_{\mathrm{s}}) = -\frac{E_{\mathrm{a}}}{RT} + \ln{D_0}
 \]
 
 \begin{figure}
 
-\centering{
-
-\includegraphics{exercise_b/analysis_b_files/figure-pdf/fig-ea-output-1.pdf}
+{\centering \includegraphics{exercise_b/analysis_b_files/figure-pdf/fig-ea-output-1.png}
 
 }
 
 \caption{\label{fig-ea}(a) D(T), (b) D(n), (c) ln(D(1000/T) and (d)
 Ea(n))}
 
-\end{figure}%
+\end{figure}
 
-\section{Checklist}\label{checklist}
+\hypertarget{checklist}{%
+\section{Checklist}\label{checklist}}
 
 All data generated along with a discussion of results fit easily on a
 single page. The images and graphs to be plotted are grouped into three
@@ -1800,13 +1791,8 @@ Subsection 3 - Group Work:
 
 \part{Templates}
 
-\section{Matplotlib}\label{matplotlib}
-
-\subsection*{How to read data into
-python:}\label{how-to-read-data-into-python}
-\addcontentsline{toc}{subsection}{How to read data into python:}
-
-\markright{How to read data into python:}
+\hypertarget{matplotlib}{%
+\section{Matplotlib}\label{matplotlib}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1831,7 +1817,8 @@ python:}\label{how-to-read-data-into-python}
  [1100.            2.22010809  301.51      ]]
 \end{verbatim}
 
-\subsection*{Two axis plot}\label{two-axis-plot}
+\hypertarget{two-axis-plot}{%
+\subsection*{Two axis plot}\label{two-axis-plot}}
 \addcontentsline{toc}{subsection}{Two axis plot}
 
 \markright{Two axis plot}
@@ -1898,10 +1885,17 @@ python:}\label{how-to-read-data-into-python}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{templates/matplotlib_files/figure-pdf/cell-3-output-1.pdf}
+\begin{figure}[H]
 
+{\centering \includegraphics{templates/matplotlib_files/figure-pdf/cell-3-output-1.png}
+
+}
+
+\end{figure}
+
+\hypertarget{line-spectra-with-gaussian-broadening}{%
 \subsection*{Line spectra with Gaussian
-broadening}\label{line-spectra-with-gaussian-broadening}
+broadening}\label{line-spectra-with-gaussian-broadening}}
 \addcontentsline{toc}{subsection}{Line spectra with Gaussian broadening}
 
 \markright{Line spectra with Gaussian broadening}
@@ -1975,9 +1969,16 @@ broadening}\label{line-spectra-with-gaussian-broadening}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{templates/matplotlib_files/figure-pdf/cell-4-output-1.pdf}
+\begin{figure}[H]
 
-\subsection*{Band Plot}\label{band-plot}
+{\centering \includegraphics{templates/matplotlib_files/figure-pdf/cell-4-output-1.png}
+
+}
+
+\end{figure}
+
+\hypertarget{band-plot}{%
+\subsection*{Band Plot}\label{band-plot}}
 \addcontentsline{toc}{subsection}{Band Plot}
 
 \markright{Band Plot}
@@ -2053,7 +2054,13 @@ broadening}\label{line-spectra-with-gaussian-broadening}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{templates/matplotlib_files/figure-pdf/cell-7-output-1.pdf}
+\begin{figure}[H]
+
+{\centering \includegraphics{templates/matplotlib_files/figure-pdf/cell-7-output-1.png}
+
+}
+
+\end{figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2093,7 +2100,7 @@ hbar =  1.0545718176461565e-34 J s
 mol =  6.02214076e+23 mol
 cal =  4.184 J
 kB =  1.380649e-23 J K-1
-u =  1.6605390666e-27 kg
+u =  1.66053906892e-27 kg
 A =  1e-10 m
 \end{verbatim}
 
@@ -2101,7 +2108,8 @@ $\nu = \frac{1}{2\pi}\sqrt{\frac{k}{\mu}}$ in cm $^{-1}$
 
 $\mu = \frac{m_1 \cdot m_2}{m_1 + m_2}$ in g $\cdot$ mol $^{-1}$
 
-\subsection*{Plot functions}\label{plot-functions}
+\hypertarget{plot-functions}{%
+\subsection*{Plot functions}\label{plot-functions}}
 \addcontentsline{toc}{subsection}{Plot functions}
 
 \markright{Plot functions}
@@ -2153,9 +2161,16 @@ $\mu = \frac{m_1 \cdot m_2}{m_1 + m_2}$ in g $\cdot$ mol $^{-1}$
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{templates/matplotlib_files/figure-pdf/cell-9-output-1.pdf}
+\begin{figure}[H]
 
-\subsection*{Fit a function to data}\label{fit-a-function-to-data}
+{\centering \includegraphics{templates/matplotlib_files/figure-pdf/cell-9-output-1.png}
+
+}
+
+\end{figure}
+
+\hypertarget{fit-a-function-to-data}{%
+\subsection*{Fit a function to data}\label{fit-a-function-to-data}}
 \addcontentsline{toc}{subsection}{Fit a function to data}
 
 \markright{Fit a function to data}
@@ -2211,14 +2226,21 @@ $\mu = \frac{m_1 \cdot m_2}{m_1 + m_2}$ in g $\cdot$ mol $^{-1}$
 \end{Shaded}
 
 \begin{verbatim}
-k =  2.999906124899833  +/-  0.001558921105905775
-r0 =  4.999755806543272  +/-  0.001928312149336986
-R2 =  0.9998566451584676
+k =  3.0001519238121075  +/-  0.0015751184414068474
+r0 =  5.000995310066044  +/-  0.0019478807815955332
+R2 =  0.9998536203850723
 \end{verbatim}
 
-\includegraphics{templates/matplotlib_files/figure-pdf/cell-10-output-2.pdf}
+\begin{figure}[H]
 
-\section{Poster Templates}\label{poster-templates}
+{\centering \includegraphics{templates/matplotlib_files/figure-pdf/cell-10-output-2.png}
+
+}
+
+\end{figure}
+
+\hypertarget{poster-templates}{%
+\section{Poster Templates}\label{poster-templates}}
 
 Here are some poster templates:
 
@@ -2238,9 +2260,8 @@ the poster in reasonable sections.
 
 \part{Guides}
 
-\section{Statistical Excursion}\label{statistical-excursion}
-
-\section{Linear Regression}\label{linear-regression}
+\hypertarget{statistical-excursion}{%
+\section{Statistical Excursion}\label{statistical-excursion}}
 
 Regression analsis helps to understand the relationship between
 independent and dependent variables.
@@ -2284,12 +2305,8 @@ so that \(\alpha_0\) and \(\alpha_1\) can computed as
 where \(\bar{x}\) and \(\bar{y}\) are the respective averages and
 \(\Delta x_i\) \(\Delta y_i\) are the respective deviations.
 
-\section{Linux Quickstart Guide}\label{linux-quickstart-guide}
-
-\section*{Introduction}\label{introduction}
-\addcontentsline{toc}{section}{Introduction}
-
-\markboth{Introduction}{Introduction}
+\hypertarget{linux-quickstart-guide}{%
+\section{Linux Quickstart Guide}\label{linux-quickstart-guide}}
 
 This guide is for people new to Linux. The aim of this documents is to
 help with everyday challenges when working with Linux systems.
@@ -2304,27 +2321,26 @@ recommended):
 
 \url{https://github.com/jlevy/the-art-of-command-line}
 
+\hypertarget{probably-most-used-linux-commands}{%
 \section*{Probably most used linux
-commands:}\label{probably-most-used-linux-commands}
+commands:}\label{probably-most-used-linux-commands}}
 \addcontentsline{toc}{section}{Probably most used linux commands:}
 
 \markboth{Probably most used linux commands:}{Probably most used linux
 commands:}
 
-\phantomsection\label{tab:my_label}
+\hypertarget{tab:my_label}{}
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4861}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4861}}@{}}
-\toprule\noalign{}
+\toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
 command {[}options{]}
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 description
 \end{minipage} \\
-\midrule\noalign{}
+\midrule()
 \endhead
-\bottomrule\noalign{}
-\endlastfoot
 \multicolumn{2}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.9722} + 2\tabcolsep}@{}}{%
 \textbf{cd} /path/to/directory \textbar{} Change to directory} \\
 \textbf{mkdir} {[}options{]} directory & Create a new directory \\
@@ -2360,37 +2376,37 @@ processes \\
 to exit \\
 \textbf{kill} {[}options{]} pid & Stop a process. If the process refuses
 to stop, use kill -9 pid \\
+\bottomrule()
 \end{longtable}
 
-\section*{More commands are:}\label{more-commands-are}
+\hypertarget{more-commands-are}{%
+\section*{More commands are:}\label{more-commands-are}}
 \addcontentsline{toc}{section}{More commands are:}
 
 \markboth{More commands are:}{More commands are:}
 
-\phantomsection\label{tab:my_label}
+\hypertarget{tab:my_label}{}
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4861}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4861}}@{}}
 \caption{Basic Linux Commands (modified version of source:
 \href{https://www.dummies.com/article/technology/computers/operating-systems/linux/common-linux-commands-196529}{here})}\tabularnewline
-\toprule\noalign{}
+\toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
 command {[}options{]}
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 description
 \end{minipage} \\
-\midrule\noalign{}
+\midrule()
 \endfirsthead
-\toprule\noalign{}
+\toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
 command {[}options{]}
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 description
 \end{minipage} \\
-\midrule\noalign{}
+\midrule()
 \endhead
-\bottomrule\noalign{}
-\endlastfoot
 \textbf{man} {[}command{]} & Display the help information for the
 specified command \\
 \textbf{echo} {[}options{]} & Print string, variable, etc. \\
@@ -2413,6 +2429,7 @@ Linux machine, over the network \\
 \textbf{who} {[}options{]} & Display who is logged on \\
 \textbf{\textgreater{}} {[}oufile{]} & Write stdout (text written to
 terminal) to outfile (e.g.~dftb+ \textgreater{} dftb.out) \\
+\bottomrule()
 \end{longtable}
 
 You can use \texttt{Tab} for autocompletion of commands.
@@ -2437,7 +2454,7 @@ On the desktop computers in the office you can search the history with
 then be autocompleted by searching in the history for matching commands
 you entered before.
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, coltitle=black, leftrule=.75mm, rightrule=.15mm, bottomrule=.15mm, titlerule=0mm, breakable, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, colback=white, toptitle=1mm, colframe=quarto-callout-note-color-frame, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colback=white, rightrule=.15mm, bottomrule=.15mm, coltitle=black, toprule=.15mm, bottomtitle=1mm, arc=.35mm, colframe=quarto-callout-note-color-frame, opacityback=0, toptitle=1mm, breakable, titlerule=0mm, left=2mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white]
 
 If you want quick access to files or directories in your home folder,
 the \texttt{\textasciitilde{}}-symbol is an alias for your home
@@ -2445,7 +2462,8 @@ directory \texttt{/home/user} (= \texttt{\textbackslash{}\$HOME}).\\
 
 \end{tcolorbox}
 
-\section*{How to: edit files}\label{how-to-edit-files}
+\hypertarget{how-to-edit-files}{%
+\section*{How to: edit files}\label{how-to-edit-files}}
 \addcontentsline{toc}{section}{How to: edit files}
 
 \markboth{How to: edit files}{How to: edit files}
@@ -2473,7 +2491,8 @@ exit vim, just type :q and Enter.}}\\
 \href{https://github.com/LeCoupa/awesome-cheatsheets/blob/master/tools/vim.txt}{Vim
 cheat sheet}\\
 
-\section*{How to: gawk}\label{how-to-gawk}
+\hypertarget{how-to-gawk}{%
+\section*{How to: gawk}\label{how-to-gawk}}
 \addcontentsline{toc}{section}{How to: gawk}
 
 \markboth{How to: gawk}{How to: gawk}
@@ -2512,7 +2531,8 @@ statements can be used similar in the language \texttt{C}. And
 spaces which then generate new columns that can be printed with
 \texttt{gawk}.
 
-\section*{How to: sed}\label{how-to-sed}
+\hypertarget{how-to-sed}{%
+\section*{How to: sed}\label{how-to-sed}}
 \addcontentsline{toc}{section}{How to: sed}
 
 \markboth{How to: sed}{How to: sed}
@@ -2544,7 +2564,7 @@ and "kiwi"), use:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, coltitle=black, leftrule=.75mm, rightrule=.15mm, bottomrule=.15mm, titlerule=0mm, breakable, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, colback=white, toptitle=1mm, colframe=quarto-callout-note-color-frame, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, colback=white, rightrule=.15mm, bottomrule=.15mm, coltitle=black, toprule=.15mm, bottomtitle=1mm, arc=.35mm, colframe=quarto-callout-note-color-frame, opacityback=0, toptitle=1mm, breakable, titlerule=0mm, left=2mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white]
 
 Note that symbols, numbers, words, strings can be replaced with a white
 space (" ") to separate columns which can be printed with \texttt{gawk}.
@@ -2552,7 +2572,8 @@ The combination of sed and gawk is very powerful!
 
 \end{tcolorbox}
 
-\section*{How to: for-loops in bash}\label{how-to-for-loops-in-bash}
+\hypertarget{how-to-for-loops-in-bash}{%
+\section*{How to: for-loops in bash}\label{how-to-for-loops-in-bash}}
 \addcontentsline{toc}{section}{How to: for-loops in bash}
 
 \markboth{How to: for-loops in bash}{How to: for-loops in bash}
@@ -2561,7 +2582,7 @@ A simple for loop looks like:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \PreprocessorTok{[}\SpecialStringTok{list}\PreprocessorTok{]}
+\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in}\NormalTok{ [list]}
     \ControlFlowTok{do} 
     \ExtensionTok{[commands]}
     \ControlFlowTok{done} 
@@ -2604,7 +2625,8 @@ calculation):
 \end{Highlighting}
 \end{Shaded}
 
-\section*{How to: ssh \& scp}\label{how-to-ssh-scp}
+\hypertarget{how-to-ssh-scp}{%
+\section*{How to: ssh \& scp}\label{how-to-ssh-scp}}
 \addcontentsline{toc}{section}{How to: ssh \& scp}
 
 \markboth{How to: ssh \& scp}{How to: ssh \& scp}
@@ -2671,12 +2693,13 @@ To login into remote computers without password authentication run
 \emph{ssh-copyid} \$USER@\$HOST and enter the password. This is
 especially convenient for accessing the clusters.
 
-\section*{Appendix: Vim Cheat Sheet}\label{appendix-vim-cheat-sheet}
+\hypertarget{appendix-vim-cheat-sheet}{%
+\section*{Appendix: Vim Cheat Sheet}\label{appendix-vim-cheat-sheet}}
 \addcontentsline{toc}{section}{Appendix: Vim Cheat Sheet}
 
 \markboth{Appendix: Vim Cheat Sheet}{Appendix: Vim Cheat Sheet}
 
-\begin{figure}[H]
+\begin{figure}
 
 {\centering \includegraphics[width=1\textwidth,height=\textheight]{guides/../img/vim_cheat_sheet.png}
 
@@ -2684,18 +2707,19 @@ especially convenient for accessing the clusters.
 
 \caption{Vim Cheat Sheet}
 
-\end{figure}%
+\end{figure}
 
-\section{Visual. Quickstart Guide}\label{visual.-quickstart-guide}
+\hypertarget{visual.-quickstart-guide}{%
+\section{Visual. Quickstart Guide}\label{visual.-quickstart-guide}}
 
-\section{How to: scientific plots}\label{how-to-scientific-plots}
-
-\subsection{xmgrace}\label{xmgrace}
+\hypertarget{xmgrace}{%
+\subsection{xmgrace}\label{xmgrace}}
 
 A tutorial can be found here:\\
 \url{https://universe.bits-pilani.ac.in/uploads/Pilani/navin/ReadPDFDOC/xmgrace.pdf}
 
-\subsection{gnuplot}\label{gnuplot}
+\hypertarget{gnuplot}{%
+\subsection{gnuplot}\label{gnuplot}}
 
 A lot of example plots can be seen here (an example plot is also shown
 in the appendix):\\
@@ -2741,7 +2765,7 @@ Gnuplot template for pdf plots (resulting example plot shown below):
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}[H]
+\begin{figure}
 
 {\centering \includegraphics[width=0.75\textwidth,height=\textheight]{guides/../img/ws_plot.png}
 
@@ -2749,19 +2773,22 @@ Gnuplot template for pdf plots (resulting example plot shown below):
 
 \caption{gnuplot example plot}
 
-\end{figure}%
+\end{figure}
 
-\subsection{matplotlib}\label{matplotlib-1}
+\hypertarget{matplotlib-1}{%
+\subsection{matplotlib}\label{matplotlib-1}}
 
 Quickstart guide:\\
 \url{https://matplotlib.org/stable/users/getting_started/index.html}
 
-\subsection{julia}\label{julia}
+\hypertarget{julia}{%
+\subsection{julia}\label{julia}}
 
 Found on the net (not testet yet, but seems useful):\\
 \url{https://nextjournal.com/leandromartinez98/tips-to-create-beautiful-publication-quality-plots-in-julia}
 
-\section{How to: vmd eye candy}\label{how-to-vmd-eye-candy}
+\hypertarget{how-to-vmd-eye-candy}{%
+\section{How to: vmd eye candy}\label{how-to-vmd-eye-candy}}
 
 \begin{itemize}
 \item
@@ -2805,9 +2832,8 @@ end save it in \texttt{.vmdrc} in your home directory):
 \end{Highlighting}
 \end{Shaded}
 
-\section{Latex Quickstart Guide}\label{latex-quickstart-guide}
-
-\section{How to: LaTeX}\label{how-to-latex}
+\hypertarget{latex-quickstart-guide}{%
+\section{Latex Quickstart Guide}\label{latex-quickstart-guide}}
 
 \begin{itemize}
 \item
@@ -2832,9 +2858,8 @@ end save it in \texttt{.vmdrc} in your home directory):
   because it is getting very slow.
 \end{itemize}
 
-\section{Python Quickstart Guide}\label{python-quickstart-guide}
-
-\section{How to learn programming}\label{how-to-learn-programming}
+\hypertarget{python-quickstart-guide}{%
+\section{Python Quickstart Guide}\label{python-quickstart-guide}}
 
 \begin{itemize}
 \tightlist
@@ -2846,13 +2871,15 @@ end save it in \texttt{.vmdrc} in your home directory):
   (various languages) Udemy courses have a good reputation as well.
 \end{itemize}
 
-\section{Python Tutorial}\label{python-tutorial}
+\hypertarget{python-tutorial}{%
+\section{Python Tutorial}\label{python-tutorial}}
 
 Welcome to the \texttt{python} tutorial! In this tutorial, we will cover
 the basics of the \texttt{python} programming language, including
 variables, data types, loops, and functions.
 
-\subsection{Variables}\label{variables}
+\hypertarget{variables}{%
+\subsection{Variables}\label{variables}}
 
 In \texttt{python}, a variable is a container that holds a value. To
 create a variable, you simply assign a value to it using the assignment
@@ -2868,7 +2895,8 @@ This creates a variable called \texttt{x} and assigns it the value
 \texttt{5}. You can then use the variable \texttt{x} in your code to
 refer to the value \texttt{5}.
 
-\subsection{Data Types}\label{data-types}
+\hypertarget{data-types}{%
+\subsection{Data Types}\label{data-types}}
 
 \texttt{python} has several built-in data types, including:
 
@@ -2894,7 +2922,8 @@ variable. For example:
 \end{Highlighting}
 \end{Shaded}
 
-\subsection{Loops}\label{loops}
+\hypertarget{loops}{%
+\subsection{Loops}\label{loops}}
 
 Loops are used to repeat a block of code multiple times. In
 \texttt{python}, there are two types of loops: \texttt{for} loops and
@@ -2928,7 +2957,8 @@ condition is true. For example:
 This will output the numbers \texttt{0} through \texttt{4}, one at a
 time.
 
-\subsection{Functions}\label{functions}
+\hypertarget{functions}{%
+\subsection{Functions}\label{functions}}
 
 Functions are reusable blocks of code that perform a specific task. To
 define a function in \texttt{python}, you use the \texttt{def} keyword
@@ -2955,17 +2985,14 @@ For example:
 This will call the \texttt{greet} function with the argument
 \texttt{"Alice"}, which will print the message ``Hello, Alice!''.
 
-\subsection{Conclusion}\label{conclusion}
+\hypertarget{conclusion}{%
+\subsection{Conclusion}\label{conclusion}}
 
 That's it for the \texttt{python} tutorial! We've covered the basics of
 variables, data t
 
-\section{Data Visualization}\label{data-visualization}
-
-\subsection*{Matplotlib}\label{matplotlib-2}
-\addcontentsline{toc}{subsection}{Matplotlib}
-
-\markright{Matplotlib}
+\hypertarget{data-visualization}{%
+\section{Data Visualization}\label{data-visualization}}
 
 Matplotlib is the main plotting library in Python. It is a very powerful
 tool for creating high-quality plots and figures.
@@ -2982,9 +3009,10 @@ More informations can be found under \url{https://matplotlib.org/}
 
 Components of Matplotlib Figure:
 
-\includegraphics[width=0.5\textwidth,height=\textheight]{index_files/mediabag/anatomy.png}
+\includegraphics[width=0.5\textwidth,height=\textheight]{guides/../img/anatomy.png}
 
-\subsubsection*{Global settings}\label{global-settings}
+\hypertarget{global-settings}{%
+\subsubsection*{Global settings}\label{global-settings}}
 \addcontentsline{toc}{subsubsection}{Global settings}
 
 \begin{Shaded}
@@ -2997,7 +3025,8 @@ Components of Matplotlib Figure:
 \end{Highlighting}
 \end{Shaded}
 
-\subsubsection*{Figure}\label{figure}
+\hypertarget{figure}{%
+\subsubsection*{Figure}\label{figure}}
 \addcontentsline{toc}{subsubsection}{Figure}
 
 \begin{Shaded}
@@ -3018,9 +3047,16 @@ Components of Matplotlib Figure:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-4-output-1.pdf}
+\begin{figure}[H]
 
-\subsubsection*{Axes}\label{axes}
+{\centering \includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-4-output-1.png}
+
+}
+
+\end{figure}
+
+\hypertarget{axes}{%
+\subsubsection*{Axes}\label{axes}}
 \addcontentsline{toc}{subsubsection}{Axes}
 
 \begin{Shaded}
@@ -3039,9 +3075,16 @@ Components of Matplotlib Figure:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-5-output-1.pdf}
+\begin{figure}[H]
 
-\subsubsection*{Use different styles}\label{use-different-styles}
+{\centering \includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-5-output-1.png}
+
+}
+
+\end{figure}
+
+\hypertarget{use-different-styles}{%
+\subsubsection*{Use different styles}\label{use-different-styles}}
 \addcontentsline{toc}{subsubsection}{Use different styles}
 
 You can use different styles for your plots. The following code shows
@@ -3070,12 +3113,19 @@ how to use the \texttt{ggplot} style.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-7-output-1.pdf}
+\begin{figure}[H]
+
+{\centering \includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-7-output-1.png}
+
+}
+
+\end{figure}
 
 Other style can be found under
 \url{https://matplotlib.org/stable/gallery/style_sheets/style_sheets_reference.html}
 
-\subsubsection*{Subplots}\label{subplots}
+\hypertarget{subplots}{%
+\subsubsection*{Subplots}\label{subplots}}
 \addcontentsline{toc}{subsubsection}{Subplots}
 
 You can create subplots in a figure. The following code shows how to
@@ -3122,7 +3172,13 @@ create a figure with 2x2 subplots.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-8-output-1.pdf}
+\begin{figure}[H]
+
+{\centering \includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-8-output-1.png}
+
+}
+
+\end{figure}
 
 You can also use \texttt{gridspec} to create subplots.
 
@@ -3144,9 +3200,16 @@ You can also use \texttt{gridspec} to create subplots.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-9-output-1.pdf}
+\begin{figure}[H]
 
-\subsubsection*{Colors and Color maps}\label{colors-and-color-maps}
+{\centering \includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-9-output-1.png}
+
+}
+
+\end{figure}
+
+\hypertarget{colors-and-color-maps}{%
+\subsubsection*{Colors and Color maps}\label{colors-and-color-maps}}
 \addcontentsline{toc}{subsubsection}{Colors and Color maps}
 
 Matplotlib provides a large number of color maps. Here your can find a
@@ -3155,7 +3218,8 @@ list of all available color maps:
 colors: \url{https://matplotlib.org/stable/tutorials/colors/colors.html}
 and \url{https://matplotlib.org/stable/gallery/color/named_colors.html}.
 
-\subsubsection*{Texts and Annotations}\label{texts-and-annotations}
+\hypertarget{texts-and-annotations}{%
+\subsubsection*{Texts and Annotations}\label{texts-and-annotations}}
 \addcontentsline{toc}{subsubsection}{Texts and Annotations}
 
 \begin{Shaded}
@@ -3172,9 +3236,16 @@ and \url{https://matplotlib.org/stable/gallery/color/named_colors.html}.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-10-output-1.pdf}
+\begin{figure}[H]
 
-\subsubsection*{Logarithmic scale}\label{logarithmic-scale}
+{\centering \includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-10-output-1.png}
+
+}
+
+\end{figure}
+
+\hypertarget{logarithmic-scale}{%
+\subsubsection*{Logarithmic scale}\label{logarithmic-scale}}
 \addcontentsline{toc}{subsubsection}{Logarithmic scale}
 
 \begin{Shaded}
@@ -3221,9 +3292,16 @@ and \url{https://matplotlib.org/stable/gallery/color/named_colors.html}.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-11-output-1.pdf}
+\begin{figure}[H]
 
-\subsubsection*{Scatter / Line plot}\label{scatter-line-plot}
+{\centering \includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-11-output-1.png}
+
+}
+
+\end{figure}
+
+\hypertarget{scatter-line-plot}{%
+\subsubsection*{Scatter / Line plot}\label{scatter-line-plot}}
 \addcontentsline{toc}{subsubsection}{Scatter / Line plot}
 
 \begin{Shaded}
@@ -3244,9 +3322,16 @@ and \url{https://matplotlib.org/stable/gallery/color/named_colors.html}.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-13-output-1.pdf}
+\begin{figure}[H]
 
-\subsubsection*{Error bars}\label{error-bars}
+{\centering \includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-13-output-1.png}
+
+}
+
+\end{figure}
+
+\hypertarget{error-bars}{%
+\subsubsection*{Error bars}\label{error-bars}}
 \addcontentsline{toc}{subsubsection}{Error bars}
 
 \begin{Shaded}
@@ -3258,9 +3343,16 @@ and \url{https://matplotlib.org/stable/gallery/color/named_colors.html}.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-14-output-1.pdf}
+\begin{figure}[H]
 
-\subsubsection*{Save figure}\label{save-figure}
+{\centering \includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-14-output-1.png}
+
+}
+
+\end{figure}
+
+\hypertarget{save-figure}{%
+\subsubsection*{Save figure}\label{save-figure}}
 \addcontentsline{toc}{subsubsection}{Save figure}
 
 \begin{Shaded}
@@ -3276,9 +3368,16 @@ and \url{https://matplotlib.org/stable/gallery/color/named_colors.html}.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-15-output-1.pdf}
+\begin{figure}[H]
 
-\subsubsection*{Histogram}\label{histogram}
+{\centering \includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-15-output-1.png}
+
+}
+
+\end{figure}
+
+\hypertarget{histogram}{%
+\subsubsection*{Histogram}\label{histogram}}
 \addcontentsline{toc}{subsubsection}{Histogram}
 
 \begin{Shaded}
@@ -3291,7 +3390,13 @@ and \url{https://matplotlib.org/stable/gallery/color/named_colors.html}.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-16-output-1.pdf}
+\begin{figure}[H]
+
+{\centering \includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-16-output-1.png}
+
+}
+
+\end{figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3306,9 +3411,16 @@ and \url{https://matplotlib.org/stable/gallery/color/named_colors.html}.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-17-output-1.pdf}
+\begin{figure}[H]
 
-\subsubsection*{Density plot}\label{density-plot}
+{\centering \includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-17-output-1.png}
+
+}
+
+\end{figure}
+
+\hypertarget{density-plot}{%
+\subsubsection*{Density plot}\label{density-plot}}
 \addcontentsline{toc}{subsubsection}{Density plot}
 
 \begin{Shaded}
@@ -3341,7 +3453,13 @@ Shape of Z: (1000, 1000)
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-19-output-1.pdf}
+\begin{figure}[H]
+
+{\centering \includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-19-output-1.png}
+
+}
+
+\end{figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3352,7 +3470,13 @@ Shape of Z: (1000, 1000)
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-20-output-1.pdf}
+\begin{figure}[H]
+
+{\centering \includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-20-output-1.png}
+
+}
+
+\end{figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3367,9 +3491,20 @@ Shape of Z: (1000, 1000)
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-21-output-1.pdf}
+\begin{verbatim}
+<a list of 16 text.Text objects>
+\end{verbatim}
 
-\subsection*{Seaborn}\label{seaborn}
+\begin{figure}[H]
+
+{\centering \includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-21-output-2.png}
+
+}
+
+\end{figure}
+
+\hypertarget{seaborn}{%
+\subsection*{Seaborn}\label{seaborn}}
 \addcontentsline{toc}{subsection}{Seaborn}
 
 \markright{Seaborn}
@@ -3390,7 +3525,8 @@ More informations can be found under \url{https://seaborn.pydata.org/}
 \end{Highlighting}
 \end{Shaded}
 
-\subsubsection*{Example}\label{example}
+\hypertarget{example}{%
+\subsubsection*{Example}\label{example}}
 \addcontentsline{toc}{subsubsection}{Example}
 
 \begin{Shaded}
@@ -3402,7 +3538,17 @@ More informations can be found under \url{https://seaborn.pydata.org/}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-23-output-1.pdf}
+\begin{verbatim}
+<Axes: xlabel='day', ylabel='total_bill'>
+\end{verbatim}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-23-output-2.png}
+
+}
+
+\end{figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3428,9 +3574,20 @@ More informations can be found under \url{https://seaborn.pydata.org/}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-24-output-1.pdf}
+\begin{verbatim}
+<Axes: xlabel='sepal_width', ylabel='sepal_length'>
+\end{verbatim}
 
-\subsection*{3D plots}\label{d-plots}
+\begin{figure}[H]
+
+{\centering \includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-24-output-2.png}
+
+}
+
+\end{figure}
+
+\hypertarget{d-plots}{%
+\subsection*{3D plots}\label{d-plots}}
 \addcontentsline{toc}{subsection}{3D plots}
 
 \markright{3D plots}
@@ -3458,11 +3615,18 @@ tool for this.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-25-output-1.pdf}
+\begin{figure}[H]
+
+{\centering \includegraphics{guides/VisualizationPythonPackages_files/figure-pdf/cell-25-output-1.png}
+
+}
+
+\end{figure}
 
 Better tools for 3D plots are \texttt{Mayavi} and \texttt{Plotly}.
 
-\subsection*{Other plotting libraries}\label{other-plotting-libraries}
+\hypertarget{other-plotting-libraries}{%
+\subsection*{Other plotting libraries}\label{other-plotting-libraries}}
 \addcontentsline{toc}{subsection}{Other plotting libraries}
 
 \markright{Other plotting libraries}
@@ -3484,7 +3648,6 @@ Better tools for 3D plots are \texttt{Mayavi} and \texttt{Plotly}.
 \item
   \href{https://pandas.pydata.org/docs/user_guide/visualization.html}{pandas}
 \end{itemize}
-
 
 
 

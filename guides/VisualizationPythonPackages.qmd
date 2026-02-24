@@ -24,7 +24,7 @@ plt.style.use('default')
 Components of Matplotlib Figure: 
 
 ::: {.column width="100%"}
-![](https://matplotlib.org/stable/_images/anatomy.png){width=50%}
+![](../img/anatomy.png){width=50%}
 :::
 
 ### Global settings {.unnumbered}
