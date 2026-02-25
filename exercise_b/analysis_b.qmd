@@ -298,6 +298,8 @@ $$
 g(r) = \frac{\left <\rho_{ab}(r)\right >}{\rho}.
 $$ 
 
+<img align="right" src="../img/rdf_Zn-C.png" width="361">
+
 The two-particle density correlation function is defined as:
 
 $$
