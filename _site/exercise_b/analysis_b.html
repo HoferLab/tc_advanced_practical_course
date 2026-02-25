@@ -637,14 +637,14 @@ A single gas molecule in a periodic box has to be calculated $NVT$ because $NPT$
 <section id="radial-distribution-functions-rdfs" class="level1 unnumbered">
 <h1 class="unnumbered">Radial Distribution Functions (RDFs)</h1>
 <p>The radial distribution function (RDF) is a simple measurement to get structural information of the system.</p>
-<p><img align="right" src="../img/rdf_sketch.png" width="313"></p>
+<p><img align="right" src="../img/rdf_sketch.png" width="290"></p>
 <!-- !RDF-plot -->
 <p>It describes the probability <span class="math inline">\(P_{ab}(r)\)</span> to find a target particle type <span class="math inline">\(b\)</span> at distance <span class="math inline">\(r\)</span> away from a reference particle type <span class="math inline">\(a\)</span>; <em>e.g.</em> the probability to find <span class="math inline">\(\mathrm{C}\mathrm{O}_2\)</span> from <span class="math inline">\(\mathrm{Zn}^{2+}\)</span> clusters at distance <span class="math inline">\(r\)</span>: <span class="math display">\[
 P_{ab}(r) = \int_{0}^{r'} 4\pi r'^2 g_{ab}(r') dr'
 \]</span> where <span class="math inline">\(g_{ab}(r)\)</span> is the RDF. The RDF formulates the average local density <span class="math inline">\(\left &lt;\rho_{ab}(r)\right &gt;\)</span> normalized by <span class="math inline">\(\rho=(N_a N_b)\)</span> <span class="math display">\[
 g(r) = \frac{\left &lt;\rho_{ab}(r)\right &gt;}{\rho}.
 \]</span></p>
-<p><img align="right" src="../img/rdf_Zn-C.png" width="361"></p>
+<p><img align="right" src="../img/rdf_Zn-C.png" width="313"></p>
 <p>The two-particle density correlation function is defined as:</p>
 <p><span class="math display">\[
 \rho_{ab}(r) =\sum_{i=1}^{N_a} \sum_{j=1}^{N_b} \left &lt; \delta(|\vec{r_{i}}-\vec{r_{j}}| -r)\right &gt;.

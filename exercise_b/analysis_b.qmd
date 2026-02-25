@@ -284,7 +284,7 @@ A single gas molecule in a periodic box has to be calculated $NVT$ because $NPT$
 
 The radial distribution function (RDF) is a simple measurement to get structural information of the system.
 
-<img align="right" src="../img/rdf_sketch.png" width="313">
+<img align="right" src="../img/rdf_sketch.png" width="290">
 
 
 <!-- !RDF-plot -->
@@ -298,7 +298,7 @@ $$
 g(r) = \frac{\left <\rho_{ab}(r)\right >}{\rho}.
 $$ 
 
-<img align="right" src="../img/rdf_Zn-C.png" width="361">
+<img align="right" src="../img/rdf_Zn-C.png" width="313">
 
 The two-particle density correlation function is defined as:
 
