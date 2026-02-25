@@ -545,11 +545,8 @@ Note
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="va">$ZIF_DIR</span>/zif8_files/co2/<span class="pp">*</span> .</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="va">$ZIF_DIR</span>/zif8_files/preeq/<span class="op">&lt;</span>TEMPERATURE<span class="op">&gt;</span>/<span class="pp">*</span> .</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="va">$ZIF_DIR</span>/zif8_files/general_input/<span class="pp">*</span> .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>2.</strong> Add the CO2 loading to the topology and restart files (e.g.&nbsp;32 carbon dioxide molecules and 298 K)</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">add_molecules</span> zif8_preeq_298.rst co2.rst  <span class="dt">\</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--rst-mol-desc-file</span> moldescriptor.dat   <span class="dt">\</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-n</span> 32                                   <span class="dt">\</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">&gt;</span> 32xco2-zif8-00.rst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>2.</strong> Add the CO2 loading to restart files (e.g.&nbsp;32 carbon dioxide molecules and 298 K)</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">add_molecules</span> zif8_preeq_298.rst co2.rst <span class="at">--rst-mol-desc-file</span> moldescriptor.dat <span class="at">-n</span> 32 <span class="op">&gt;</span> 32xco2-zif8-00.rst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="simulation" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="simulation">Simulation</h2>

@@ -139,13 +139,10 @@ cp $ZIF_DIR/zif8_files/preeq/<TEMPERATURE>/* .
 cp $ZIF_DIR/zif8_files/general_input/* .
 ```
 
-**2.** Add the CO2 loading to the topology and restart files (e.g. 32 carbon dioxide molecules and 298 K)
+**2.** Add the CO2 loading to restart files (e.g. 32 carbon dioxide molecules and 298 K)
 
 ```bash
-add_molecules zif8_preeq_298.rst co2.rst  \
-  --rst-mol-desc-file moldescriptor.dat   \
-  -n 32                                   \
-  > 32xco2-zif8-00.rst
+add_molecules zif8_preeq_298.rst co2.rst --rst-mol-desc-file moldescriptor.dat -n 32 > 32xco2-zif8-00.rst
 ```
 
 ## Simulation {.unnumbered}
