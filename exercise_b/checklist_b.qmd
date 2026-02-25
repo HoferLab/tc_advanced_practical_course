@@ -22,5 +22,6 @@ Subsection 3 - Group Work:
 
 - [ ] A graph showing the lattice parameter of the pristine (= empty) ZIF-8 at the five different temperatures
 (248.15&nbsp;K - 348.15&nbsp;K) and the resulting linear thermal expansion coefficient
+- [ ] A comparison of the calculated linear thermal expansion coefficient of ZIF-8 with reported literature data (include the source and mention the method they have used!)
 - [ ] A graph showing the Arrhenius plot of the Einstein diffusion coefficient at the five different temperatures (298.15&nbsp;K - 398.15&nbsp;K) including a fit
 - [ ] A graph showing the Arrhenius plot of the Green-Kubo diffusion coefficient at the five different temperatures (298.15&nbsp;K - 398.15&nbsp;K) including a fit

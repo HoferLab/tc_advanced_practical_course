@@ -364,3 +364,13 @@ average_V zif8-03.box
 ```
 
 **3.** Calculate the thermal expansion coefficient using the following formula, see [thermal expansion](analysis_b.qmd#linear--volumetric-thermal-expansion-coefficient)
+
+
+**4.** Compare the calculated thermal expansion coefficient of ZIF-8 with literature values.
+
+:::{.callout-note}
+
+Include the source of the reference on the poster and which method they used to obtain it.
+[Google Scholar](https://scholar.google.com/) is your friend for this research ;)
+
+:::
