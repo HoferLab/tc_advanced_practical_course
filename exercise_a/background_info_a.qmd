@@ -1,5 +1,5 @@
 ---
-title: "Background Info A" 
+title: "Background Info" 
 format:
   html:
     code-fold: false
@@ -7,7 +7,7 @@ engine: jupyter
 execute: 
   echo: false
 ---
-# Exercise A – Vibrational spectroscopy using nuclear wave functions {.unnumbered}
+# Exercise – Vibrational Spectroscopy using Nuclear Wave Functions {.unnumbered}
 
 ::: columns
 
@@ -69,7 +69,7 @@ $$
 
 The calculation of the trapezoidal integration is actually very simple and can be easily implemented in a spreadsheet editor such as `libreoffice` or `excel` (or computed using data science software such as `matlab`, `octave`,`python`, `R`, etc.)
 
-## A.1) Diatomic molecule {.unnumbered}
+## Diatomic molecule {.unnumbered}
 
 In this part the vibration of a diatomic molecule is investigated. After drawing the molecule using `gaussview`, an energy minimisation (= geometry optimisation) and a harmonic frequency calculation has to be carried out. In the next step a potential energy scan has to be performed in the range of approx. -0.5$\,$Å to +1.5$\,$Å using a step length $\Delta r = 0.01\,$Å. This  yields about $150$ individual potential points. 
 
@@ -124,7 +124,7 @@ The output of the Numerov procedure contains the coordinate and potential inform
 In this part, the transition dipole moments and oscillator strengths are **NOT(!)** required.
 :::
 
-## A.2) Stretch vibration in a polyatomic molecule {.unnumbered}
+## Stretch Vibration in a Polyatomic Molecule {.unnumbered}
 
 In this example, the X-H stretch motion of a polyatomic molecule (X=O,N) provides a suitable approximation to the actual normal mode. In order to assess the influence of quantum effects, both hydrated and deuterated species (i.e. X-H and X-D) have to be investigated. After the geometry optimisation and frequency computation, the potential energy scan of the X-H distance in the range of approx. $0.5\,\mathrm{Å}$ to $2.0\,\mathrm{Å}$ has to be carried out, using again a step length of $0.01\,\mathrm{Å}$.
 
@@ -174,5 +174,5 @@ modes obtained via the Numerov procedure and the harmonic approximation.
 :::
 
 
-## A.3 ) Protocol: {.unnumbered}
+## Protocol: {.unnumbered}
 The protocol in this section should be designed as an A0-Poster (similar to those Ph.D. students typically prepare for their presentations in the Atrium of the CCB building), see [poster templeates](../templates/poster.qmd). All data generated along with a discussion of results fit easily on a single page. Please include your name and matriculation number, and provide the protocol as pdf-file including your surname in the name of the file.

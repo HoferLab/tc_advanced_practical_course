@@ -1,5 +1,5 @@
 ---
-title: "HowTo A"
+title: "HowTo"
 format:
   html:
     code-fold: false
@@ -7,7 +7,6 @@ engine: jupyter
 execute: 
   echo: false
 ---
-# Exercise A – Vibrational spectroscopy using nuclear wave functions {.unnumbered}
 
 The required scripts and programs for this exercise are provided in the folder:
 
@@ -28,7 +27,7 @@ ii) copy/move/rename files.
 
 If you are unsure please look at this [Linux quickstart guide](../guides/linux_quickstart_guide.qmd).
 
-## Part A.1) Vibrational spectroscopy of a diatomic molecule at the example of H2 {.unnumbered}
+### Vibrational spectroscopy of a diatomic molecule at the example of H2 {.unnumbered}
 
 ### Tasks {.unnumbered}
 
@@ -45,7 +44,7 @@ If you are unsure please look at this [Linux quickstart guide](../guides/linux_q
 - Table comparing the harmonic and anharmonic wave numbers for the states 01 to 04
 - A screenshot of the equilibrium geometry (use a white background color!)
 
-### HowTo Part A.1) {.unnumbered}
+### HowTo {.unnumbered}
 
 **1)** Draw the structure using `gaussview` (command `gv`) and save the file, *e.g.* as `h2_opt.com`. 
 
@@ -259,7 +258,7 @@ iv) even graphically in the program `xmgrace`. <br>
 You can choose whichever method works best for you.
 :::
 
-## Part A.2) Stretch vibration in a polyatomic molecule {.unnumbered}
+### Stretch Vibration in a Polyatomic Molecule {.unnumbered}
 
 ### Tasks {.unnumbered}
 
