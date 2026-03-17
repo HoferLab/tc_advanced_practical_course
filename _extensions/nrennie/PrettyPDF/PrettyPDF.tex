@@ -4,9 +4,19 @@
 \usepackage{eso-pic}
 \usepackage{fancyhdr}
 \usepackage{sectsty}
-\usepackage{fontspec}
+% \usepackage{fontspec}
 \usepackage{titlesec}
 
+\usepackage{fvextra}
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{
+  commandchars=\\\{\},
+  breaklines, breakanywhere
+}
+\DefineVerbatimEnvironment{OutputCode}{Verbatim}{
+  commandchars=\\\{\},
+  breaklines, breakanywhere
+}
 %% Set page size with a wider right margin
 \geometry{a4paper, total={170mm,257mm}, left=20mm, top=20mm, bottom=20mm, right=50mm}
 
@@ -46,32 +56,32 @@
 \titleformat{\subsection}
   {\sffamily\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
   
-% left align title
-\makeatletter
-\renewcommand{\maketitle}{\bgroup\setlength{\parindent}{0pt}
-\begin{flushleft}
-  {\sffamily\huge\textbf{\MakeUppercase{\@title}}} \vspace{0.3cm} \newline
-  {\Large {\@subtitle}} \newline
-  \@author
-\end{flushleft}\egroup
-}
-\makeatother
+% % left align title
+% \makeatletter
+% \renewcommand{\maketitle}{\bgroup\setlength{\parindent}{0pt}
+% \begin{flushleft}
+%   {\sffamily\huge\textbf{\MakeUppercase{\@title}}} \vspace{0.3cm} \newline
+%   {\Large {\@subtitle}} \newline
+%   \@author
+% \end{flushleft}\egroup
+% }
+% \makeatother
 
-%% Use some custom fonts
-\setsansfont{Ubuntu}[
-    Path=_extensions/nrennie/PrettyPDF/Ubuntu/,
-    Scale=0.9,
-    Extension = .ttf,
-    UprightFont=*-Regular,
-    BoldFont=*-Bold,
-    ItalicFont=*-Italic,
-    ]
+% %% Use some custom fonts
+% \setsansfont{Ubuntu}[
+%     Path=_extensions/nrennie/PrettyPDF/Ubuntu/,
+%     Scale=0.9,
+%     Extension = .ttf,
+%     UprightFont=*-Regular,
+%     BoldFont=*-Bold,
+%     ItalicFont=*-Italic,
+%     ]
 
-\setmainfont{Ubuntu}[
-    Path=_extensions/nrennie/PrettyPDF/Ubuntu/,
-    Scale=0.9,
-    Extension = .ttf,
-    UprightFont=*-Regular,
-    BoldFont=*-Bold,
-    ItalicFont=*-Italic,
-    ]
+% \setmainfont{Ubuntu}[
+%     Path=_extensions/nrennie/PrettyPDF/Ubuntu/,
+%     Scale=0.9,
+%     Extension = .ttf,
+%     UprightFont=*-Regular,
+%     BoldFont=*-Bold,
+%     ItalicFont=*-Italic,
+%     ]

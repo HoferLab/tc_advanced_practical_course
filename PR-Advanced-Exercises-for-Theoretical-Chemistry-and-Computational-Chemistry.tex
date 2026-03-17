@@ -5,8 +5,7 @@
 %
 \documentclass[
   letterpaper,
-  DIV=11,
-  numbers=noendperiod]{scrreprt}
+]{article}
 
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
@@ -39,7 +38,7 @@
 \usepackage{xcolor}
 \usepackage[normalem]{ulem}
 \setlength{\emergencystretch}{3em} % prevent overfull lines
-\setcounter{secnumdepth}{5}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 % Make \paragraph and \subparagraph free-standing
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
@@ -116,7 +115,93 @@
 \def\fps@figure{htbp}
 \makeatother
 
-\KOMAoption{captions}{tableheading}
+% load packages
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+\usepackage{fancyhdr}
+\usepackage{sectsty}
+% \usepackage{fontspec}
+\usepackage{titlesec}
+
+\usepackage{fvextra}
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{
+  commandchars=\\\{\},
+  breaklines, breakanywhere
+}
+\DefineVerbatimEnvironment{OutputCode}{Verbatim}{
+  commandchars=\\\{\},
+  breaklines, breakanywhere
+}
+%% Set page size with a wider right margin
+\geometry{a4paper, total={170mm,257mm}, left=20mm, top=20mm, bottom=20mm, right=50mm}
+
+%% Let's define some colours
+\definecolor{light}{HTML}{E6E6FA}
+\definecolor{highlight}{HTML}{800080}
+\definecolor{dark}{HTML}{330033}
+
+%% Let's add the border on the right hand side 
+\AddToShipoutPicture{% 
+    \AtPageLowerLeft{% 
+        \put(\LenToUnit{\dimexpr\paperwidth-3cm},0){% 
+            \color{light}\rule{3cm}{\LenToUnit\paperheight}%
+          }%
+     }%
+     % logo
+    \AtPageLowerLeft{% start the bar at the bottom right of the page
+        \put(\LenToUnit{\dimexpr\paperwidth-2.25cm},27.2cm){% move it to the top right
+            \color{light}\includegraphics[width=1.5cm]{_extensions/nrennie/PrettyPDF/logo.png}
+          }%
+     }%
+}
+
+%% Style the page number
+\fancypagestyle{mystyle}{
+  \fancyhf{}
+  \renewcommand\headrulewidth{0pt}
+  \fancyfoot[R]{\thepage}
+  \fancyfootoffset{3.5cm}
+}
+\setlength{\footskip}{20pt}
+
+%% style the chapter/section fonts
+\chapterfont{\color{dark}\fontsize{20}{16.8}\selectfont}
+\sectionfont{\color{dark}\fontsize{20}{16.8}\selectfont}
+\subsectionfont{\color{dark}\fontsize{14}{16.8}\selectfont}
+\titleformat{\subsection}
+  {\sffamily\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+  
+% % left align title
+% \makeatletter
+% \renewcommand{\maketitle}{\bgroup\setlength{\parindent}{0pt}
+% \begin{flushleft}
+%   {\sffamily\huge\textbf{\MakeUppercase{\@title}}} \vspace{0.3cm} \newline
+%   {\Large {\@subtitle}} \newline
+%   \@author
+% \end{flushleft}\egroup
+% }
+% \makeatother
+
+% %% Use some custom fonts
+% \setsansfont{Ubuntu}[
+%     Path=_extensions/nrennie/PrettyPDF/Ubuntu/,
+%     Scale=0.9,
+%     Extension = .ttf,
+%     UprightFont=*-Regular,
+%     BoldFont=*-Bold,
+%     ItalicFont=*-Italic,
+%     ]
+
+% \setmainfont{Ubuntu}[
+%     Path=_extensions/nrennie/PrettyPDF/Ubuntu/,
+%     Scale=0.9,
+%     Extension = .ttf,
+%     UprightFont=*-Regular,
+%     BoldFont=*-Bold,
+%     ItalicFont=*-Italic,
+%     ]
 \makeatletter
 \@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
 \@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
@@ -181,7 +266,7 @@
 \@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
 \makeatother
 \makeatletter
-\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{named}{light}}
 \makeatother
 \makeatletter
 \makeatother
@@ -194,10 +279,10 @@
 \hypersetup{
   pdftitle={PR Advanced Exercises for Theoretical Chemistry and Computational Chemistry},
   colorlinks=true,
-  linkcolor={blue},
+  linkcolor={highlight},
   filecolor={Maroon},
   citecolor={Blue},
-  urlcolor={Blue},
+  urlcolor={highlight},
   pdfcreator={LaTeX via pandoc}}
 
 \title{PR Advanced Exercises for Theoretical Chemistry and Computational
@@ -207,18 +292,20 @@ Chemistry}
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, sharp corners, frame hidden, borderline west={3pt}{0pt}{shadecolor}, interior hidden, boxrule=0pt, enhanced]}{\end{tcolorbox}}\fi
+\pagestyle{mystyle}
+
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[colback={shadecolor}, enhanced, frame hidden, breakable, boxrule=0pt]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
 \hypersetup{linkcolor=}
-\setcounter{tocdepth}{2}
+\setcounter{tocdepth}{3}
 \tableofcontents
 }
 \bookmarksetup{startatroot}
 
 \hypertarget{instructions}{%
-\chapter{Instructions}\label{instructions}}
+\section{Instructions}\label{instructions}}
 
 Welcome to the instruction page of the 724651 PR Advanced Exercises for
 Theoretical Chemistry and Computational Chemistry!
@@ -270,7 +357,7 @@ greek letter Ψ is pure coincidence ;)}
 \part{Exercise: Vibrational Spectroscopy}
 
 \hypertarget{background-info-a}{%
-\chapter{Background Info A}\label{background-info-a}}
+\section{Background Info A}\label{background-info-a}}
 
 The simplest way to generate vibrational spectra is the \textbf{harmonic
 approximation}: all second derivatives of the energy with respect to the
@@ -349,8 +436,8 @@ software such as \texttt{matlab}, \texttt{octave},\texttt{python},
 \texttt{R}, etc.)
 
 \hypertarget{a.1-diatomic-molecule}{%
-\section*{A.1) Diatomic molecule}\label{a.1-diatomic-molecule}}
-\addcontentsline{toc}{section}{A.1) Diatomic molecule}
+\subsection*{A.1) Diatomic molecule}\label{a.1-diatomic-molecule}}
+\addcontentsline{toc}{subsection}{A.1) Diatomic molecule}
 
 \markright{A.1) Diatomic molecule}
 
@@ -399,7 +486,7 @@ Using the reduced mass \(μ\) and the force constant \(k\) the frequency
 \(\mathrm{cm^{-1}}\)) should be calculated and compared to the result
 obtained from gaussian.
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 Extra care is required to apply all factors to obtain the correct unit
 of the frequency and wavenumber (i.e.~just dividing the force constant
@@ -426,7 +513,7 @@ eigenvalues are given as comment line (also in
 respective energy differences have to be transformed into
 \(\mathrm{cm^{-1}}\).
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-important-color!10!white, titlerule=0mm, title={The report for this part should include:}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-important-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title={The report for this part should include:}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, colframe=quarto-callout-important-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 \begin{itemize}
 \tightlist
@@ -453,7 +540,7 @@ respective energy differences have to be transformed into
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 In this part, the transition dipole moments and oscillator strengths are
 \textbf{NOT(!)} required.
@@ -461,9 +548,9 @@ In this part, the transition dipole moments and oscillator strengths are
 \end{tcolorbox}
 
 \hypertarget{a.2-stretch-vibration-in-a-polyatomic-molecule}{%
-\section*{A.2) Stretch vibration in a polyatomic
+\subsection*{A.2) Stretch vibration in a polyatomic
 molecule}\label{a.2-stretch-vibration-in-a-polyatomic-molecule}}
-\addcontentsline{toc}{section}{A.2) Stretch vibration in a polyatomic
+\addcontentsline{toc}{subsection}{A.2) Stretch vibration in a polyatomic
 molecule}
 
 \markright{A.2) Stretch vibration in a polyatomic molecule}
@@ -477,7 +564,7 @@ X-H distance in the range of approx. \(0.5\,\mathrm{Å}\) to
 \(2.0\,\mathrm{Å}\) has to be carried out, using again a step length of
 \(0.01\,\mathrm{Å}\).
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-warning-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Careful:}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-warning-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Careful:}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-warning-color!10!white, colframe=quarto-callout-warning-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 Be sure to select the correct bond for the potential energy scan! (This
 is a \textbf{very} frequent error in this excercise.)
@@ -509,7 +596,7 @@ reduced mass provided in the gaussian output file is correct! To
 identify the correct mode, a visual inspection in \texttt{gaussview} is
 required.
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-warning-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Careful:}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-warning-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Careful:}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-warning-color!10!white, colframe=quarto-callout-warning-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 Be sure to make a separate check in the deuterated case -- the order of
 vibrations is sometimes different (again a \textbf{very} common error in
@@ -537,7 +624,7 @@ computed from the transition dipole moments and reported relative to
 \(f_{10}\), thus always giving a number of \(1.0\) for the ground state
 transition).
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-important-color!10!white, titlerule=0mm, title={The report for this part should include:}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-important-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title={The report for this part should include:}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, colframe=quarto-callout-important-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 \begin{itemize}
 \tightlist
@@ -565,8 +652,8 @@ transition).
 \end{tcolorbox}
 
 \hypertarget{a.3-protocol}{%
-\section*{A.3 ) Protocol:}\label{a.3-protocol}}
-\addcontentsline{toc}{section}{A.3 ) Protocol:}
+\subsection*{A.3 ) Protocol:}\label{a.3-protocol}}
+\addcontentsline{toc}{subsection}{A.3 ) Protocol:}
 
 \markright{A.3 ) Protocol:}
 
@@ -579,7 +666,7 @@ page. Please include your name and matriculation number, and provide the
 protocol as pdf-file including your surname in the name of the file.
 
 \hypertarget{howto-a}{%
-\chapter{HowTo A}\label{howto-a}}
+\section{HowTo A}\label{howto-a}}
 
 The required scripts and programs for this exercise are provided in the
 folder:
@@ -590,7 +677,7 @@ folder:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 This HowTo assumes you remember how to
 
@@ -608,18 +695,18 @@ If you are unsure please look at this
 \protect\hyperlink{linux-quickstart-guide}{Linux quickstart guide}.
 
 \hypertarget{part-a.1-vibrational-spectroscopy-of-a-diatomic-molecule-at-the-example-of-h2}{%
-\section*{Part A.1) Vibrational spectroscopy of a diatomic molecule at
-the example of
+\subsection*{Part A.1) Vibrational spectroscopy of a diatomic molecule
+at the example of
 H2}\label{part-a.1-vibrational-spectroscopy-of-a-diatomic-molecule-at-the-example-of-h2}}
-\addcontentsline{toc}{section}{Part A.1) Vibrational spectroscopy of a
-diatomic molecule at the example of H2}
+\addcontentsline{toc}{subsection}{Part A.1) Vibrational spectroscopy of
+a diatomic molecule at the example of H2}
 
 \markright{Part A.1) Vibrational spectroscopy of a diatomic molecule at
 the example of H2}
 
 \hypertarget{tasks}{%
-\subsection*{Tasks}\label{tasks}}
-\addcontentsline{toc}{subsection}{Tasks}
+\subsubsection*{Tasks}\label{tasks}}
+\addcontentsline{toc}{subsubsection}{Tasks}
 
 \begin{itemize}
 \tightlist
@@ -633,8 +720,8 @@ the example of H2}
 \end{itemize}
 
 \hypertarget{results}{%
-\subsection*{Results}\label{results}}
-\addcontentsline{toc}{subsection}{Results}
+\subsubsection*{Results}\label{results}}
+\addcontentsline{toc}{subsubsection}{Results}
 
 \begin{itemize}
 \tightlist
@@ -660,8 +747,8 @@ the example of H2}
 \end{itemize}
 
 \hypertarget{howto-part-a.1}{%
-\subsection*{HowTo Part A.1)}\label{howto-part-a.1}}
-\addcontentsline{toc}{subsection}{HowTo Part A.1)}
+\subsubsection*{HowTo Part A.1)}\label{howto-part-a.1}}
+\addcontentsline{toc}{subsubsection}{HowTo Part A.1)}
 
 \textbf{1)} Draw the structure using \texttt{gaussview} (command
 \texttt{gv}) and save the file, \emph{e.g.} as \texttt{h2\_opt.com}.
@@ -672,7 +759,7 @@ the example of H2}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title={Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title={Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 draw stuff\\
 File \textgreater{} Save\\
@@ -685,7 +772,7 @@ Cartesian'' must be unticked!
 \texttt{nedit}, \texttt{gedit}, \texttt{vi}, \ldots) and change the
 command line (\texttt{\#}) to
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title={Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title={Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -695,7 +782,7 @@ command line (\texttt{\#}) to
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-important-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-important-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, colframe=quarto-callout-important-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 It is important to include \textbf{one (and only one) blank line} after
 the command line (\texttt{\#}-line), the title-line as well as the atom
@@ -722,7 +809,7 @@ distance,\emph{e.g.}:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title={Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title={Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 {[}\ldots{]}\\
 {[}\ldots{]}\\
@@ -745,7 +832,7 @@ frequency calculation, \emph{e.g.}:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title={Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title={Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -757,7 +844,7 @@ frequency calculation, \emph{e.g.}:
 
 Also set the bond length to the minimum distance, \emph{e.g.}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title={Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title={Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 {[}\ldots{]}\\
 0 ~1\\
@@ -784,7 +871,7 @@ frequency from the input-file
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title={Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title={Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 {[}\ldots{]}\\
 {[}\ldots{]}\\
@@ -806,7 +893,7 @@ IR Inten -\/- ~~~~~~~~~~~~~~~~ ~~~~~ { 0.0000 }\\
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-important-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-important-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, colframe=quarto-callout-important-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 For diatomics the force constant and the reduced mass are not given
 correctly! (according to the developers that's a feature, not an error
@@ -825,7 +912,7 @@ potential energy scan, \emph{e.g.}:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title={Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title={Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -839,13 +926,13 @@ potential energy scan, \emph{e.g.}:
 \textbf{8)} Change the starting value of the bond length by subtracting
 \(\mathrm{0.5\,Å}\), and set up the scan points \emph{e.g.}:
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title={Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title={Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 0.7427352 -- 0.5 = 0.2427352
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title={Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title={Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 {[}\ldots{]}\\
 0 ~1\\
@@ -891,7 +978,7 @@ output:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-warning-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-warning-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-warning-color!10!white, colframe=quarto-callout-warning-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 Careful -- if told, the redirect \texttt{\textgreater{}} will overwrite
 existing files and there is no undo if this happens!
@@ -900,7 +987,7 @@ existing files and there is no undo if this happens!
 
 The file \texttt{scan\_data.dat} contains five data columns:
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title={Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title={Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 \begin{itemize}
 \tightlist
@@ -931,7 +1018,7 @@ Numerov analysis:
   should be used.
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-warning-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-warning-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-warning-color!10!white, colframe=quarto-callout-warning-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 Be sure to use the mass of the correct isotopes, \emph{e.g.}
 \(\mathrm{^1H_2}\), \(\mathrm{^2D_2}\), \(\mathrm{^{12}C}\),
@@ -960,7 +1047,7 @@ The file \texttt{numerov.dat} contains a headline (\texttt{\#}) and
 twelve data columns. Columns \(1\) to \(7\) are to generate the required
 figure, columns \(8\) to \(12\) are for data analysis:
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title={Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title={Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 \begin{itemize}
 \tightlist
@@ -988,7 +1075,7 @@ xmgrace, gnuplot, \ldots) as well as data software (\texttt{office},
 \texttt{origin}, \ldots) to perform the analyses required in
 \protect\hyperlink{howto-a}{A.2.2}.
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 Which software you choose for the analysis part (or if you want to write
 your own code) is entirely up to you. There are different ways to obtain
@@ -1001,16 +1088,16 @@ datascience routines, iii) on the command line using a (very simple)
 \end{tcolorbox}
 
 \hypertarget{part-a.2-stretch-vibration-in-a-polyatomic-molecule}{%
-\section*{Part A.2) Stretch vibration in a polyatomic
+\subsection*{Part A.2) Stretch vibration in a polyatomic
 molecule}\label{part-a.2-stretch-vibration-in-a-polyatomic-molecule}}
-\addcontentsline{toc}{section}{Part A.2) Stretch vibration in a
+\addcontentsline{toc}{subsection}{Part A.2) Stretch vibration in a
 polyatomic molecule}
 
 \markright{Part A.2) Stretch vibration in a polyatomic molecule}
 
 \hypertarget{tasks-1}{%
-\subsection*{Tasks}\label{tasks-1}}
-\addcontentsline{toc}{subsection}{Tasks}
+\subsubsection*{Tasks}\label{tasks-1}}
+\addcontentsline{toc}{subsubsection}{Tasks}
 
 \begin{enumerate}
 \def\labelenumi{\roman{enumi})}
@@ -1028,8 +1115,8 @@ polyatomic molecule}
 \end{enumerate}
 
 \hypertarget{results-1}{%
-\subsection*{Results}\label{results-1}}
-\addcontentsline{toc}{subsection}{Results}
+\subsubsection*{Results}\label{results-1}}
+\addcontentsline{toc}{subsubsection}{Results}
 
 \begin{itemize}
 \tightlist
@@ -1073,7 +1160,7 @@ In order to change the isotope from \(\mathrm{^1H}\) and
 applied, \emph{e.g.} in case of a frequency calculation for
 \(\mathrm{D_2}\):
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title={Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title={Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 \# B3LYP/6-311++G(3df,3pd) FREQ SCF=VERYTIGHT INT=ULTRAFINE\\
 \strut \\
@@ -1087,7 +1174,7 @@ B1 ~~ 0.74273528\\
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-important-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Common errors/pitfalls in this exercise}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-important-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Common errors/pitfalls in this exercise}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, colframe=quarto-callout-important-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 \begin{itemize}
 \tightlist
@@ -1121,7 +1208,7 @@ Here, the units \(\mathrm{kcal}\), \(\mathrm{Å^{-2}}\) and
 \end{tcolorbox}
 
 \hypertarget{checklist-a}{%
-\chapter{Checklist A}\label{checklist-a}}
+\section{Checklist A}\label{checklist-a}}
 
 The protocol in this section should be designed as an A0-Poster (similar
 to those Ph.D.~students typically prepare for their presentations in the
@@ -1152,7 +1239,7 @@ The report for exercise A.1 should include:
   01 - 04.
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 In this part, the transition dipole moments and oscillator strengths are
 \textbf{NOT(!)} required.
@@ -1184,7 +1271,7 @@ The report for exercise A.2 should include:
   as text.
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 In this part, the transition dipole moments and oscillator strengths
 \textbf{ARE(!)} required for the analysis.
@@ -1194,7 +1281,7 @@ In this part, the transition dipole moments and oscillator strengths
 \part{Exercise: NNP-MD}
 
 \hypertarget{background-info}{%
-\chapter{Background Info}\label{background-info}}
+\section{Background Info}\label{background-info}}
 
 Metal-organic frameworks (MOFs) are hybrid crystalline materials
 assembled from both inorganic and organic residues containing potential
@@ -1302,9 +1389,9 @@ transferable machine learning force field'' Matter 2025, 8, 102203 DOI:
 10.1016/j.matt.2025.102203
 
 \hypertarget{howto}{%
-\chapter{HowTo}\label{howto}}
+\section{HowTo}\label{howto}}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-warning-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-warning-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-warning-color!10!white, colframe=quarto-callout-warning-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 Links to the \textbf{Google Sheets} with the assigned temperatures and
 carbon dioxide loadings:
@@ -1329,7 +1416,7 @@ for Part \protect\hyperlink{part-b.2-thermal-expansion-of-zif-8}{B.2}.
 The carbon dioxide loadings will be used for the simulations in Part
 \protect\hyperlink{part-b.1-gas-simulation-in-zif-8}{B.1}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-important-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-important-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, colframe=quarto-callout-important-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 Before you run any simulations, please make sure you know your assigned
 \textbf{TEMPERATURES} values and \textbf{CARBON DIOXIDE LOADINGS}!
@@ -1351,7 +1438,7 @@ executing the following command:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-important-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-important-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, colframe=quarto-callout-important-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 This command needs to be executed only once per terminal session. If you
 close the terminal, you will need to execute the command again when you
@@ -1379,8 +1466,8 @@ function that can be accessed by running the script with the
 \end{Shaded}
 
 \hypertarget{analysis-tools}{%
-\section*{Analysis Tools}\label{analysis-tools}}
-\addcontentsline{toc}{section}{Analysis Tools}
+\subsection*{Analysis Tools}\label{analysis-tools}}
+\addcontentsline{toc}{subsection}{Analysis Tools}
 
 \markright{Analysis Tools}
 
@@ -1421,8 +1508,8 @@ relation. \\
 \end{longtable}
 
 \hypertarget{files}{%
-\section*{Files}\label{files}}
-\addcontentsline{toc}{section}{Files}
+\subsection*{Files}\label{files}}
+\addcontentsline{toc}{subsection}{Files}
 
 \markright{Files}
 
@@ -1430,7 +1517,7 @@ The directories encoded in the varible \texttt{ZIF\_DIR} contain all
 necessary files for the simulations. The files are organized in the
 following way:
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1491,7 +1578,7 @@ Description
 \end{longtable}
 
 \hypertarget{part-b.1-gas-simulation-in-zif-8}{%
-\chapter{Part B.1) Gas simulation in
+\section{Part B.1) Gas simulation in
 ZIF-8}\label{part-b.1-gas-simulation-in-zif-8}}
 
 The first part of the exercise is to simulate the diffusion of carbon
@@ -1499,7 +1586,7 @@ dioxide molecules in the ZIF-8 framework at the assigned temperature
 values. The carbon dioxide loading is set to the two assigned loadings
 per student.
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 This part of the exercise is performed twice with the two assigned
 carbon dioxide loadings. The simulations can be run in parallel.
@@ -1507,8 +1594,8 @@ carbon dioxide loadings. The simulations can be run in parallel.
 \end{tcolorbox}
 
 \hypertarget{system-setup}{%
-\section*{System Setup}\label{system-setup}}
-\addcontentsline{toc}{section}{System Setup}
+\subsection*{System Setup}\label{system-setup}}
+\addcontentsline{toc}{subsection}{System Setup}
 
 \markright{System Setup}
 
@@ -1534,8 +1621,8 @@ molecules and 298 K)
 \end{Shaded}
 
 \hypertarget{simulation}{%
-\section*{Simulation}\label{simulation}}
-\addcontentsline{toc}{section}{Simulation}
+\subsection*{Simulation}\label{simulation}}
+\addcontentsline{toc}{subsection}{Simulation}
 
 \markright{Simulation}
 
@@ -1554,7 +1641,7 @@ assigned temperature, generated restart file, and topology file.
       file_prefix   = XXX-01;
 \end{verbatim}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 Replace \texttt{XXX} with the assigned temperature value and the
 corresponding restart and topology files. The \texttt{file\_prefix} can
@@ -1580,7 +1667,7 @@ Start multiple input files one after the other
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-important-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-important-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, colframe=quarto-callout-important-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 The overall equilibration is split into two stages. The first stage is a
 10 ps NVT equilibration (\texttt{run-01.in}). The second stage is a 10
@@ -1591,9 +1678,9 @@ ps each (\texttt{run-03.in} and \texttt{run-04.in}).
 \end{tcolorbox}
 
 \hypertarget{extract-carbon-dioxide-molecules}{%
-\section*{Extract Carbon Dioxide
+\subsection*{Extract Carbon Dioxide
 Molecules}\label{extract-carbon-dioxide-molecules}}
-\addcontentsline{toc}{section}{Extract Carbon Dioxide Molecules}
+\addcontentsline{toc}{subsection}{Extract Carbon Dioxide Molecules}
 
 \markright{Extract Carbon Dioxide Molecules}
 
@@ -1615,8 +1702,8 @@ and
 \end{Shaded}
 
 \hypertarget{einstein-relation}{%
-\section*{Einstein Relation}\label{einstein-relation}}
-\addcontentsline{toc}{section}{Einstein Relation}
+\subsection*{Einstein Relation}\label{einstein-relation}}
+\addcontentsline{toc}{subsection}{Einstein Relation}
 
 \markright{Einstein Relation}
 
@@ -1639,7 +1726,7 @@ squared displacement (MSD)} of the carbon dioxide molecule using the
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-important-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-important-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, colframe=quarto-callout-important-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 For both assigned carbon dioxide loadings, insert the corresponding
 self-diffusion coefficient values into the \textbf{Google Sheets}.
@@ -1647,8 +1734,8 @@ self-diffusion coefficient values into the \textbf{Google Sheets}.
 \end{tcolorbox}
 
 \hypertarget{green-kubo-relation}{%
-\section*{Green-Kubo Relation}\label{green-kubo-relation}}
-\addcontentsline{toc}{section}{Green-Kubo Relation}
+\subsection*{Green-Kubo Relation}\label{green-kubo-relation}}
+\addcontentsline{toc}{subsection}{Green-Kubo Relation}
 
 \markright{Green-Kubo Relation}
 
@@ -1671,7 +1758,7 @@ tool:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-important-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-important-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, colframe=quarto-callout-important-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 For both assigned carbon dioxide loadings, insert the corresponding
 self-diffusion coefficient values into the \textbf{Google Sheets}.
@@ -1679,9 +1766,9 @@ self-diffusion coefficient values into the \textbf{Google Sheets}.
 \end{tcolorbox}
 
 \hypertarget{radial-distribution-function}{%
-\section*{Radial Distribution
+\subsection*{Radial Distribution
 Function}\label{radial-distribution-function}}
-\addcontentsline{toc}{section}{Radial Distribution Function}
+\addcontentsline{toc}{subsection}{Radial Distribution Function}
 
 \markright{Radial Distribution Function}
 
@@ -1705,7 +1792,7 @@ distribution function (RDF)} of the carbon dioxide molecule using the
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 The RDF calculation will generate a \texttt{output} file named
 \texttt{rdf-C-C.out} and \texttt{rdf-Zn-C.out}, accordingly. Plot the
@@ -1715,8 +1802,8 @@ plotting tool.
 \end{tcolorbox}
 
 \hypertarget{visualization}{%
-\section*{Visualization}\label{visualization}}
-\addcontentsline{toc}{section}{Visualization}
+\subsection*{Visualization}\label{visualization}}
+\addcontentsline{toc}{subsection}{Visualization}
 
 \markright{Visualization}
 
@@ -1736,7 +1823,7 @@ plotting tool.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 The \texttt{traj2box} tool generates a box file that can be visualized
 in VMD. The box file contains the unit cell information with \texttt{X}
@@ -1788,15 +1875,15 @@ representations are:
 \end{itemize}
 
 \hypertarget{part-b.2-thermal-expansion-of-zif-8}{%
-\chapter{Part B.2) Thermal Expansion of
+\section{Part B.2) Thermal Expansion of
 ZIF-8}\label{part-b.2-thermal-expansion-of-zif-8}}
 
 The second part of the exercise is to calculate the thermal expansion of
 the pristine ZIF-8 framework at the assigned temperature values.
 
 \hypertarget{system-setup-1}{%
-\section*{System Setup}\label{system-setup-1}}
-\addcontentsline{toc}{section}{System Setup}
+\subsection*{System Setup}\label{system-setup-1}}
+\addcontentsline{toc}{subsection}{System Setup}
 
 \markright{System Setup}
 
@@ -1812,8 +1899,8 @@ The system setup is done by running the following command:
 \end{Shaded}
 
 \hypertarget{simulation-1}{%
-\section*{Simulation}\label{simulation-1}}
-\addcontentsline{toc}{section}{Simulation}
+\subsection*{Simulation}\label{simulation-1}}
+\addcontentsline{toc}{subsection}{Simulation}
 
 \markright{Simulation}
 
@@ -1832,7 +1919,7 @@ assigned temperature, generated restart file, and topology file.
       file_prefix   = zif8-01;
 \end{verbatim}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 Replace \texttt{XXX} with the assigned temperature value. The
 \texttt{file\_prefix} can be any name you choose. Please make sure to
@@ -1849,7 +1936,7 @@ different simulation steps.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 The overall equilibration is split into two stages. The first stage is a
 10 ps NVT equilibration (\texttt{run-01.in}). The second stage is a 10
@@ -1861,8 +1948,8 @@ expansion coefficient calculation.
 \end{tcolorbox}
 
 \hypertarget{analysis}{%
-\section*{Analysis}\label{analysis}}
-\addcontentsline{toc}{section}{Analysis}
+\subsection*{Analysis}\label{analysis}}
+\addcontentsline{toc}{subsection}{Analysis}
 
 \markright{Analysis}
 
@@ -1892,7 +1979,7 @@ expansion}
 \textbf{4.} Compare the calculated thermal expansion coefficient of
 ZIF-8 with literature values.
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 Include the source of the reference on the poster and which method they
 used to obtain it. \href{https://scholar.google.com/}{Google Scholar} is
@@ -1901,10 +1988,10 @@ your friend for this research ;)
 \end{tcolorbox}
 
 \hypertarget{analysis-1}{%
-\chapter{Analysis}\label{analysis-1}}
+\section{Analysis}\label{analysis-1}}
 
 \hypertarget{log-file-check}{%
-\section{Log-file check}\label{log-file-check}}
+\subsection{Log-file check}\label{log-file-check}}
 
 Open the \texttt{*.log} file with any editor.
 
@@ -1926,7 +2013,7 @@ the simulation for all files:
 \end{Shaded}
 
 \hypertarget{visual-inspection}{%
-\section{Visual inspection}\label{visual-inspection}}
+\subsection{Visual inspection}\label{visual-inspection}}
 
 Check if the system is behaving as expected.
 
@@ -1944,8 +2031,8 @@ It is a good sign if
 \end{itemize}
 
 \hypertarget{troubleshooting}{%
-\section*{Troubleshooting}\label{troubleshooting}}
-\addcontentsline{toc}{section}{Troubleshooting}
+\subsection*{Troubleshooting}\label{troubleshooting}}
+\addcontentsline{toc}{subsection}{Troubleshooting}
 
 \markright{Troubleshooting}
 
@@ -1967,9 +2054,9 @@ results:
 etc.
 
 \hypertarget{equilibrium-state-of-simulation}{%
-\chapter*{Equilibrium state of
+\section*{Equilibrium state of
 simulation}\label{equilibrium-state-of-simulation}}
-\addcontentsline{toc}{chapter}{Equilibrium state of simulation}
+\addcontentsline{toc}{section}{Equilibrium state of simulation}
 
 \markboth{Equilibrium state of simulation}{Equilibrium state of
 simulation}
@@ -1979,7 +2066,7 @@ simulation, it is essential to ensure that the system is in an
 equilibrium state. However, what constitutes an \emph{equilibrium
 state}?
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-important-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{An equilibrium state:}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-important-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{An equilibrium state:}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, colframe=quarto-callout-important-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 can be defined as a state in which macroscopic properties \(A\)
 (\emph{e.g} temperture \(T\), pressure \(P\), energies \(E\), volume
@@ -1992,7 +2079,7 @@ long-term trends, it can be assumed that the system reached an
 equilibrium state.
 
 \hypertarget{arithmetic-average-standard-deviation-and-standard-error}{%
-\section{Arithmetic Average, Standard Deviation and Standard
+\subsection{Arithmetic Average, Standard Deviation and Standard
 Error}\label{arithmetic-average-standard-deviation-and-standard-error}}
 
 The aforementioned constant relaxation of the properties can be verified
@@ -2013,7 +2100,7 @@ A_{\nu} = \frac{A_{\sigma }}{\sqrt{n}}
 \]
 
 \hypertarget{running-average}{%
-\section{Running Average}\label{running-average}}
+\subsection{Running Average}\label{running-average}}
 
 Further, the running average \(\left < A \right >_{\tau}\) at time
 \(\tau\) with a window size of \(\omega\) and a gap size \(g\)
@@ -2027,7 +2114,7 @@ Further, the running average \(\left < A \right >_{\tau}\) at time
 can help to estimate the fluctuation of the properties over time.
 
 \hypertarget{cummulative-average}{%
-\section{Cummulative Average}\label{cummulative-average}}
+\subsection{Cummulative Average}\label{cummulative-average}}
 
 And the cumulative average is a running average that is added at each
 step. \[
@@ -2035,7 +2122,7 @@ step. \[
 \]
 
 \hypertarget{linear-regression-fit}{%
-\section{Linear Regression Fit}\label{linear-regression-fit}}
+\subsection{Linear Regression Fit}\label{linear-regression-fit}}
 
 A linear regression fit can help to estimate the trend of your
 simulation.
@@ -2044,7 +2131,7 @@ For more further detail:
 \protect\hyperlink{statistical-excursion}{statistics}
 
 \hypertarget{plot-of-temperature-over-simulation-time}{%
-\section{Plot of temperature over simulation
+\subsection{Plot of temperature over simulation
 time}\label{plot-of-temperature-over-simulation-time}}
 
 The temperature during the simulation can be found in the associated
@@ -2131,9 +2218,9 @@ Shape of data:  (50000, 12)
 \end{figure}
 
 \hypertarget{linear-volumetric-thermal-expansion-coefficient}{%
-\chapter*{Linear / Volumetric Thermal Expansion
+\section*{Linear / Volumetric Thermal Expansion
 Coefficient}\label{linear-volumetric-thermal-expansion-coefficient}}
-\addcontentsline{toc}{chapter}{Linear / Volumetric Thermal Expansion
+\addcontentsline{toc}{section}{Linear / Volumetric Thermal Expansion
 Coefficient}
 
 \markboth{Linear / Volumetric Thermal Expansion Coefficient}{Linear /
@@ -2204,7 +2291,7 @@ V = a b c \sqrt{1-\mathrm{cos}^2(\alpha) -\mathrm{cos}^2(\beta) - \mathrm{cos}^2
 \]
 
 \hypertarget{plot-lattice-parameter-vs.-temperature}{%
-\section{Plot Lattice Parameter
+\subsection{Plot Lattice Parameter
 vs.~Temperature}\label{plot-lattice-parameter-vs.-temperature}}
 
 \begin{Shaded}
@@ -2242,7 +2329,7 @@ vs.~Temperature}\label{plot-lattice-parameter-vs.-temperature}}
 
 \end{figure}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Experimental Measurement Data is available from:}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Experimental Measurement Data is available from:}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 X-ray Diffraction (XRD)
 
@@ -2253,8 +2340,8 @@ Neutron Powder Diffraction (NPD)
 \end{tcolorbox}
 
 \hypertarget{interaction-energy}{%
-\chapter*{Interaction Energy}\label{interaction-energy}}
-\addcontentsline{toc}{chapter}{Interaction Energy}
+\section*{Interaction Energy}\label{interaction-energy}}
+\addcontentsline{toc}{section}{Interaction Energy}
 
 \markboth{Interaction Energy}{Interaction Energy}
 
@@ -2272,9 +2359,9 @@ system (guest@host, host, guest) from a long enough equilibrated
 trajectory.
 
 \hypertarget{radial-distribution-functions-rdfs}{%
-\chapter*{Radial Distribution Functions
+\section*{Radial Distribution Functions
 (RDFs)}\label{radial-distribution-functions-rdfs}}
-\addcontentsline{toc}{chapter}{Radial Distribution Functions (RDFs)}
+\addcontentsline{toc}{section}{Radial Distribution Functions (RDFs)}
 
 \markboth{Radial Distribution Functions (RDFs)}{Radial Distribution
 Functions (RDFs)}
@@ -2305,7 +2392,7 @@ with the probability \(G(r)\) \[
 N_{ab}(r) = \rho G_{ab}(r)
 \]
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Dirac-Delta Function}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-tip-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Dirac-Delta Function}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 \[
 \delta(x-x_0) =  \begin{cases}
@@ -2319,8 +2406,8 @@ N_{ab}(r) = \rho G_{ab}(r)
 \end{tcolorbox}
 
 \hypertarget{self-diffusion-coefficient}{%
-\chapter*{Self-Diffusion Coefficient}\label{self-diffusion-coefficient}}
-\addcontentsline{toc}{chapter}{Self-Diffusion Coefficient}
+\section*{Self-Diffusion Coefficient}\label{self-diffusion-coefficient}}
+\addcontentsline{toc}{section}{Self-Diffusion Coefficient}
 
 \markboth{Self-Diffusion Coefficient}{Self-Diffusion Coefficient}
 
@@ -2353,8 +2440,8 @@ As well as \(\dot{A}\) is the molecular velocity which should be also
 considered as center of mass.
 
 \hypertarget{einstein-relation-1}{%
-\section*{Einstein-Relation}\label{einstein-relation-1}}
-\addcontentsline{toc}{section}{Einstein-Relation}
+\subsection*{Einstein-Relation}\label{einstein-relation-1}}
+\addcontentsline{toc}{subsection}{Einstein-Relation}
 
 \markright{Einstein-Relation}
 
@@ -2366,9 +2453,9 @@ D_{\mathrm{s}} = \frac{1}{2 \cdot d} \lim _{t\to \infty} \frac{d}{dt} MSD(\tau)
 \] where \(d=1,2,3\) is the dimensionality.
 
 \hypertarget{mean-squared-displacement}{%
-\subsection*{Mean-Squared
+\subsubsection*{Mean-Squared
 Displacement}\label{mean-squared-displacement}}
-\addcontentsline{toc}{subsection}{Mean-Squared Displacement}
+\addcontentsline{toc}{subsubsection}{Mean-Squared Displacement}
 
 The mean-squared displacement describes the temporal displacement of the
 particle from a time origin \(t_0\) averaged over the time interval
@@ -2382,7 +2469,7 @@ the MSD is not linear. Only at higher correleation times the expected
 diffusion (see Figure Figure~\ref{fig-msd} (b)) behaviour can be
 observed.
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Question:}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-tip-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Question:}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 \begin{itemize}
 \tightlist
@@ -2397,7 +2484,7 @@ observed.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-caution-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Answer:}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-caution-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Answer:}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-caution-color!10!white, colframe=quarto-callout-caution-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 The self-diffusion coefficient is the slope of the MSD divided by 2
 \(\cdot\;d\).
@@ -2504,8 +2591,8 @@ linear part of the dataset.
 \end{figure}
 
 \hypertarget{green-kubo-relation-1}{%
-\section*{Green-Kubo Relation}\label{green-kubo-relation-1}}
-\addcontentsline{toc}{section}{Green-Kubo Relation}
+\subsection*{Green-Kubo Relation}\label{green-kubo-relation-1}}
+\addcontentsline{toc}{subsection}{Green-Kubo Relation}
 
 \markright{Green-Kubo Relation}
 
@@ -2516,7 +2603,7 @@ D_{\mathrm{s}} = \frac{1}{d} \int _{0}^{\infty} VACF(t)  dt
 \] where \(d=1,2,3\) is the dimension.
 
 \hypertarget{veloctiy-autocorrelation-function}{%
-\subsection{Veloctiy-Autocorrelation
+\subsubsection{Veloctiy-Autocorrelation
 Function}\label{veloctiy-autocorrelation-function}}
 
 The \href{}{velocity-autocorrelatin function} \(VACF(\tau)\) is averaged
@@ -2576,8 +2663,8 @@ VACF(\tau) = \left < \frac{1}{N} \sum_{i=1}^{N} |\vec{v} _{i}(t) \vec{v} _{i}(t_
 \end{figure}
 
 \hypertarget{activation-energy}{%
-\chapter*{Activation Energy}\label{activation-energy}}
-\addcontentsline{toc}{chapter}{Activation Energy}
+\section*{Activation Energy}\label{activation-energy}}
+\addcontentsline{toc}{section}{Activation Energy}
 
 \markboth{Activation Energy}{Activation Energy}
 
@@ -2607,7 +2694,7 @@ Ea(n))}
 \end{figure}
 
 \hypertarget{checklist}{%
-\chapter{Checklist}\label{checklist}}
+\section{Checklist}\label{checklist}}
 
 All data generated along with a discussion of results fit easily on a
 single page. The images and graphs to be plotted are grouped into three
@@ -2662,7 +2749,7 @@ Subsection 3 - Group Work:
 \part{Templates}
 
 \hypertarget{matplotlib}{%
-\chapter{Matplotlib}\label{matplotlib}}
+\section{Matplotlib}\label{matplotlib}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2688,8 +2775,8 @@ Subsection 3 - Group Work:
 \end{verbatim}
 
 \hypertarget{two-axis-plot}{%
-\section*{Two axis plot}\label{two-axis-plot}}
-\addcontentsline{toc}{section}{Two axis plot}
+\subsection*{Two axis plot}\label{two-axis-plot}}
+\addcontentsline{toc}{subsection}{Two axis plot}
 
 \markright{Two axis plot}
 
@@ -2764,9 +2851,9 @@ Subsection 3 - Group Work:
 \end{figure}
 
 \hypertarget{line-spectra-with-gaussian-broadening}{%
-\section*{Line spectra with Gaussian
+\subsection*{Line spectra with Gaussian
 broadening}\label{line-spectra-with-gaussian-broadening}}
-\addcontentsline{toc}{section}{Line spectra with Gaussian broadening}
+\addcontentsline{toc}{subsection}{Line spectra with Gaussian broadening}
 
 \markright{Line spectra with Gaussian broadening}
 
@@ -2848,8 +2935,8 @@ broadening}\label{line-spectra-with-gaussian-broadening}}
 \end{figure}
 
 \hypertarget{band-plot}{%
-\section*{Band Plot}\label{band-plot}}
-\addcontentsline{toc}{section}{Band Plot}
+\subsection*{Band Plot}\label{band-plot}}
+\addcontentsline{toc}{subsection}{Band Plot}
 
 \markright{Band Plot}
 
@@ -2979,8 +3066,8 @@ $\nu = \frac{1}{2\pi}\sqrt{\frac{k}{\mu}}$ in cm $^{-1}$
 $\mu = \frac{m_1 \cdot m_2}{m_1 + m_2}$ in g $\cdot$ mol $^{-1}$
 
 \hypertarget{plot-functions}{%
-\section*{Plot functions}\label{plot-functions}}
-\addcontentsline{toc}{section}{Plot functions}
+\subsection*{Plot functions}\label{plot-functions}}
+\addcontentsline{toc}{subsection}{Plot functions}
 
 \markright{Plot functions}
 
@@ -3040,8 +3127,8 @@ $\mu = \frac{m_1 \cdot m_2}{m_1 + m_2}$ in g $\cdot$ mol $^{-1}$
 \end{figure}
 
 \hypertarget{fit-a-function-to-data}{%
-\section*{Fit a function to data}\label{fit-a-function-to-data}}
-\addcontentsline{toc}{section}{Fit a function to data}
+\subsection*{Fit a function to data}\label{fit-a-function-to-data}}
+\addcontentsline{toc}{subsection}{Fit a function to data}
 
 \markright{Fit a function to data}
 
@@ -3096,9 +3183,9 @@ $\mu = \frac{m_1 \cdot m_2}{m_1 + m_2}$ in g $\cdot$ mol $^{-1}$
 \end{Shaded}
 
 \begin{verbatim}
-k =  2.999882798932318  +/-  0.0015100244234588238
-r0 =  4.999497114503537  +/-  0.0018679052162883152
-R2 =  0.9998654817460259
+k =  2.998053941939239  +/-  0.0015872151628211267
+r0 =  4.998136369397468  +/-  0.001964928082637604
+R2 =  0.9998513165241232
 \end{verbatim}
 
 \begin{figure}[H]
@@ -3110,7 +3197,7 @@ R2 =  0.9998654817460259
 \end{figure}
 
 \hypertarget{poster-templates}{%
-\chapter{Poster Templates}\label{poster-templates}}
+\section{Poster Templates}\label{poster-templates}}
 
 Here are some poster templates:
 
@@ -3131,7 +3218,7 @@ the poster in reasonable sections.
 \part{Guides}
 
 \hypertarget{statistical-excursion}{%
-\chapter{Statistical Excursion}\label{statistical-excursion}}
+\section{Statistical Excursion}\label{statistical-excursion}}
 
 Regression analsis helps to understand the relationship between
 independent and dependent variables.
@@ -3176,7 +3263,7 @@ where \(\bar{x}\) and \(\bar{y}\) are the respective averages and
 \(\Delta x_i\) \(\Delta y_i\) are the respective deviations.
 
 \hypertarget{linux-quickstart-guide}{%
-\chapter{Linux Quickstart Guide}\label{linux-quickstart-guide}}
+\section{Linux Quickstart Guide}\label{linux-quickstart-guide}}
 
 This guide is for people new to Linux. The aim of this documents is to
 help with everyday challenges when working with Linux systems.
@@ -3192,9 +3279,9 @@ recommended):
 \url{https://github.com/jlevy/the-art-of-command-line}
 
 \hypertarget{probably-most-used-linux-commands}{%
-\chapter*{Probably most used linux
+\section*{Probably most used linux
 commands:}\label{probably-most-used-linux-commands}}
-\addcontentsline{toc}{chapter}{Probably most used linux commands:}
+\addcontentsline{toc}{section}{Probably most used linux commands:}
 
 \markboth{Probably most used linux commands:}{Probably most used linux
 commands:}
@@ -3249,8 +3336,8 @@ to stop, use kill -9 pid \\
 \end{longtable}
 
 \hypertarget{more-commands-are}{%
-\chapter*{More commands are:}\label{more-commands-are}}
-\addcontentsline{toc}{chapter}{More commands are:}
+\section*{More commands are:}\label{more-commands-are}}
+\addcontentsline{toc}{section}{More commands are:}
 
 \markboth{More commands are:}{More commands are:}
 
@@ -3323,7 +3410,7 @@ On the desktop computers in the office you can search the history with
 then be autocompleted by searching in the history for matching commands
 you entered before.
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 If you want quick access to files or directories in your home folder,
 the \texttt{\textasciitilde{}}-symbol is an alias for your home
@@ -3332,8 +3419,8 @@ directory \texttt{/home/user} (= \texttt{\textbackslash{}\$HOME}).\\
 \end{tcolorbox}
 
 \hypertarget{how-to-edit-files}{%
-\chapter*{How to: edit files}\label{how-to-edit-files}}
-\addcontentsline{toc}{chapter}{How to: edit files}
+\section*{How to: edit files}\label{how-to-edit-files}}
+\addcontentsline{toc}{section}{How to: edit files}
 
 \markboth{How to: edit files}{How to: edit files}
 
@@ -3361,8 +3448,8 @@ exit vim, just type :q and Enter.}}\\
 cheat sheet}\\
 
 \hypertarget{how-to-gawk}{%
-\chapter*{How to: gawk}\label{how-to-gawk}}
-\addcontentsline{toc}{chapter}{How to: gawk}
+\section*{How to: gawk}\label{how-to-gawk}}
+\addcontentsline{toc}{section}{How to: gawk}
 
 \markboth{How to: gawk}{How to: gawk}
 
@@ -3401,8 +3488,8 @@ spaces which then generate new columns that can be printed with
 \texttt{gawk}.
 
 \hypertarget{how-to-sed}{%
-\chapter*{How to: sed}\label{how-to-sed}}
-\addcontentsline{toc}{chapter}{How to: sed}
+\section*{How to: sed}\label{how-to-sed}}
+\addcontentsline{toc}{section}{How to: sed}
 
 \markboth{How to: sed}{How to: sed}
 
@@ -3433,7 +3520,7 @@ and "kiwi"), use:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, arc=.35mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, breakable, leftrule=.75mm, colback=white, toprule=.15mm, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, opacitybacktitle=0.6, arc=.35mm, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, breakable, toprule=.15mm, bottomtitle=1mm, toptitle=1mm, titlerule=0mm, colback=white, bottomrule=.15mm, rightrule=.15mm, left=2mm, coltitle=black, leftrule=.75mm]
 
 Note that symbols, numbers, words, strings can be replaced with a white
 space (" ") to separate columns which can be printed with \texttt{gawk}.
@@ -3442,8 +3529,8 @@ The combination of sed and gawk is very powerful!
 \end{tcolorbox}
 
 \hypertarget{how-to-for-loops-in-bash}{%
-\chapter*{How to: for-loops in bash}\label{how-to-for-loops-in-bash}}
-\addcontentsline{toc}{chapter}{How to: for-loops in bash}
+\section*{How to: for-loops in bash}\label{how-to-for-loops-in-bash}}
+\addcontentsline{toc}{section}{How to: for-loops in bash}
 
 \markboth{How to: for-loops in bash}{How to: for-loops in bash}
 
@@ -3495,8 +3582,8 @@ calculation):
 \end{Shaded}
 
 \hypertarget{how-to-ssh-scp}{%
-\chapter*{How to: ssh \& scp}\label{how-to-ssh-scp}}
-\addcontentsline{toc}{chapter}{How to: ssh \& scp}
+\section*{How to: ssh \& scp}\label{how-to-ssh-scp}}
+\addcontentsline{toc}{section}{How to: ssh \& scp}
 
 \markboth{How to: ssh \& scp}{How to: ssh \& scp}
 
@@ -3563,8 +3650,8 @@ To login into remote computers without password authentication run
 especially convenient for accessing the clusters.
 
 \hypertarget{appendix-vim-cheat-sheet}{%
-\chapter*{Appendix: Vim Cheat Sheet}\label{appendix-vim-cheat-sheet}}
-\addcontentsline{toc}{chapter}{Appendix: Vim Cheat Sheet}
+\section*{Appendix: Vim Cheat Sheet}\label{appendix-vim-cheat-sheet}}
+\addcontentsline{toc}{section}{Appendix: Vim Cheat Sheet}
 
 \markboth{Appendix: Vim Cheat Sheet}{Appendix: Vim Cheat Sheet}
 
@@ -3579,16 +3666,16 @@ especially convenient for accessing the clusters.
 \end{figure}
 
 \hypertarget{visual.-quickstart-guide}{%
-\chapter{Visual. Quickstart Guide}\label{visual.-quickstart-guide}}
+\section{Visual. Quickstart Guide}\label{visual.-quickstart-guide}}
 
 \hypertarget{xmgrace}{%
-\section{xmgrace}\label{xmgrace}}
+\subsection{xmgrace}\label{xmgrace}}
 
 A tutorial can be found here:\\
 \url{https://universe.bits-pilani.ac.in/uploads/Pilani/navin/ReadPDFDOC/xmgrace.pdf}
 
 \hypertarget{gnuplot}{%
-\section{gnuplot}\label{gnuplot}}
+\subsection{gnuplot}\label{gnuplot}}
 
 A lot of example plots can be seen here (an example plot is also shown
 in the appendix):\\
@@ -3645,19 +3732,19 @@ Gnuplot template for pdf plots (resulting example plot shown below):
 \end{figure}
 
 \hypertarget{matplotlib-1}{%
-\section{matplotlib}\label{matplotlib-1}}
+\subsection{matplotlib}\label{matplotlib-1}}
 
 Quickstart guide:\\
 \url{https://matplotlib.org/stable/users/getting_started/index.html}
 
 \hypertarget{julia}{%
-\section{julia}\label{julia}}
+\subsection{julia}\label{julia}}
 
 Found on the net (not testet yet, but seems useful):\\
 \url{https://nextjournal.com/leandromartinez98/tips-to-create-beautiful-publication-quality-plots-in-julia}
 
 \hypertarget{how-to-vmd-eye-candy}{%
-\chapter{How to: vmd eye candy}\label{how-to-vmd-eye-candy}}
+\section{How to: vmd eye candy}\label{how-to-vmd-eye-candy}}
 
 \begin{itemize}
 \item
@@ -3702,7 +3789,7 @@ end save it in \texttt{.vmdrc} in your home directory):
 \end{Shaded}
 
 \hypertarget{latex-quickstart-guide}{%
-\chapter{Latex Quickstart Guide}\label{latex-quickstart-guide}}
+\section{Latex Quickstart Guide}\label{latex-quickstart-guide}}
 
 \begin{itemize}
 \item
@@ -3728,7 +3815,7 @@ end save it in \texttt{.vmdrc} in your home directory):
 \end{itemize}
 
 \hypertarget{python-quickstart-guide}{%
-\chapter{Python Quickstart Guide}\label{python-quickstart-guide}}
+\section{Python Quickstart Guide}\label{python-quickstart-guide}}
 
 \begin{itemize}
 \tightlist
@@ -3741,14 +3828,14 @@ end save it in \texttt{.vmdrc} in your home directory):
 \end{itemize}
 
 \hypertarget{python-tutorial}{%
-\chapter{Python Tutorial}\label{python-tutorial}}
+\section{Python Tutorial}\label{python-tutorial}}
 
 Welcome to the \texttt{python} tutorial! In this tutorial, we will cover
 the basics of the \texttt{python} programming language, including
 variables, data types, loops, and functions.
 
 \hypertarget{variables}{%
-\section{Variables}\label{variables}}
+\subsection{Variables}\label{variables}}
 
 In \texttt{python}, a variable is a container that holds a value. To
 create a variable, you simply assign a value to it using the assignment
@@ -3765,7 +3852,7 @@ This creates a variable called \texttt{x} and assigns it the value
 refer to the value \texttt{5}.
 
 \hypertarget{data-types}{%
-\section{Data Types}\label{data-types}}
+\subsection{Data Types}\label{data-types}}
 
 \texttt{python} has several built-in data types, including:
 
@@ -3792,7 +3879,7 @@ variable. For example:
 \end{Shaded}
 
 \hypertarget{loops}{%
-\section{Loops}\label{loops}}
+\subsection{Loops}\label{loops}}
 
 Loops are used to repeat a block of code multiple times. In
 \texttt{python}, there are two types of loops: \texttt{for} loops and
@@ -3827,7 +3914,7 @@ This will output the numbers \texttt{0} through \texttt{4}, one at a
 time.
 
 \hypertarget{functions}{%
-\section{Functions}\label{functions}}
+\subsection{Functions}\label{functions}}
 
 Functions are reusable blocks of code that perform a specific task. To
 define a function in \texttt{python}, you use the \texttt{def} keyword
@@ -3855,12 +3942,12 @@ This will call the \texttt{greet} function with the argument
 \texttt{"Alice"}, which will print the message ``Hello, Alice!''.
 
 \hypertarget{conclusion}{%
-\section{Conclusion}\label{conclusion}}
+\subsection{Conclusion}\label{conclusion}}
 
 That's it for the \texttt{python} tutorial!
 
 \hypertarget{data-visualization}{%
-\chapter{Data Visualization}\label{data-visualization}}
+\section{Data Visualization}\label{data-visualization}}
 
 Matplotlib is the main plotting library in Python. It is a very powerful
 tool for creating high-quality plots and figures.
@@ -3880,8 +3967,8 @@ Components of Matplotlib Figure:
 \includegraphics[width=0.5\textwidth,height=\textheight]{guides/../img/anatomy.png}
 
 \hypertarget{global-settings}{%
-\subsection*{Global settings}\label{global-settings}}
-\addcontentsline{toc}{subsection}{Global settings}
+\subsubsection*{Global settings}\label{global-settings}}
+\addcontentsline{toc}{subsubsection}{Global settings}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3894,8 +3981,8 @@ Components of Matplotlib Figure:
 \end{Shaded}
 
 \hypertarget{figure}{%
-\subsection*{Figure}\label{figure}}
-\addcontentsline{toc}{subsection}{Figure}
+\subsubsection*{Figure}\label{figure}}
+\addcontentsline{toc}{subsubsection}{Figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3924,8 +4011,8 @@ Components of Matplotlib Figure:
 \end{figure}
 
 \hypertarget{axes}{%
-\subsection*{Axes}\label{axes}}
-\addcontentsline{toc}{subsection}{Axes}
+\subsubsection*{Axes}\label{axes}}
+\addcontentsline{toc}{subsubsection}{Axes}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3952,8 +4039,8 @@ Components of Matplotlib Figure:
 \end{figure}
 
 \hypertarget{use-different-styles}{%
-\subsection*{Use different styles}\label{use-different-styles}}
-\addcontentsline{toc}{subsection}{Use different styles}
+\subsubsection*{Use different styles}\label{use-different-styles}}
+\addcontentsline{toc}{subsubsection}{Use different styles}
 
 You can use different styles for your plots. The following code shows
 how to use the \texttt{ggplot} style.
@@ -3993,8 +4080,8 @@ Other style can be found under
 \url{https://matplotlib.org/stable/gallery/style_sheets/style_sheets_reference.html}
 
 \hypertarget{subplots}{%
-\subsection*{Subplots}\label{subplots}}
-\addcontentsline{toc}{subsection}{Subplots}
+\subsubsection*{Subplots}\label{subplots}}
+\addcontentsline{toc}{subsubsection}{Subplots}
 
 You can create subplots in a figure. The following code shows how to
 create a figure with 2x2 subplots.
@@ -4077,8 +4164,8 @@ You can also use \texttt{gridspec} to create subplots.
 \end{figure}
 
 \hypertarget{colors-and-color-maps}{%
-\subsection*{Colors and Color maps}\label{colors-and-color-maps}}
-\addcontentsline{toc}{subsection}{Colors and Color maps}
+\subsubsection*{Colors and Color maps}\label{colors-and-color-maps}}
+\addcontentsline{toc}{subsubsection}{Colors and Color maps}
 
 Matplotlib provides a large number of color maps. Here your can find a
 list of all available color maps:
@@ -4087,8 +4174,8 @@ colors: \url{https://matplotlib.org/stable/tutorials/colors/colors.html}
 and \url{https://matplotlib.org/stable/gallery/color/named_colors.html}.
 
 \hypertarget{texts-and-annotations}{%
-\subsection*{Texts and Annotations}\label{texts-and-annotations}}
-\addcontentsline{toc}{subsection}{Texts and Annotations}
+\subsubsection*{Texts and Annotations}\label{texts-and-annotations}}
+\addcontentsline{toc}{subsubsection}{Texts and Annotations}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4113,8 +4200,8 @@ and \url{https://matplotlib.org/stable/gallery/color/named_colors.html}.
 \end{figure}
 
 \hypertarget{logarithmic-scale}{%
-\subsection*{Logarithmic scale}\label{logarithmic-scale}}
-\addcontentsline{toc}{subsection}{Logarithmic scale}
+\subsubsection*{Logarithmic scale}\label{logarithmic-scale}}
+\addcontentsline{toc}{subsubsection}{Logarithmic scale}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4169,8 +4256,8 @@ and \url{https://matplotlib.org/stable/gallery/color/named_colors.html}.
 \end{figure}
 
 \hypertarget{scatter-line-plot}{%
-\subsection*{Scatter / Line plot}\label{scatter-line-plot}}
-\addcontentsline{toc}{subsection}{Scatter / Line plot}
+\subsubsection*{Scatter / Line plot}\label{scatter-line-plot}}
+\addcontentsline{toc}{subsubsection}{Scatter / Line plot}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4199,8 +4286,8 @@ and \url{https://matplotlib.org/stable/gallery/color/named_colors.html}.
 \end{figure}
 
 \hypertarget{error-bars}{%
-\subsection*{Error bars}\label{error-bars}}
-\addcontentsline{toc}{subsection}{Error bars}
+\subsubsection*{Error bars}\label{error-bars}}
+\addcontentsline{toc}{subsubsection}{Error bars}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4220,8 +4307,8 @@ and \url{https://matplotlib.org/stable/gallery/color/named_colors.html}.
 \end{figure}
 
 \hypertarget{save-figure}{%
-\subsection*{Save figure}\label{save-figure}}
-\addcontentsline{toc}{subsection}{Save figure}
+\subsubsection*{Save figure}\label{save-figure}}
+\addcontentsline{toc}{subsubsection}{Save figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4245,8 +4332,8 @@ and \url{https://matplotlib.org/stable/gallery/color/named_colors.html}.
 \end{figure}
 
 \hypertarget{histogram}{%
-\subsection*{Histogram}\label{histogram}}
-\addcontentsline{toc}{subsection}{Histogram}
+\subsubsection*{Histogram}\label{histogram}}
+\addcontentsline{toc}{subsubsection}{Histogram}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4288,8 +4375,8 @@ and \url{https://matplotlib.org/stable/gallery/color/named_colors.html}.
 \end{figure}
 
 \hypertarget{density-plot}{%
-\subsection*{Density plot}\label{density-plot}}
-\addcontentsline{toc}{subsection}{Density plot}
+\subsubsection*{Density plot}\label{density-plot}}
+\addcontentsline{toc}{subsubsection}{Density plot}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4372,8 +4459,8 @@ Shape of Z: (1000, 1000)
 \end{figure}
 
 \hypertarget{seaborn}{%
-\section*{Seaborn}\label{seaborn}}
-\addcontentsline{toc}{section}{Seaborn}
+\subsection*{Seaborn}\label{seaborn}}
+\addcontentsline{toc}{subsection}{Seaborn}
 
 \markright{Seaborn}
 
@@ -4394,8 +4481,8 @@ More informations can be found under \url{https://seaborn.pydata.org/}
 \end{Shaded}
 
 \hypertarget{example}{%
-\subsection*{Example}\label{example}}
-\addcontentsline{toc}{subsection}{Example}
+\subsubsection*{Example}\label{example}}
+\addcontentsline{toc}{subsubsection}{Example}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4455,8 +4542,8 @@ More informations can be found under \url{https://seaborn.pydata.org/}
 \end{figure}
 
 \hypertarget{d-plots}{%
-\section*{3D plots}\label{d-plots}}
-\addcontentsline{toc}{section}{3D plots}
+\subsection*{3D plots}\label{d-plots}}
+\addcontentsline{toc}{subsection}{3D plots}
 
 \markright{3D plots}
 
@@ -4494,8 +4581,8 @@ tool for this.
 Better tools for 3D plots are \texttt{Mayavi} and \texttt{Plotly}.
 
 \hypertarget{other-plotting-libraries}{%
-\section*{Other plotting libraries}\label{other-plotting-libraries}}
-\addcontentsline{toc}{section}{Other plotting libraries}
+\subsection*{Other plotting libraries}\label{other-plotting-libraries}}
+\addcontentsline{toc}{subsection}{Other plotting libraries}
 
 \markright{Other plotting libraries}
 
