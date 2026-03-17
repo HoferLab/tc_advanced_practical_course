@@ -24,6 +24,12 @@ book:
   chapters:
     - index.qmd     
 
+    - part: "Exercise: Vibrational Spectroscopy"  
+      chapters:
+        - exercise_a/background_info_a.qmd
+        - exercise_a/exercise_a.qmd
+        - exercise_a/checklist_a.qmd
+
     - part: "Exercise: NNP-MD"  
       chapters:
         - exercise_b/exercise_b.qmd
