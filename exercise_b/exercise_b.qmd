@@ -22,7 +22,7 @@ The ZIF-8 system Zn(2-methylimidazolate)~2~ crystallizes in the non-centrosymmet
 
 In order to achieve fast and accurate MD simulations, the MACE-MP neural network potential (NNP) [9-11] is applied, in particular the MACE-DAC-1 model [12], which is trained not only on solid-state systems but also on interactions with gases for direct air capture (DAC) applications. If trained properly, NNPs provide an efficient and versatile description of chemical systems, combining the accuracy of high level quantum chemical methods with the speed of classical force field approaches.
 
-In this exercise the properties of the pristine host material (lattice parameter and thermal expansion coefficient) and the interaction between the inserted CO~2~ molecules and the ZIF-8 host (interaction energies, diffusion coefficient, activation energy of diffusion) will be studied.
+In this exercise the properties of the pristine host material (lattice parameter and thermal expansion coefficient) and the interaction between the inserted CO~2~ molecules and the ZIF-8 host (diffusion coefficient and activation energy of diffusion) will be studied.
 </div>
 
 [1] Yusuf, V. F.; Malek, N. I.; Kailasa, S. K. “Review on Organic Framework Classification, Synthetic Approaches, and Influencing Factors: Applications in Energy, Drug Delivery, and Wastewater Treatment.” 
