@@ -562,7 +562,20 @@ Note
 </section>
 <section id="simulation" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="simulation">Simulation</h2>
-<p><strong>1.</strong> Edit the input file <code>run-01.in</code> to include your assigned temperature, generated restart file, and topology file.</p>
+<p><strong>1.</strong> Edit the input files <code>run-01.in</code> to <code>run-04.in</code> to include your assigned temperature, generated restart file, and topology file.</p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Please make sure and double check that all input files <code>.in</code> are edited accordingly and no typos are present! Otherwise, PQ won’t be able to read in the input files and the simulation will stop prematurely!</p>
+</div>
+</div>
 <pre><code>...
 # Temperature algorithm (velocity rescaling), Target T in K and Relaxation time in ps
       thermostat = velocity_rescaling; temp = XXX.XX; t_relaxation = 0.1;
@@ -582,13 +595,13 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Replace <code>XXX</code> with the assigned temperature value and the corresponding restart and topology files. The <code>file_prefix</code> can be any name you choose. Please make sure to use <code>-00.rst</code> as the start file and <code>-01</code> as the file prefix. This will help to keep track of the different simulation steps.</p>
+<p>Replace <code>XXX</code> with the assigned temperature value and the corresponding restart and topology files. The <code>file_prefix</code> can be any name you choose. Please make sure to use <code>-00.rst</code> as the start file and <code>-01</code> as the file prefix in <code>run-01.in</code> and increment the numbers by one for each following input file. This will help to keep track of the different simulation steps.</p>
 </div>
 </div>
 <p><strong>2.</strong> Run NVT equlibration</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PQ</span> run-01.in</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Start multiple input files one after the other</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PQ</span> run-01.in <span class="kw">&amp;&amp;</span> <span class="ex">PQ</span> run-02.in <span class="kw">&amp;&amp;</span> <span class="ex">PQ</span> run-03.in</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PQ</span> run-01.in <span class="kw">&amp;&amp;</span> <span class="ex">PQ</span> run-02.in <span class="kw">&amp;&amp;</span> <span class="ex">PQ</span> run-03.in <span class="kw">&amp;&amp;</span> <span class="ex">PQ</span> run-04.in</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout-important callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -719,7 +732,20 @@ Note
 </section>
 <section id="simulation-1" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="simulation-1">Simulation</h2>
-<p><strong>1.</strong> Edit the input file <code>run-01.in</code> to include your assigned temperature, generated restart file, and topology file.</p>
+<p><strong>1.</strong> Edit the input files <code>run-01.in</code> to <code>run-03.in</code> to include your assigned temperature, generated restart file, and topology file. <code>run-04.in</code> is not needed for this part of the exercise.</p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Please make sure and double check that all input files <code>.in</code> are edited accordingly and no typos are present! Otherwise, PQ won’t be able to read in the input files and the simulation will stop prematurely!</p>
+</div>
+</div>
 <pre><code>...
 # Temperature algorithm (velocity rescaling), Target T in K and Relaxation time in ps
       thermostat = velocity_rescaling; temp = XXX.XX; t_relaxation = 0.1;
@@ -739,18 +765,20 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Replace <code>XXX</code> with the assigned temperature value. The <code>file_prefix</code> can be any name you choose. Please make sure to use <code>-01</code> as the file prefix. This will help to keep track of the different simulation steps.</p>
+<p>Replace <code>XXX</code> with the assigned temperature value and the corresponding restart and topology files. The <code>file_prefix</code> can be any name you choose. Please make sure to use <code>-00.rst</code> as the start file and <code>-01</code> as the file prefix in <code>run-01.in</code> and increment the numbers by one for each following input file. This will help to keep track of the different simulation steps.</p>
 </div>
 </div>
 <p><strong>2.</strong> Run NVT equlibration</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PQ</span> run-01.in</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<p>Start multiple input files one after the other</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PQ</span> run-01.in <span class="kw">&amp;&amp;</span> <span class="ex">PQ</span> run-02.in <span class="kw">&amp;&amp;</span> <span class="ex">PQ</span> run-03.in</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-important callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Note
+Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -761,9 +789,9 @@ Note
 <section id="analysis" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="analysis">Analysis</h2>
 <p><strong>1.</strong> Average the lattice parameter <code>a</code> of the ZIF-8 framework using the <code>average_a</code> tool:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">average_a</span> zif8-03.box</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">average_a</span> zif8-03.box</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>2.</strong> Average the volume of the ZIF-8 framework using the <code>average_V</code> tool:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">average_V</span> zif8-03.box</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">average_V</span> zif8-03.box</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout-important callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

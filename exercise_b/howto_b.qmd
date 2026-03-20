@@ -141,7 +141,14 @@ add_molecules zif8_preeq_298.rst co2.rst --rst-mol-desc-file moldescriptor.dat -
 
 ## Simulation {.unnumbered}
 
-**1.** Edit the input file `run-01.in` to include your assigned temperature, generated restart file, and topology file.
+**1.** Edit the input files `run-01.in` to `run-04.in` to include your assigned temperature, generated restart file, and topology file.
+
+:::{.callout-important}
+
+Please make sure and double check that all input files `.in` are edited accordingly and no typos are present!
+Otherwise, PQ won't be able to read in the input files and the simulation will stop prematurely!
+
+:::
 
 ```
 ...
@@ -158,7 +165,7 @@ add_molecules zif8_preeq_298.rst co2.rst --rst-mol-desc-file moldescriptor.dat -
 :::{.callout-note}
 
 Replace `XXX` with the assigned temperature value and the corresponding restart and topology files. The `file_prefix` can be any name you choose.
-Please make sure to use `-00.rst` as the start file and `-01` as the file prefix. This will help to keep track of the different simulation steps.
+Please make sure to use `-00.rst` as the start file and `-01` as the file prefix in `run-01.in` and increment the numbers by one for each following input file. This will help to keep track of the different simulation steps.
 
 :::
 
@@ -170,7 +177,7 @@ PQ run-01.in
 Start multiple input files one after the other
 
 ```bash
-PQ run-01.in && PQ run-02.in && PQ run-03.in
+PQ run-01.in && PQ run-02.in && PQ run-03.in && PQ run-04.in
 ```
 
 :::{.callout-important}
@@ -304,7 +311,14 @@ cp $ZIF_DIR/zif8_files/general_input/* .
 
 ## Simulation {.unnumbered}
 
-**1.** Edit the input file `run-01.in` to include your assigned temperature, generated restart file, and topology file.
+**1.** Edit the input files `run-01.in` to `run-03.in` to include your assigned temperature, generated restart file, and topology file. `run-04.in` is not needed for this part of the exercise.
+
+:::{.callout-important}
+
+Please make sure and double check that all input files `.in` are edited accordingly and no typos are present!
+Otherwise, PQ won't be able to read in the input files and the simulation will stop prematurely!
+
+:::
 
 ```
 ...
@@ -320,8 +334,8 @@ cp $ZIF_DIR/zif8_files/general_input/* .
 
 :::{.callout-note}
 
-Replace `XXX` with the assigned temperature value. The `file_prefix` can be any name you choose.
-Please make sure to use `-01` as the file prefix. This will help to keep track of the different simulation steps.
+Replace `XXX` with the assigned temperature value and the corresponding restart and topology files. The `file_prefix` can be any name you choose.
+Please make sure to use `-00.rst` as the start file and `-01` as the file prefix in `run-01.in` and increment the numbers by one for each following input file. This will help to keep track of the different simulation steps.
 
 :::
 
@@ -330,8 +344,13 @@ Please make sure to use `-01` as the file prefix. This will help to keep track o
 ```bash
 PQ run-01.in
 ```
+Start multiple input files one after the other
 
-:::{.callout-note}
+```bash
+PQ run-01.in && PQ run-02.in && PQ run-03.in
+```
+
+:::{.callout-important}
 
 The overall equilibration is split into two stages. The first stage is a 10 ps NVT equilibration (`run-01.in`).
 The second stage is a 10 ps NPT equilibration (`run-02.in`).
