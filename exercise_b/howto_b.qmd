@@ -119,7 +119,7 @@ The directories encoded in the varible `ZIF_DIR` contain all necessary files for
 
 # Part B.1) Gas simulation in ZIF-8  
 
-The first part of the exercise is to simulate the diffusion of carbon dioxide molecules in ZIF-8 at the assigned temperature values. There are a total of five different temperatures (298.15 K, 323.15 K, 348.15 K, 373.15 K, 398.15 K) and five different CO~2~ loadings (6, 8, 10, 12, 14). Each student is carrying out one CO~2~@ZIF-8 simulation at the assigned temperature with the assigned loading.
+The first part of the exercise is to simulate the diffusion of carbon dioxide molecules in ZIF-8. There are a total of five different temperatures (298.15 K, 323.15 K, 348.15 K, 373.15 K, 398.15 K) and five different CO~2~ loadings (6, 8, 10, 12, 14). Each student is carrying out one CO~2~@ZIF-8 simulation at the assigned temperature with the assigned loading.
 
 ## System Setup {.unnumbered}
 
@@ -289,7 +289,7 @@ File > New Molecule > Filename (Browse to the box file) > Load (All at once)
 
 # Part B.2) Thermal Expansion of ZIF-8
 
-The second part of the exercise is to calculate the thermal expansion of the pristine ZIF-8 framework at the assigned temperature values.
+The second part of the exercise is to calculate the thermal expansion of the pristine ZIF-8 framework at the assigned temperature value.
 
 ## System Setup {.unnumbered}
 
@@ -354,7 +354,13 @@ average_a zif8-03.box
 average_V zif8-03.box
 ```
 
-**3.** Calculate the thermal expansion coefficient using the following formula, see [thermal expansion](analysis_b.qmd#linear--volumetric-thermal-expansion-coefficient)
+:::{.callout-important}
+
+For the assigned temperature, insert the calculated average lattice parameter and average volume into the **Google Sheet**.
+
+:::
+
+**3.** Calculate the thermal expansion coefficient using the values from your group and the following formula: [thermal expansion](analysis_b.qmd#linear--volumetric-thermal-expansion-coefficient).
 
 
 **4.** Compare the calculated thermal expansion coefficient of ZIF-8 with literature values.
