@@ -260,17 +260,6 @@ Neutron Powder Diffraction (NPD)
 :::
 
 
-
-# Interaction Energy {.unnumbered}
-The interaction energy is a measurement to estimate the energy share of interaction between the guest and host system. 
-It can be calculated by substracting the single energy shares of the individual systems ($U_{\mathrm{guest}}$ and $U_{\mathrm{host}}$) from the energy of the total system ($U_{\mathrm{guest@host}}$):
-$$
-U_{\mathrm{int}} = \left< U_{\mathrm{guest@host}} \right > - \left< U_{\mathrm{host}} \right > -  \left< U_{\mathrm{guest}} \right >.
-$$
-
-For this, you take the average total energy $U=E_{\mathrm{kin}}+U_{\mathrm{pot}}$ of the respective simulated system (guest@host, host, guest) from a long enough equilibrated trajectory.
-
-
 <!-- ::: {.callout-warning}
 ## Ensemble
 *Pay attention:* 

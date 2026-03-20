@@ -362,7 +362,6 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#plot-lattice-parameter-vs.-temperature" id="toc-plot-lattice-parameter-vs.-temperature" class="nav-link" data-scroll-target="#plot-lattice-parameter-vs.-temperature">Plot Lattice Parameter vs.&nbsp;Temperature</a></li>
   </ul></li>
-  <li><a href="#interaction-energy" id="toc-interaction-energy" class="nav-link" data-scroll-target="#interaction-energy">Interaction Energy</a></li>
   <li><a href="#radial-distribution-functions-rdfs" id="toc-radial-distribution-functions-rdfs" class="nav-link" data-scroll-target="#radial-distribution-functions-rdfs">Radial Distribution Functions (RDFs)</a></li>
   <li><a href="#self-diffusion-coefficient" id="toc-self-diffusion-coefficient" class="nav-link" data-scroll-target="#self-diffusion-coefficient">Self-Diffusion Coefficient</a>
   <ul class="collapse">
@@ -643,14 +642,6 @@ Experimental Measurement Data is available from:
 <p>Neutron Powder Diffraction (NPD)</p>
 </div>
 </div>
-</section>
-</section>
-<section id="interaction-energy" class="level1 unnumbered">
-<h1 class="unnumbered">Interaction Energy</h1>
-<p>The interaction energy is a measurement to estimate the energy share of interaction between the guest and host system. It can be calculated by substracting the single energy shares of the individual systems (<span class="math inline">\(U_{\mathrm{guest}}\)</span> and <span class="math inline">\(U_{\mathrm{host}}\)</span>) from the energy of the total system (<span class="math inline">\(U_{\mathrm{guest@host}}\)</span>): <span class="math display">\[
-U_{\mathrm{int}} = \left&lt; U_{\mathrm{guest@host}} \right &gt; - \left&lt; U_{\mathrm{host}} \right &gt; -  \left&lt; U_{\mathrm{guest}} \right &gt;.
-\]</span></p>
-<p>For this, you take the average total energy <span class="math inline">\(U=E_{\mathrm{kin}}+U_{\mathrm{pot}}\)</span> of the respective simulated system (guest@host, host, guest) from a long enough equilibrated trajectory.</p>
 <!-- ::: {.callout-warning}
 ## Ensemble
 *Pay attention:* 
@@ -658,6 +649,7 @@ U_{\mathrm{int}} = \left&lt; U_{\mathrm{guest@host}} \right &gt; - \left&lt; U_{
 The $\left< U_{\mathrm{guest@host}} \right>$ and $\left< U_{\mathrm{host}}\right >$ energy are determined by a $NPT$ simulation in contrast $\left< U_{\mathrm{guest}} \right >$ energy has to be calculated in a $NVT$ ensemble.
 A single gas molecule in a periodic box has to be calculated $NVT$ because $NPT$ would cause into crash of the simulation.
 ::: -->
+</section>
 </section>
 <section id="radial-distribution-functions-rdfs" class="level1 unnumbered">
 <h1 class="unnumbered">Radial Distribution Functions (RDFs)</h1>
