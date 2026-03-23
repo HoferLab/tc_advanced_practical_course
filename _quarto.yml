@@ -11,10 +11,10 @@ book:
     tools: 
       - icon: "substack"
         menu:
-          - text: Analysis A Presentation
-            href: presentation/analysis_b_presentation.html
-          - text: HowTo A Presentation
+          - text: HowTo B Presentation
             href: presentation/howto_b_presentation.html
+          - text: Analysis B Presentation
+            href: presentation/analysis_b_presentation.html
       - icon: "table"
         menu:
           - text: Thermal Expansion
