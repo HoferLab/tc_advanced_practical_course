@@ -16,7 +16,7 @@ slide-number: "c"
 #     orcid: 0000-0000-0000-0001
 #     email: author.y@email.com
 #     affiliations: Institution Y
-date: last-modified
+# date: last-modified
 bibliography: references.bib
 embed-resources: true
 ---
@@ -27,15 +27,15 @@ embed-resources: true
 
 -   describing structural properties
 
--   comprehension thermal and mechanical properties
+-   compute thermal and mechanical properties
 
--   virtual screening which encompasses the development of advanced functional materials:
-      -   anodes, cathods, 
-      -   solar cells, 
-      -   catalysts, 
-      -   bioactive glasses, 
-      -   sensors, 
-      -   alloys materials etc.
+-   virtual screening and development of advanced functional materials:
+      -   anodes, cathodes
+      -   solar cells
+      -   catalysts
+      -   bioactive glasses
+      -   sensors
+      -   alloy materials etc.
 :::
 
 ## Analysis of Data
@@ -59,8 +59,8 @@ What do you think are the limitations of a NNP?
 
 :::{.callout-warning}
 # Answer
-- Modelling something out of the training set can be challenging.
-- Need of GPUS
+- Modelling something outside of the training set can be challenging
+- Need for GPUs
 :::
 
 ## Analysis of Data
@@ -78,20 +78,20 @@ It is important to be aware of the accuracy and limitations of the computational
 :::{.callout-tip}
 
 # Question
-What is your assessment of the accuracy of NNP methods?
+How accurate are NNP methods?
 :::
 
 . . .
 
 :::{.callout-warning}
 # Answer
-The degree of accuracy is depending on the quality and size of the training set.
+The degree of accuracy is highly depending on the quality and size of the training set.
 :::
 
-## Preanalysis
+## Pre-Analysis
 
 :::{.nonincremental}
--   Simulation finished without errors: no abort, no error messages appear
+-   Simulation finished without errors: no abort, no error messages appeared
 
 
 
@@ -99,7 +99,7 @@ The degree of accuracy is depending on the quality and size of the training set.
 
 <br>
 
--   Visual inspectation of the system: system behave properly
+-   Visual inspection of the system: system behaves properly
 
 <br>
 
@@ -107,9 +107,9 @@ The degree of accuracy is depending on the quality and size of the training set.
 :::
 
 
-## Visual inspection
+## Visual Inspection
 
-Check the system is working like expected.
+Did the system behave as expected?
 
 Open the `*.xyz` file with `VMD`.
 
@@ -118,11 +118,11 @@ Open the `*.xyz` file with `VMD`.
 It is a good sign if 
 
 
- - [ ] no atom has been ejected from the box
+ - [ ] no unintended bond breaking or formation occurs
 
- - [ ] systems remains intact, no collapsing or blowing up
+ - [ ] system remains intact -> no collapsing or blowing up
 
- - [ ] no unanticipated movements were observed ect.
+ - [ ] no translation of the whole box or super fast spinning of a molecule
 
 
 
@@ -130,28 +130,28 @@ It is a good sign if
 
 ## Troubleshooting
 
-In the event that the simulation does not produce the anticipated results:
+In the event that the simulation did not produce the anticipated results:
 
 
 
-- [ ] Try to understanding any error messages that may have arisen
+- [ ] Try to understand any error messages that may have been raised
 
 
-- [ ] Check the `*.log` and `*.in` file  if the simulation was setup properly.
+- [ ] Check the `*.log` and `*.in` file to see if the simulation was set up properly
 
 
 - [ ] Check the starting structure
 
 
-- [ ] Check the moldescriptor ect.
+- [ ] Check the moldescriptor file and shake files
 
 
 
 
-## Equilibrium state of simulation
+## Equilibrium State of Simulation
 
 :::{.nonincremental}
-Firstly, in order to obtain meaningful physical properties from a simulation, it is essential to ensure that the system is in an equilibrium state. 
+First, in order to obtain meaningful physical properties from a simulation, it is essential to ensure that the system is in an equilibrium state. 
 :::
 
 :::{.callout-tip}
@@ -164,7 +164,7 @@ However, what constitutes an *equilibrium state*?
 
 :::{.callout-warning}
 # Answer
-Equilibrium state can be defined as a state in which macroscopic properties $A$ (*e.g* temperture $T$, pressure $P$, energies $E$, volume $V$,...) do **NOT** undergo major changes over time.
+Equilibrium state can be defined as a state in which macroscopic properties (*e.g* temperture $T$, pressure $P$, energies $E$, volume $V$,...) do **NOT** undergo major changes over time.
 :::
 . . .
 
@@ -222,7 +222,7 @@ For more further detail: [statistics](../guides/statistics.qmd)
 
 
 
-## Plot of temperature over simulation time {auto-animate="true"}
+## Plot of Temperature over Simulation Time {auto-animate="true"}
 
 
 ::: {.panel-tabset}
@@ -325,7 +325,7 @@ plt.show()
 
 ## Linear / Volumetric Thermal Expansion Coefficient 
 
-The thermal expansion coefficient is a quantity that describes the extent to which a solid substance undergoes a change in response to variations in temperature.
+The thermal expansion coefficient is a quantity that describes the extend to which a solid substance undergoes a change in response to variations in temperature.
 
 <br>
 
@@ -333,11 +333,11 @@ Therefore the system is computed in $NPT$ ensemble at different temperatures $T_
 
 <br>
 
-For our case we consider a temperature range from $(248 - 348)\,\mathrm{K}$ in $25\,\mathrm{K}$ steps.
+For our case we consider a temperature range from $248 - 348\,\mathrm{K}$ in $25\,\mathrm{K}$ steps.
 
-## Linear thermal expansion coefficient
+## Linear Thermal Expansion Coefficient
 
-Linear thermal expansion coefficient at $\mathrm{298}\,\mathrm{K}$ is calculated by the temperature gradient of the respective average lattice parameter $\left < a \right >$, $\left < b \right >$ or $\left < c\right >$ at constant pressure $P$ ($NPT$ ensemble)
+The linear thermal expansion coefficient at $\mathrm{298}\,\mathrm{K}$ is calculated via the temperature gradient of the respective average lattice parameter $\left < a \right >$, $\left < b \right >$ or $\left < c\right >$ at constant pressure $P$ ($NPT$ ensemble)
 
 $$
 \alpha _{x}^{T_{\mathrm{298\,K}}} = \frac{1}{x} \left ( \frac{\partial x}{\partial T} \right ) _{P}, x={a,b,c}
@@ -346,13 +346,13 @@ $$
 <br>
 
 The slope can be estimated numerically in different ways. A simple way is to employ a [finite difference method](https://en.wikipedia.org/wiki/Finite_difference_method).
-There are [three](https://en.wikipedia.org/wiki/Finite_difference) fundamental types of it the *forward, backward* and *central* finite difference. 
+There are [three](https://en.wikipedia.org/wiki/Finite_difference) fundamental types of this method, the *forward*, the  *backward* and the *central* finite difference. 
 
 
-## Linear thermal expansion coefficient
+## Linear Thermal Expansion Coefficient
 
 
-In our case we use the central finite difference method with **[five-point stencil](https://en.wikipedia.org/wiki/Five-point_stencil)**.
+In our case we use the central finite difference method with a **[five-point stencil](https://en.wikipedia.org/wiki/Five-point_stencil)**.
 In general it is formulated in 1D as:
 
 $$
@@ -365,9 +365,9 @@ where $h$ is the change of $x$.
 
 <br>
 
-If you use more than five points [higher](https://en.wikipedia.org/wiki/Finite_difference_coefficient) stencil order can be used.
+If more than five points are used, a [higher](https://en.wikipedia.org/wiki/Finite_difference_coefficient) order stencil can be employed.
 
-## Linear thermal expansion coefficient
+## Linear thermal Expansion Coefficient
 
 In our case the differentiation can be written as:
 
@@ -383,21 +383,21 @@ $$
 x \in {a,b,c}
 $$
 
-## Volumetric thermal expansion coefficient
+## Volumetric Thermal Expansion Coefficient
 
 
-It is the same formulation as for the linear thermal expansion coefficient, except that the volume $V$ is used instead of the individual lattice parameters:
+The formulation is the same as for the linear thermal expansion coefficient, except that the volume $V$ is used instead of the individual lattice parameters:
 
 $$
 \alpha _{V}^{T_{\mathrm{298\,K}}} = \frac{1}{V} \left ( \frac{\partial V}{\partial T} \right ) _{P}
 $$
 
-The volume of a orthorhomibc system can be calculated as:
+The volume of an orthorhombic system can be calculated as:
 $$
 V = a\cdot b \cdot c
 $$
 
-In general of a non-orthorhombic [crystal sytems](https://en.wikipedia.org/wiki/Crystal_system) the volume is calculatd by:
+In the general case of a non-orthorhombic [crystal sytems](https://en.wikipedia.org/wiki/Crystal_system) the volume is calculated as:
 $$
 V = a b c \sqrt{1-\mathrm{cos}^2(\alpha) -\mathrm{cos}^2(\beta) - \mathrm{cos}^2(\gamma)+ 2(\mathrm{cos}(\alpha) \mathrm{cos}(\beta) \mathrm{cos}(\gamma))}
 $$
@@ -407,7 +407,7 @@ $$
 :::{.callout-tip}
 
 # Question
-How you can estimate linear/ volumetric thermal expansion coefficient in the lab?
+How can you estimate the linear/volumetric thermal expansion coefficient in the lab?
 :::
 
 . . .
@@ -452,28 +452,6 @@ plt.show()
 
 
 
-
-
-## Interaction Energy 
-
-The interaction energy is a measurement to estimate the energy share of interaction between the guest and host system. 
-It can be calculated by substracting the single energy shares of the individual systems ($U_{\mathrm{guest}}$ and $U_{\mathrm{host}}$) from the energy of the total system ($U_{\mathrm{guest@host}}$):
-$$
-U_{\mathrm{int}} = \left< U_{\mathrm{guest@host}} \right > - \left< U_{\mathrm{host}} \right > -  \left< U_{\mathrm{guest}} \right >.
-$$
-
-In doing so you take the average total energy $U=E_{\mathrm{kin}}+U_{\mathrm{pot}}$ of the respective simulated systems (guest@host, host, guest) at a long enough equilibrated trajectories.
-
-<!-- ## Interaction Energy 
-::: {.callout-warning}
-### Ensemble
-*Pay attention:* 
-
-The $\left< U_{\mathrm{guest@host}} \right>$ and $\left< U_{\mathrm{host}}\right >$ energy are determined by a $NPT$ simulation in contrast $\left< U_{\mathrm{guest}} \right >$ energy has to be calculated in a $NVT$ ensemble.
-A single gas molecule in a periodic box has to be calculated $NVT$ because $NPT$ would cause into crash of the simulation.
-::: -->
-
-
 ## Radial Distribution Functions (RDFs) 
 
 The radial distribution function (RDF) is a simple measurement to get structural information of the system.
@@ -483,13 +461,13 @@ The radial distribution function (RDF) is a simple measurement to get structural
 
 ## Radial Distribution Functions (RDFs) 
 
-It describes the probability $P_{ab}(r)$ to find a target particle type $b$ at a distance $r$ away from a reference particle type $a$ *e.g.* the probability to find $\mathrm{H}_2$from $\mathrm{Zn}^{2+}$ clusters in a distance $r$:
+It describes the probability $P_{ab}(r)$ to find a target particle of type $b$ at distance $r$ from a reference particle type $a$; *e.g.* the probability to find $\mathrm{H}_2$ molecules at distance $r$ from $\mathrm{Zn}^{2+}$:
 $$
 P_{ab}(r) = \int_{0}^{r'} 4\pi r'^2 g_{ab}(r') dr'
 $$ 
-where $g_{ab}(r)$ is the RDF. The RDF formulats the average local density $\left <\rho_{ab}(r)\right >$ normalized by $\rho=(N_a N_b)$
+where $g_{ab}(r)$ is the RDF. The RDF formulates the average local density $\left <\rho_{ab}(r)\right >$ normalized by $\rho=(N_a N_b)$
 $$
-g(r) = \frac{\left <\rho_{ab}(r)\right >}{\rho}.
+g(r) = \frac{\left <\rho_{ab}(r)\right >}{\rho}
 $$ 
 
 ## Radial Distribution Functions (RDFs) 
@@ -497,7 +475,7 @@ $$
 The two-particle density correlation function is defined as:
 
 $$
-\rho_{ab}(r) =\sum_{i=1}^{N_a} \sum_{j=1}^{N_b} \left < \delta(|\vec{r_{i}}-\vec{r_{j}}| -r)\right >.
+\rho_{ab}(r) =\sum_{i=1}^{N_a} \sum_{j=1}^{N_b} \left < \delta(|\vec{r_{i}}-\vec{r_{j}}| -r)\right >
 $$
 
 
@@ -526,17 +504,17 @@ $$
 
 ## Self-Diffusion Coefficient 
 
-In order to describe the dynamic of guests in host systems, it is necessary to calculate transport properties. 
+In order to describe the dynamics of guest molecules in a host system, it is necessary to calculate transport properties. 
 A transport property would be for example the *diffusion*, *viscosity*, *electrical or thermal conductivity*.
 
-In general transport properties can be described as a property coefficient $\gamma$ which depends on microscopic variable $A$ (*e.g.* positions $\Delta \vec{r}$ or the velocities $\vec{v}$) that is written as an infinite time integration of a non-normalized time correlation function $\left < \dot{A}(t)\dot{A}(t_0) \right >$ :
+In general transport properties can be described as a property coefficient $\gamma$ which depends on a microscopic variable $A$ (*e.g.* positions $\Delta \vec{r}$ or the velocities $\vec{v}$) that is written as an infinite time integration of a non-normalized time correlation function $\left < \dot{A}(t)\dot{A}(t_0) \right >$ :
 $$
-\gamma = \int_{0}^{\infty} dt \left < \dot{A}(t)\dot{A}(t_0) \right >.
+\gamma = \int_{0}^{\infty} dt \left < \dot{A}(t)\dot{A}(t_0) \right >
 $$
 
 ## Self-Diffusion Coefficient 
 
-This is also known as **Green-Kubo** relation which can also written as equivalent **Einstein** expression
+This is also known as the **Green-Kubo** relation, which can also be written as the equivalent **Einstein** expression:
 
 $$
 \gamma = \lim_{t\to\infty} \frac{\left < (A(t) - A(t_0))^2 \right >}{2t} = \frac{1}{2} \lim_{t\to\infty} \frac{d}{dt} \left < (A(t) - A(t_0))^2 \right >
@@ -544,18 +522,18 @@ $$
 
 ## Self-Diffusion Coefficient 
 
-In case of self-diffusion coefficient $D_{\mathrm{s}}$ the variable $A$ is the molecular position $\vec{r}_{\mathrm{cm}}$ which in general is the center of mass position of the particles:
+In case of the self-diffusion coefficient $D_{\mathrm{s}}$, the variable $A$ is the molecular position $\vec{r}_{\mathrm{cm}}$, which in general is the center of mass position of the particles:
 $$
 \vec{r}_{\mathrm{cm}} = \frac{\sum_{i=1}^{N} m_i \vec{r}_i}{\sum_{i=1}^{N} m_i}
 $$
-where $m_i$ is the atomic mass, $\vec{r}_i$ is the atomic positions and $N$ the number of atoms in the particle.
+where $m_i$ is the atomic mass, $\vec{r}_i$ the atomic positions and $N$ the number of atoms in the particle.
 
-As well as $\dot{A}$ is the molecular velocity which should be also considered as center of mass.
+$\dot{A}$ is the molecular velocity and should also be considered with respect to the center of mass.
 
 
 ## Einstein-Relation 
 
-The Einstein Relation can be therefore written as slope of the mean-squared-displacement ($MSD(\tau)$)  over time origins $\tau$
+The Einstein Relation can therefore be written as the slope of the mean-squared-displacement ($MSD(\tau)$)  over time origins $\tau$
 
 $$
 D_{\mathrm{s}} = \frac{1}{2 \cdot d} \lim _{t\to \infty} \frac{d}{dt} MSD(\tau)
@@ -564,11 +542,11 @@ where $d=1,2,3$ is the dimensionality.
 
 ## Mean-Squared Displacement 
 
-The mean-squared displacement describes the the temporally displacement of the particle from a time origin $t_0$ averaged over the time interval $\tau$
+The mean-squared displacement describes the displacement of the particle from a time origin $t_0$ averaged over the time interval $\tau$
 $$
 MSD(\tau) = \left < \frac{1}{N} \sum_{i=1}^{N} |\vec{r} _{i}(t) - \vec{r} _{i}(t_0)|^2  \right >_{\tau}
 $$
-where $N$ is the number of the particle, $\vec{r}_{i}$ is the center-of-mass position vector of the particle $i$.
+where $N$ is the number of particles of that type and $\vec{r}_{i}$ is the center-of-mass position vector of particle $i$.
 
 <!-- also can be written as running average with window size $\omega$ and gap size $g$
 $$
@@ -578,10 +556,10 @@ $$
  -->
 
 
-## Mean-Squared Displacement 
+## Mean-Squared Displacement
 
 
-Looking at the Figure @fig-msd (a), we see that the beginning of the MSD is not linear. Only at higher correleation times the normal diffusion (see Figure @fig-msd (b)) behaviour appear.
+Looking at Figure @fig-msd (a), we see that the beginning of the MSD is not linear. Only at higher correleation times the expected diffusion (see Figure @fig-msd (b)) behavior is exhibited.
 
 
 :::{.callout-tip}
@@ -595,17 +573,17 @@ Looking at the Figure @fig-msd (a), we see that the beginning of the MSD is not 
 
 :::
 
-. . . 
+## Mean-Squared Displacement
 
 :::{.callout-caution}
 
 # Answer:
-The self-diffusion coefficient is the slope of the MSD divided by 2 $\cdot d$.
+The self-diffusion coefficient is the slope of the MSD divided by 2 $\cdot\,d$.
 
 But this is only true if correlation time is long enough.
 We can say that in the linear regime we fulfill this limes due to unchanging slope which represents the difffusion coefficient.
 
-Therefore it is important to have really linear behaviour in order to apply the Einstein relation.
+Therefore, it is really important to be in the regime of linear behavior, in order to apply the Einstein relation.
 
 You get the slope by fitting a [linear regression](../guides/statistics.qmd) at the last linear section.
 :::
@@ -694,7 +672,7 @@ plt.show()
 
 ## Green-Kubo Relation 
 
-The Green-Kubo formalism needs a numerical integration of the velocity-autocorrelation function $VACF(t)$ to get the self-diffusion coefficent $D_{\mathrm{s}}$
+The Green-Kubo formalism requires numerical integration of the velocity-autocorrelation function $VACF(t)$ to get the self-diffusion coefficent $D_{\mathrm{s}}$
 $$
 D_{\mathrm{s}} = \frac{1}{d} \int _{0}^{\infty} VACF(t)  dt
 $$
@@ -707,7 +685,7 @@ The  [Velocity-Autocorrelatin Function]() $VACF(\tau)$ is averaged over a time i
 $$
 VACF(\tau) = \left < \frac{1}{N} \sum_{i=1}^{N} |\vec{v} _{i}(t) \vec{v} _{i}(t_0)|^2 \right >_{\tau}
 $$
-where $\vec{v}_{i}$ is the velocity of the particle $i$ and $t_0$ labels the time origin.
+where $\vec{v}_{i}$ is the velocity the particle $i$, and $t_0$ labels the time origin.
 
 ## Veloctiy-Autocorrelation Function
 
@@ -760,7 +738,7 @@ The diffusion coefficient is directly depending on the activation energy $E_{\ma
 $$
 D_{\mathrm{s}}=D_0 e^{-\frac{E_{\mathrm{a}}}{RT}}
 $$
-where $D_0$ is factor of the exponential function, $R=8.314\,\mathrm{JK^{-1}mol^{-1}}$ is the gas constant and $T$ is the temperature.
+where $D_0$ is a constant factorn, $R=8.3145\,\mathrm{JK^{-1}mol^{-1}}$ is the ideal gas constant and $T$ is the temperature.
 
 With this formalism we can apply an [Arrhenius equation](https://en.wikipedia.org/wiki/Arrhenius_equation) to [fit a linear function](../guides/statistics.qmd) to get the activation energy $E_{\mathrm{a}}$
 $$
