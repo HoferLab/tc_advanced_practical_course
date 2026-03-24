@@ -71,19 +71,19 @@ The following analysis tools are provided for this exercise:
 
 ## Files {.unnumbered}
 
-The directories encoded in the varible `ZIF_DIR` contain all necessary files for the simulations. The files are organized in the following way:
+The directories encoded in the `ZIF_DIR` variable contain all necessary files for the simulations. The files are organized in the following way:
 
 :::{.callout-note title="File Structure" collapse="true"}
 
 ```bash
+├── co2
+│   └── co2.rst
 ├── general_input
 │   ├── moldescriptor.dat
 │   ├── run-01.in
 │   ├── run-02.in
 │   ├── run-03.in
 │   └── run-04.in
-├── co2
-│   ├── co2.rst
 └── preeq
     ├── 248
     │   ├── shake_zif8_248.top
@@ -112,8 +112,8 @@ The directories encoded in the varible `ZIF_DIR` contain all necessary files for
 
 | Folder/File          | Description                                                                                                        |
 |----------------------|--------------------------------------------------------------------------------------------------------------------|
-| `general_input`      | Contains the input files for the simulations (`moldescriptor.dat` and `run-0*.in`).                                |
 | `co2`                | Contains the carbon dioxide restart-file (`co2.rst`)                                                               |
+| `general_input`      | Contains the input files for the simulations (`moldescriptor.dat` and `run-0?.in`).                                |
 | `preeq`              | Contains the pre-equilibrated restart-files (`zif8_preeq_*.rst`) and associated topology files (`shake_zif8_*.top`).         |
 
 
@@ -123,7 +123,7 @@ The first part of the exercise is to simulate the diffusion of carbon dioxide mo
 
 ## System Setup {.unnumbered}
 
-The system setup is done by running the following command:
+The simulation system is set up by running the following command:
 
 **1.** Copy the necessary files to the working directory
 
@@ -300,7 +300,7 @@ The second part of the exercise is to calculate the thermal expansion of the pri
 
 ## System Setup {.unnumbered}
 
-The system setup is done by running the following command:
+The simulation system is set up by running the following command:
 
 **1.** Copy the necessary files to the working directory
 

@@ -16,7 +16,7 @@ slide-number: "c"
 #     orcid: 0000-0000-0000-0001
 #     email: author.y@email.com
 #     affiliations: Institution Y
-date: last-modified
+#date: last-modified
 bibliography: references.bib
 embed-resources: true
 ---
@@ -25,20 +25,20 @@ embed-resources: true
 
 :::{.callout-warning}
 
-Links to the **Google Sheets** with the assigned temperatures and hydrogen loadings:
+Links to the **Google Sheets** with the assigned temperatures and carbon dioxide loadings:
 
 - [Thermal Expansion](https://docs.google.com/spreadsheets/d/1wLiVdocFKj4iYNReIv2KdyEh5-HF7x3P1qJy946fHts/edit?usp=sharing)
 - [Gas Diffusion](https://docs.google.com/spreadsheets/d/1k56gQvhw8spThA9WNhdUirlWV9gKY-G1va8DjMysdBU/edit?usp=sharing)
 
 :::
 
-Each student will be assigned two specific temperature values and two different hydrogen loadings for the simulations.
+Each student will be assigned two specific temperature values and a specific carbon dioxide loading for the simulations.
 One temperature will be used for Part [B.1](#part-b.1-gas-simulation-in-zif-8) and the other for Part [B.2](#part-b.2-thermal-expansion-of-zif-8).
-The hydrogen loadings will be used for the simulations in Part [B.1](#part-b.1-gas-simulation-in-zif-8)
+The carbon dioxide loading will be used for the simulation in Part [B.1](#part-b.1-gas-simulation-in-zif-8)
 
 :::{.callout-important}
 
-Before you run any simulations, please make sure you know your assigned **TEMPERATURE** values.
+Before you run any simulations, please make sure you know your assigned **TEMPERATURES** and **CARBON DIOXIDE LOADING**!
 
 :::
 
@@ -46,7 +46,7 @@ Before you run any simulations, please make sure you know your assigned **TEMPER
 
 ## Tools and Programs 
 
-All tools and programs are provided by the Hofer Lab. The simulaton engine is [PQ](https://github.com/MolarVerse/PQ). The analysis tools are written in Python and C, and are partially based on the [PQAnalysis](https://github.com/MolarVerse/PQAnalysis) library.
+All tools and programs are provided by the HoferLab™. The simulaton engine that will be used is [PQ](https://github.com/MolarVerse/PQ). The analysis tools are written in Python and C, and are partially based on the [PQAnalysis](https://github.com/MolarVerse/PQAnalysis) library.
 
 The required tools and programs for this exercise are provided by executing the following command:
 
@@ -93,19 +93,18 @@ The following analysis tools are provided for this exercise:
 
 ## Files 
 
-The folders `/media/TC_Lehre/03_PR_Fortgeschrittene_Uebungen_zu_TC_und_Comp_Chemie/zif8-h2/zif8_files` contains all necessary files for the simulations. The files are organized in the following way:
+The directories encoded in the `ZIF_DIR` variable contain all necessary files for the simulations. The files are organized in the following way:
 
 :::{.callout-note title="File Structure"}
 ```{bash}
+├── co2
+│   └── co2.rst
 ├── general_input
 │   ├── moldescriptor.dat
 │   ├── run-01.in
 │   ├── run-02.in
 │   ├── run-03.in
 │   └── run-04.in
-├── h2
-│   ├── h2.rst
-│   └── shake_h2.top
 └── preeq
     ├── 248
     │   ├── shake_zif8_248.top
@@ -133,55 +132,50 @@ The folders `/media/TC_Lehre/03_PR_Fortgeschrittene_Uebungen_zu_TC_und_Comp_Chem
 
 ## Files 
 
-The folders `/media/TC_Lehre/03_PR_Fortgeschrittene_Uebungen_zu_TC_und_Comp_Chemie/zif8-h2/zif8_files` contains all necessary files for the simulations. The files are organized in the following way:
+The directories encoded in the `ZIF_DIR` variable contain all necessary files for the simulations. The files are organized in the following way:
 
 
-| Folder/File          | Description                                                                                                      |
-|----------------------|------------------------------------------------------------------------------------------------------------------|
-| `general_input`      | Contains the input files for the simulations (`moldescriptor.dat` and `run-0*.in`).                                |
-| `h2`                 | Contains the hydrogen restart-file (`h2.rst`) and the topology file (`shake_h2.top`).                             |
-| `preeq`              | Contains the equilibration restart-files (`zif8_preeq_*.rst`) and the topology files (`shake_zif8_*.top`).         |
+| Folder/File          | Description                                                                                                        |
+|----------------------|--------------------------------------------------------------------------------------------------------------------|
+| `co2`                | Contains the carbon dioxide restart-file (`co2.rst`)                                                               |
+| `general_input`      | Contains the input files for the simulations (`moldescriptor.dat` and `run-0?.in`).                                |
+| `preeq`              | Contains the pre-equilibrated restart-files (`zif8_preeq_*.rst`) and associated topology files (`shake_zif8_*.top`).         |
 
 
 # Part B.1) Gas simulation in ZIF-8  
 
 ## Part B.1) Gas simulation in ZIF-8  
 
-The first part of the exercise is to simulate the diffusion of hydrogen molecules in the ZIF-8 framework at the assigned temperature values. The hydrogen loading is set to the two assigned loadings per student.
-
-:::{.callout-note}
-
-This part of the exercise is performed twice with the two assigned hydrogen loadings. The simulations can be run in parallel.
-
-:::
+The first part of the exercise is to simulate the diffusion of carbon dioxide molecules in ZIF-8. There are a total of five different temperatures (298.15 K, 323.15 K, 348.15 K, 373.15 K, 398.15 K) and five different CO~2~ loadings (6, 8, 10, 12, 14). Each student is carrying out one CO~2~\@ZIF-8 simulation at the assigned temperature with the assigned loading.
 
 ## System Setup 
 
-The system setup is done by running the following command:
+The simulation system is set up by running the following command:
 
 **1.** Copy the necessary files to the working directory
 
 ```bash
-cp /media/TC_Lehre/03_PR_Fortgeschrittene_Uebungen_zu_TC_und_Comp_Chemie/zif8-h2/zif8_files/h2/* .
-cp /media/TC_Lehre/03_PR_Fortgeschrittene_Uebungen_zu_TC_und_Comp_Chemie/zif8-h2/zif8_files/preeq/<TEMPERATURE>/* .
-cp /media/TC_Lehre/03_PR_Fortgeschrittene_Uebungen_zu_TC_und_Comp_Chemie/zif8-h2/zif8_files/general_input/* .
+cp $ZIF_DIR/zif8_files/co2/* .
+cp $ZIF_DIR/zif8_files/preeq/<TEMPERATURE>/* .
+cp $ZIF_DIR/zif8_files/general_input/* .
 ```
 
-**2.** Add the hydrogen loading to the topology and restart files (e.g. 32 hydrogen molecules and 298 K)
+**2.** Add the CO~2~ loading to restart files (e.g. 32 carbon dioxide molecules and 298 K)
 
 ```bash
-add_molecules zif8_preeq_298.rst h2.rst   \
-  --rst-mol-desc-file moldescriptor.dat   \
-  --top-file shake_zif8_298.top           \
-  --added-top-file shake_h2.top           \
-  --output-top-file shake.top             \
-  -n 32                                   \
-  > 32xh2-zif8-00.rst
+add_molecules zif8_preeq_298.rst co2.rst --rst-mol-desc-file moldescriptor.dat -n 32 > 32xco2-zif8-00.rst
 ```
 
 ## Simulation 
 
-**1.** Edit the input file `run-01.in` to include your assigned temperature, generated restart file, and topology file.
+**1.** Edit the input files `run-01.in` to `run-04.in` to include your assigned temperature, generated restart file, and topology file.
+
+:::{.callout-important}
+
+Please make sure and double check that all input files `.in` are edited accordingly and no typos are present!
+Otherwise, PQ won't be able to read in the input files and the simulation will stop prematurely!
+
+:::
 
 ```
 ...
@@ -195,12 +189,26 @@ add_molecules zif8_preeq_298.rst h2.rst   \
       file_prefix   = XXX-01;
 ```
 
+## Simulation 
+
 :::{.callout-note}
 
 Replace `XXX` with the assigned temperature value and the corresponding restart and topology files. The `file_prefix` can be any name you choose.
-Please make sure to use `-00.rst` as the start file and `-01` as the file prefix. This will help to keep track of the different simulation steps.
+Please make sure to use `-00.rst` as the start file and `-01` as the file prefix in `run-01.in` and increment the numbers by one for each following input file. This will help to keep track of the different simulation steps.
 
 :::
+
+```
+...
+# Temperature algorithm (velocity rescaling), Target T in K and Relaxation time in ps
+      thermostat = velocity_rescaling; temp = XXX.XX; t_relaxation = 0.1;
+...
+# Files
+      start_file    = XXX-00.rst;
+      topology_file = XXX.top;
+
+      file_prefix   = XXX-01;
+```
 
 ## Simulation 
 
@@ -208,6 +216,11 @@ Please make sure to use `-00.rst` as the start file and `-01` as the file prefix
 
 ```bash
 PQ run-01.in
+```
+Start multiple input files one after the other
+
+```bash
+PQ run-01.in && PQ run-02.in && PQ run-03.in && PQ run-04.in
 ```
 
 :::{.callout-important}
@@ -218,28 +231,22 @@ After the equilibration, the production run is performed for 1 ns, which is spli
 
 :::
 
-## Extract Hydrogen Molecule 
+## Extract Carbon Dioxide Molecules 
 
-Extract the hydrogen molecule from the trajectory and velocity files using the `extract_h2` tool:
+Extract the carbon dioxide molecules from the trajectory and velocity files using the `extract_co2` tool:
 
 ```bash
-extract_h2 <trajectory_file>.xyz -n 276
+extract_co2 <trajectory_files>.xyz
 ```
 and
 ```bash
-extract_h2 <velocity_file>.vel -n 276
+extract_co2 <velocity_files>.vel
 ```
-
-:::{.callout-note}
-
-The `-n` flag specifies the number of atoms of the empty ZIF-8 framework.
-
-:::
 
 
 ## Einstein Relation 
 
-**1.** Calculate the [mean squared displacement (MSD)](analysis_b.qmd#einstein-relation) of the hydrogen molecule using the `msd` tool:
+**1.** Calculate the [mean squared displacement (MSD)](analysis_b.qmd#einstein-relation) of the carbon dioxide molecule using the `msd` tool:
 ```bash
 msd
 ```
@@ -252,13 +259,13 @@ linearfit --window 5
 
 :::{.callout-important}
 
-For both assigned hydrogen loadings, insert the corresponding self-diffusion coefficient values into the **Google Sheets**.
+For the assigned carbon dioxide loading, please insert the calculated self-diffusion coefficient value into the **Google Sheet**.
 
 :::
 
 ## Green-Kubo Relation 
 
-**1.** Calculate the [velocity autocorrelation function (VACF)](analysis_b.qmd#green-kubo-relation) of the hydrogen molecule using the `vacf` tool:
+**1.** Calculate the [velocity autocorrelation function (VACF)](analysis_b.qmd#green-kubo-relation) of the carbon dioxide molecule using the `vacf` tool:
 ```bash
 vacf
 ```
@@ -269,7 +276,7 @@ integration
 
 :::{.callout-important}
 
-For both assigned hydrogen loadings, insert the corresponding self-diffusion coefficient values into the **Google Sheets**.
+For the assigned carbon dioxide loading, insert the calculated self-diffusion coefficient value into the **Google Sheet**.
 
 :::
 
@@ -277,22 +284,29 @@ For both assigned hydrogen loadings, insert the corresponding self-diffusion coe
 
 ## Part B.2) Thermal Expansion of ZIF-8
 
-The second part of the exercise is to calculate the thermal expansion of the ZIF-8 framework at the assigned temperature values.
+The second part of the exercise is to calculate the thermal expansion of the pristine ZIF-8 framework at the assigned temperature value.
 
 ## System Setup 
 
-The system setup is done by running the following command:
+The simulation system is set up by running the following command:
 
 **1.** Copy the necessary files to the working directory
 
 ```bash
-cp /media/TC_Lehre/03_PR_Fortgeschrittene_Uebungen_zu_TC_und_Comp_Chemie/zif8-h2/zif8_files/preeq/<TEMPERATURE>/* .
-cp /media/TC_Lehre/03_PR_Fortgeschrittene_Uebungen_zu_TC_und_Comp_Chemie/zif8-h2/zif8_files/general_input/* .
+cp $ZIF_DIR/zif8_files/preeq/<TEMPERATURE>/* .
+cp $ZIF_DIR/zif8_files/general_input/* .
 ```
 
 ## Simulation 
 
-**1.** Edit the input file `run-01.in` to include your assigned temperature, generated restart file, and topology file.
+**1.** Edit the input files `run-01.in` to `run-03.in` to include your assigned temperature, generated restart file, and topology file. `run-04.in` is not needed for this part of the exercise.
+
+:::{.callout-important}
+
+Please make sure and double check that all input files `.in` are edited accordingly and no typos are present!
+Otherwise, PQ won't be able to read in the input files and the simulation will stop prematurely!
+
+:::
 
 ```
 ...
@@ -306,12 +320,26 @@ cp /media/TC_Lehre/03_PR_Fortgeschrittene_Uebungen_zu_TC_und_Comp_Chemie/zif8-h2
       file_prefix   = zif8-01;
 ```
 
+## Simulation 
+
 :::{.callout-note}
 
-Replace `XXX` with the assigned temperature value. The `file_prefix` can be any name you choose.
-Please make sure to use `-01` as the file prefix. This will help to keep track of the different simulation steps.
+Replace `XXX` with the assigned temperature value and the corresponding restart and topology files. The `file_prefix` can be any name you choose.
+Please make sure to use `-00.rst` as the start file and `-01` as the file prefix in `run-01.in` and increment the numbers by one for each following input file. This will help to keep track of the different simulation steps.
 
 :::
+
+```
+...
+# Temperature algorithm (velocity rescaling), Target T in K and Relaxation time in ps
+      thermostat = velocity_rescaling; temp = XXX.XX; t_relaxation = 0.1;
+...
+# Files
+      start_file    = zif8_preeq_XXX.rst;
+      topology_file = shake_zif8_XXX.top;
+
+      file_prefix   = zif8-01;
+```
 
 ## Simulation 
 
@@ -320,13 +348,18 @@ Please make sure to use `-01` as the file prefix. This will help to keep track o
 ```bash
 PQ run-01.in
 ```
+Start multiple input files one after the other
+
+```bash
+PQ run-01.in && PQ run-02.in && PQ run-03.in
+```
 
 :::{.callout-note}
 
 The overall equilibration is split into two stages. The first stage is a 10 ps NVT equilibration (`run-01.in`).
 The second stage is a 10 ps NPT equilibration (`run-02.in`).
 After the equilibration, the production run is performed for 500 ps (`run-03.in`).
-Only run `run-03.in` for the thermal expansion calculation.
+Only the trajectory from the last run `run-03.in` is used for the thermal expansion coefficient calculation.
 
 :::
 
@@ -344,4 +377,21 @@ average_a zif8-03.box
 average_V zif8-03.box
 ```
 
-**3.** Calculate the thermal expansion coefficient using the following formula, see [thermal expansion](analysis_b.qmd#linear--volumetric-thermal-expansion-coefficient)
+:::{.callout-important}
+
+For the assigned temperature, insert the calculated average lattice parameter and average volume into the **Google Sheet**.
+
+:::
+
+## Analysis 
+
+**3.** Calculate the thermal expansion coefficient using the values from your group and the following formula: [thermal expansion](analysis_b.qmd#linear--volumetric-thermal-expansion-coefficient)
+
+**4.** Compare the calculated thermal expansion coefficient of ZIF-8 with literature values.
+
+:::{.callout-note}
+
+Include the source of the reference on the poster and which method they used to obtain it.
+[Google Scholar](https://scholar.google.com/) is your friend for this research ;)
+
+:::
