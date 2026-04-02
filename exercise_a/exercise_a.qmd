@@ -120,7 +120,7 @@ B1   <span style="color:red"> 0.74273528 </span>  \
 [...]
 :::
 
-**6)** Execute the frequency calculation and get the harmonic frequency from the input-file
+**6)** Execute the frequency calculation and get the harmonic frequency from the log-file
 
 ```bash
 g16 h2_freq.com
@@ -184,7 +184,7 @@ B1   <span style="color:red"> 0.24273528</span> <span style="color:red"> 150</
 [...]
 :::
 
-This will perform a potential energy scan from $\mathrm{0.2427352\,Å}$, increasing the H-H distance $150$ times by  $\mathrm{0.01\,Å}$, thus the scan will end at a H-H distance of  $\mathrm{1.7427352\,Å}$. Don`t forget to include a final blank line in the gaussian input.
+This will perform a potential energy scan from $\mathrm{0.2427352\,Å}$, increasing the H-H distance $150$ times by  $\mathrm{0.01\,Å}$, thus the scan will end at a H-H distance of  $\mathrm{1.7427352\,Å}$. Don't forget to include a final blank line in the gaussian input.
 
 **9)** Execute the potential energy scan and grab a coffee:
 
@@ -213,7 +213,7 @@ The file `scan_data.dat` contains five data columns:
 :::{.callout-note icon=false title="scan_data.dat"}
 - column $1$	:  Distance in Å	
 - column $2$	:  Energy in Hartree
-- columns $3$ to $4$	:  $x$, $y$ and $z$-component of the dipole moment
+- columns $3$ to $5$	:  $x$, $y$ and $z$-component of the dipole moment
 ::::
 
 This file can be directly imported into graphic-programs, *e.g.* `office`,`xmgrace`, `gnuplot`, ...
@@ -252,7 +252,7 @@ This file can be directly imported into graphic programs (e.g. office, xmgrace, 
 :::{.callout-note}
 Which software you choose for the analysis part (or if you want to write your own code) is entirely up to you. There are different ways to obtain the requested data, *e.g.* the numerical integration can be carried out<br>
 i) in an `excel`-sheet,<br>
-ii) using `phyton`/`R` datascience routines,  <br>
+ii) using `Python`/`R` datascience routines,  <br>
 iii) on the command line using a (very simple) `awk`-script or <br>
 iv) even graphically in the program `xmgrace`. <br>
 You can choose whichever method works best for you.
@@ -265,7 +265,7 @@ You can choose whichever method works best for you.
 i) Execute an energy minimisation, a frequency calculation and a potential energy scan using gaussian
 ii) Extract the potential energy data from the output file
 iii) Execute a Numerov calculation
-iv) Analyse both a hydrated ($\mathrm{^1H}$) and deuterated system ($\mathrm{^1D}$) 
+iv) Analyse both a hydrated ($\mathrm{^1H}$) and deuterated system ($\mathrm{^2D}$) 
  
 ### Results {.unnumbered}
 

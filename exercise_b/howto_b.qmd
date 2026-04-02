@@ -169,7 +169,7 @@ Please make sure to use `-00.rst` as the start file and `-01` as the file prefix
 
 :::
 
-**2.** Run NVT equlibration 
+**2.** Run NVT equilibration 
 
 ```bash
 PQ run-01.in

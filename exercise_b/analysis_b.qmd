@@ -70,7 +70,7 @@ Firstly, in order to obtain meaningful physical properties from a simulation, it
 :::{.callout-important}
 ## An equilibrium state:
 
-can be defined as a state in which macroscopic properties $A$ (*e.g* temperture $T$, pressure $P$, energies $E$, volume $V$, ...) do **NOT** undergo major changes over time.
+can be defined as a state in which macroscopic properties $A$ (*e.g* temperature $T$, pressure $P$, energies $E$, volume $V$, ...) do **NOT** undergo major changes over time.
 :::
 Once these properties fluctuate around a constant pattern without any long-term trends, it can be assumed that the system reached an equilibrium state.
 
@@ -105,7 +105,7 @@ $$
 
 can help to estimate the fluctuation of the properties over time.
 
-## Cummulative Average
+## Cumulative Average
 
 And the cumulative average is a running average that is added at each step.
 $$
@@ -116,7 +116,7 @@ $$
 ## Linear Regression Fit
 A linear regression fit can help to estimate the trend of your simulation.
 
-For more further detail: [statistics](../guides/statistics.qmd)
+For further detail: [statistics](../guides/statistics.qmd)
 
 
 
@@ -216,7 +216,7 @@ The volume of a orthorhombic system can be calculated as:
 $$
 V = a\cdot b \cdot c
 $$
-In general, the volume of a non-orthorhombic [crystal sytems](https://en.wikipedia.org/wiki/Crystal_system) is calculated as:
+In general, the volume of a non-orthorhombic [crystal systems](https://en.wikipedia.org/wiki/Crystal_system) is calculated as:
 $$
 V = a b c \sqrt{1-\mathrm{cos}^2(\alpha) -\mathrm{cos}^2(\beta) - \mathrm{cos}^2(\gamma)+ 2(\mathrm{cos}(\alpha) \mathrm{cos}(\beta) \mathrm{cos}(\gamma))}
 $$
@@ -366,13 +366,13 @@ $$
 
 
 
-Looking at Figure @fig-msd (a), we see that the beginning of the MSD is not linear. Only at higher correleation times the expected diffusion (see Figure @fig-msd (b)) behaviour can be observed.
+Looking at Figure @fig-msd (a), we see that the beginning of the MSD is not linear. Only at higher correlation times the expected diffusion (see Figure @fig-msd (b)) behaviour can be observed.
 
 :::{.callout-tip}
 ## Question: 
 - How do you get the self-diffusion coefficient out of the MSD regarding the Einstein-relation?
 - How do you get the gradient/slope of the MSD?
-- What does the limes in that formular mean?
+- What does the limes in that formula mean?
 :::
 
 
@@ -381,9 +381,9 @@ Looking at Figure @fig-msd (a), we see that the beginning of the MSD is not line
 The self-diffusion coefficient is the slope of the MSD divided by 2 $\cdot\;d$.
 
 But this is only true if the correlation time is long enough.
-We can say that in the linear regime we fulfill this limes due to the constant slope, which represents the difffusion coefficient.
+We can say that in the linear regime we fulfill this limes due to the constant slope, which represents the diffusion coefficient.
 
-Therefore, in order to apply the Einstein relation, it is important to be in the linar regime of the MSD plot.
+Therefore, in order to apply the Einstein relation, it is important to be in the linear regime of the MSD plot.
 
 You get the slope by fitting a [linear regression](../guides/statistics.qmd) to the linear part of the dataset.
 :::
@@ -480,7 +480,7 @@ where $d=1,2,3$ is the dimension.
 ### Veloctiy-Autocorrelation Function
 
 
-The [velocity-autocorrelatin function]() $VACF(\tau)$ is averaged over a time interval $\tau$ 
+The [velocity-autocorrelation function]() $VACF(\tau)$ is averaged over a time interval $\tau$ 
 $$
 VACF(\tau) = \left < \frac{1}{N} \sum_{i=1}^{N} |\vec{v} _{i}(t) \vec{v} _{i}(t_0)|^2 \right >_{\tau}
 $$
@@ -531,7 +531,7 @@ plt.show()
 
 # Activation Energy  {.unnumbered}
 
-The diffusion coefficient is directly depending on the activation energy $E_{\mathrm{a}}$ by an exponential decacy
+The diffusion coefficient is directly depending on the activation energy $E_{\mathrm{a}}$ by an exponential decay
 $$
 D_{\mathrm{s}}=D_0 e^{-\frac{E_{\mathrm{a}}}{RT}}
 $$
