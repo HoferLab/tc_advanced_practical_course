@@ -27,7 +27,7 @@ ii) copy/move/rename files.
 
 If you are unsure please look at this [Linux quickstart guide](../guides/linux_quickstart_guide.qmd).
 
-### Vibrational spectroscopy of a diatomic molecule at the example of H2 {.unnumbered}
+### Vibrational spectroscopy of a diatomic molecule at the example of $\mathrm{H_2}$ {.unnumbered}
 
 ### Tasks {.unnumbered}
 
