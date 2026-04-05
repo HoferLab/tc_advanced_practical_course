@@ -1,6 +1,9 @@
 # Quarto build outputs
 /_site/
 /Website_QMPart/
+/index_files/
+/site_libs/
+/data/test.png
 
 # LaTeX temporary files
 *.aux
