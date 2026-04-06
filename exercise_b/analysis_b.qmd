@@ -471,9 +471,9 @@ plt.show()
 
 ## Green-Kubo Relation {.unnumbered}
 
-The Green-Kubo formalism needs a numerical integration of the velocity-autocorrelation function $VACF(t)$ to get the self-diffusion coefficent $D_{\mathrm{s}}$
+The Green-Kubo formalism needs a numerical integration of the velocity-autocorrelation function $VACF(\tau)$ to get the self-diffusion coefficent $D_{\mathrm{s}}$
 $$
-D_{\mathrm{s}} = \frac{1}{d} \int _{0}^{\infty} VACF(t)  dt
+D_{\mathrm{s}} = \frac{1}{d} \int _{0}^{\infty} VACF(\tau)  d\tau
 $$
 where $d=1,2,3$ is the dimension.
 
@@ -482,14 +482,14 @@ where $d=1,2,3$ is the dimension.
 
 The [velocity-autocorrelation function]() $VACF(\tau)$ is averaged over a time interval $\tau$ 
 $$
-VACF(\tau) = \left < \frac{1}{N} \sum_{i=1}^{N} |\vec{v} _{i}(t) \vec{v} _{i}(t_0)|^2 \right >_{\tau}
+VACF(\tau) = \left < \frac{1}{N} \sum_{i=1}^{N} \vec{v} _{i}(t_0) \cdot \vec{v} _{i}(t_0 + \tau) \right >_{t_0}
 $$
-where $\vec{v}_{i}$ is the velocity of the particle $i$ and $t_0$ labels the time origin.
+where $\vec{v}_{i}$ is the velocity of particle $i$ and $t_0$ labels the time origin. $\tau$ is also called the lag time.
 
 
 ```{python}
 #| label: fig-VACF
-#| fig-cap: "VACF(t) plot"
+#| fig-cap: "VACF(τ) plot"
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -519,11 +519,11 @@ axs.plot(time,VACF_z,label=r"$VACF_z$",color="grey")
 axs.plot(time,VACF_xyz,label=r"$VACF_{x+y+z}$",color="k")
 axs.plot(time, cumulative_integral, label=r'Cumulative Integral of $VACF_{x+y+z}$',color="red")
 
-axs.text(0.05, 0.95, r"$D_s = %.2f \, \mathrm{\AA^2 ps^{-1}}$" %(d_green_kubo), transform=axs.transAxes, fontsize=14, verticalalignment='top')
+axs.text(0.05, 0.95, r"$D_s = %.2f \, \mathrm{\AA² \cdot ps⁻²}$" %(d_green_kubo), transform=axs.transAxes, fontsize=14,verticalalignment='top')
 
 
 axs.set_xlabel(r"correlation time $\tau$ in ps")
-axs.set_ylabel(r"$VACF(t)$ in $\mathrm{(\AA ps^{-1})^{2}}$")
+axs.set_ylabel(r"$VACF(\tau)$ in $\mathrm{\AA² \cdot ps⁻²}$")
 axs.legend(fontsize=12,loc='upper left', bbox_to_anchor=(1.05, 1.05))
 plt.show()
 ```
@@ -533,11 +533,11 @@ plt.show()
 
 The diffusion coefficient is directly depending on the activation energy $E_{\mathrm{a}}$ by an exponential decay
 $$
-D_{\mathrm{s}}=D_0 e^{-\frac{E_{\mathrm{a}}}{RT}}
+D_{\mathrm{s}}=D_0 \cdot e^{-\frac{E_{\mathrm{a}}}{RT}}
 $$
-where $D_0$ is factor of the exponential function, $R=8.3145\,\mathrm{JK^{-1}mol^{-1}}$ is the ideal gas constant and $T$ is the temperature.
+where $D_0$ is the pre-exponential factor, $R=8.3145\,\mathrm{JK^{-1}mol^{-1}}$ is the ideal gas constant and $T$ is the temperature.
 
-With this formalism we can apply an [Arrhenius equation](https://en.wikipedia.org/wiki/Arrhenius_equation) to [fit a linear function](../guides/statistics.qmd) to get the activation energy $E_{\mathrm{a}}$.
+With this formalism we can apply an [Arrhenius equation](https://en.wikipedia.org/wiki/Arrhenius_equation) to [fit a linear function](../guides/statistics.qmd). From the slope of the fit the activation energy $E_{\mathrm{a}}$ can be calculated.
 $$
 \ln (D_{\mathrm{s}}) = -\frac{E_{\mathrm{a}}}{RT} + \ln{D_0}
 $$
