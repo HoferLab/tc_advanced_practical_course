@@ -342,20 +342,20 @@ As well as $\dot{A}$ is the molecular velocity which should be also considered a
 
 ## Einstein-Relation {.unnumbered}
 
-The Einstein Relation can be therefore written as slope of the mean-squared-displacement ($MSD(\tau)$) over time origins $\tau$
+The Einstein Relation expresses the self-diffustion coefficient as the slope of the mean-squared-displacement ($MSD(\tau)$) with respect to the lag time $\tau$
 
 $$
-D_{\mathrm{s}} = \frac{1}{2 \cdot d} \lim _{t\to \infty} \frac{d}{dt} MSD(\tau)
+D_{\mathrm{s}} = \frac{1}{2 d} \lim _{\tau \to \infty} \frac{d}{d \tau} MSD(\tau)
 $$
 where $d=1,2,3$ is the dimensionality.
 
 ### Mean-Squared Displacement {.unnumbered}
 
-The mean-squared displacement describes the temporal displacement of the particle from a time origin $t_0$ averaged over the time interval $\tau$
+The MSD describes the mean squared displacement of particles over a lag time $\tau$, averaged over all time origins $t_0$
 $$
-MSD(\tau) = \left < \frac{1}{N} \sum_{i=1}^{N} |\vec{r} _{i}(t) - \vec{r} _{i}(t_0)|^2  \right >_{\tau}
+MSD(\tau) = \left < \frac{1}{N} \sum_{i=1}^{N} |\vec{r} _{i}(t_0 + \tau) - \vec{r} _{i}(t_0)|^2  \right >_{t_0}
 $$
-where $N$ is the number of the particle, $\vec{r}_{i}$ is the center-of-mass position vector of the particle $i$.
+where $N$ is the number of particles and $\vec{r}_{i}$ is the center-of-mass position vector of particle $i$.
 
 <!-- also can be written as running average with window size $\omega$ and gap size $g$
 $$
@@ -440,7 +440,7 @@ axs[0].plot(time,MSD_xyz,label=r"$MSD_{x+y+z}$",color="k")
 axs[0].vlines(time[-500],0,500,color="k",linestyle="dotted",label=r"fitting regime")
 axs[0].plot(time[-500:],linear_regression(time[-500:],*popt),color="red",linestyle="dashed",label=r"linear fit $y=a\cdot x + b$: $a= {:.2f}$, $b= {:.2f}$ ".format(popt[0],popt[1]))
 axs[0].text(-0.5, 1.05, '(a)', transform=axs[0].transAxes, fontsize=14, verticalalignment='top')
-axs[0].text(1.0,400, r"$D_s=%2.2f\,\mathrm{\AA^2 ps^{-1}}$" %(d_einstein),fontsize=14)
+axs[0].text(1.0,400, r"$D_s=%2.2f\,\mathrm{\AA² \cdot ps⁻¹}$" %(d_einstein),fontsize=14)
 axs[0].legend(fontsize=12,loc='upper left', bbox_to_anchor=(1.05, 1.05))
 
 
@@ -453,13 +453,13 @@ axs[1].plot(time_regime,confined_diffusion(time_regime,50,2),label=r"confined di
 
 
 axs[0].set_xlabel(r"correlation time $\tau$ in ps")
-axs[0].set_ylabel(r"$MSD(t)$ in $\mathrm{\AA^2}$")
+axs[0].set_ylabel(r"$MSD(\tau)$ in $\mathrm{\AA^2}$")
 
 axs[0].set_ylim(0,500)
 
 
 axs[1].set_xlabel(r"correlation time $\tau$ in ps")
-axs[1].set_ylabel(r"$MSD(t)$ in $\mathrm{\AA^2}$")
+axs[1].set_ylabel(r"$MSD(\tau)$ in $\mathrm{\AA^2}$")
 axs[1].set_xlim(0,5)
 axs[1].set_ylim(0,500)
 axs[1].text(-0.5, 1.05, '(b)', transform=axs[1].transAxes, fontsize=14, verticalalignment='top')
@@ -519,7 +519,7 @@ axs.plot(time,VACF_z,label=r"$VACF_z$",color="grey")
 axs.plot(time,VACF_xyz,label=r"$VACF_{x+y+z}$",color="k")
 axs.plot(time, cumulative_integral, label=r'Cumulative Integral of $VACF_{x+y+z}$',color="red")
 
-axs.text(0.05, 0.95, r"$D_s = %.2f \, \mathrm{\AA² \cdot ps⁻²}$" %(d_green_kubo), transform=axs.transAxes, fontsize=14,verticalalignment='top')
+axs.text(0.05, 0.95, r"$D_s = %.2f \, \mathrm{\AA² \cdot ps⁻¹}$" %(d_green_kubo), transform=axs.transAxes, fontsize=14,verticalalignment='top')
 
 
 axs.set_xlabel(r"correlation time $\tau$ in ps")
