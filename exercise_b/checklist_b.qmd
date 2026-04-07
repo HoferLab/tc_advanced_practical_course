@@ -4,7 +4,7 @@ format:
   html:
     code-fold: false
 ---
-All data generated along with a discussion of results fit easily on a single page. The images and graphs to be plotted are grouped into three subsections, which should also be grouped together on the poster.
+All data generated along with a discussion of results fit easily on a single page. The images and graphs to be plotted are grouped into three subsections, which should also be grouped together on the poster. Please add units where applicable.
 
 Subsection 1 - System Setup and Equilibration:
 
@@ -14,8 +14,10 @@ Subsection 1 - System Setup and Equilibration:
 
 Subsection 2 - Gas Diffusion:
 
-- [ ] A graph showing the mean-square-displacement (MSD) of the CO<sub>2</sub> molecules vs time including a fit
-- [ ] A graph showing the Green-Kubo correlation function vs time and the associated integral
+- [ ] A graph showing the mean-square-displacement (MSD) of the CO<sub>2</sub> molecules vs lag time including a linear fit
+- [ ] A graph showing the velocity-autocorrelation function (VACF) vs lag time and the associated integral
+- [ ] A graph showing the Zn-C RDF
+- [ ] A graph showing the C-C RDF
 
 
 Subsection 3 - Group Work:

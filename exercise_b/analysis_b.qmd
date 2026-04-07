@@ -107,9 +107,9 @@ It smooths the signal by reducing short-term fluctuations while retaining the ov
 
 ## Cumulative Average
 
-At each step, the cumulative average takes the previous average $\left < A \right >_{n-1}$ and adjusts it to account for the new data point $x_n$:
+At each step, the cumulative average takes the previous average $\left < A \right >_{n-1}$ and adjusts it to account for the new data point $A_n$:
 $$
-\left < A \right >_n = \frac{(n-1)\left < A \right >_{n-1} + x_n}{n}
+\left < A \right >_n = \frac{(n-1)\left < A \right >_{n-1} + A_n}{n}
 $$
 
 

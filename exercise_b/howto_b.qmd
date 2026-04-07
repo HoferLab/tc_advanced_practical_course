@@ -244,14 +244,14 @@ For the assigned carbon dioxide loading, insert the calculated self-diffusion co
 rdf_zif8 <trajectory_file-03>.xyz <trajectory_file-04>.xyz
 ```
 
-**2.** Calculate the RDF for `Zn` and `C` or `O` atoms (gas) using the `rdf_zif8` tool:
+**2.** Calculate the RDF for `Zn` and `C` atoms (gas) using the `rdf_zif8` tool:
 
 ```bash
 rdf_zif8 <trajectory_file-03>.xyz <trajectory_file-04>.xyz --center Zn --ligand1 X
 ```
 
 :::{.callout-note}
-The RDF calculation will generate a `output` file named `rdf-C-C.out` and `rdf-Zn-C.out`, accordingly. Plot the 1st column (distance) against the 2nd column (RDF) using your preferred plotting tool.
+The RDF calculation will generate `output` files named `rdf-C-C.out` and `rdf-Zn-C.out`, accordingly. Plot the 1st column (distance) against the 2nd column (RDF) using your preferred plotting tool.
 :::
 
 ## Visualization {.unnumbered}
