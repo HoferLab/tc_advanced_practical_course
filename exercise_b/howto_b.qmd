@@ -247,7 +247,7 @@ rdf_zif8 <trajectory_file-03>.xyz <trajectory_file-04>.xyz
 **2.** Calculate the RDF for `Zn` and `C` atoms (gas) using the `rdf_zif8` tool:
 
 ```bash
-rdf_zif8 <trajectory_file-03>.xyz <trajectory_file-04>.xyz --center Zn --ligand1 X
+rdf_zif8 <trajectory_file-03>.xyz <trajectory_file-04>.xyz --center Zn --ligand1 C
 ```
 
 :::{.callout-note}
